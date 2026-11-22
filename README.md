@@ -58,11 +58,16 @@ At the registrar or DNS host of `agilityy.com`, add:
 |---|---|---|---|
 | CNAME | `hiring` | `agilityy-research.github.io` | default (3600) |
 
-That is the only manual step. Within six hours the workflow sees the record, commits the `CNAME` file (which sets
-the custom domain on the Pages site), GitHub issues the certificate, and on a later run the workflow enables
-"Enforce HTTPS". The old `github.io` address then redirects to `https://hiring.agilityy.com/` with the path kept, so
-every link already published keeps working. Check progress in the repository's Actions tab ("Custom domain") or at
-Settings → Pages. Optional hardening: verify the domain for the organisation (Organisation settings → Pages →
+That is the only manual step. Within six hours the workflow sees the record and commits the `CNAME` file, which sets
+the custom domain on the Pages site; GitHub then issues the certificate and serves the site over HTTPS. The old
+`github.io` address redirects to `https://hiring.agilityy.com/` with the path kept, so every link already published
+keeps working. Check progress in the repository's Actions tab ("Custom domain") or at Settings → Pages.
+
+One setting the workflow's own token is not allowed to change: "Enforce HTTPS" (redirecting `http://` to `https://`;
+the site is already served over HTTPS either way). When the certificate is issued the workflow tries, and if GitHub
+refuses it fails once and e-mails the owner: either tick **Settings → Pages → Enforce HTTPS** (one click) or add a
+repository secret `PAGES_TOKEN` (a fine-grained token for this repository with the permission *Pages: read and
+write*) and the next scheduled run does it. Optional hardening: verify the domain for the organisation (Organisation settings → Pages →
 Verified domains: a TXT record GitHub names) so nobody else can claim `hiring.agilityy.com` on GitHub Pages.
 
 ## Methodology in brief

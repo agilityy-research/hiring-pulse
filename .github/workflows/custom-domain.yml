@@ -31,7 +31,10 @@ jobs:
       - uses: actions/checkout@v4
       - name: Check DNS, set the domain, enforce HTTPS
         env:
-          GH_TOKEN: ${{ github.token }}
+          # The workflow token can commit files but GitHub does not let it write Pages settings. A repository secret
+          # PAGES_TOKEN (fine-grained token, this repository only, permission Pages: read and write) lets the last
+          # step, "Enforce HTTPS", happen by itself too; without it that step is one click in Settings > Pages.
+          GH_TOKEN: ${{ secrets.PAGES_TOKEN || github.token }}
           DRY_RUN: ${{ inputs.dry_run }}
         run: |
           set -euo pipefail
@@ -63,7 +66,10 @@ jobs:
           if [ "$enforced" != "true" ]; then
             if [ "$cert" = "approved" ]; then
               echo "Certificate issued; enforcing HTTPS"
-              gh api -X PUT "$api" -F https_enforced=true
+              if ! gh api -X PUT "$api" -F https_enforced=true; then
+                echo "::error::The site is live at https://$DOMAIN but this token may not change Pages settings. One click: Settings > Pages > tick 'Enforce HTTPS'. Or add a repository secret PAGES_TOKEN (fine-grained token, this repository, Pages: read and write) and this job does it on its next run."
+                exit 1
+              fi
             else
               echo "Certificate state is '$cert'; HTTPS will be enforced on a later run."
             fi
