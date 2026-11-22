@@ -3,14 +3,30 @@
 # repository and the CNAME file, so the same source works at agilityy-research.github.io/hiring-pulse and at
 # hiring.agilityy.com without an edit.
 title: Hiring Pulse
-tagline: Weekly startup hiring benchmarks from 10,000+ job boards
+tagline: Weekly startup hiring benchmarks from 21,922 job boards
 description: >-
-  Weekly startup hiring benchmarks and daily job board data for 10,000+ venture-backed companies, by Agilityy
-  Research: open roles, roles opened and closed, median days-to-fill, AI/ML share, remote share. Free report every
-  Monday; the underlying hiring signals data is for sale per record or as a feed.
+  Weekly startup hiring benchmarks by Agilityy Research, measured from the public job boards of 21,922
+  companies read every day: open roles, biggest movers, days-to-fill, AI/ML share, remote share, by function and
+  industry. Free every Monday under CC BY 4.0; the daily data behind it is sold per row or as a feed.
 author: Agilityy Research
 lang: en
 timezone: UTC
+
+# Facts the pages quote. Edit here when the universe changes (monthly refresh) and every page follows.
+coverage:
+  companies: "21,922"
+  companies_since: "2026-11-22"
+  companies_before: "10,933"
+  vendors: "Greenhouse, Lever, Ashby, SmartRecruiters, Recruitee and Personio"
+  vendors_short: "Greenhouse, Lever, Ashby, SmartRecruiters, Recruitee, Personio"
+  daily_since: "2026-11-21"
+  with_industry: "683"
+  flows_from: "2026-12-07"
+  yc_subset: "639"
+  yc_subset_since: "2026-11-06"
+# One-off studies that sit outside the weekly series (file names in reports/ without the .md).
+baseline_reports:
+  - "2026-11-20"
 
 permalink: pretty
 markdown: kramdown
@@ -20,7 +36,7 @@ kramdown:
 
 # All default on GitHub Pages; listed so a local `bundle exec jekyll serve` behaves the same.
 plugins:
-  - jekyll-optional-front-matter   # the Actor commits plain Markdown reports (no front matter); they still become pages
+  - jekyll-optional-front-matter   # the weekly pipeline commits plain Markdown reports (no front matter); they still become pages
   - jekyll-default-layout          # ... in _layouts/default.html
   - jekyll-titles-from-headings    # ... titled from their first heading
   - jekyll-relative-links
@@ -32,6 +48,12 @@ optional_front_matter:
 titles_from_headings:
   enabled: true
   strip_title: false
+
+defaults:
+  - scope:
+      path: "reports"
+    values:
+      sitemap: true
 
 exclude:
   - README.md

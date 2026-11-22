@@ -1,0 +1,31 @@
+---
+permalink: /feed.xml
+sitemap: false
+---
+{%- assign report_pages = site.pages | where_exp: "p", "p.path contains 'reports/'" | where_exp: "p", "p.name != 'index.md'" | where_exp: "p", "p.name != 'latest.md'" | sort: "name" | reverse -%}
+{%- assign newest = report_pages | first -%}
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Hiring Pulse: weekly startup hiring benchmarks</title>
+  <subtitle>{{ site.description | strip_newlines | strip | xml_escape }}</subtitle>
+  <link href="{{ '/feed.xml' | absolute_url }}" rel="self" type="application/atom+xml"/>
+  <link href="{{ '/' | absolute_url }}" rel="alternate" type="text/html"/>
+  <id>{{ '/' | absolute_url }}</id>
+  <updated>{% if newest %}{{ newest.name | remove: ".md" }}T07:00:00Z{% else %}{{ site.time | date_to_xmlschema }}{% endif %}</updated>
+  <author><name>Agilityy Research</name><uri>{{ '/' | absolute_url }}</uri></author>
+  <rights>CC BY 4.0</rights>
+  <generator>Jekyll</generator>
+{%- for p in report_pages %}
+{%- assign d = p.name | remove: ".md" %}
+  <entry>
+    <title>{% if site.baseline_reports contains d %}Baseline study {{ d }}: 14 days of startup hiring, 639 Y Combinator companies{% else %}Hiring Pulse {{ d }}: startup hiring this week{% endif %}</title>
+    <link href="{{ p.url | absolute_url }}" rel="alternate" type="text/html"/>
+    <id>{{ p.url | absolute_url }}</id>
+    <published>{{ d }}T07:00:00Z</published>
+    <updated>{{ d }}T07:00:00Z</updated>
+    <author><name>Agilityy Research</name></author>
+    <category term="startup hiring"/>
+    <content type="html">{{ p.content | markdownify | xml_escape }}</content>
+  </entry>
+{%- endfor %}
+</feed>

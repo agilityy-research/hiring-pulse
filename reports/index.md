@@ -1,26 +1,47 @@
 ---
-title: "All weekly Hiring Pulse reports"
+title: "All weekly Hiring Pulse reports: the startup hiring archive"
 description: >-
-  Archive of every weekly Hiring Pulse report: startup hiring benchmarks from 10,000+ job boards, one report per
-  Monday since November 2026, by Agilityy Research. Open roles, days-to-fill, AI share, industry and function tables.
+  Every weekly Hiring Pulse edition since November 2026, one per Monday: startup hiring benchmarks from 21,922 public
+  job boards with key findings, charts, movers, days-to-fill, AI/ML and remote share. Plus the one-off baseline study.
 permalink: /reports/
 ---
 # All weekly reports
 
-One report per week, generated on Mondays from the previous day's snapshots and published here by the pipeline itself.
-The newest is always at [reports/latest]({{ '/reports/latest/' | relative_url }}); the Markdown sources are in the
+A new edition every Monday at 07:00 UTC, computed from that morning's reads of {{ site.coverage.companies }} company job
+boards. Each edition opens with the week's key findings and charts, then the headline numbers with their change since
+the previous edition, then the full tables. The newest is always at [reports/latest]({{ '/reports/latest/' | relative_url }});
+subscribe with the [Atom feed]({{ '/feed.xml' | relative_url }}). Markdown sources and chart files are in the
 [GitHub repository](https://github.com/agilityy-research/hiring-pulse/tree/main/reports).
 
-{%- assign report_pages = site.pages | where_exp: "p", "p.path contains 'reports/'" | sort: "path" | reverse %}
+{%- assign report_pages = site.pages | where_exp: "p", "p.path contains 'reports/'" | where_exp: "p", "p.name != 'index.md'" | where_exp: "p", "p.name != 'latest.md'" | sort: "name" | reverse %}
+{%- assign weekly = "" | split: "" %}{%- assign baselines = "" | split: "" %}
+{%- for p in report_pages %}{%- assign d = p.name | remove: ".md" %}{%- if site.baseline_reports contains d %}{%- assign baselines = baselines | push: p %}{%- else %}{%- assign weekly = weekly | push: p %}{%- endif %}{%- endfor %}
+
+## Weekly series
+
+{%- if weekly.size > 0 %}
 <ul class="report-list">
-{%- for p in report_pages %}
-{%- if p.name != "latest.md" and p.name != "index.md" %}
+{%- for p in weekly %}
 <li><a href="{{ p.url | relative_url }}">Hiring Pulse {{ p.name | remove: ".md" }}</a>{% if forloop.first %} <span class="muted small">(latest)</span>{% endif %}</li>
-{%- endif %}
 {%- endfor %}
 </ul>
+{%- else %}
+<p>The first Monday edition is published on 2026-11-23 at 07:00 UTC. Until then the
+<a href="{{ '/reports/latest/' | relative_url }}">preview edition</a> shows the current numbers in the same format.</p>
+{%- endif %}
 
-Early editions (before any company had 14 days of daily history) report what the boards showed on the day: open
-roles, functions, AI share, seniority and remote share. From the first edition after 2026-12-05 every report also
-carries growth, roles opened and closed, days-to-fill and the leaderboards; coverage grows each week as more of the
-tracked companies pass the 14-day mark. How the numbers are measured: [methodology]({{ '/methodology/' | relative_url }}).
+Editions before {{ site.coverage.flows_from }} carry the stock figures for the whole universe (open roles, functions,
+AI/ML share, remote share, seniority, the largest boards) and the flow figures (growth, roles opened and closed,
+days-to-fill, movers) for the companies that already have 14 days of daily history. From {{ site.coverage.flows_from }}
+the flow figures cover the whole universe, and the "since previous edition" columns and the trend chart lengthen
+with every edition. How the numbers are measured: [methodology]({{ '/methodology/' | relative_url }}).
+
+## Baseline study
+
+{%- for p in baselines %}
+<ul class="report-list">
+<li><a href="{{ p.url | relative_url }}">Hiring Pulse {{ p.name | remove: ".md" }}</a> <span class="tag">Baseline study</span>
+<span class="muted small">14-day readout on {{ site.coverage.yc_subset }} Y Combinator companies, collected daily from {{ site.coverage.yc_subset_since }}; the first look at
+growth, days-to-fill and movers before the full universe had history. Not part of the weekly series.</span></li>
+</ul>
+{%- endfor %}
