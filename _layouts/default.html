@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {%- assign is_report = false -%}
 {%- if page.url contains "/reports/" and page.url != "/reports/" -%}{%- assign is_report = true -%}{%- endif -%}
-{%- assign report_date = page.basename -%}
+{%- assign report_date = page.name | remove: ".md" -%}
 {%- if is_report and page.title contains "—" -%}{%- assign report_date = page.title | split: "—" | last | strip -%}{%- endif -%}
 {%- if is_report -%}
   {%- assign page_title = "Hiring Pulse " | append: report_date | append: ": startup hiring benchmarks for the week" -%}

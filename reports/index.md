@@ -15,7 +15,7 @@ The newest is always at [reports/latest]({{ '/reports/latest/' | relative_url }}
 <ul class="report-list">
 {%- for p in report_pages %}
 {%- if p.name != "latest.md" and p.name != "index.md" %}
-<li><a href="{{ p.url | relative_url }}">Hiring Pulse {{ p.basename }}</a>{% if forloop.first %} <span class="muted small">(latest)</span>{% endif %}</li>
+<li><a href="{{ p.url | relative_url }}">Hiring Pulse {{ p.name | remove: ".md" }}</a>{% if forloop.first %} <span class="muted small">(latest)</span>{% endif %}</li>
 {%- endif %}
 {%- endfor %}
 </ul>
