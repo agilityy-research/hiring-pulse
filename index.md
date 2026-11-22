@@ -56,7 +56,34 @@ permalink: /
 </div>
 {%- endif %}
 
+<div class="search" id="company-search" hidden>
+<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+<label class="visually-hidden" for="company-q">Search a company</label>
+<input id="company-q" type="search" autocomplete="off" spellcheck="false" placeholder="Search one of the {{ v_companies | default: site.coverage.companies }} companies: open roles today, change in 30 days, signal">
+<ul class="search-results" id="company-results" aria-live="polite"></ul>
+</div>
+<p class="muted small" id="company-search-note" hidden>Preview tier: one line per company from the latest edition. The roles themselves, the daily history and the opened/closed events are in the <a href="{{ '/get-the-data/' | relative_url }}">feed</a>. A company missing? <a href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">Ask for it</a>.</p>
+
+{%- if site.newsletter_action != "" %}
+<div class="signup">
+<b>The startup hiring pulse in your inbox, every Monday at 07:00 UTC.</b> Key findings, charts and the movers; no other mail.
+<form action="{{ site.newsletter_action }}" method="post" target="_blank">
+<input type="email" name="{{ site.newsletter_email_field | default: 'email' }}" placeholder="work e-mail" required>
+<button type="submit">Subscribe</button>
+<span class="muted small">Prefer a reader? <a href="{{ '/feed.xml' | relative_url }}">Atom feed</a>.</span>
+</form>
+</div>
+{%- endif %}
+
 ## What the data says this week
+
+<div class="chips" id="audience-chips" hidden role="group" aria-label="Show the findings for">
+<button type="button" data-who="" aria-pressed="true">Everyone</button>
+<button type="button" data-who="talent|recruit" aria-pressed="false">Talent teams</button>
+<button type="button" data-who="sales|revenue" aria-pressed="false">Sales &amp; revenue</button>
+<button type="button" data-who="investor|analyst" aria-pressed="false">Investors &amp; analysts</button>
+<button type="button" data-who="employer|compensation" aria-pressed="false">Employer brand</button>
+</div>
 
 {% if items.size > 1 %}
 <div class="insights">
@@ -67,7 +94,7 @@ permalink: /
 {%- assign who = "" -%}{%- assign detail = rest | strip -%}
 {%- if rest contains "- *" -%}{%- assign rp = rest | split: "- *" -%}{%- assign detail = rp[0] | strip -%}{%- assign who = rp[1] | split: "*" | first -%}{%- endif -%}
 {%- assign wp = who | split: ": " -%}
-<div class="card">
+<div class="card" data-who="{{ who | downcase | escape }}">
 <h3>{{ head | strip }}</h3>
 {%- if detail != "" %}<p>{{ detail | markdownify | strip_html }}</p>{% endif %}
 {%- if who != "" %}<p class="who">{% if wp.size > 1 %}<b>{{ wp[0] }}:</b> {{ who | remove_first: wp[0] | remove_first: ": " }}{% else %}{{ who }}{% endif %}</p>{% endif %}
@@ -81,7 +108,19 @@ permalink: /
 
 {%- if charts != "" %}
 <div class="charts">
-{{ charts | markdownify }}
+{%- assign chart_blocks = charts | split: "![" -%}
+{%- for blk in chart_blocks offset: 1 -%}
+  {%- assign url = blk | split: "](" | last | split: ")" | first -%}
+  {%- assign fname = url | split: "/" | last -%}
+  {%- assign rel = "/reports/charts/" | append: fname -%}
+  {%- assign on_disk = site.static_files | where: "path", rel | first -%}
+  {%- assign caption = blk | split: ")" | last | strip -%}
+  {%- if on_disk -%}
+  <figure>{% include_relative {{ rel | remove_first: "/" }} %}{% if caption != "" %}<figcaption>{{ caption | markdownify | strip_html }}</figcaption>{% endif %}</figure>
+  {%- else -%}
+  {{ "![" | append: blk | markdownify }}
+  {%- endif -%}
+{%- endfor %}
 </div>
 {%- endif %}
 {%- if headline != "" %}
@@ -95,22 +134,31 @@ permalink: /
 
 ## Get the data behind it
 
-<div class="grid">
-<div class="card"><h3>Hiring Signals Feed</h3>
-<p>Yesterday's signals for every tracked company, one row each, or any day or 30-day window, filtered by vendor,
-industry, function or signal. Download as JSON, CSV or Excel, call it from code, or ask for it from Claude or Cursor.</p>
-<p><span class="price">$0.01 per company-day</span> · <a href="https://apify.com/agilityy/hiring-signals-feed">Open the feed</a></p></div>
-<div class="card"><h3>Your own company list</h3>
-<p>Daily growth, roles opened and closed, days-to-fill and a one-word signal for the companies you name; or one
-company checked right now; or companies that just raised money, with a live hiring check.</p>
-<p><a href="{{ '/data/' | relative_url }}">Products and prices</a></p></div>
-<div class="card"><h3>The whole history</h3>
-<p>Every company, every day, every role event since collection began: monthly CSV files or a Snowflake share, with
-a free sample and the schema to load today.</p>
-<p><a href="{{ '/for-data-teams/' | relative_url }}">For data teams</a></p></div>
-</div>
+<table class="pricing">
+<thead><tr><th></th><th>Sales &amp; revenue teams</th><th>Data teams</th><th>Investors &amp; analysts</th></tr></thead>
+<tbody>
+<tr><td>What you get</td>
+<td>Yesterday's signal for every tracked company, one row each: open roles, roles opened and closed, 30-day growth, days-to-fill, a one-word signal; plus every role opened or closed as an event. Filter by vendor, industry, function or signal.</td>
+<td>The whole history: daily signals and job events for every company since collection began, with the schema and a free sample to load today.</td>
+<td>Daily tracking of the companies you name (a portfolio, a sector, a watch list), SEC Form D funded companies with a live hiring check, and custom cuts of the history.</td></tr>
+<tr><td>Delivered as</td>
+<td>JSON, CSV or Excel download; REST API with Python and JS clients; schedules to Google Sheets, Slack or a webhook; MCP in Claude, Cursor or Claude Code.</td>
+<td>Monthly CSV files, or a Snowflake share refreshed daily.</td>
+<td>Same four routes as the feed; custom cuts as CSV or Parquet.</td></tr>
+<tr><td>Price</td>
+<td><span class="price">$0.01 per company-day</span>; job events $0.004 each.</td>
+<td><span class="price">$149 / month</span> or $1,200 / year for the files; <span class="price">$249 / month</span> Snowflake share.</td>
+<td><span class="price">$0.025 per company-day</span> on your list; funded leads $0.015 each; custom cuts quoted, often free with attribution for research and press.</td></tr>
+<tr><td>Start</td>
+<td><a class="btn" href="https://apify.com/agilityy/hiring-signals-feed">Open the feed</a></td>
+<td><a class="btn" href="{{ '/for-data-teams/' | relative_url }}">Schema, sample, access</a></td>
+<td><a class="btn" href="{{ '/data/' | relative_url }}">Products and prices</a></td></tr>
+</tbody>
+</table>
 
-<p><a class="btn" href="{{ '/get-the-data/' | relative_url }}">All six ways to get the data</a></p>
+<p><a class="btn alt" href="{{ '/samples/daily_signals_sample.csv' | relative_url }}" download>Download a sample CSV: daily signals</a>
+<a class="btn alt" href="{{ '/samples/job_events_sample.csv' | relative_url }}" download>Sample CSV: job events</a>
+<a class="btn alt" href="{{ '/get-the-data/' | relative_url }}">All six ways to get the data</a></p>
 
 ## Why these numbers hold up
 
@@ -124,7 +172,12 @@ a free sample and the schema to load today.</p>
 - **Checked daily.** Fetch rate, day-over-day stability, a careers-page re-count and a re-fetch of closed roles are
   measured every day with alert thresholds. The [methodology]({{ '/methodology/' | relative_url }}) lists them.
 
-## Who uses it
+## Who it is for
+
+<p class="trust"><span>Launched November 2026, so no customer logos yet. Judge the data itself:</span>
+<a href="{{ '/samples/daily_signals_sample.csv' | relative_url }}">the sample</a>
+<a href="{{ '/methodology/' | relative_url }}">the method and the daily checks</a>
+<a href="https://github.com/agilityy-research/hiring-pulse">the source of every report</a></p>
 
 <div class="grid">
 <div class="card"><h3>Talent and recruiting teams</h3>
@@ -144,3 +197,59 @@ or a paper is usually free with attribution.</p></div>
 <p class="small muted">Reports are released under CC BY 4.0. Cite as "Agilityy Research, Hiring Pulse, {{ latest_date }}"
 with a link to this site. New edition every Monday 07:00 UTC; subscribe to the <a href="{{ '/feed.xml' | relative_url }}">Atom feed</a>.
 Source files: <a href="https://github.com/agilityy-research/hiring-pulse">github.com/agilityy-research/hiring-pulse</a>.</p>
+
+<script>
+(function () {
+  var box = document.getElementById("company-search"), q = document.getElementById("company-q"),
+      out = document.getElementById("company-results"), note = document.getElementById("company-search-note");
+  if (!box || !q || !out) return;
+  box.hidden = false; if (note) note.hidden = false;
+  var data = null, loading = null, url = "{{ '/reports/data/companies.json' | relative_url }}";
+  function load() {
+    if (data || loading) return loading;
+    loading = fetch(url, {cache: "force-cache"}).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
+      data = j && j.companies ? j : {companies: [], windowDays: 30}; return data;
+    }).catch(function () { data = {companies: [], windowDays: 30}; return data; });
+    return loading;
+  }
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]; }); }
+  function fmt(n) { return Number(n).toLocaleString("en-US"); }
+  function render(term) {
+    out.innerHTML = "";
+    if (!data || term.length < 2) return;
+    var t = term.toLowerCase(), hits = [], rows = data.companies;
+    for (var i = 0; i < rows.length && hits.length < 8; i++) { if (String(rows[i][0]).toLowerCase().indexOf(t) !== -1) hits.push(rows[i]); }
+    if (!hits.length) { out.innerHTML = '<li><span class="muted">No board with that name among the tracked companies.</span></li>'; return; }
+    var d = data.windowDays || 30;
+    out.innerHTML = hits.map(function (r) {
+      var name = r[0], vendor = r[1], ind = r[2], open = r[3], net = r[4], growth = r[5], sig = r[6], ai = r[7], remote = r[8], fn = r[9];
+      var meta = [vendor && vendor.charAt(0).toUpperCase() + vendor.slice(1), ind, fn && ("mostly " + fn)].filter(Boolean).join(" · ");
+      var line;
+      if (net === null || net === undefined) line = '<span class="muted">' + d + '-day change from the next editions, as its history reaches 14 days</span>';
+      else {
+        var cls = net > 0 ? "up" : (net < 0 ? "down" : ""), sign = net > 0 ? "+" : "";
+        var word = sig === "A" ? "accelerating" : (sig === "C" ? "contracting" : "steady");
+        line = '<span class="' + cls + '">' + sign + fmt(net) + " roles in " + d + " days" + (growth === null || growth === undefined ? "" : " (" + (growth > 0 ? "+" : "") + growth + "%)") + "</span> · " + word;
+      }
+      var extra = [ai != null ? ai + "% AI/ML" : null, remote != null ? remote + "% remote" : null].filter(Boolean).join(" · ");
+      return "<li><b>" + esc(name) + "</b><span>" + fmt(open) + " open roles</span>" + line + (meta ? '<span class="muted">' + esc(meta) + "</span>" : "") +
+             (extra ? '<span class="muted">' + esc(extra) + "</span>" : "") + ' <a href="{{ '/get-the-data/' | relative_url }}">Which roles? Unlock the feed</a></li>';
+    }).join("");
+  }
+  q.addEventListener("focus", function () { load(); });
+  q.addEventListener("input", function () { var v = q.value.trim(); load().then(function () { if (q.value.trim() === v) render(v); }); });
+  var chips = document.getElementById("audience-chips"), cards = document.querySelectorAll(".insights .card");
+  if (chips && cards.length) {
+    chips.hidden = false;
+    chips.addEventListener("click", function (e) {
+      var b = e.target.closest("button"); if (!b) return;
+      chips.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      var keys = (b.getAttribute("data-who") || "").split("|").filter(Boolean);
+      cards.forEach(function (c) {
+        var who = (c.getAttribute("data-who") || "").toLowerCase();
+        c.classList.toggle("dim", keys.length > 0 && !keys.some(function (k) { return who.indexOf(k) !== -1; }));
+      });
+    });
+  }
+})();
+</script>

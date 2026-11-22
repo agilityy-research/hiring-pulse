@@ -24,6 +24,11 @@ coverage:
   flows_from: "2026-12-07"
   yc_subset: "639"
   yc_subset_since: "2026-11-06"
+# Monday e-mail. Leave empty and the signup box is not shown. To switch it on: create a free list at a provider that
+# offers a plain HTML form (Buttondown: https://buttondown.com/<list>, action "https://buttondown.com/api/emails/embed-subscribe/<list>";
+# Kit, MailerLite and Beehiiv work the same way), paste the form's action URL here, and the site renders a signup box.
+newsletter_action: ""
+newsletter_email_field: "email"
 # One-off studies that sit outside the weekly series (file names in reports/ without the .md).
 baseline_reports:
   - "2026-11-20"

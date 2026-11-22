@@ -17,7 +17,7 @@ Startup hiring this week, measured from the public job boards (Greenhouse, Smart
 - **14.2% of open roles are remote, and the typical company offers none.** 535 of the 8,419 companies with 10 or more openings are fully remote.
   - *For employer-brand and compensation teams: remote is the exception, which makes it a differentiator in the posting.*
 
-The growth, days-to-fill and movers figures cover the 648 companies with 14+ days of daily history; the other 21,234 tracked companies join them as their history accumulates, most from 2026-12-06.
+The growth, days-to-fill and movers figures cover the 648 companies with 14+ days of daily history; the other 21,234 tracked companies join them as their history accumulates, most from 2026-12-06. Next edition: Monday 2026-11-23, 07:00 UTC.
 
 ## This week in charts
 
