@@ -1,7 +1,7 @@
 ---
 title: "How you get the data: download, API, schedules, MCP or a bulk feed"
 description: >-
-  Six ways to get the daily hiring data behind Hiring Pulse: Console download (JSON, CSV, Excel), REST API and clients, scheduled runs with webhooks, MCP from Claude or Cursor, monthly files or Snowflake.
+  Six ways to get the daily hiring data behind Hiring Pulse: download JSON/CSV/Excel, REST API and clients, scheduled runs, MCP from Claude or Cursor, bulk feed.
 permalink: /get-the-data/
 jsonld: dataset
 dataset_name: "Hiring Pulse daily hiring signals and job events"
