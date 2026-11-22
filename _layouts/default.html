@@ -187,6 +187,8 @@ table.pricing{display:table;width:100%;font-size:.95rem}
 table.pricing th,table.pricing td{white-space:normal;vertical-align:top;min-width:0}
 table.pricing th{font-size:1rem}
 table.pricing td:first-child,table.pricing th:first-child{color:var(--muted);font-weight:500;width:9rem}
+table.pricing th:not(:first-child){width:30%}
+@media (max-width:640px){table.pricing,table.pricing thead,table.pricing tbody,table.pricing tr,table.pricing td,table.pricing th{display:block;width:auto}table.pricing thead{display:none}table.pricing td:first-child{font-weight:600;color:var(--fg);border-bottom:0;padding-bottom:0}table.pricing td{border-bottom:0}table.pricing tr{border-bottom:1px solid var(--line);padding:.4rem 0}}
 .signup{background:var(--accent-bg);border:1px solid var(--line);border-radius:10px;padding:1rem 1.2rem;margin:1.2rem 0}
 .signup form{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
 .signup input[type=email]{flex:1 1 14rem;font:inherit;padding:.55rem .8rem;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
