@@ -42,7 +42,7 @@
   {%- if first_finding != "" -%}
     {%- assign page_description = "Hiring Pulse " | append: report_date | append: ": " | append: first_finding | truncate: 158 -%}
   {%- elsif is_baseline -%}
-    {%- assign page_description = "Baseline study: 14 days of startup hiring at " | append: site.coverage.yc_subset | append: " Y Combinator companies, read daily from " | append: site.coverage.yc_subset_since | append: ": growth, roles opened and closed, days-to-fill, movers, AI/ML and remote share." -%}
+    {%- assign page_description = "Baseline study: 14 days of startup hiring at " | append: site.coverage.yc_subset | append: " Y Combinator companies read daily: growth, roles opened and closed, days-to-fill, movers, AI/ML and remote share." -%}
   {%- else -%}
     {%- assign page_description = "Hiring Pulse " | append: report_date | append: ": weekly startup hiring benchmarks from " | append: site.coverage.companies | append: " public job boards: open roles, biggest movers, days-to-fill, AI/ML share, remote share, by function and industry." -%}
   {%- endif -%}

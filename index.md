@@ -39,11 +39,11 @@ permalink: /
 
 # Where startup hiring is moving this week
 
-{%- if items.size > 1 %}
+{% if items.size > 1 %}
 {%- assign first = items[1] | split: nl2 | first -%}
-{%- assign hero = first | split: "**" | first -%}
+{%- assign hero = first | split: "**" | first %}
 <p class="hero">{{ hero }}</p>
-{%- endif %}
+{% endif %}
 <p class="muted small">Edition of {{ latest_date }}. {{ coverage_line | markdownify | strip_html | strip }} The weekly report is free to quote; the daily data behind it, every company and every role opened or closed, is <a href="{{ '/get-the-data/' | relative_url }}">yours per row, as a feed or through an AI assistant</a>.</p>
 
 {%- if v_open != "" %}
@@ -58,7 +58,7 @@ permalink: /
 
 ## What the data says this week
 
-{%- if items.size > 1 %}
+{% if items.size > 1 %}
 <div class="insights">
 {%- for item in items offset: 1 %}
 {%- assign body = item | split: nl2 | first -%}
@@ -74,7 +74,7 @@ permalink: /
 </div>
 {%- endfor %}
 </div>
-{%- if findings_note != "" %}<p class="muted small">{{ findings_note | markdownify | strip_html }}</p>{% endif %}
+{% if findings_note != "" %}<p class="muted small">{{ findings_note | markdownify | strip_html }}</p>{% endif %}
 {%- else %}
 {{ sections[0] | remove_first: title_line | markdownify }}
 {%- endif %}
