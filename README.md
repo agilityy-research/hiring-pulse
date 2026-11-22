@@ -1,12 +1,12 @@
-# Hiring Pulse — weekly startup hiring benchmarks from 21,922 public job boards
+# Hiring Pulse — weekly startup hiring benchmarks from 21,000+ public job boards
 
-**Site: https://agilityy-research.github.io/hiring-pulse/** (becomes **https://hiring.agilityy.com** once the DNS
-record below exists). **Agilityy Research** reads the public job boards of 21,922 companies every day (Greenhouse,
-Lever, Ashby, SmartRecruiters, Recruitee and Personio boards; 10,933 companies before 2026-11-22) and publishes a
+**Site: https://hiring.agilityy.com/** (becomes **https://hiring.agilityy.com** once the DNS
+record below exists). **Agilityy Research** reads the public job boards of 21,000+ companies every day (Greenhouse,
+Lever, Ashby, SmartRecruiters, Recruitee and Personio boards; 10,000+ companies before 2026-11-22) and publishes a
 benchmark report here every Monday at 07:00 UTC.
 
 **This week → [reports/latest.md](reports/latest.md)** · archive in [`reports/`](reports/) (one file per week,
-charts in [`reports/charts/`](reports/charts/)) · [Atom feed](https://agilityy-research.github.io/hiring-pulse/feed.xml)
+charts in [`reports/charts/`](reports/charts/)) · [Atom feed](https://hiring.agilityy.com/feed.xml)
 
 ## What is in each edition
 
@@ -85,7 +85,7 @@ GitHub Pages.
 
 - **Universe.** Companies with a public job board on Greenhouse, Lever, Ashby, SmartRecruiters, Recruitee or
   Personio, drawn from accelerator lists and public web indexes, verified against the company name; industry and size
-  metadata for the 683 YC-backed companies.
+  metadata for around 700 YC-backed companies.
 - **Snapshots.** Every board is read once a day. A role is *opened* when it first appears and *closed* when it
   disappears; days-to-fill is the age of a role at closure. Postings older than a year at closure are excluded
   from days-to-fill as evergreen.

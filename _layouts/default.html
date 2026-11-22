@@ -29,10 +29,10 @@
   {%- assign first_finding = "" -%}
   {%- if page.content contains 'id="key-findings"' -%}
     {%- assign lis = page.content | split: 'id="key-findings"' | last | split: "<li>" -%}
-    {%- if lis.size > 1 -%}{%- assign first_finding = lis[1] | split: "</li>" | first | strip_html | strip -%}{%- endif -%}
+    {%- if lis.size > 1 -%}{%- assign first_li = lis[1] | split: "</li>" | first -%}{%- if first_li contains "</strong>" -%}{%- assign first_finding = first_li | split: "</strong>" | first | strip_html | strip -%}{%- else -%}{%- assign first_finding = first_li | strip_html | strip -%}{%- endif -%}{%- endif -%}
   {%- elsif page.content contains "## Key findings" -%}
     {%- assign body = page.content | split: "## Key findings" | last | split: "## " | first | split: nl -%}
-    {%- for ln in body -%}{%- if first_finding == "" and ln contains "- " and ln.size > 20 -%}{%- assign first_finding = ln | remove_first: "- " | remove: "**" | strip -%}{%- endif -%}{%- endfor -%}
+    {%- for ln in body -%}{%- if first_finding == "" and ln contains "- **" -%}{%- assign first_finding = ln | remove_first: "- **" | split: "**" | first | strip -%}{%- elsif first_finding == "" and ln contains "- " and ln.size > 20 -%}{%- assign first_finding = ln | remove_first: "- " | remove: "**" | strip -%}{%- endif -%}{%- endfor -%}
   {%- endif -%}
   {%- if is_baseline -%}
     {%- assign page_title = "Baseline study " | append: report_date | append: ": 14 days of hiring at 639 YC companies" -%}
@@ -140,8 +140,23 @@ pre{background:var(--card);padding:.8rem 1rem;border-radius:8px;overflow-x:auto;
 pre code{background:none;padding:0}
 img,svg.hp{max-width:100%;height:auto}
 main.report img,main.latest img,svg.hp{display:block;width:100%;max-width:720px;margin:1rem 0 1.4rem}
-main.report #key-findings + ul,main.latest .findings ul{padding-left:1.2rem}
-main.report #key-findings + ul li,main.latest .findings li{font-size:1.06rem;margin:.55rem 0;line-height:1.5}
+main.report #key-findings + ul{padding-left:1.2rem}
+main.report #key-findings + ul > li{font-size:1.06rem;margin:.8rem 0;line-height:1.5}
+main.report #key-findings + ul > li > ul{padding-left:0;margin:.25rem 0 0}
+main.report #key-findings + ul > li > ul > li{list-style:none;font-size:.93rem;color:var(--muted);margin:0}
+main.report img + p > em:only-child,main.latest .charts p > em:only-child{display:block;font-style:normal;color:var(--muted);font-size:.95rem;margin:-.9rem 0 1.6rem}
+p.hero{font-size:1.5rem;line-height:1.3;font-weight:650;margin:.2rem 0 .8rem;max-width:52rem}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(10.5rem,1fr));gap:.8rem;margin:1.2rem 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:.8rem 1rem;display:flex;flex-direction:column;gap:.15rem}
+.stat b{font-size:1.75rem;line-height:1.1;font-weight:700;letter-spacing:-.01em}
+.stat span{color:var(--muted);font-size:.86rem;line-height:1.3}
+.stat .delta{color:var(--accent);font-weight:600}
+.insights{display:grid;grid-template-columns:repeat(auto-fit,minmax(19rem,1fr));gap:1rem;margin:1rem 0}
+.insights .card{margin:0;display:flex;flex-direction:column}
+.insights h3{font-size:1.12rem;line-height:1.35;margin:0 0 .45rem}
+.insights p{margin:.25rem 0;font-size:.97rem}
+.insights .who{margin-top:auto;padding-top:.6rem;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+.insights .who b{color:var(--fg);font-weight:600}
 .price{font-weight:600;white-space:nowrap}
 .report-nav{display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;font-size:.93rem;margin:0 0 1rem;color:var(--muted)}
 ul.report-list{list-style:none;padding:0}

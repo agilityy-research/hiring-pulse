@@ -1,7 +1,7 @@
 ---
 title: "Job board data for data teams: the full history as files or a Snowflake share"
 description: >-
-  The full Hiring Pulse history for data teams: daily signals and job events for 21,922 companies, as monthly CSV or a Snowflake share. Schema, sample, prices.
+  The full Hiring Pulse history for data teams: daily signals and job events for 21,000+ companies, as monthly CSV or a Snowflake share. Schema, sample, prices.
 permalink: /for-data-teams/
 jsonld: dataset
 dataset_name: "Hiring Pulse full history: daily_signals, job_events, companies"
@@ -23,7 +23,7 @@ Three tables, appended daily, with the history from the first day of collection.
 | Table | One row per | Rows per day (Nov 2026) | Columns |
 |---|---|---|---|
 | `companies` | company | monthly refresh, {{ site.coverage.companies }} rows | key, name, job-board vendor and slug, careers URL, website; for the {{ site.coverage.with_industry }} YC-backed companies also industry, sub-industry, team size, batch |
-| `daily_signals` | company × day | ≈ {{ site.coverage.companies }} | snapshot time, open roles, previous open roles, new and closed roles, net change, growth %, 30-day trend, roles opened and closed in 30 days, median days-to-fill, remote share, AI/ML roles and share, functions, seniority mix, top departments, top locations, snapshots recorded, one-word signal |
+| `daily_signals` | company × day | one per tracked company, {{ site.coverage.companies }} a day | snapshot time, open roles, previous open roles, new and closed roles, net change, growth %, 30-day trend, roles opened and closed in 30 days, median days-to-fill, remote share, AI/ML roles and share, functions, seniority mix, top departments, top locations, snapshots recorded, one-word signal |
 | `job_events` | role opened or closed | thousands | event type, company, vendor, slug, job id, title, department, location, remote flag, URL, first seen, closed at, days open; plus one baseline row per role that was already open when a board entered the archive |
 
 Coverage: {{ site.coverage.companies }} companies with a public {{ site.coverage.vendors }} board, daily since

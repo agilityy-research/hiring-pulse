@@ -1,7 +1,7 @@
 ---
 title: "Methodology: how the startup hiring benchmarks are measured and checked"
 description: >-
-  How Hiring Pulse measures startup hiring: daily reads of 21,922 public job boards, how opened and closed roles and days-to-fill are defined, daily checks.
+  How Hiring Pulse measures startup hiring: daily reads of 21,000+ public job boards, how opened and closed roles and days-to-fill are defined, daily checks.
 permalink: /methodology/
 ---
 # Methodology

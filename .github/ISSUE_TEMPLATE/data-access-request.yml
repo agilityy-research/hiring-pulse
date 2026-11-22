@@ -7,7 +7,7 @@ body:
     attributes:
       value: |
         Thanks for your interest. Tell us what you need and we reply in this thread, usually within two business days.
-        What the data contains and the free sample: https://agilityy-research.github.io/hiring-pulse/for-data-teams/
+        What the data contains and the free sample: https://hiring.agilityy.com/for-data-teams/
   - type: input
     id: organisation
     attributes:

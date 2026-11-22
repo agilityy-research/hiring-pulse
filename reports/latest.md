@@ -4,21 +4,30 @@ Startup hiring this week, measured from the public job boards (Greenhouse, Smart
 
 ## Key findings
 
-- **696,445 roles are open** across the job boards of 21,882 companies. Engineering accounts for 19.1% of them, Operations for 11.8%.
-- Among the 648 companies with 30 days of history, open roles are +0.8% against a month ago (1,879 opened, 1,792 closed); 7.3% of these companies are accelerating and 13.1% contracting. Largest additions: Aleph Lab (+43 roles), Fivetran (+37 roles); largest cuts: Inversion Space (−34), Clara (−17). By industry, Education is growing fastest (+19.5%) and Healthcare slowest (−2.3%).
-- Roles stay posted a median of **64.2 days** before they close; Clinical fills fastest (35 days), Product slowest (85).
-- **20,797 AI/ML roles** make up 3.0% of all openings. Heaviest AI/ML hirers among boards with 10+ roles: 10x Team (94.0% of its openings), Reonic (93.3% of its openings).
-- **14.2% of open roles are remote**; 535 of the 8,419 companies with 10 or more openings are fully remote, and the median company lists 0.0% of its roles as remote.
+- **696,445 roles are open across the job boards of 21,882 companies.** Engineering is the largest function with 132,934 openings (19.1%), then Operations (11.8%) and Sales (10.4%).
+  - *For analysts: the size of startup hiring demand by function, re-measured from 21,882 first-party boards every day.*
+- **More companies are cutting than growing: 13.1% of those with a month of history are contracting, 7.3% accelerating.** Across the 648 companies with 30 days of history, open roles are +0.8% against a month ago (1,879 opened, 1,792 closed). By industry, Education is growing fastest (+19.5%) and Healthcare slowest (−2.3%).
+  - *For sales teams: the accelerating companies are opening budgets now; the daily feed names them, with the roles they added.*
+- **Aleph Lab added 43 open roles in 30 days, more than any other company; Inversion Space cut the most (−34).** Also expanding: Fivetran (+37, 196 open), Legora (+26, 342 open); also cutting: Clara (−17, 138 open), Deepgram (−17, 52 open).
+  - *For revenue teams: a company that grows its open roles by a third is about to buy tools, payroll and office space. The earliest public budget signal.*
+- **A startup role stays open a median of 64.2 days before it is filled or withdrawn; Product roles take 85 days, Clinical 35.** Measured on 1,739 postings that closed in the last 30 days at 336 companies.
+  - *For talent teams: a time-to-fill benchmark by function, industry and company size, against companies like yours.*
+- **AI/ML roles are 3.0% of all openings (20,797 roles), but at 10x Team and Reonic they are over 90% of the board.** Heaviest AI/ML hirers among boards with 10+ roles: 10x Team (94.0% of its openings), Reonic (93.3% of its openings).
+  - *For investors: the AI share of each company's board, day by day, separates AI-native teams from AI-washed decks.*
+- **14.2% of open roles are remote, and the typical company offers none.** 535 of the 8,419 companies with 10 or more openings are fully remote.
+  - *For employer-brand and compensation teams: remote is the exception, which makes it a differentiator in the posting.*
 
 The growth, days-to-fill and movers figures cover the 648 companies with 14+ days of daily history; the other 21,234 tracked companies join them as their history accumulates, most from 2026-12-06.
 
 ## This week in charts
 
-![Open roles by function. Engineering 133k (19.1%); Operations 82k (11.8%); Sales 72.1k (10.4%); Customer 39.2k (5.6%); Clinical 33.7k (4.8%); Marketing 25.9k (3.7%); Data & AI 25.4k (3.6%); Finance 17.6k (2.5%); People 13.2k (1.9%); Product 11.7k (1.7%); Design 10.6k (1.5%); Legal 6.9k (1.0%).](https://agilityy-research.github.io/hiring-pulse/reports/charts/2026-11-22-functions.svg)
+![Open roles by function. Engineering 133k (19.1%); Operations 82k (11.8%); Sales 72.1k (10.4%); Customer 39.2k (5.6%); Clinical 33.7k (4.8%); Marketing 25.9k (3.7%); Data & AI 25.4k (3.6%); Finance 17.6k (2.5%); People 13.2k (1.9%); Product 11.7k (1.7%); Design 10.6k (1.5%); Legal 6.9k (1.0%).](https://hiring.agilityy.com/reports/charts/2026-11-22-functions.svg)
 
-![Largest movers: net change in open roles over 30 days. Aleph Lab +43 (171 open); Fivetran +37 (196 open); Legora +26 (342 open); Flexport +20 (212 open); Orchestra +14 (55 open); Flex +13 (37 open); Inversion Space −34 (55 open); Clara −17 (138 open); Deepgram −17 (52 open); Astranis −15 (170 open); Vanta −15 (69 open); Firecrawl −14 (14 open).](https://agilityy-research.github.io/hiring-pulse/reports/charts/2026-11-22-movers.svg)
+*Engineering alone is 133k of the 696k open roles.*
 
-![Open roles, edition by edition. 22 Nov 696k.](https://agilityy-research.github.io/hiring-pulse/reports/charts/2026-11-22-trend.svg)
+![Largest movers: net change in open roles over 30 days. Aleph Lab +43 (171 open); Fivetran +37 (196 open); Legora +26 (342 open); Flexport +20 (212 open); Orchestra +14 (55 open); Flex +13 (37 open); Inversion Space −34 (55 open); Clara −17 (138 open); Deepgram −17 (52 open); Astranis −15 (170 open); Vanta −15 (69 open); Firecrawl −14 (14 open).](https://hiring.agilityy.com/reports/charts/2026-11-22-movers.svg)
+
+*Aleph Lab added the most roles in 30 days; Inversion Space cut the most.*
 
 ## Headline numbers
 
@@ -239,6 +248,6 @@ Companies with 14+ days of history and a known industry; a segment needs 5 compa
 
 ## About the numbers
 
-Source: daily reads of the public job boards (Greenhouse, SmartRecruiters, Personio, Ashby, Recruitee and Lever) of 21,882 companies. Every figure is first-party: a role is counted once, from the company's own board, and a closure is observed the day the posting disappears, not inferred. Job titles are mapped to functions, seniority and the AI/ML flag with one fixed taxonomy, so editions are comparable week to week. Method, definitions and the daily accuracy checks: [agilityy-research.github.io/hiring-pulse/methodology](https://agilityy-research.github.io/hiring-pulse/methodology/). Every edition: [agilityy-research.github.io/hiring-pulse](https://agilityy-research.github.io/hiring-pulse). Free to quote under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) with a link.
+Source: daily reads of the public job boards (Greenhouse, SmartRecruiters, Personio, Ashby, Recruitee and Lever) of 21,882 companies. Every figure is first-party: a role is counted once, from the company's own board, and a closure is observed the day the posting disappears, not inferred. Job titles are mapped to functions, seniority and the AI/ML flag with one fixed taxonomy, so editions are comparable week to week. Method, definitions and the daily accuracy checks: [hiring.agilityy.com/methodology](https://hiring.agilityy.com/methodology/). Every edition: [hiring.agilityy.com](https://hiring.agilityy.com). Free to quote under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) with a link.
 
-**Get the data.** Yesterday's signals for every tracked company, one row each, pay per row from $0.01 per company-day: [Hiring Signals Feed](https://apify.com/agilityy/hiring-signals-feed). Track your own list of companies daily: [Hiring Velocity Signals](https://apify.com/agilityy/hiring-velocity-signals). Check one company now: [Company Hiring Lookup](https://apify.com/agilityy/company-hiring-lookup). Companies that just raised money: [Funded & Hiring Leads](https://apify.com/agilityy/funded-and-hiring-leads). The whole history as monthly files or a Snowflake share: [agilityy-research.github.io/hiring-pulse/for-data-teams/](https://agilityy-research.github.io/hiring-pulse/for-data-teams/). Every way to get it, from a download to an AI assistant: [agilityy-research.github.io/hiring-pulse/get-the-data/](https://agilityy-research.github.io/hiring-pulse/get-the-data/).
+**Get the data.** Yesterday's signals for every tracked company, one row each, pay per row from $0.01 per company-day: [Hiring Signals Feed](https://apify.com/agilityy/hiring-signals-feed). Track your own list of companies daily: [Hiring Velocity Signals](https://apify.com/agilityy/hiring-velocity-signals). Check one company now: [Company Hiring Lookup](https://apify.com/agilityy/company-hiring-lookup). Companies that just raised money: [Funded & Hiring Leads](https://apify.com/agilityy/funded-and-hiring-leads). The whole history as monthly files or a Snowflake share: [hiring.agilityy.com/for-data-teams/](https://hiring.agilityy.com/for-data-teams/). Every way to get it, from a download to an AI assistant: [hiring.agilityy.com/get-the-data/](https://hiring.agilityy.com/get-the-data/).

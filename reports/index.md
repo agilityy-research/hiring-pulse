@@ -1,7 +1,7 @@
 ---
 title: "All weekly Hiring Pulse reports: the startup hiring archive"
 description: >-
-  Every weekly Hiring Pulse edition, one per Monday: startup hiring benchmarks from 21,922 job boards with key findings, charts, movers, days-to-fill, AI share.
+  Every weekly Hiring Pulse edition, one per Monday: startup hiring benchmarks from 21,000+ job boards with key findings, charts, movers, days-to-fill, AI share.
 permalink: /reports/
 ---
 # All weekly reports

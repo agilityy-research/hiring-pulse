@@ -3,9 +3,9 @@
 # repository and the CNAME file, so the same source works at agilityy-research.github.io/hiring-pulse and at
 # hiring.agilityy.com without an edit.
 title: Hiring Pulse
-tagline: Weekly startup hiring benchmarks from 21,922 job boards
+tagline: Weekly startup hiring benchmarks from 21,000+ job boards
 description: >-
-  Weekly startup hiring benchmarks by Agilityy Research, measured from the public job boards of 21,922
+  Weekly startup hiring benchmarks by Agilityy Research, measured from the public job boards of 21,000+
   companies read every day: open roles, biggest movers, days-to-fill, AI/ML share, remote share, by function and
   industry. Free every Monday under CC BY 4.0; the daily data behind it is sold per row or as a feed.
 author: Agilityy Research
@@ -14,13 +14,13 @@ timezone: UTC
 
 # Facts the pages quote. Edit here when the universe changes (monthly refresh) and every page follows.
 coverage:
-  companies: "21,922"
+  companies: "21,000+"   # rounded on purpose: the exact count of the day is in each report's coverage line
   companies_since: "2026-11-22"
-  companies_before: "10,933"
+  companies_before: "10,000+"
   vendors: "Greenhouse, Lever, Ashby, SmartRecruiters, Recruitee and Personio"
   vendors_short: "Greenhouse, Lever, Ashby, SmartRecruiters, Recruitee, Personio"
   daily_since: "2026-11-21"
-  with_industry: "683"
+  with_industry: "around 700"
   flows_from: "2026-12-07"
   yc_subset: "639"
   yc_subset_since: "2026-11-06"
