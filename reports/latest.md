@@ -1,0 +1,184 @@
+# Hiring Pulse — 2026-11-20
+
+Coverage: 639 companies with public job boards, 30-day window.
+
+- Open roles: **10,886** (+137 vs window start, 1.3%)
+- Roles opened / closed: 1,768 / 1,631
+- Companies accelerating / contracting: 6.9% / 11.1%
+- Median days-to-fill: 65 (from 1,584 closures at 319 companies; 47 postings older than a year excluded)
+- Median remote share: 20.0%
+- AI/ML roles: **579** (5.3% of open roles)
+- Seniority mix: Entry 5.1%, Mid 55.4%, Senior 14.0%, Staff/Principal 8.2%, Manager 9.9%, Director 3.1%, Executive 4.2%
+
+## Open roles by function
+
+| Function | Open roles | Share | Days-to-fill |
+|---|---|---|---|
+| Engineering | 3,406 | 31.3% | 79 |
+| Sales | 2,047 | 18.8% | 65.0 |
+| Operations | 941 | 8.6% | 45 |
+| Other | 827 | 7.6% | 56 |
+| Data & AI | 672 | 6.2% | 67.0 |
+| Marketing | 619 | 5.7% | 60 |
+| Customer | 574 | 5.3% | 75 |
+| Product | 451 | 4.1% | 86 |
+| Clinical | 422 | 3.9% | 35.0 |
+| Design | 274 | 2.5% | 58 |
+| Finance | 265 | 2.4% | 50.5 |
+| People | 251 | 2.3% | 52.5 |
+| Legal | 137 | 1.3% | 49 |
+
+## Industries by hiring growth
+
+| Industry | Companies | Open roles | Growth | Opened | Closed | Days-to-fill |
+|---|---|---|---|---|---|---|
+| Education | 8 | 98 | 19.5% | 28 | 12 | 50.5 |
+| Consumer | 32 | 503 | 10.5% | 149 | 101 | 59.0 |
+| Real Estate and Construction | 12 | 117 | 3.5% | 30 | 26 | 66 |
+| Government | 7 | 53 | 1.9% | 6 | 5 | 105.5 |
+| B2B | 360 | 5,875 | 1.4% | 915 | 832 | 70 |
+| Fintech | 76 | 1,648 | 1.4% | 281 | 259 | 67 |
+| Industrials | 65 | 1,368 | -1.2% | 191 | 208 | 67.5 |
+| Healthcare | 77 | 1,216 | -1.5% | 166 | 184 | 53.0 |
+
+## Largest net additions of open roles
+
+| # | Company | Industry | Open | Net change | Growth | AI roles | Remote | Days-to-fill | Top functions |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | Aleph Lab | Consumer | 171 | +43 | 33.6% | 0 (0.0%) | 1.8% | 66.0 | Sales, Marketing, Legal |
+| 2 | Fivetran | B2B | 191 | +32 | 20.1% | 6 (3.1%) | 23.6% | 61.5 | Engineering, Marketing, Sales |
+| 3 | Legora | B2B | 338 | +22 | 7.0% | 6 (1.8%) | 0.3% | 64 | Engineering, Sales, Customer |
+| 4 | Flexport | B2B | 214 | +22 | 11.5% | 2 (0.9%) | 3.3% | 84.5 | Operations, Sales, Engineering |
+| 5 | Distro | B2B | 257 | +19 | 8.0% | 1 (0.4%) | 8.2% | 25.0 | Other, Sales, Customer |
+| 6 | Conveo | B2B | 29 | +17 | 141.7% | 0 (0.0%) | 89.7% | 26.0 | Marketing, Sales, Engineering |
+| 7 | Stepful | Education | 47 | +12 | 34.3% | 0 (0.0%) | 68.1% | 23 | Clinical, Operations, Other |
+| 8 | Stripe | Fintech | 777 | +12 | 1.6% | 39 (5.0%) | 15.1% | 72 | Sales, Engineering, Product |
+| 9 | Flex | Fintech | 35 | +11 | 45.8% | 0 (0.0%) | 11.4% | 181 | Sales, Engineering, Legal |
+| 10 | Curri | Real Estate and Construction | 35 | +10 | 40.0% | 1 (2.9%) | 80.0% | 34 | Sales, Engineering, Customer |
+| 11 | LemFi | Fintech | 31 | +10 | 47.6% | 0 (0.0%) | 100.0% | 33.5 | Marketing, Legal, Finance |
+| 12 | David AI | B2B | 22 | +9 | 69.2% | 1 (4.5%) | 4.5% | 77.5 | Engineering, Operations, Sales |
+| 13 | Replit | B2B | 37 | +9 | 32.1% | 1 (2.7%) | 100.0% | 49 | Engineering, Marketing, Operations |
+| 14 | Supabase | B2B | 80 | +9 | 12.7% | 5 (6.2%) | 98.8% | 84 | Engineering, Data & AI, Sales |
+| 15 | Akido Labs | Healthcare | 35 | +9 | 34.6% | 0 (0.0%) | 5.7% | 43 | Clinical, Marketing, Other |
+
+## Largest net reductions of open roles
+
+| # | Company | Industry | Open | Net change | Growth | AI roles | Remote | Days-to-fill | Top functions |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | Inversion Space | Industrials | 58 | -31 | -34.8% | 1 (1.7%) | 0.0% | 147 | Engineering, Operations, Other |
+| 2 | Clara | Healthcare | 138 | -17 | -11.0% | 13 (9.4%) | 38.4% | 86 | Sales, Engineering, Data & AI |
+| 3 | Deepgram | B2B | 53 | -16 | -23.2% | 15 (28.3%) | 86.8% | 78.0 | Sales, Data & AI, Engineering |
+| 4 | Vanta | B2B | 69 | -15 | -17.9% | 6 (8.7%) | 92.8% | 78.0 | Sales, Engineering, Data & AI |
+| 5 | Firecrawl | B2B | 14 | -14 | -50.0% | 2 (14.3%) | 78.6% | 101 | Engineering, Sales, Legal |
+| 6 | Astranis | Industrials | 173 | -12 | -6.5% | 0 (0.0%) | 0.0% | 57.0 | Engineering, Operations, Other |
+| 7 | Axle | Fintech | 49 | -11 | -18.3% | 2 (4.1%) | 14.3% | 21.0 | Other, Customer, Data & AI |
+| 8 | Turing Labs Inc. | B2B | 34 | -10 | -22.7% | 15 (44.1%) | 11.8% | 24 | Data & AI, Engineering, Finance |
+| 9 | Onebrief | B2B | 31 | -9 | -22.5% | 0 (0.0%) | 64.5% | 62.5 | Customer, Engineering, Marketing |
+| 10 | PermitFlow | Real Estate and Construction | 25 | -9 | -26.5% | 1 (4.0%) | 100.0% | 66 | Operations, Sales, Customer |
+| 11 | H1 | Healthcare | 15 | -8 | -34.8% | 0 (0.0%) | 40.0% | 69.5 | Product, Sales, Customer |
+| 12 | Broccoli AI | B2B | 21 | -7 | -25.0% | 1 (4.8%) | 9.5% | 94.0 | Engineering, Sales, Marketing |
+| 13 | Numeral | B2B | 14 | -7 | -33.3% | 0 (0.0%) | 100.0% | 132.5 | Customer, Engineering, Sales |
+| 14 | Encord | B2B | 32 | -6 | -15.8% | 3 (9.4%) | 0.0% | 84.0 | Engineering, Sales, Data & AI |
+| 15 | Fieldguide | B2B | 36 | -6 | -14.3% | 3 (8.3%) | 100.0% | 43.5 | Engineering, Sales, Data & AI |
+
+## Fastest-growing companies
+
+| # | Company | Industry | Open | Net change | Growth | AI roles | Remote | Days-to-fill | Top functions |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | Atlas | Fintech | 7 | +5 | 250.0% | 1 (14.3%) | 0.0% | — | Engineering, Design, Data & AI |
+| 2 | Farel | B2B | 6 | +4 | 200.0% | 0 (0.0%) | 66.7% | 56 | Sales |
+| 3 | Dex | Consumer | 8 | +5 | 166.7% | 0 (0.0%) | 100.0% | — | Marketing, Engineering, People |
+| 4 | AON3D | Industrials | 5 | +3 | 150.0% | 0 (0.0%) | 0.0% | 165 | Engineering, Marketing, Design |
+| 5 | Conveo | B2B | 29 | +17 | 141.7% | 0 (0.0%) | 89.7% | 26.0 | Marketing, Sales, Engineering |
+| 6 | River | B2B | 6 | +3 | 100.0% | 0 (0.0%) | 100.0% | — | Engineering, Legal, Operations |
+| 7 | Tolmo | B2B | 10 | +5 | 100.0% | 1 (10.0%) | 90.0% | — | Engineering, Marketing, Data & AI |
+| 8 | Double | B2B | 9 | +4 | 80.0% | 0 (0.0%) | 100.0% | — | Engineering, Customer, Sales |
+| 9 | Cambio | Real Estate and Construction | 7 | +3 | 75.0% | 2 (28.6%) | 100.0% | — | Product, Sales, Data & AI |
+| 10 | David AI | B2B | 22 | +9 | 69.2% | 1 (4.5%) | 4.5% | 77.5 | Engineering, Operations, Sales |
+| 11 | Tendo | Consumer | 10 | +4 | 66.7% | 0 (0.0%) | 100.0% | — | Clinical, Product, Data & AI |
+| 12 | Albedo | Industrials | 11 | +4 | 57.1% | 0 (0.0%) | 0.0% | — | Engineering, Sales, Operations |
+| 13 | Airbyte | B2B | 14 | +5 | 55.6% | 0 (0.0%) | 92.9% | 20.0 | Engineering, Sales, Finance |
+| 14 | LiteLLM | B2B | 18 | +6 | 50.0% | 3 (16.7%) | 16.7% | — | Engineering, Data & AI, Sales |
+| 15 | Marble | B2B | 6 | +2 | 50.0% | 1 (16.7%) | 0.0% | 163 | Other, Engineering, Data & AI |
+
+## Contracting companies
+
+| # | Company | Industry | Open | Net change | Growth | AI roles | Remote | Days-to-fill | Top functions |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | Mintlify | B2B | 5 | -10 | -66.7% | 0 (0.0%) | 0.0% | 55.0 | Sales, Design, Customer |
+| 2 | Ready | Government | 2 | -4 | -66.7% | 0 (0.0%) | 50.0% | 105.5 | Other, Operations |
+| 3 | Roofr | Consumer | 3 | -5 | -62.5% | 0 (0.0%) | 100.0% | 45.0 | Sales, Marketing |
+| 4 | Hyperbound | B2B | 4 | -5 | -55.6% | 1 (25.0%) | 25.0% | 39.5 | Sales, Engineering, Data & AI |
+| 5 | Zerocater | B2B | 4 | -5 | -55.6% | 0 (0.0%) | 0.0% | 69.0 | Operations |
+| 6 | Close | B2B | 3 | -3 | -50.0% | 0 (0.0%) | 100.0% | 79 | Engineering, Data & AI |
+| 7 | Firecrawl | B2B | 14 | -14 | -50.0% | 2 (14.3%) | 78.6% | 101 | Engineering, Sales, Legal |
+| 8 | Nango | B2B | 4 | -4 | -50.0% | 0 (0.0%) | 100.0% | 37 | Engineering, Sales |
+| 9 | Juno | Healthcare | 6 | -6 | -50.0% | 0 (0.0%) | 83.3% | 70 | Sales, Operations, Finance |
+| 10 | Preload | B2B | 5 | -5 | -50.0% | 0 (0.0%) | 0.0% | 125.0 | Operations, Engineering, Other |
+| 11 | RevenueCat | B2B | 10 | -9 | -47.4% | 0 (0.0%) | 100.0% | 79.0 | Product, Sales, Marketing |
+| 12 | Bankjoy | Fintech | 7 | -6 | -46.2% | 0 (0.0%) | 100.0% | 71.5 | Engineering, Product, Sales |
+| 13 | Titan | Fintech | 7 | -5 | -41.7% | 0 (0.0%) | 0.0% | 59 | Engineering, Other |
+| 14 | Accord | B2B | 3 | -2 | -40.0% | 0 (0.0%) | 100.0% | 71.0 | Customer, Sales, Engineering |
+| 15 | LiveFlow | B2B | 3 | -2 | -40.0% | 0 (0.0%) | 0.0% | 198 | Marketing, Customer |
+
+## Fastest to fill roles
+
+| # | Company | Industry | Open | Net change | Growth | AI roles | Remote | Days-to-fill | Top functions |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | Checkr | B2B | 38 | -1 | -2.6% | 1 (2.6%) | 2.6% | 20.5 | Engineering, Finance, Operations |
+| 2 | Axle | Fintech | 49 | -11 | -18.3% | 2 (4.1%) | 14.3% | 21.0 | Other, Customer, Data & AI |
+| 3 | Turing Labs Inc. | B2B | 34 | -10 | -22.7% | 15 (44.1%) | 11.8% | 24 | Data & AI, Engineering, Finance |
+| 4 | Distro | B2B | 257 | +19 | 8.0% | 1 (0.4%) | 8.2% | 25.0 | Other, Sales, Customer |
+| 5 | Arketa | B2B | 8 | +0 | 0.0% | 0 (0.0%) | 87.5% | 27 | Customer, Sales, Finance |
+| 6 | GOAT Group | Consumer | 11 | -7 | -38.9% | 0 (0.0%) | 18.2% | 29 | Operations, Sales, Engineering |
+| 7 | Mesh | B2B | 22 | -2 | -8.3% | 1 (4.5%) | 40.9% | 29 | Engineering, Sales, Legal |
+| 8 | Pronto | Consumer | 37 | +2 | 5.7% | 1 (2.7%) | 0.0% | 29 | Engineering, Operations, Product |
+| 9 | Ashby | B2B | 79 | +8 | 11.3% | 0 (0.0%) | 100.0% | 29.5 | Engineering, Customer, Sales |
+| 10 | voize | B2B | 46 | +1 | 2.2% | 7 (15.2%) | 97.8% | 33.0 | Sales, Engineering, Data & AI |
+| 11 | Curri | Real Estate and Construction | 35 | +10 | 40.0% | 1 (2.9%) | 80.0% | 34 | Sales, Engineering, Customer |
+| 12 | Finni Health | Healthcare | 136 | +7 | 5.4% | 0 (0.0%) | 14.0% | 34.0 | Clinical, Sales, Finance |
+| 13 | Nango | B2B | 4 | -4 | -50.0% | 0 (0.0%) | 100.0% | 37 | Engineering, Sales |
+| 14 | Nox Metals | Industrials | 40 | +5 | 14.3% | 1 (2.5%) | 0.0% | 39 | Operations, Engineering, Sales |
+| 15 | Thndr | Fintech | 18 | +2 | 12.5% | 1 (5.6%) | 66.7% | 39.0 | Engineering, Other, Operations |
+
+## Heaviest AI/ML hiring (share of open roles)
+
+| # | Company | Industry | Open | Net change | Growth | AI roles | Remote | Days-to-fill | Top functions |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | Eloquent AI | B2B | 13 | +0 | 0.0% | 6 (46.2%) | 46.2% | — | Data & AI, Engineering, Customer |
+| 2 | Prodigal | Fintech | 13 | -1 | -7.1% | 6 (46.2%) | 0.0% | 58.5 | Data & AI, Sales, Operations |
+| 3 | Spellbrush | Consumer | 11 | +0 | 0.0% | 5 (45.5%) | 9.1% | — | Data & AI, Other, Engineering |
+| 4 | Turing Labs Inc. | B2B | 34 | -10 | -22.7% | 15 (44.1%) | 11.8% | 24 | Data & AI, Engineering, Finance |
+| 5 | Hopper | B2B | 29 | +8 | 38.1% | 9 (31.0%) | 100.0% | 97 | Data & AI, Product, Operations |
+| 6 | Prolific | B2B | 37 | +9 | 32.1% | 11 (29.7%) | 32.4% | 95.0 | Data & AI, Engineering, Customer |
+| 7 | Deepgram | B2B | 53 | -16 | -23.2% | 15 (28.3%) | 86.8% | 78.0 | Sales, Data & AI, Engineering |
+| 8 | AssemblyAI | B2B | 18 | +1 | 5.9% | 5 (27.8%) | 16.7% | 64.0 | Data & AI, Sales, Engineering |
+| 9 | Netomi | B2B | 18 | -2 | -10.0% | 5 (27.8%) | 100.0% | 39 | Engineering, Sales, Product |
+| 10 | Blissway | Government | 11 | +0 | 0.0% | 3 (27.3%) | 63.6% | — | Engineering, Data & AI, Operations |
+| 11 | Scale AI | B2B | 167 | -6 | -3.5% | 45 (26.9%) | 0.0% | 154 | Engineering, Data & AI, Sales |
+| 12 | Swayable | B2B | 16 | -2 | -11.1% | 4 (25.0%) | 12.5% | — | Data & AI, Sales, Product |
+| 13 | Salient | B2B | 12 | -2 | -14.3% | 3 (25.0%) | 8.3% | 183 | Engineering, Product, People |
+| 14 | Uplane | B2B | 17 | +1 | 6.2% | 4 (23.5%) | 23.5% | — | Marketing, Design, Data & AI |
+| 15 | Sygaldry Technologies | Industrials | 18 | +1 | 5.9% | 4 (22.2%) | 0.0% | 28 | Other, Data & AI, Engineering |
+
+## Most remote-friendly
+
+| # | Company | Industry | Open | Net change | Growth | AI roles | Remote | Days-to-fill | Top functions |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | Abacum | B2B | 13 | +0 | 0.0% | 0 (0.0%) | 100.0% | 40 | Customer, Sales, Engineering |
+| 2 | AIOS | Healthcare | 20 | +2 | 11.1% | 1 (5.0%) | 100.0% | 57.0 | Marketing, Clinical, Engineering |
+| 3 | Alchemy | Industrials | 18 | -3 | -14.3% | 0 (0.0%) | 100.0% | 85 | Engineering, Finance, Sales |
+| 4 | ARQ | Fintech | 38 | +2 | 5.6% | 0 (0.0%) | 100.0% | 15 | Engineering, Legal, Product |
+| 5 | Ashby | B2B | 79 | +8 | 11.3% | 0 (0.0%) | 100.0% | 29.5 | Engineering, Customer, Sales |
+| 6 | Bree | Fintech | 10 | -3 | -23.1% | 2 (20.0%) | 100.0% | 76 | Data & AI, Engineering, Design |
+| 7 | ClassDojo | Education | 14 | +2 | 16.7% | 1 (7.1%) | 100.0% | 50 | Sales, Marketing, Engineering |
+| 8 | Clipboard | Consumer | 37 | +0 | 0.0% | 2 (5.4%) | 100.0% | 65 | Operations, Customer, Sales |
+| 9 | Fieldguide | B2B | 36 | -6 | -14.3% | 3 (8.3%) | 100.0% | 43.5 | Engineering, Sales, Data & AI |
+| 10 | FirstWork | B2B | 19 | +6 | 46.2% | 1 (5.3%) | 100.0% | — | Sales, Engineering, Product |
+| 11 | Float | Fintech | 19 | +1 | 5.6% | 1 (5.3%) | 100.0% | 42 | Sales, Other, Engineering |
+| 12 | Teleport | B2B | 26 | +5 | 23.8% | 0 (0.0%) | 100.0% | 62.0 | Engineering, Sales, Marketing |
+| 13 | Honeydew | B2B | 14 | -1 | -6.7% | 0 (0.0%) | 100.0% | 68.0 | Other, Engineering, Design |
+| 14 | Hopper | B2B | 29 | +8 | 38.1% | 9 (31.0%) | 100.0% | 97 | Data & AI, Product, Operations |
+| 15 | LemFi | Fintech | 31 | +10 | 47.6% | 0 (0.0%) | 100.0% | 33.5 | Marketing, Legal, Finance |
+
+Source: daily snapshots of public Greenhouse, Lever, Ashby and Workable job boards. Generated by Hiring Pulse Benchmarks on Apify.
