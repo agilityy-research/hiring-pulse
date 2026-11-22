@@ -1,7 +1,7 @@
 ---
 title: "Hiring data products and prices: feed, trackers, lookup, funded leads, scrapers"
 description: >-
-  Hiring data per row: the daily Hiring Signals Feed for 21,922 companies, tracking of your own company list, a one-company lookup, SEC Form D funded-and-hiring leads and job board scrapers. Prices per row.
+  Hiring data per row: a daily signals feed for 21,922 companies, tracking of your own list, a one-company lookup, SEC Form D funded leads, job board scrapers.
 permalink: /data/
 jsonld: dataset
 dataset_name: "Hiring Pulse data products"
