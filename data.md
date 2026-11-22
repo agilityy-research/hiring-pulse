@@ -1,9 +1,7 @@
 ---
-title: "Hiring data products and prices: signals feed, company trackers, lookup, funded leads, job scrapers"
+title: "Hiring data products and prices: feed, trackers, lookup, funded leads, scrapers"
 description: >-
-  Buy hiring data per row: the daily Hiring Signals Feed for 21,922 companies, daily tracking of your own company
-  list, a one-company hiring lookup, SEC Form D funded-and-hiring leads, and Greenhouse, Lever, Ashby and Workable
-  job scrapers. Prices per row, no subscription, billed by Apify.
+  Hiring data per row: the daily Hiring Signals Feed for 21,922 companies, tracking of your own company list, a one-company lookup, SEC Form D funded-and-hiring leads and job board scrapers. Prices per row.
 permalink: /data/
 jsonld: dataset
 dataset_name: "Hiring Pulse data products"

@@ -1,9 +1,7 @@
 ---
 title: "Startup hiring benchmarks, every Monday, from 21,922 job boards"
 description: >-
-  Where startup hiring accelerates and stalls this week: open roles, biggest movers, days-to-fill, AI/ML and remote
-  share across 21,922 companies with public job boards, measured daily by Agilityy Research. Free weekly report;
-  the daily data is sold per row or as a feed.
+  Where startup hiring accelerates and stalls this week: open roles, biggest movers, days-to-fill, AI/ML and remote share across 21,922 public job boards. Free weekly report.
 permalink: /
 ---
 {%- capture nl %}

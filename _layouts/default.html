@@ -35,9 +35,9 @@
     {%- for ln in body -%}{%- if first_finding == "" and ln contains "- " and ln.size > 20 -%}{%- assign first_finding = ln | remove_first: "- " | remove: "**" | strip -%}{%- endif -%}{%- endfor -%}
   {%- endif -%}
   {%- if is_baseline -%}
-    {%- assign page_title = "Baseline study " | append: report_date | append: ": 14 days of startup hiring, 639 Y Combinator companies" -%}
+    {%- assign page_title = "Baseline study " | append: report_date | append: ": 14 days of hiring at 639 YC companies" -%}
   {%- else -%}
-    {%- assign page_title = "Startup hiring report, week of " | append: report_date | append: ": open roles, movers, days-to-fill, AI share" -%}
+    {%- assign page_title = "Startup hiring, week of " | append: report_date | append: ": movers, days-to-fill, AI share" -%}
   {%- endif -%}
   {%- if first_finding != "" -%}
     {%- assign page_description = "Hiring Pulse " | append: report_date | append: ": " | append: first_finding | truncate: 158 -%}

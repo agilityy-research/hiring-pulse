@@ -1,9 +1,7 @@
 ---
-title: "Job board data for data teams: the full hiring history as monthly files or a Snowflake share"
+title: "Job board data for data teams: the full history as files or a Snowflake share"
 description: >-
-  The full Hiring Pulse history for data teams: daily hiring signals and job events for 21,922 companies with public
-  job boards (Greenhouse, Lever, Ashby, SmartRecruiters, Recruitee, Personio), delivered monthly as CSV or a
-  Snowflake share. Schema, free sample, price anchors and how to request access.
+  The full Hiring Pulse history for data teams: daily hiring signals and job events for 21,922 companies on six job-board vendors, as monthly CSV or a Snowflake share. Schema, free sample, prices, access.
 permalink: /for-data-teams/
 jsonld: dataset
 dataset_name: "Hiring Pulse full history: daily_signals, job_events, companies"
