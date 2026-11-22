@@ -1,0 +1,7 @@
+eventType,company,provider,slug,jobId,title,department,location,remote,url,firstSeen,closedAt,daysOpen
+opened,whiskeylibrary,ashby,whiskeylibrary,531608f3-2814-4ce4-98c8-8a1b4635e1f1,"Creative Strategist, Direct Response Ads",Marketing,United States,True,https://jobs.ashbyhq.com/whiskeylibrary/531608f3-2814-4ce4-98c8-8a1b4635e1f1,2026-11-22T05:57:20.291+00:00,,
+opened,Ooma,greenhouse,ooma,5301233007,Senior Telephony Engineer,Engineering,"Remote, US",True,https://job-boards.greenhouse.io/ooma/jobs/5301233007,2026-11-22T01:28:13-05:00,,
+closed,"Albert & Mackenzie, LLP",greenhouse,albertmackenziellp,4437333009,Service Desk Analyst,I.T.,"Encino, CA",False,https://job-boards.greenhouse.io/albertmackenziellp/jobs/4437333009,2026-10-07T13:59:36-04:00,2026-11-22T07:12:03+00:00,45
+closed,Groww,greenhouse,groww,5000618101,Senior Manager - Compliance (PMS),Compliance,"Bengaluru-VTP, India",False,https://job-boards.eu.greenhouse.io/groww/jobs/5000618101,2026-10-12T01:47:03-04:00,2026-11-22T07:12:03+00:00,41
+closed,sovra,ashby,sovra,0fffb778-c744-4070-8860-f6f705856859,Senior Product Manager,Product | Produit,United States,True,https://jobs.ashbyhq.com/sovra/0fffb778-c744-4070-8860-f6f705856859,2026-11-06T20:57:01.346+00:00,2026-11-22T07:12:03+00:00,15
+closed,project44,greenhouse,project44,8378314,Customer Support Specialist,Customer Support,"Bangalore, India",False,https://job-boards.greenhouse.io/project44/jobs/8378314,2026-11-12T09:09:49-05:00,2026-11-22T07:12:03+00:00,9

@@ -1,0 +1,72 @@
+# Switches the site to hiring.agilityy.com by itself once the owner has added the DNS record
+#   CNAME  hiring  ->  agilityy-research.github.io
+# Until the record exists the site stays at https://agilityy-research.github.io/hiring-pulse/ (a CNAME file committed
+# before DNS resolves would redirect that URL into the void). Every six hours this job checks DNS; when the record is
+# there it commits the CNAME file (which is what sets the custom domain on a branch-built Pages site), and on a later
+# run, once GitHub has issued the certificate, it switches on "Enforce HTTPS" through the Pages API. After that every
+# run is a no-op. If the API refuses the HTTPS switch the run fails and GitHub e-mails the owner: the fallback is one
+# tick of "Enforce HTTPS" in Settings > Pages.
+# Nothing here touches DNS. Run it by hand from the Actions tab with dry_run to check the token's permissions.
+name: Custom domain
+on:
+  schedule:
+    - cron: "23 */6 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Only report DNS and Pages state; change nothing"
+        type: boolean
+        default: false
+permissions:
+  contents: write
+  pages: write
+concurrency: custom-domain
+env:
+  DOMAIN: hiring.agilityy.com
+  TARGET: agilityy-research.github.io
+jobs:
+  domain:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check DNS, set the domain, enforce HTTPS
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          set -euo pipefail
+          api="repos/$GITHUB_REPOSITORY/pages"
+          pages=$(gh api "$api")
+          echo "Pages now: $(echo "$pages" | jq -c '{cname, https_enforced, cert: .https_certificate.state, url: .html_url}')"
+          resolved=$(dig +short CNAME "$DOMAIN" @1.1.1.1 | sed 's/\.$//' || true)
+          echo "DNS CNAME $DOMAIN -> '${resolved:-none}' (expected $TARGET)"
+          if [ "$DRY_RUN" = "true" ]; then
+            echo "Dry run: probing the Pages API with an unchanged source (no effect) to verify the token can write."
+            gh api -X PUT "$api" --input <(echo "$pages" | jq -c '{source: {branch: .source.branch, path: .source.path}}') >/dev/null \
+              && echo "Pages API write: OK" || echo "Pages API write: DENIED (HTTPS enforcement would need one click in Settings > Pages)"
+            exit 0
+          fi
+          if [ "$resolved" != "$TARGET" ]; then
+            echo "DNS record not in place yet; nothing to do."; exit 0
+          fi
+          if [ ! -f CNAME ] || [ "$(cat CNAME)" != "$DOMAIN" ]; then
+            echo "Committing the CNAME file: with a branch build this is what sets the custom domain, and the file"
+            echo "must exist in the repository or the next report commit would unset the domain again."
+            echo "$DOMAIN" > CNAME
+            git config user.name "Agilityy Research"
+            git config user.email "agilityy-research@users.noreply.github.com"
+            git add CNAME && git commit -m "Custom domain: $DOMAIN" && git push
+            exit 0
+          fi
+          cert=$(echo "$pages" | jq -r '.https_certificate.state // ""')
+          enforced=$(echo "$pages" | jq -r '.https_enforced')
+          if [ "$enforced" != "true" ]; then
+            if [ "$cert" = "approved" ]; then
+              echo "Certificate issued; enforcing HTTPS"
+              gh api -X PUT "$api" -F https_enforced=true
+            else
+              echo "Certificate state is '$cert'; HTTPS will be enforced on a later run."
+            fi
+          else
+            echo "Domain and HTTPS are in place; nothing to do."
+          fi

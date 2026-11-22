@@ -1,0 +1,42 @@
+# Hiring Pulse site. Built by GitHub Pages (Jekyll) from the main branch root; nothing else to run.
+# url and baseurl are left unset on purpose: jekyll-github-metadata fills them in on GitHub Pages from the
+# repository and the CNAME file, so the same source works at agilityy-research.github.io/hiring-pulse and at
+# hiring.agilityy.com without an edit.
+title: Hiring Pulse
+tagline: Weekly startup hiring benchmarks from 10,000+ job boards
+description: >-
+  Weekly startup hiring benchmarks and daily job board data for 10,000+ venture-backed companies, by Agilityy
+  Research: open roles, roles opened and closed, median days-to-fill, AI/ML share, remote share. Free report every
+  Monday; the underlying hiring signals data is for sale per record or as a feed.
+author: Agilityy Research
+lang: en
+timezone: UTC
+
+permalink: pretty
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+# All default on GitHub Pages; listed so a local `bundle exec jekyll serve` behaves the same.
+plugins:
+  - jekyll-optional-front-matter   # the Actor commits plain Markdown reports (no front matter); they still become pages
+  - jekyll-default-layout          # ... in _layouts/default.html
+  - jekyll-titles-from-headings    # ... titled from their first heading
+  - jekyll-relative-links
+  - jekyll-github-metadata
+  - jekyll-sitemap
+
+optional_front_matter:
+  remove_originals: true
+titles_from_headings:
+  enabled: true
+  strip_title: false
+
+exclude:
+  - README.md
+  - LICENSE.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - node_modules

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{%- assign is_report = false -%}
+{%- if page.url contains "/reports/" and page.url != "/reports/" -%}{%- assign is_report = true -%}{%- endif -%}
+{%- assign report_date = page.basename -%}
+{%- if is_report and page.title contains "—" -%}{%- assign report_date = page.title | split: "—" | last | strip -%}{%- endif -%}
+{%- if is_report -%}
+  {%- assign page_title = "Hiring Pulse " | append: report_date | append: ": startup hiring benchmarks for the week" -%}
+  {%- assign page_description = "Hiring Pulse for " | append: report_date | append: ": open roles, roles opened and closed, median days-to-fill, AI/ML share and remote share across venture-backed companies with public job boards, by industry and function. Weekly benchmark by Agilityy Research." -%}
+{%- else -%}
+  {%- assign page_title = page.title | default: site.title -%}
+  {%- assign page_description = page.description | default: site.description -%}
+{%- endif -%}
+{%- assign canonical = page.url -%}
+{%- if page.url == "/reports/latest/" -%}{%- assign canonical = "/reports/" | append: report_date | append: "/" -%}{%- endif -%}
+<title>{% if page.url == "/" %}{{ site.title }}: {{ site.tagline }}{% else %}{{ page_title }} · {{ site.title }}{% endif %}</title>
+<meta name="description" content="{{ page_description | strip_newlines | strip | escape }}">
+<link rel="canonical" href="{{ canonical | absolute_url }}">
+<meta property="og:site_name" content="Hiring Pulse by Agilityy Research">
+<meta property="og:type" content="{% if is_report %}article{% else %}website{% endif %}">
+<meta property="og:title" content="{{ page_title | escape }}">
+<meta property="og:description" content="{{ page_description | strip_newlines | strip | escape }}">
+<meta property="og:url" content="{{ canonical | absolute_url }}">
+<meta name="twitter:card" content="summary">
+<link rel="sitemap" type="application/xml" href="{{ '/sitemap.xml' | relative_url }}">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230f4c81'/%3E%3Cpath d='M6 22l6-7 5 4 9-11' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+:root{--bg:#fff;--fg:#1b1f24;--muted:#596069;--line:#e3e6ea;--accent:#0f4c81;--accent-bg:#eef4fa;--card:#f6f8fa;}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1216;--fg:#e6e8eb;--muted:#9aa3ad;--line:#2a3038;--accent:#7cb3ea;--accent-bg:#172232;--card:#161b22;}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--accent)}
+header.site{border-bottom:1px solid var(--line)}
+header.site .in{max-width:68rem;margin:0 auto;padding:.8rem 1rem;display:flex;flex-wrap:wrap;align-items:baseline;gap:.4rem 1.2rem}
+.brand{font-weight:700;font-size:1.15rem;color:var(--fg);text-decoration:none}
+.brand small{font-weight:400;color:var(--muted);font-size:.85rem;margin-left:.4rem}
+nav.site{margin-left:auto;display:flex;flex-wrap:wrap;gap:.2rem .9rem;font-size:.95rem}
+nav.site a{text-decoration:none;color:var(--fg)}
+nav.site a:hover,nav.site a.on{color:var(--accent)}
+main{max-width:68rem;margin:0 auto;padding:1.4rem 1rem 3rem}
+main.narrow{max-width:46rem}
+h1{font-size:1.9rem;line-height:1.2;margin:.4rem 0 1rem}
+h2{font-size:1.35rem;margin:2rem 0 .6rem;padding-top:.4rem}
+h3{font-size:1.1rem;margin:1.4rem 0 .4rem}
+p.lead{font-size:1.12rem;color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1rem 1.2rem;margin:1rem 0}
+.card h2:first-child,.card h3:first-child{margin-top:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem;margin:1rem 0}
+.grid .card{margin:0}
+.btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:.55rem 1rem;border-radius:8px;font-weight:600}
+.btn.alt{background:var(--accent-bg);color:var(--accent)}
+.muted{color:var(--muted)}
+.small{font-size:.9rem}
+table{border-collapse:collapse;display:block;overflow-x:auto;max-width:100%;margin:.8rem 0;font-size:.93rem}
+th,td{border-bottom:1px solid var(--line);padding:.38rem .6rem;text-align:left;white-space:nowrap;vertical-align:top}
+th{background:var(--card);font-weight:600}
+code{background:var(--card);padding:.1rem .3rem;border-radius:4px;font-size:.9em}
+pre{background:var(--card);padding:.8rem 1rem;border-radius:8px;overflow-x:auto}
+pre code{background:none;padding:0}
+.price{font-weight:600;white-space:nowrap}
+.report-nav{display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;font-size:.93rem;margin:0 0 1rem;color:var(--muted)}
+ul.report-list{list-style:none;padding:0}
+ul.report-list li{padding:.45rem 0;border-bottom:1px solid var(--line)}
+footer.site{border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+footer.site .in{max-width:68rem;margin:0 auto;padding:1rem;display:flex;flex-wrap:wrap;gap:.4rem 1.4rem}
+footer.site a{color:inherit}
+</style>
+</head>
+<body>
+<header class="site"><div class="in">
+<a class="brand" href="{{ '/' | relative_url }}">Hiring Pulse<small>by Agilityy Research</small></a>
+<nav class="site">
+<a href="{{ '/reports/latest/' | relative_url }}" {% if page.url == '/reports/latest/' %}class="on"{% endif %}>Latest report</a>
+<a href="{{ '/reports/' | relative_url }}" {% if page.url == '/reports/' %}class="on"{% endif %}>All reports</a>
+<a href="{{ '/data/' | relative_url }}" {% if page.url == '/data/' %}class="on"{% endif %}>Data</a>
+<a href="{{ '/for-data-teams/' | relative_url }}" {% if page.url == '/for-data-teams/' %}class="on"{% endif %}>For data teams</a>
+<a href="{{ '/methodology/' | relative_url }}" {% if page.url == '/methodology/' %}class="on"{% endif %}>Methodology</a>
+</nav>
+</div></header>
+<main{% unless is_report or page.url == "/" %} class="narrow"{% endunless %}>
+{%- if is_report %}
+<div class="report-nav"><span>Weekly report, generated {{ report_date }} (UTC).</span>
+<a href="{{ '/reports/' | relative_url }}">All reports</a>
+<a href="{{ '/methodology/' | relative_url }}">How these numbers are measured</a>
+<a href="https://github.com/{{ site.github.repository_nwo | default: 'agilityy-research/hiring-pulse' }}/blob/main/{{ page.path }}">Markdown source</a></div>
+{%- endif %}
+{{ content }}
+</main>
+<footer class="site"><div class="in">
+<span>© {{ site.time | date: "%Y" }} Agilityy Research. Reports are <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>: quote them with a link.</span>
+<a href="https://apify.com/agilityy">Apify Store</a>
+<a href="https://github.com/agilityy-research/hiring-pulse">GitHub</a>
+<a href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">Request data access</a>
+</div></footer>
+</body>
+</html>
