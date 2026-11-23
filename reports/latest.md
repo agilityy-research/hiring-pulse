@@ -1,31 +1,31 @@
-# Hiring Pulse — 2026-11-22
+# Hiring Pulse — 2026-11-23
 
-Startup hiring this week, measured from the public job boards (Greenhouse, SmartRecruiters, Personio, Ashby, Recruitee and Lever) of 21,882 companies, read every day. Figures as of 22 November 2026.
+Startup hiring this week, measured from the public job boards (Greenhouse, SmartRecruiters, Personio, Ashby, Recruitee and Lever) of 21,882 companies, read every day. Figures as of 23 November 2026.
 
 ## Key findings
 
-- **696,445 roles are open across the job boards of 21,882 companies.** Engineering is the largest function with 132,934 openings (19.1%), then Operations (11.8%) and Sales (10.4%).
+- **696,254 roles are open across the job boards of 21,882 companies.** Engineering is the largest function with 133,099 openings (19.1%), then Operations (11.8%) and Sales (10.4%).
   - *For analysts: the size of startup hiring demand by function, re-measured from 21,882 first-party boards every day.*
-- **More companies are cutting than growing: 13.1% of those with a month of history are contracting, 7.3% accelerating.** Across the 648 companies with 30 days of history, open roles are +0.8% against a month ago (1,879 opened, 1,792 closed). By industry, Education is growing fastest (+19.5%) and Healthcare slowest (−2.3%).
+- **More companies are cutting than growing: 13.4% of those with a month of history are contracting, 7.3% accelerating.** Across the 648 companies with 30 days of history, open roles are +0.9% against a month ago (1,895 opened, 1,800 closed). By industry, Education is growing fastest (+19.5%) and Industrials slowest (−2.5%).
   - *For sales teams: the accelerating companies are opening budgets now; the daily feed names them, with the roles they added.*
-- **Aleph Lab added 43 open roles in 30 days, more than any other company; Inversion Space cut the most (−34).** Also expanding: Fivetran (+37, 196 open), Legora (+26, 342 open); also cutting: Clara (−17, 138 open), Deepgram (−17, 52 open).
+- **Aleph Lab added 43 open roles in 30 days, more than any other company; Inversion Space cut the most (−34).** Also expanding: Fivetran (+37, 196 open), Legora (+28, 344 open); also cutting: Astranis (−17, 168 open), Deepgram (−17, 52 open).
   - *For revenue teams: a company that grows its open roles by a third is about to buy tools, payroll and office space. The earliest public budget signal.*
-- **A startup role stays open a median of 64.2 days before it is filled or withdrawn; Product roles take 85 days, Clinical 35.** Measured on 1,739 postings that closed in the last 30 days at 336 companies.
+- **A startup role stays open a median of 64.2 days before it is filled or withdrawn; Product roles take 85 days, Clinical 35.** Measured on 1,746 postings that closed in the last 30 days at 338 companies.
   - *For talent teams: a time-to-fill benchmark by function, industry and company size, against companies like yours.*
-- **AI/ML roles are 3.0% of all openings (20,797 roles), but at 10x Team and Reonic they are over 90% of the board.** Heaviest AI/ML hirers among boards with 10+ roles: 10x Team (94.0% of its openings), Reonic (93.3% of its openings).
+- **AI/ML roles are 3.0% of all openings (20,849 roles), but at 10x Team and Reonic they are over 90% of the board.** Heaviest AI/ML hirers among boards with 10+ roles: 10x Team (94.0% of its openings), Reonic (93.3% of its openings).
   - *For investors: the AI share of each company's board, day by day, separates AI-native teams from AI-washed decks.*
-- **14.2% of open roles are remote, and the typical company offers none.** 535 of the 8,419 companies with 10 or more openings are fully remote.
+- **14.3% of open roles are remote, and the typical company offers none.** 535 of the 8,410 companies with 10 or more openings are fully remote.
   - *For employer-brand and compensation teams: remote is the exception, which makes it a differentiator in the posting.*
 
-The growth, days-to-fill and movers figures cover the 648 companies with 14+ days of daily history; the other 21,234 tracked companies join them as their history accumulates, most from 2026-12-06. Next edition: Monday 2026-11-23, 07:00 UTC.
+The growth, days-to-fill and movers figures cover the 648 companies with 14+ days of daily history; the other 21,234 tracked companies join them as their history accumulates, most from 2026-12-06. Next edition: Monday 2026-11-30, 07:00 UTC.
 
 ## This week in charts
 
-![Open roles by function. Engineering 133k (19.1%); Operations 82k (11.8%); Sales 72.1k (10.4%); Customer 39.2k (5.6%); Clinical 33.7k (4.8%); Marketing 25.9k (3.7%); Data & AI 25.4k (3.6%); Finance 17.6k (2.5%); People 13.2k (1.9%); Product 11.7k (1.7%); Design 10.6k (1.5%); Legal 6.9k (1.0%).](https://hiring.agilityy.com/reports/charts/2026-11-22-functions.svg)
+![Open roles by function. Engineering 133k (19.1%); Operations 82.1k (11.8%); Sales 72.1k (10.4%); Customer 39.1k (5.6%); Clinical 33.7k (4.8%); Marketing 25.9k (3.7%); Data & AI 25.4k (3.7%); Finance 17.6k (2.5%); People 13.2k (1.9%); Product 11.7k (1.7%); Design 10.6k (1.5%); Legal 6.9k (1.0%).](https://hiring.agilityy.com/reports/charts/2026-11-23-functions.svg)
 
 *Engineering alone is 133k of the 696k open roles.*
 
-![Largest movers: net change in open roles over 30 days. Aleph Lab +43 (171 open); Fivetran +37 (196 open); Legora +26 (342 open); Flexport +20 (212 open); Orchestra +14 (55 open); Flex +13 (37 open); Inversion Space −34 (55 open); Clara −17 (138 open); Deepgram −17 (52 open); Astranis −15 (170 open); Vanta −15 (69 open); Firecrawl −14 (14 open).](https://hiring.agilityy.com/reports/charts/2026-11-22-movers.svg)
+![Largest movers: net change in open roles over 30 days. Aleph Lab +43 (171 open); Fivetran +37 (196 open); Legora +28 (344 open); Flexport +20 (212 open); Orchestra +14 (55 open); Flex +13 (37 open); Inversion Space −34 (55 open); Astranis −17 (168 open); Deepgram −17 (52 open); Clara −15 (140 open); Vanta −15 (69 open); Firecrawl −14 (14 open).](https://hiring.agilityy.com/reports/charts/2026-11-23-movers.svg)
 
 *Aleph Lab added the most roles in 30 days; Inversion Space cut the most.*
 
@@ -34,20 +34,20 @@ The growth, days-to-fill and movers figures cover the 648 companies with 14+ day
 | Metric | This edition | Previous edition | Change |
 |---|---|---|---|
 | Companies tracked | 21,882 | — | — |
-| Open roles | 696,445 | — | — |
-| AI/ML roles | 20,797 | — | — |
+| Open roles | 696,254 | — | — |
+| AI/ML roles | 20,849 | — | — |
 | AI/ML share of open roles | 3.0% | — | — |
-| Remote roles, share of open roles | 14.2% | — | — |
+| Remote roles, share of open roles | 14.3% | — | — |
 | Median company's remote share | 0.0% | — | — |
 | Companies with 14+ days of history | 648 | — | — |
-| Open roles vs 30 days earlier | +0.8% | — | — |
-| Roles opened / closed (30 days) | 1,879 / 1,792 | — | — |
+| Open roles vs 30 days earlier | +0.9% | — | — |
+| Roles opened / closed (30 days) | 1,895 / 1,800 | — | — |
 | Median days-to-fill | 64.2 | — | — |
-| Companies accelerating / contracting | 7.3% / 13.1% | — | — |
+| Companies accelerating / contracting | 7.3% / 13.4% | — | — |
 
 The previous-edition and change columns fill in from the next edition.
 
-Days-to-fill is the median posting lifetime of 1,739 roles that closed in the last 30 days at 336 companies; 53 postings older than a year at closure are excluded as evergreen.
+Days-to-fill is the median posting lifetime of 1,746 roles that closed in the last 30 days at 338 companies; 54 postings older than a year at closure are excluded as evergreen.
 
 Seniority mix of open roles: Entry 5.6%, Mid 68.7%, Senior 8.9%, Staff/Principal 3.6%, Manager 9.1%, Director 2.4%, Executive 1.7%.
 
@@ -55,19 +55,19 @@ Seniority mix of open roles: Entry 5.6%, Mid 68.7%, Senior 8.9%, Staff/Principal
 
 | Function | Open roles | Share | Since previous edition | Days-to-fill* |
 |---|---|---|---|---|
-| Engineering | 132,934 | 19.1% | — | 78.5 |
-| Operations | 82,038 | 11.8% | — | 45 |
-| Sales | 72,092 | 10.4% | — | 63 |
-| Customer | 39,164 | 5.6% | — | 70 |
-| Clinical | 33,667 | 4.8% | — | 35 |
-| Marketing | 25,945 | 3.7% | — | 57.5 |
-| Data & AI | 25,394 | 3.6% | — | 66 |
-| Finance | 17,624 | 2.5% | — | 54 |
-| People | 13,220 | 1.9% | — | 52 |
-| Product | 11,727 | 1.7% | — | 85 |
-| Design | 10,567 | 1.5% | — | 50 |
-| Legal | 6,863 | 1.0% | — | 50 |
-| Other | 225,210 | 32.3% | — | 55 |
+| Engineering | 133,099 | 19.1% | — | 78.5 |
+| Operations | 82,117 | 11.8% | — | 45.5 |
+| Sales | 72,097 | 10.4% | — | 63 |
+| Customer | 39,097 | 5.6% | — | 70 |
+| Clinical | 33,672 | 4.8% | — | 35 |
+| Marketing | 25,933 | 3.7% | — | 59 |
+| Data & AI | 25,445 | 3.7% | — | 66 |
+| Finance | 17,597 | 2.5% | — | 54 |
+| People | 13,191 | 1.9% | — | 52 |
+| Product | 11,722 | 1.7% | — | 85 |
+| Design | 10,581 | 1.5% | — | 50 |
+| Legal | 6,858 | 1.0% | — | 50 |
+| Other | 224,845 | 32.3% | — | 55 |
 
 \* Median days-to-fill among the 648 companies with 14+ days of history; functions with fewer than 3 closures show —.
 
@@ -81,10 +81,10 @@ Companies with 14+ days of history and a known industry; a segment needs 5 compa
 | Consumer | 34 | 504 | +10.0% | 153 | 107 | 56 |
 | Real Estate and Construction | 12 | 117 | +3.5% | 32 | 28 | 66 |
 | Government | 7 | 53 | +1.9% | 7 | 6 | 83.2 |
-| Fintech | 77 | 1,656 | +1.4% | 300 | 277 | 68.2 |
-| B2B | 365 | 5,864 | +1.0% | 988 | 930 | 69 |
-| Industrials | 66 | 1,355 | −2.2% | 199 | 230 | 61.5 |
-| Healthcare | 77 | 1,206 | −2.3% | 169 | 197 | 53 |
+| Fintech | 77 | 1,656 | +1.4% | 301 | 278 | 68 |
+| B2B | 365 | 5,873 | +1.2% | 1,001 | 934 | 69 |
+| Healthcare | 77 | 1,208 | −2.1% | 171 | 197 | 53 |
+| Industrials | 66 | 1,352 | −2.5% | 199 | 233 | 61.2 |
 
 ## Largest net additions of open roles (30 days)
 
@@ -92,18 +92,18 @@ Companies with 14+ days of history and a known industry; a segment needs 5 compa
 |---|---|---|---|---|---|---|---|---|---|
 | 1 | Aleph Lab | Consumer | 171 | +43 | +33.6% | 0 (0.0%) | 1.8% | 66 | Sales, Marketing, Legal |
 | 2 | Fivetran | B2B | 196 | +37 | +23.3% | 6 (3.1%) | 25.0% | 64 | Engineering, Marketing, Sales |
-| 3 | Legora | B2B | 342 | +26 | +8.2% | 6 (1.8%) | 0.3% | 64 | Engineering, Sales, Customer |
+| 3 | Legora | B2B | 344 | +28 | +8.9% | 6 (1.7%) | 0.3% | 64 | Engineering, Sales, Customer |
 | 4 | Flexport | B2B | 212 | +20 | +10.4% | 2 (0.9%) | 3.3% | 84.5 | Operations, Sales, Engineering |
 | 5 | Orchestra | B2B | 55 | +14 | +34.1% | 0 (0.0%) | 5.5% | 39 | Other, Sales, Marketing |
 | 6 | Flex | Fintech | 37 | +13 | +54.2% | 0 (0.0%) | 10.8% | 181 | Sales, Engineering, Legal |
 | 7 | Zip | B2B | 111 | +13 | +13.3% | 3 (2.7%) | 96.4% | 103 | Sales, Engineering, Other |
 | 8 | Conveo | B2B | 24 | +12 | +100.0% | 0 (0.0%) | 87.5% | 2 | Marketing, Engineering, Operations |
 | 9 | Stepful | Education | 47 | +12 | +34.3% | 0 (0.0%) | 68.1% | 23 | Clinical, Operations, Other |
-| 10 | Stripe | Fintech | 777 | +12 | +1.6% | 40 (5.1%) | 14.7% | 69.5 | Sales, Engineering, Product |
-| 11 | Distro | B2B | 248 | +10 | +4.2% | 1 (0.4%) | 9.3% | 24 | Other, Customer, Sales |
-| 12 | LemFi | Fintech | 31 | +10 | +47.6% | 0 (0.0%) | 100.0% | 33.5 | Marketing, Legal, Finance |
-| 13 | Replit | B2B | 38 | +10 | +35.7% | 1 (2.6%) | 100.0% | 49 | Engineering, Operations, Marketing |
-| 14 | Curri | Real Estate and Construction | 35 | +10 | +40.0% | 1 (2.9%) | 82.9% | 37 | Sales, Engineering, Customer |
+| 10 | Stripe | Fintech | 777 | +12 | +1.6% | 40 (5.1%) | 14.7% | 69 | Sales, Engineering, Product |
+| 11 | LemFi | Fintech | 31 | +10 | +47.6% | 0 (0.0%) | 100.0% | 33.5 | Marketing, Legal, Finance |
+| 12 | Replit | B2B | 38 | +10 | +35.7% | 1 (2.6%) | 100.0% | 49 | Engineering, Operations, Marketing |
+| 13 | Curri | Real Estate and Construction | 35 | +10 | +40.0% | 1 (2.9%) | 82.9% | 37 | Sales, Engineering, Customer |
+| 14 | Distro | B2B | 247 | +9 | +3.8% | 1 (0.4%) | 9.3% | 24 | Other, Customer, Sales |
 | 15 | Prolific | B2B | 37 | +9 | +32.1% | 11 (29.7%) | 32.4% | 95 | Data & AI, Engineering, Customer |
 
 ## Largest net reductions of open roles (30 days)
@@ -111,9 +111,9 @@ Companies with 14+ days of history and a known industry; a segment needs 5 compa
 | # | Company | Industry | Open roles | Net change | Growth | AI/ML roles | Remote | Days-to-fill | Top functions |
 |---|---|---|---|---|---|---|---|---|---|
 | 1 | Inversion Space | Industrials | 55 | −34 | −38.2% | 1 (1.8%) | 0.0% | 147 | Engineering, Operations, Other |
-| 2 | Clara | Healthcare | 138 | −17 | −11.0% | 13 (9.4%) | 38.4% | 86 | Sales, Engineering, Data & AI |
+| 2 | Astranis | Industrials | 168 | −17 | −9.2% | 1 (0.6%) | 0.0% | 57.5 | Engineering, Operations, Other |
 | 3 | Deepgram | B2B | 52 | −17 | −24.6% | 15 (28.8%) | 86.5% | 71 | Sales, Data & AI, Engineering |
-| 4 | Astranis | Industrials | 170 | −15 | −8.1% | 1 (0.6%) | 0.0% | 58 | Engineering, Operations, Other |
+| 4 | Clara | Healthcare | 140 | −15 | −9.7% | 13 (9.3%) | 37.9% | 86 | Sales, Engineering, Data & AI |
 | 5 | Vanta | B2B | 69 | −15 | −17.9% | 6 (8.7%) | 92.8% | 78 | Sales, Engineering, Data & AI |
 | 6 | Firecrawl | B2B | 14 | −14 | −50.0% | 2 (14.3%) | 78.6% | 101 | Engineering, Sales, Legal |
 | 7 | Turing Labs Inc. | B2B | 31 | −13 | −29.5% | 12 (38.7%) | 9.7% | 27 | Data & AI, Engineering, Finance |
@@ -175,7 +175,7 @@ Companies with 14+ days of history and a known industry; a segment needs 5 compa
 | 3 | Axle | Fintech | 49 | −11 | −18.3% | 2 (4.1%) | 14.3% | 21 | Other, Customer, Data & AI |
 | 4 | voize | B2B | 45 | +0 | +0.0% | 6 (13.3%) | 97.8% | 22 | Sales, Engineering, Other |
 | 5 | Akido Labs | Healthcare | 34 | +8 | +30.8% | 0 (0.0%) | 5.9% | 23 | Clinical, Marketing, Other |
-| 6 | Distro | B2B | 248 | +10 | +4.2% | 1 (0.4%) | 9.3% | 24 | Other, Customer, Sales |
+| 6 | Distro | B2B | 247 | +9 | +3.8% | 1 (0.4%) | 9.3% | 24 | Other, Customer, Sales |
 | 7 | Reality Defender | B2B | 0 | −5 | −100.0% | 0 (—) | — | 26 |  |
 | 8 | Turing Labs Inc. | B2B | 31 | −13 | −29.5% | 12 (38.7%) | 9.7% | 27 | Data & AI, Engineering, Finance |
 | 9 | Arketa | B2B | 8 | +0 | +0.0% | 0 (0.0%) | 87.5% | 27 | Customer, Sales, Finance |
@@ -194,17 +194,17 @@ Companies with 14+ days of history and a known industry; a segment needs 5 compa
 | 2 | Reonic | — | 30 | 28 (93.3%) | 6.7% | Data & AI, Product, Sales |
 | 3 | Meridial | — | 827 | 751 (90.8%) | 25.3% | Data & AI, Other, Operations |
 | 4 | Provectus | — | 43 | 38 (88.4%) | 83.7% | Data & AI, Product, Other |
-| 5 | Innodata Inc. | — | 107 | 91 (85.0%) | 89.7% | Data & AI, Engineering, Other |
-| 6 | Aptura | — | 40 | 32 (80.0%) | 77.5% | Data & AI, Other, Operations |
-| 7 | Parallel Partners | — | 10 | 8 (80.0%) | 90.0% | Data & AI, Engineering, Product |
-| 8 | Next Step Systems | — | 10 | 8 (80.0%) | 80.0% | Data & AI, Engineering, Product |
-| 9 | Ginas Tech Jobs | — | 10 | 8 (80.0%) | 80.0% | Data & AI, Engineering |
-| 10 | Featherless AI | — | 17 | 13 (76.5%) | 100.0% | Data & AI, Marketing, Operations |
-| 11 | Inworld | — | 16 | 12 (75.0%) | 93.8% | Data & AI, Sales, Engineering |
-| 12 | ALAIKA Advisory | — | 15 | 11 (73.3%) | 0.0% | Data & AI, Other, Finance |
-| 13 | EvolutionIQ | — | 22 | 16 (72.7%) | 72.7% | Data & AI, Engineering, Other |
-| 14 | Distyl AI | — | 25 | 18 (72.0%) | 96.0% | Data & AI, Engineering, Operations |
-| 15 | Articul8 | — | 20 | 14 (70.0%) | 55.0% | Data & AI, Engineering, Finance |
+| 5 | Artefact North America | — | 34 | 30 (88.2%) | 0.0% | Data & AI, Marketing, Other |
+| 6 | Innodata Inc. | — | 107 | 91 (85.0%) | 89.7% | Data & AI, Engineering, Other |
+| 7 | Aptura | — | 40 | 32 (80.0%) | 77.5% | Data & AI, Other, Operations |
+| 8 | Parallel Partners | — | 10 | 8 (80.0%) | 90.0% | Data & AI, Engineering, Product |
+| 9 | Next Step Systems | — | 10 | 8 (80.0%) | 80.0% | Data & AI, Engineering, Product |
+| 10 | Ginas Tech Jobs | — | 10 | 8 (80.0%) | 80.0% | Data & AI, Engineering |
+| 11 | Featherless AI | — | 17 | 13 (76.5%) | 100.0% | Data & AI, Marketing, Operations |
+| 12 | Inworld | — | 16 | 12 (75.0%) | 93.8% | Data & AI, Sales, Engineering |
+| 13 | ALAIKA Advisory | — | 15 | 11 (73.3%) | 0.0% | Data & AI, Other, Finance |
+| 14 | EvolutionIQ | — | 22 | 16 (72.7%) | 72.7% | Data & AI, Engineering, Other |
+| 15 | Distyl AI | — | 25 | 18 (72.0%) | 96.0% | Data & AI, Engineering, Operations |
 
 ## Most remote-friendly companies
 
@@ -231,7 +231,7 @@ Companies with 14+ days of history and a known industry; a segment needs 5 compa
 | # | Company | Industry | Open roles | AI/ML roles | Remote | Top functions |
 |---|---|---|---|---|---|---|
 | 1 | Svetness Personal Training | — | 5,049 | 0 (0.0%) | 0.0% | Other |
-| 2 | Domino's | — | 5,000 | 0 (0.0%) | 0.1% | Other, Customer, Operations |
+| 2 | Domino's | — | 5,000 | 0 (0.0%) | 0.1% | Other, Operations, Customer |
 | 3 | CROSSMARK | — | 5,000 | 0 (0.0%) | 0.0% | Marketing, Customer, Product |
 | 4 | Sonsoft Inc | — | 5,000 | 2 (0.0%) | 0.1% | Other, Engineering, Customer |
 | 5 | Groupement Mousquetaires | — | 5,000 | 0 (0.0%) | 0.6% | Other, Sales, Operations |
@@ -243,7 +243,7 @@ Companies with 14+ days of history and a known industry; a segment needs 5 compa
 | 11 | Dev | — | 4,727 | 6 (0.1%) | 7.6% | Other, Operations, Finance |
 | 12 | BoxLunch & Hot Topic | — | 4,665 | 0 (0.0%) | 0.0% | Other, Sales |
 | 13 | Canonical_managed_posts | — | 4,628 | 0 (0.0%) | 1.4% | Engineering, Sales, People |
-| 14 | SGS | — | 4,535 | 3 (0.1%) | 3.9% | Other, Operations, Sales |
+| 14 | SGS | — | 4,527 | 3 (0.1%) | 3.9% | Other, Operations, Sales |
 | 15 | TSMG | — | 4,499 | 266 (5.9%) | 18.5% | Operations, Data & AI, Other |
 
 ## About the numbers
