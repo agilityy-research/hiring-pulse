@@ -1,29 +1,29 @@
 # Hiring Pulse — 2026-11-23
 
-Startup hiring this week, measured from the public job boards (Greenhouse, Lever, Ashby, SmartRecruiters, Recruitee and Personio) of 21,829 companies, read every day. Figures as of 23 November 2026. 53 tracked companies are excluded from the benchmark (53 boards above the startup size limit); they stay in the daily feed. The rule is in the methodology.
+Startup hiring this week, measured from the public job boards (Greenhouse, Lever, Ashby, SmartRecruiters, Recruitee and Personio) of 21,804 companies, read every day. Figures as of 23 November 2026. 78 tracked companies are excluded from the benchmark (78 boards above the startup size limit); they stay in the daily feed. The rule is in the methodology.
 
 ## Key findings
 
-- **Open roles stand at 528,566 across the 21,829 companies tracked this week.** Engineering is the largest function with 104,819 openings (19.8%), then Operations (11.0%) and Sales (10.8%).
-  - *For analysts: the size of startup hiring demand by function, re-measured from 21,829 first-party boards every day.*
+- **Open roles stand at 496,976 across the 21,804 companies tracked this week.** Engineering is the largest function with 99,573 openings (20.0%), then Sales (11.0%) and Operations (10.8%).
+  - *For analysts: the size of startup hiring demand by function, re-measured from 21,804 first-party boards every day.*
 - **More companies are cutting than growing: 13.4% of those with 14+ days of history are contracting, 7.3% accelerating.** Across the 648 companies with 14+ days of daily history, open roles are +0.9% against 16 days earlier (1,895 opened, 1,800 closed). By industry, Education is growing fastest (+19.5%) and Industrials slowest (−2.5%).
   - *For sales teams: the accelerating companies are opening budgets now; the daily feed names them, with the roles they added.*
 - **Aleph Lab added 43 open roles in 16 days, more than any other company; Inversion Space cut the most (−34).** Also expanding: Fivetran (+37, 196 open), Legora (+28, 344 open); also cutting: Astranis (−17, 168 open), Deepgram (−17, 52 open).
   - *For revenue teams: a company that grows its open roles by a third is about to buy tools, payroll and office space. The earliest public budget signal.*
 - **A startup role stays open a median of 64.2 days before it is filled or withdrawn; Product roles take 85 days, Clinical 35.** Measured on 1,746 postings that closed in the last 16 days at 338 companies.
   - *For talent teams: a time-to-fill benchmark by function, industry and company size, against companies like yours.*
-- **AI/ML roles are 3.0% of all openings (15,836 roles), but at 10x Team and Reonic they are over 90% of the board.** Heaviest AI/ML hirers among boards with 10+ roles: 10x Team (94.0% of its openings), Reonic (93.3% of its openings).
+- **AI/ML roles are 3.1% of all openings (15,270 roles), but at 10x Team and Reonic they are over 90% of the board.** Heaviest AI/ML hirers among boards with 10+ roles: 10x Team (94.0% of its openings), Reonic (93.3% of its openings).
   - *For investors: the AI share of each company's board, day by day, separates AI-native teams from AI-washed decks.*
-- **15.2% of open roles are remote, and the typical company offers none.** 532 of the 8,357 companies with 10 or more openings are fully remote.
+- **16.1% of open roles are remote, and the typical company offers none.** 532 of the 8,332 companies with 10 or more openings are fully remote.
   - *For employer-brand and compensation teams: remote is the exception, which makes it a differentiator in the posting.*
 
-The growth, days-to-fill and movers figures cover the 648 companies with 14+ days of daily history; the other 21,181 tracked companies join them as their history accumulates, most from the edition of 2026-12-07. Next edition: Monday 2026-11-30, 07:00 UTC.
+The growth, days-to-fill and movers figures cover the 648 companies with 14+ days of daily history; the other 21,156 tracked companies join them as their history accumulates, most from the edition of 2026-12-07. Next edition: Monday 2026-11-30, 07:00 UTC.
 
 ## This week in charts
 
-![Open roles by function. Engineering 105k (19.8%); Operations 57.9k (11.0%); Sales 57.3k (10.8%); Clinical 27.4k (5.2%); Customer 25.1k (4.7%); Data & AI 20k (3.8%); Marketing 19.9k (3.8%); Finance 14.4k (2.7%); Product 9.9k (1.9%); People 9.8k (1.9%); Design 8.9k (1.7%); Legal 5.9k (1.1%).](https://hiring.agilityy.com/reports/charts/2026-11-23-functions.svg)
+![Open roles by function. Engineering 99.6k (20.0%); Sales 54.6k (11.0%); Operations 53.7k (10.8%); Customer 24.1k (4.8%); Clinical 24k (4.8%); Marketing 19.5k (3.9%); Data & AI 19.3k (3.9%); Finance 13.9k (2.8%); Product 9.7k (2.0%); People 9.6k (1.9%); Design 8.6k (1.7%); Legal 5.7k (1.1%).](https://hiring.agilityy.com/reports/charts/2026-11-23-functions.svg)
 
-*Engineering alone is 105k of the 529k open roles.*
+*Engineering alone is 100k of the 497k open roles.*
 
 ![Largest movers: net change in open roles over 16 days. Aleph Lab +43 (171 open); Fivetran +37 (196 open); Legora +28 (344 open); Flexport +20 (212 open); Orchestra +14 (55 open); Flex +13 (37 open); Inversion Space −34 (55 open); Astranis −17 (168 open); Deepgram −17 (52 open); Clara −15 (140 open); Vanta −15 (69 open); Firecrawl −14 (14 open).](https://hiring.agilityy.com/reports/charts/2026-11-23-movers.svg)
 
@@ -33,11 +33,11 @@ The growth, days-to-fill and movers figures cover the 648 companies with 14+ day
 
 | Metric | This edition | Previous edition | Change |
 |---|---|---|---|
-| Companies tracked | 21,829 | — | — |
-| Open roles | 528,566 | — | — |
-| AI/ML roles | 15,836 | — | — |
-| AI/ML share of open roles | 3.0% | — | — |
-| Remote roles, share of open roles | 15.2% | — | — |
+| Companies tracked | 21,804 | — | — |
+| Open roles | 496,976 | — | — |
+| AI/ML roles | 15,270 | — | — |
+| AI/ML share of open roles | 3.1% | — | — |
+| Remote roles, share of open roles | 16.1% | — | — |
 | Median company's remote share | 0.0% | — | — |
 | Companies with 14+ days of history | 648 | — | — |
 | Open roles vs 16 days earlier | +0.9% | — | — |
@@ -49,25 +49,25 @@ The previous-edition and change columns fill in from the next edition.
 
 Days-to-fill is the median posting lifetime of 1,746 roles that closed in the last 16 days at 338 companies; 54 postings older than a year at closure are excluded as evergreen.
 
-Seniority mix of open roles: Entry 5.6%, Mid 67.0%, Senior 9.7%, Staff/Principal 4.1%, Manager 9.2%, Director 2.6%, Executive 1.8%.
+Seniority mix of open roles: Entry 5.8%, Mid 66.0%, Senior 10.0%, Staff/Principal 4.1%, Manager 9.4%, Director 2.8%, Executive 1.9%.
 
 ## Open roles by function
 
 | Function | Open roles | Share | Since previous edition | Days-to-fill* |
 |---|---|---|---|---|
-| Engineering | 104,819 | 19.8% | — | 78.5 |
-| Operations | 57,936 | 11.0% | — | 45.5 |
-| Sales | 57,260 | 10.8% | — | 63 |
-| Clinical | 27,355 | 5.2% | — | 35 |
-| Customer | 25,096 | 4.7% | — | 70 |
-| Data & AI | 20,047 | 3.8% | — | 66 |
-| Marketing | 19,866 | 3.8% | — | 59 |
-| Finance | 14,370 | 2.7% | — | 54 |
-| Product | 9,882 | 1.9% | — | 85 |
-| People | 9,806 | 1.9% | — | 52 |
-| Design | 8,926 | 1.7% | — | 50 |
-| Legal | 5,876 | 1.1% | — | 50 |
-| Other | 167,327 | 31.7% | — | 55 |
+| Engineering | 99,573 | 20.0% | — | 78.5 |
+| Sales | 54,590 | 11.0% | — | 63 |
+| Operations | 53,680 | 10.8% | — | 45.5 |
+| Customer | 24,070 | 4.8% | — | 70 |
+| Clinical | 23,980 | 4.8% | — | 35 |
+| Marketing | 19,493 | 3.9% | — | 59 |
+| Data & AI | 19,342 | 3.9% | — | 66 |
+| Finance | 13,936 | 2.8% | — | 54 |
+| Product | 9,715 | 2.0% | — | 85 |
+| People | 9,610 | 1.9% | — | 52 |
+| Design | 8,609 | 1.7% | — | 50 |
+| Legal | 5,660 | 1.1% | — | 50 |
+| Other | 154,718 | 31.1% | — | 55 |
 
 \* Median days-to-fill among the 648 companies with 14+ days of history; functions with fewer than 3 closures show —.
 
@@ -230,26 +230,26 @@ Companies with 14+ days of history and a known industry; a segment needs 5 compa
 
 | # | Company | Industry | Open roles | AI/ML roles | Remote | Top functions |
 |---|---|---|---|---|---|---|
-| 1 | USM | — | 1,483 | 0 (0.0%) | 0.5% | Engineering, Other, Customer |
-| 2 | Henry Ford Health | — | 1,476 | 0 (0.0%) | 0.1% | Clinical, Other, Operations |
-| 3 | Northwestern Memorial Healthcare | — | 1,439 | 0 (0.0%) | 0.7% | Clinical, Other, Operations |
-| 4 | Contact Government Services, LLC | — | 1,430 | 0 (0.0%) | 8.0% | Other, Engineering, Operations |
-| 5 | LifeStance Health | — | 1,424 | 0 (0.0%) | 3.2% | Clinical |
-| 6 | Jobs for Lebanon | — | 1,396 | 1 (0.1%) | 12.4% | Other, Sales, Operations |
-| 7 | Mindlance | — | 1,384 | 3 (0.2%) | 0.2% | Other, Engineering, Operations |
-| 8 | krg technology inc | — | 1,356 | 0 (0.0%) | 0.0% | Engineering, Other, Customer |
-| 9 | Securitas | — | 1,339 | 0 (0.0%) | 1.9% | Other, Engineering, Operations |
-| 10 | Drees & Sommer SE | — | 1,336 | 18 (1.3%) | 0.7% | Other, Engineering, Customer |
-| 11 | Artech Information System LLC | — | 1,325 | 1 (0.1%) | 0.4% | Other, Engineering, Operations |
-| 12 | Agentur für Haushaltshilfe GmbH | — | 1,291 | 0 (0.0%) | 0.9% | Other, People |
-| 13 | Express Oil Change & Tire Engineers | — | 1,278 | 0 (0.0%) | 0.1% | Operations, Other, Sales |
-| 14 | R+V Allgemeine Versicherung AG | — | 1,253 | 3 (0.2%) | 0.4% | Sales, Other, Engineering |
-| 15 | City and County Healthcare Group Ltd | — | 1,245 | 0 (0.0%) | 0.2% | Other, Operations, Clinical |
+| 1 | ServiceNow | — | 999 | 156 (15.6%) | 32.0% | Sales, Engineering, Data & AI |
+| 2 | Schwarz IT KG | — | 994 | 0 (0.0%) | 0.0% | Sales, Operations, Other |
+| 3 | Devoteam | — | 987 | 81 (8.2%) | 6.6% | Engineering, Other, Data & AI |
+| 4 | Ramboll | — | 984 | 0 (0.0%) | 0.6% | Engineering, Customer, Other |
+| 5 | MCG  | — | 978 | 0 (0.0%) | 0.0% | Sales, Design, Marketing |
+| 6 | United Media | — | 977 | 33 (3.4%) | 0.0% | Other, Finance, Marketing |
+| 7 | TecTammina | — | 973 | 0 (0.0%) | 0.0% | Engineering, Other, Sales |
+| 8 | Best Version Media | — | 962 | 0 (0.0%) | 0.0% | Sales |
+| 9 | Atria Group LLC | — | 962 | 0 (0.0%) | 0.6% | Engineering, Other, Customer |
+| 10 | Bertelsmann | — | 961 | 10 (1.0%) | 1.9% | Other, Operations, Engineering |
+| 11 | Renesas Electronics | — | 960 | 30 (3.1%) | 0.9% | Engineering, Operations, Sales |
+| 12 | CFO Insights | — | 939 | 33 (3.5%) | 0.0% | Other, Finance, Operations |
+| 13 | Lever Test 12345 | — | 904 | 1 (0.1%) | 68.8% | Other, Engineering, Operations |
+| 14 | National Vision | — | 902 | 0 (0.0%) | 0.9% | Other, Sales, Clinical |
+| 15 | Databricks | — | 894 | 85 (9.5%) | 9.1% | Engineering, Sales, Data & AI |
 
 *Note, added 2026-11-24: this edition was re-rendered with the benchmark exclusion rule (large employers and staffing agencies stay in the feed but out of these tables). Nine SmartRecruiters boards had been read up to a 5,000-posting cap on this day; all nine are among the excluded boards, so the figures above are unaffected. The cap was lifted on 2026-11-23.*
 
 ## About the numbers
 
-Source: daily reads of the public job boards (Greenhouse, Lever, Ashby, SmartRecruiters, Recruitee and Personio) of 21,829 companies. Every figure is first-party: a role is counted once, from the company's own board, and a closure is observed the day the posting disappears, not inferred. Job titles are mapped to functions, seniority and the AI/ML flag with one fixed taxonomy, so editions are comparable week to week. Method, definitions and the daily accuracy checks: [hiring.agilityy.com/methodology](https://hiring.agilityy.com/methodology/). Every edition: [hiring.agilityy.com](https://hiring.agilityy.com). Free to quote under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) with a link.
+Source: daily reads of the public job boards (Greenhouse, Lever, Ashby, SmartRecruiters, Recruitee and Personio) of 21,804 companies. Every figure is first-party: a role is counted once, from the company's own board, and a closure is observed the day the posting disappears, not inferred. Job titles are mapped to functions, seniority and the AI/ML flag with one fixed taxonomy, so editions are comparable week to week. Method, definitions and the daily accuracy checks: [hiring.agilityy.com/methodology](https://hiring.agilityy.com/methodology/). Every edition: [hiring.agilityy.com](https://hiring.agilityy.com). Free to quote under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) with a link.
 
 **Get the data.** Yesterday's signals for every tracked company, one row each, pay per row from $0.01 per company-day: [Hiring Signals Feed](https://apify.com/agilityy/hiring-signals-feed). Track your own list of companies daily: [Hiring Velocity Signals](https://apify.com/agilityy/hiring-velocity-signals). Check one company now: [Company Hiring Lookup](https://apify.com/agilityy/company-hiring-lookup). Companies that just raised money: [Funded & Hiring Leads](https://apify.com/agilityy/funded-and-hiring-leads). The whole history as monthly files or a Snowflake share: [hiring.agilityy.com/for-data-teams/](https://hiring.agilityy.com/for-data-teams/). Every way to get it, from a download to an AI assistant: [hiring.agilityy.com/get-the-data/](https://hiring.agilityy.com/get-the-data/).

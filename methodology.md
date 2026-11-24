@@ -69,8 +69,8 @@ The universe is every company with a public job board on the six vendors that ou
 mostly venture-backed technology companies, but a public board does not make a startup. **Large employers, staffing
 and recruiting agencies and franchise networks are tracked in the daily feed but excluded from the benchmark**: the
 findings, charts, headline numbers and tables. A company is excluded when the universe record tags it
-(`excludeFromBenchmarks`, with the reason), or, until it is tagged, when its board lists more than 1,500 open roles,
-a size no startup reaches. Every edition states how many companies were excluded and why. The rule was introduced on
+(`excludeFromBenchmarks`, with the reason), or, until it is tagged, when its board lists more than 1,000 open roles,
+a size very few startups reach. Every edition states how many companies were excluded and why. The rule was introduced on
 2026-11-24 after the first full-universe edition listed Domino's, AECOM and two staffing agencies among the largest
 "startup" boards.
 
