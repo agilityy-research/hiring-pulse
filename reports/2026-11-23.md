@@ -4,7 +4,7 @@ Startup hiring this week, measured from the public job boards (Greenhouse, Lever
 
 ## Key findings
 
-- **696,254 roles are open across the job boards of 21,882 companies.** Engineering is the largest function with 133,099 openings (19.1%), then Operations (11.8%) and Sales (10.4%).
+- **Open roles stand at 696,254 across the 21,882 companies tracked this week.** Engineering is the largest function with 133,099 openings (19.1%), then Operations (11.8%) and Sales (10.4%).
   - *For analysts: the size of startup hiring demand by function, re-measured from 21,882 first-party boards every day.*
 - **More companies are cutting than growing: 13.4% of those with 14+ days of history are contracting, 7.3% accelerating.** Across the 648 companies with 14+ days of daily history, open roles are +0.9% against 16 days earlier (1,895 opened, 1,800 closed). By industry, Education is growing fastest (+19.5%) and Industrials slowest (−2.5%).
   - *For sales teams: the accelerating companies are opening budgets now; the daily feed names them, with the roles they added.*

@@ -41,7 +41,7 @@ permalink: /
 <p class="eyebrow">Weekly startup hiring benchmarks · Edition {{ latest_date }}</p>
 <h1>Where startup hiring is moving this week</h1>
 {%- if v_open != "" %}
-<p class="hero">{{ v_open }} open roles at {{ v_companies | default: site.coverage.companies }} startups, counted from their own job boards every day.</p>
+<p class="hero">This week: {{ v_open }} open roles on the job boards of the {{ v_companies | default: site.coverage.companies }} companies we track.</p>
 {%- elsif items.size > 1 %}
 {%- assign first = items[1] | split: nl2 | first -%}
 {%- assign hero = first | split: "**" | first %}
@@ -53,7 +53,7 @@ permalink: /
 {%- if v_open != "" %}
 <div class="stats" aria-label="Headline numbers">
 <div class="stat"><b>{{ v_open }}</b><span>open roles</span>{% if d_open != "" and d_open != "—" %}<span class="delta">{{ d_open }} vs previous edition</span>{% endif %}</div>
-{%- if v_companies != "" %}<div class="stat"><b>{{ v_companies }}</b><span>companies, boards read daily</span></div>{% endif %}
+{%- if v_companies != "" %}<div class="stat"><b>{{ v_companies }}</b><span>companies tracked this week</span></div>{% endif %}
 {%- if v_fill != "" and v_fill != "—" %}<div class="stat"><b>{{ v_fill }}</b><span>median days a role stays posted</span>{% if d_fill != "" and d_fill != "—" %}<span class="delta">{{ d_fill }}</span>{% endif %}</div>{% endif %}
 {%- if v_ai != "" %}<div class="stat"><b>{{ v_ai }}</b><span>of open roles are AI/ML</span>{% if d_ai != "" and d_ai != "—" %}<span class="delta">{{ d_ai }}</span>{% endif %}</div>{% endif %}
 {%- if v_remote != "" and v_remote != "—" %}<div class="stat"><b>{{ v_remote }}</b><span>of open roles are remote</span>{% if d_remote != "" and d_remote != "—" %}<span class="delta">{{ d_remote }}</span>{% endif %}</div>{% endif %}
