@@ -1,6 +1,6 @@
-# Hiring Pulse — 2026-11-24
+# Hiring Pulse — 2026-11-23
 
-Startup hiring this week, measured from the public job boards (Greenhouse, Lever, Ashby, SmartRecruiters, Recruitee and Personio) of 21,882 companies, read every day. Figures as of 24 November 2026.
+Startup hiring this week, measured from the public job boards (Greenhouse, Lever, Ashby, SmartRecruiters, Recruitee and Personio) of 21,882 companies, read every day. Figures as of 23 November 2026.
 
 ## Key findings
 
@@ -21,11 +21,11 @@ The growth, days-to-fill and movers figures cover the 648 companies with 14+ day
 
 ## This week in charts
 
-![Open roles by function. Engineering 133k (19.1%); Operations 82.1k (11.8%); Sales 72.1k (10.4%); Customer 39.1k (5.6%); Clinical 33.7k (4.8%); Marketing 25.9k (3.7%); Data & AI 25.4k (3.7%); Finance 17.6k (2.5%); People 13.2k (1.9%); Product 11.7k (1.7%); Design 10.6k (1.5%); Legal 6.9k (1.0%).](https://hiring.agilityy.com/reports/charts/2026-11-24-functions.svg)
+![Open roles by function. Engineering 133k (19.1%); Operations 82.1k (11.8%); Sales 72.1k (10.4%); Customer 39.1k (5.6%); Clinical 33.7k (4.8%); Marketing 25.9k (3.7%); Data & AI 25.4k (3.7%); Finance 17.6k (2.5%); People 13.2k (1.9%); Product 11.7k (1.7%); Design 10.6k (1.5%); Legal 6.9k (1.0%).](https://hiring.agilityy.com/reports/charts/2026-11-23-functions.svg)
 
 *Engineering alone is 133k of the 696k open roles.*
 
-![Largest movers: net change in open roles over 16 days. Aleph Lab +43 (171 open); Fivetran +37 (196 open); Legora +28 (344 open); Flexport +20 (212 open); Orchestra +14 (55 open); Flex +13 (37 open); Inversion Space −34 (55 open); Astranis −17 (168 open); Deepgram −17 (52 open); Clara −15 (140 open); Vanta −15 (69 open); Firecrawl −14 (14 open).](https://hiring.agilityy.com/reports/charts/2026-11-24-movers.svg)
+![Largest movers: net change in open roles over 16 days. Aleph Lab +43 (171 open); Fivetran +37 (196 open); Legora +28 (344 open); Flexport +20 (212 open); Orchestra +14 (55 open); Flex +13 (37 open); Inversion Space −34 (55 open); Astranis −17 (168 open); Deepgram −17 (52 open); Clara −15 (140 open); Vanta −15 (69 open); Firecrawl −14 (14 open).](https://hiring.agilityy.com/reports/charts/2026-11-23-movers.svg)
 
 *Aleph Lab added the most roles in 16 days; Inversion Space cut the most.*
 
