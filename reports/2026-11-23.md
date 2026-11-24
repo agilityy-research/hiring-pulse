@@ -246,6 +246,8 @@ Companies with 14+ days of history and a known industry; a segment needs 5 compa
 | 14 | SGS | — | 4,527 | 3 (0.1%) | 3.9% | Other, Operations, Sales |
 | 15 | TSMG | — | 4,499 | 266 (5.9%) | 18.5% | Operations, Data & AI, Other |
 
+*Correction, added 2026-11-24: nine SmartRecruiters boards (Domino's, CROSSMARK, Sonsoft, Groupement Mousquetaires, Accor, Bosch Group, Endeavor IT Solution, AECOM, Adeeba e Services) were read up to a 5,000-posting cap in this edition, so their counts are floors; Domino's alone lists 25,151. The cap was lifted on 2026-11-23 and the edition of 2026-11-30 carries full counts. The open-roles total above is correspondingly understated.*
+
 ## About the numbers
 
 Source: daily reads of the public job boards (Greenhouse, Lever, Ashby, SmartRecruiters, Recruitee and Personio) of 21,882 companies. Every figure is first-party: a role is counted once, from the company's own board, and a closure is observed the day the posting disappears, not inferred. Job titles are mapped to functions, seniority and the AI/ML flag with one fixed taxonomy, so editions are comparable week to week. Method, definitions and the daily accuracy checks: [hiring.agilityy.com/methodology](https://hiring.agilityy.com/methodology/). Every edition: [hiring.agilityy.com](https://hiring.agilityy.com). Free to quote under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) with a link.
