@@ -24,7 +24,7 @@ adds a few cents of compute per run, there is no subscription and nothing to ins
 | US companies that just raised money (SEC Form D), with a live hiring check and a lead score | [Funded &amp; Hiring Leads](https://apify.com/agilityy/funded-and-hiring-leads) | one lead | <span class="price">$0.015 per lead</span> launch price (list $0.03) |
 | Every open role on one company's board, as rows | [Greenhouse](https://apify.com/agilityy/greenhouse-jobs-scraper), [Lever](https://apify.com/agilityy/lever-jobs-scraper), [Ashby](https://apify.com/agilityy/ashby-jobs-scraper) or [Workable](https://apify.com/agilityy/workable-jobs-scraper) Jobs Scraper | one role | <span class="price">$0.0015 per role</span> |
 
-Prices as shown on each listing on 2026-11-22; launch prices run until 2027-01-21. The full catalogue with examples
+Launch prices until 2027-01-21; Apify adds a few cents of compute per run. The full catalogue with examples
 is on [products and prices]({{ '/data/' | relative_url }}).
 
 ## 1. Run it in the browser and download JSON, CSV or Excel
@@ -79,7 +79,7 @@ Apify's own guide to integrations: [docs.apify.com/platform/integrations](https:
 ## 4. Ask for it from Claude, Cursor or Claude Code (MCP)
 
 Apify runs a hosted MCP server at `https://mcp.apify.com` that exposes Store products as tools, so an AI assistant can
-run the lookup or the feed and read the result in the conversation. Steps as documented by Apify on 2026-11-22
+run the lookup or the feed and read the result in the conversation..
 ([docs.apify.com/platform/integrations/mcp](https://docs.apify.com/platform/integrations/mcp)):
 
 <ol class="steps">
@@ -88,24 +88,33 @@ run the lookup or the feed and read the result in the conversation. Steps as doc
 <li>To pin our products as named tools instead of searching, connect with the tools parameter: <code>https://mcp.apify.com?tools=agilityy/hiring-signals-feed,agilityy/company-hiring-lookup,agilityy/funded-and-hiring-leads</code>. Each run is billed to your Apify account at the per-row prices above, like any other run.</li>
 </ol>
 
-## 5. and 6. Bulk routes for data teams: monthly files or a Snowflake share
+## Bulk delivery for data teams: monthly files or a Snowflake share
 
 For a warehouse, a model or a product you want the whole archive, every company and every day since
 {{ site.coverage.daily_since }}, delivered as files or a share rather than fetched row by row. Three tables
 (`companies`, `daily_signals`, `job_events`), appended daily, with a Snowflake DDL and the same columns as the free
 sample.
 
-| Route | Delivery | Price anchor |
+| Route | Delivery | Price |
 |---|---|---|
-| Monthly CSV files, 1-month term | CSV in S3 or AWS Data Exchange | $149 per month |
-| Annual feed with the full history | CSV in S3 or AWS Data Exchange | $1,200 per year |
-| Snowflake listing | Secure share, 30-day-lagged free sample | $249 per month |
+| Monthly CSV files, 1-month term | CSV files in S3 now; AWS Data Exchange listing from late December 2026 | $149 per month |
+| Annual feed with the full history | CSV files in S3 now; AWS Data Exchange listing from late December 2026 | $1,200 per year |
+| Snowflake share | Secure share now; Marketplace listing from late December 2026 | $249 per month |
 | Enterprise: redistribution rights, custom cuts, SLA | As above | $5,000–8,000 per year |
 
 Both routes start with the short [data access request](https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml)
-form (organisation, use, tables, delivery); we answer in the thread, usually within two business days, and take it
-off the thread if you ask. Schema, sample rows and coverage details: [for data teams]({{ '/for-data-teams/' | relative_url }}).
+form (organisation, use, tables, delivery); we reply within two business days; ask in the form for a private channel. Schema, sample rows and coverage details: [for data teams]({{ '/for-data-teams/' | relative_url }}).
 Academic and journalistic use is usually a free cut with attribution.
+
+## Terms for the data
+
+- **Self-serve products** (the feed, the trackers, the lookup, the leads) are billed, refunded and supported under
+  [Apify's terms](https://apify.com/terms-of-service); the rows you fetch are yours to use in your own analyses and products.
+- **Bulk files and the Snowflake share** are licensed for internal use by the buying organisation. Raw rows may not be
+  redistributed or resold; aggregates and derived metrics may be published with attribution to Agilityy Research.
+- **Terms**: monthly plans can be cancelled at the end of any month; annual plans run twelve months. Invoices in USD,
+  by card or bank transfer; the contracting entity and tax details are stated on the quote.
+- **Support**: replies within two business days; a private channel on request.
 
 ## Free samples, no account needed
 

@@ -40,19 +40,21 @@ permalink: /
 <section class="band navy hero"><div class="wrap">
 <p class="eyebrow">Weekly startup hiring benchmarks · Edition {{ latest_date }}</p>
 <h1>Where startup hiring is moving this week</h1>
-{%- if items.size > 1 %}
+{%- if v_open != "" %}
+<p class="hero">{{ v_open }} open roles at {{ v_companies | default: site.coverage.companies }} startups, counted from their own job boards every day.</p>
+{%- elsif items.size > 1 %}
 {%- assign first = items[1] | split: nl2 | first -%}
 {%- assign hero = first | split: "**" | first %}
 <p class="hero">{{ hero }}</p>
 {%- endif %}
-<p class="sub muted">From the public job boards of {{ v_companies | default: site.coverage.companies }} companies, read every day. The weekly report is free; the daily data behind it is for sale.</p>
+<p class="sub muted">Free report every Monday. The daily data behind it is for sale.</p>
 <div class="actions"><a class="btn" href="{{ '/reports/latest/' | relative_url }}">Read this week's report</a>
-<a class="btn alt" href="{{ '/get-the-data/' | relative_url }}">How you get the data</a></div>
+<a class="btn alt" href="{{ '/get-the-data/' | relative_url }}">How to buy</a></div>
 {%- if v_open != "" %}
 <div class="stats" aria-label="Headline numbers">
 <div class="stat"><b>{{ v_open }}</b><span>open roles</span>{% if d_open != "" and d_open != "—" %}<span class="delta">{{ d_open }} vs previous edition</span>{% endif %}</div>
 {%- if v_companies != "" %}<div class="stat"><b>{{ v_companies }}</b><span>companies, boards read daily</span></div>{% endif %}
-{%- if v_fill != "" and v_fill != "—" %}<div class="stat"><b>{{ v_fill }}</b><span>median days to fill a role</span>{% if d_fill != "" and d_fill != "—" %}<span class="delta">{{ d_fill }}</span>{% endif %}</div>{% endif %}
+{%- if v_fill != "" and v_fill != "—" %}<div class="stat"><b>{{ v_fill }}</b><span>median days a role stays posted</span>{% if d_fill != "" and d_fill != "—" %}<span class="delta">{{ d_fill }}</span>{% endif %}</div>{% endif %}
 {%- if v_ai != "" %}<div class="stat"><b>{{ v_ai }}</b><span>of open roles are AI/ML</span>{% if d_ai != "" and d_ai != "—" %}<span class="delta">{{ d_ai }}</span>{% endif %}</div>{% endif %}
 {%- if v_remote != "" and v_remote != "—" %}<div class="stat"><b>{{ v_remote }}</b><span>of open roles are remote</span>{% if d_remote != "" and d_remote != "—" %}<span class="delta">{{ d_remote }}</span>{% endif %}</div>{% endif %}
 </div>
@@ -94,7 +96,8 @@ permalink: /
 <div class="card" data-who="{{ who | downcase | escape }}">
 <h3>{{ head | strip }}</h3>
 {%- if detail != "" %}<p>{{ detail | markdownify | strip_html }}</p>{% endif %}
-{%- if who != "" %}<p class="who">{% if wp.size > 1 %}<b>{{ wp[0] | remove_first: "For " | capitalize }}</b>{{ who | remove_first: wp[0] | remove_first: ": " | capitalize }}{% else %}{{ who }}{% endif %}</p>{% endif %}
+{%- if who != "" %}{%- assign who_rest = who | remove_first: wp[0] | remove_first: ": " | strip -%}{%- assign who_tag = wp[0] | remove_first: "For " | strip -%}
+<p class="who">{% if wp.size > 1 %}<b>{{ who_tag | slice: 0 | upcase }}{{ who_tag | slice: 1, 200 }}</b>{{ who_rest | slice: 0 | upcase }}{{ who_rest | slice: 1, 400 }}{% else %}{{ who }}{% endif %}</p>{% endif %}
 </div>
 {%- endfor %}
 </div>
@@ -149,7 +152,7 @@ permalink: /
 </div>
 <div class="actions"><a class="btn alt" href="{{ '/samples/daily_signals_sample.csv' | relative_url }}" download>Download a sample CSV: daily signals</a>
 <a class="btn alt" href="{{ '/samples/job_events_sample.csv' | relative_url }}" download>Sample CSV: job events</a>
-<a class="btn alt" href="{{ '/get-the-data/' | relative_url }}">All six ways to get the data</a></div>
+<a class="btn alt" href="{{ '/get-the-data/' | relative_url }}">How to buy: all six routes</a></div>
 </div></section>
 
 <section class="band"><div class="wrap">

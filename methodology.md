@@ -46,7 +46,7 @@ permalink: /methodology/
 
 ## Verification: how we know the data is complete and accurate
 
-Nobody eyeballs rows. The collection measures itself at the end of every run and writes a quality record for the day;
+No manual review: the collection measures itself at the end of every run and writes a quality record for the day;
 a monitoring job turns the thresholds below into alerts, and a run that fails them is repaired or re-run before the
 next report.
 
@@ -77,5 +77,5 @@ fetched, 21 of 21 verifiable boards in agreement and 10 of 10 closures confirmed
 ## Licence and citation
 
 Reports are released under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Cite as
-"Agilityy Research, Hiring Pulse, week of YYYY-MM-DD" with a link to the report. Corrections and questions:
+"Agilityy Research, Hiring Pulse, YYYY-MM-DD" (the edition date) with a link to the report. Corrections and questions:
 [open an issue](https://github.com/agilityy-research/hiring-pulse/issues) in the repository.

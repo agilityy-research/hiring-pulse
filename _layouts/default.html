@@ -126,7 +126,7 @@ header.site .wrap{display:flex;align-items:center;gap:1rem;min-height:3.6rem;pos
 .brand small{font-weight:500;color:var(--muted);font-size:.8rem;margin-left:.2rem}
 .brand{white-space:nowrap}
 @media (max-width:480px){.brand small{display:none}}
-nav.site{margin-left:auto;display:flex;gap:1.3rem;font-size:.95rem;font-weight:500}
+nav.site{margin-left:auto;display:flex;gap:1.1rem;font-size:.93rem;font-weight:500}
 nav.site a{color:var(--fg);text-decoration:none;padding:.3rem 0;border-bottom:2px solid transparent}
 nav.site a:hover,nav.site a.on{color:var(--accent);border-color:var(--accent)}
 nav.site .cta{background:var(--accent);color:#fff;padding:.42rem .9rem;border-radius:999px;border:0}
@@ -136,7 +136,7 @@ details.menu summary{list-style:none;cursor:pointer;font-weight:600;padding:.4re
 details.menu summary::-webkit-details-marker{display:none}
 details.menu nav{position:absolute;left:0;right:0;top:100%;background:var(--bg);border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:0;padding:.4rem 1.1rem 1rem;box-shadow:var(--shadow)}
 details.menu nav a{padding:.65rem 0;border-bottom:1px solid var(--line);color:var(--fg);text-decoration:none;font-weight:500}
-@media (max-width:820px){nav.site{display:none}details.menu{display:block}}
+@media (max-width:900px){nav.site{display:none}details.menu{display:block}}
 /* layout */
 main{display:block}
 main.narrow .wrap,main.report .wrap{max-width:52rem;padding-top:1.6rem;padding-bottom:3rem}
@@ -266,17 +266,18 @@ footer.site .legal{grid-column:1 / -1;border-top:1px solid var(--line);padding-t
 <nav class="site" aria-label="Site">
 <a href="{{ '/reports/latest/' | relative_url }}" {% if page.url == '/reports/latest/' %}class="on"{% endif %}>This week</a>
 <a href="{{ '/reports/' | relative_url }}" {% if page.url == '/reports/' %}class="on"{% endif %}>Reports</a>
-<a href="{{ '/data/' | relative_url }}" {% if page.url == '/data/' %}class="on"{% endif %}>Pricing</a>
+<a href="{{ '/data/' | relative_url }}" {% if page.url == '/data/' %}class="on"{% endif %}>Products &amp; prices</a>
+<a href="{{ '/for-data-teams/' | relative_url }}" {% if page.url == '/for-data-teams/' %}class="on"{% endif %}>For data teams</a>
 <a href="{{ '/methodology/' | relative_url }}" {% if page.url == '/methodology/' %}class="on"{% endif %}>Methodology</a>
 <a href="{{ '/about/' | relative_url }}" {% if page.url == '/about/' %}class="on"{% endif %}>About</a>
-<a class="cta" href="{{ '/get-the-data/' | relative_url }}">Get the data</a>
+<a class="cta" href="{{ '/get-the-data/' | relative_url }}">How to buy</a>
 </nav>
 <details class="menu"><summary>Menu</summary>
 <nav aria-label="Site">
 <a href="{{ '/reports/latest/' | relative_url }}">This week's report</a>
 <a href="{{ '/reports/' | relative_url }}">All reports</a>
-<a href="{{ '/get-the-data/' | relative_url }}">Get the data</a>
-<a href="{{ '/data/' | relative_url }}">Pricing</a>
+<a href="{{ '/get-the-data/' | relative_url }}">How to buy</a>
+<a href="{{ '/data/' | relative_url }}">Products &amp; prices</a>
 <a href="{{ '/for-data-teams/' | relative_url }}">For data teams</a>
 <a href="{{ '/methodology/' | relative_url }}">Methodology</a>
 <a href="{{ '/about/' | relative_url }}">About</a>
@@ -301,7 +302,7 @@ footer.site .legal{grid-column:1 / -1;border-top:1px solid var(--line);padding-t
 <div><a class="brand" href="{{ '/' | relative_url }}" style="display:inline-flex;margin-bottom:.5rem"><span class="mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 22l6-7 5 4 9-11"/></svg></span>Hiring Pulse</a>
 <p style="margin:0;max-width:30rem">Weekly startup hiring benchmarks from the public job boards of {{ site.coverage.companies }} companies, read every day by Agilityy Research. Reports are free under <a href="https://creativecommons.org/licenses/by/4.0/" style="display:inline;text-decoration:underline">CC BY 4.0</a>; the daily data behind them is for sale.</p></div>
 <div><h4>Read</h4><a href="{{ '/reports/latest/' | relative_url }}">This week's report</a><a href="{{ '/reports/' | relative_url }}">All editions</a><a href="{{ '/methodology/' | relative_url }}">Methodology</a><a href="{{ '/feed.xml' | relative_url }}">Atom feed</a></div>
-<div><h4>Buy</h4><a href="{{ '/get-the-data/' | relative_url }}">How you get the data</a><a href="{{ '/data/' | relative_url }}">Products and prices</a><a href="{{ '/for-data-teams/' | relative_url }}">For data teams</a><a href="https://apify.com/agilityy">Apify Store</a></div>
+<div><h4>Buy</h4><a href="{{ '/get-the-data/' | relative_url }}">How to buy</a><a href="{{ '/data/' | relative_url }}">Products and prices</a><a href="{{ '/for-data-teams/' | relative_url }}">For data teams</a><a href="https://apify.com/agilityy">Apify Store</a></div>
 <div><h4>Company</h4><a href="{{ '/about/' | relative_url }}">About</a><a href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">Contact / request data</a><a href="https://github.com/agilityy-research/hiring-pulse">Source on GitHub</a><a href="{{ '/privacy/' | relative_url }}">Privacy</a></div>
 <div class="legal">© {{ site.time | date: "%Y" }} Agilityy Research. No cookies; cookieless page-view counting only: <a href="{{ '/privacy/' | relative_url }}" style="display:inline;text-decoration:underline">privacy</a>.</div>
 </div></footer>
