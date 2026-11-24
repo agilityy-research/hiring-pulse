@@ -63,6 +63,17 @@ A healthy day looks like: fetched OK about 99%, open roles within a few percent 
 22 or more of 25, closures confirmed 10 of 10. The first full-universe day, 2026-11-22, measured 99.5% of boards
 fetched, 21 of 21 verifiable boards in agreement and 10 of 10 closures confirmed.
 
+## Who is in the benchmark, and who is not
+
+The universe is every company with a public job board on the six vendors that our monthly refresh can find; it is
+mostly venture-backed technology companies, but a public board does not make a startup. **Large employers, staffing
+and recruiting agencies and franchise networks are tracked in the daily feed but excluded from the benchmark**: the
+findings, charts, headline numbers and tables. A company is excluded when the universe record tags it
+(`excludeFromBenchmarks`, with the reason), or, until it is tagged, when its board lists more than 1,500 open roles,
+a size no startup reaches. Every edition states how many companies were excluded and why. The rule was introduced on
+2026-11-24 after the first full-universe edition listed Domino's, AECOM and two staffing agencies among the largest
+"startup" boards.
+
 ## Known limits
 
 - Only companies on the six vendors are covered. Companies with a custom careers site, or on Workday, iCIMS,
