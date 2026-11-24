@@ -25,11 +25,10 @@ on the [Apify Store](https://apify.com/agilityy), and in bulk as monthly files o
 - **Published method.** The [methodology]({{ '/methodology/' | relative_url }}) describes every definition and the daily
   quality checks; every report's source file is on [GitHub](https://github.com/agilityy-research/hiring-pulse).
 - **Fixed definitions.** The function, seniority and AI/ML taxonomy does not change between editions without a note.
-- **No tracking.** The site sets no cookies and loads no third-party scripts ([privacy]({{ '/privacy/' | relative_url }})).
+- **No tracking.** The site sets no cookies; one cookieless beacon counts page views ([privacy]({{ '/privacy/' | relative_url }})).
 
 ## Contact
 
 Data requests, corrections, press and research questions: the
-[request form](https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml)
-(a GitHub account is needed; it keeps every request public and answerable) or a message through the
-[Apify Store profile](https://apify.com/agilityy). We answer within two working days.
+[request form](https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml) on GitHub
+(public), or a private message through the [Apify Store profile](https://apify.com/agilityy). We answer within two working days.

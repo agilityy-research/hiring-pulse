@@ -45,7 +45,7 @@ permalink: /
 {%- assign hero = first | split: "**" | first %}
 <p class="hero">{{ hero }}</p>
 {%- endif %}
-<p class="sub muted">Measured from the public job boards of {{ v_companies | default: site.coverage.companies }} companies, read every day. The report is free every Monday; the daily data behind it, every company and every role opened or closed, is for sale per row.</p>
+<p class="sub muted">From the public job boards of {{ v_companies | default: site.coverage.companies }} companies, read every day. The weekly report is free; the daily data behind it is for sale.</p>
 <div class="actions"><a class="btn" href="{{ '/reports/latest/' | relative_url }}">Read this week's report</a>
 <a class="btn alt" href="{{ '/get-the-data/' | relative_url }}">How you get the data</a></div>
 {%- if v_open != "" %}
@@ -68,7 +68,7 @@ permalink: /
 <input id="company-q" type="search" autocomplete="off" spellcheck="false" placeholder="Type a company name, e.g. Fivetran">
 <ul class="search-results" id="company-results" aria-live="polite"></ul>
 </div>
-<p class="muted small" id="company-search-note" hidden>One line per company from the latest edition: open roles, change over 30 days, signal. The roles themselves, the daily history and every opened or closed event are in the <a href="{{ '/get-the-data/' | relative_url }}">feed</a>. Company missing? <a href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">Ask for it</a>.</p>
+<p class="muted small" id="company-search-note" hidden>One line per company from this week's edition. The roles, the daily history and every opened or closed event are in the <a href="{{ '/get-the-data/' | relative_url }}">feed</a>. Company missing? <a href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">Ask for it</a>.</p>
 <noscript><p class="muted small">The search needs JavaScript; the same preview rows are in <a href="{{ '/reports/data/companies.json' | relative_url }}">reports/data/companies.json</a>.</p></noscript>
 </div></section>
 
@@ -135,10 +135,10 @@ permalink: /
 
 <section class="band tint" id="data"><div class="wrap">
 <p class="eyebrow">Get the data behind it</p>
-<h2>Pick the shape that fits your team</h2>
+<h2>Three ways to buy</h2>
 <div class="plans">
 <div class="card plan"><div class="for">Sales &amp; revenue teams</div><p class="price">$0.01</p><p class="per">per company and day · job events $0.004 each</p>
-<ul><li>Yesterday's signal for every tracked company: open roles, opened and closed, 30-day growth, days-to-fill, a one-word signal.</li><li>Every role opened or closed as an event, with title, function, location and URL.</li><li>Download as JSON, CSV or Excel; REST API with Python and JS clients; schedules to Google Sheets, Slack or a webhook; MCP in Claude, Cursor or Claude Code.</li></ul>
+<ul><li>Yesterday's signal for every tracked company: open roles, opened and closed, 30-day growth, days-to-fill, a one-word signal.</li><li>Every role opened or closed as an event, with title, function, location and URL.</li><li>JSON, CSV or Excel download; REST API; schedules to Google Sheets, Slack or a webhook; MCP in Claude or Cursor.</li></ul>
 <a class="btn" href="https://apify.com/agilityy/hiring-signals-feed">Open the feed</a></div>
 <div class="card plan"><div class="for">Data teams</div><p class="price">$149 <span class="per" style="display:inline;font-size:1rem">/ month</span></p><p class="per">or $1,200 a year for the files · Snowflake share $249 / month</p>
 <ul><li>The whole history: daily signals and job events for every company since collection began.</li><li>Monthly CSV files, or a Snowflake share refreshed daily.</li><li>Published schema and a free sample to load today.</li></ul>
@@ -157,7 +157,7 @@ permalink: /
 <h2>Why these numbers hold up</h2>
 <div class="facts">
 <div class="card"><h3>First-party</h3><p>Every company's own job board ({{ site.coverage.vendors }}) is read once a day. A role is counted once, from the source; a closure is observed the day the posting disappears.</p></div>
-<div class="card"><h3>Broad</h3><p>{{ site.coverage.companies }} companies since {{ site.coverage.companies_since }}, {{ site.coverage.companies_before }} before that; mostly venture-backed technology companies, {{ site.coverage.with_industry }} of them with industry and team size. The exact count of the day is in every report.</p></div>
+<div class="card"><h3>Broad</h3><p>{{ site.coverage.companies }} companies, mostly venture-backed technology companies; {{ site.coverage.with_industry }} of them with industry and team size for the segment tables. The exact count of the day is in every report.</p></div>
 <div class="card"><h3>Comparable</h3><p>Functions, seniority and the AI/ML flag come from one fixed title taxonomy, so this week's figures compare with last week's and with yours.</p></div>
 <div class="card"><h3>Checked daily</h3><p>Fetch rate, day-over-day stability, a careers-page re-count and a re-fetch of closed roles are measured every day with alert thresholds. <a href="{{ '/methodology/' | relative_url }}">The methodology</a> lists them.</p></div>
 </div>
@@ -165,8 +165,8 @@ permalink: /
 </div></section>
 
 <section class="band tint"><div class="wrap">
-<p class="eyebrow">Built for</p>
-<h2>Who reads Hiring Pulse</h2>
+<p class="eyebrow">Readers</p>
+<h2>Who uses it, and for what</h2>
 <div class="grid four">
 <div class="card"><h3>Talent and recruiting teams</h3><p class="muted small">Which functions are hard to fill and how long roles stay open, by industry and company size; which competitors are opening or closing teams.</p></div>
 <div class="card"><h3>Sales and revenue operations</h3><p class="muted small">A company that just doubled its open roles is buying tools, office space, payroll and insurance. Hiring momentum per company is the earliest public budget signal.</p></div>
@@ -176,9 +176,9 @@ permalink: /
 </div></section>
 
 <section class="band navy"><div class="wrap">
-<p class="eyebrow">Every Monday, 07:00 UTC</p>
-<h2>Next edition: the findings, the charts, the movers</h2>
-<p class="sub muted">Cite as "Agilityy Research, Hiring Pulse, {{ latest_date }}" with a link to this site. Reports are CC BY 4.0.</p>
+<p class="eyebrow">Stay current</p>
+<h2>A new edition every Monday at 07:00 UTC</h2>
+<p class="sub muted">Free to quote under CC BY 4.0: cite as "Agilityy Research, Hiring Pulse, {{ latest_date }}" with a link to this site.</p>
 {%- if site.newsletter_action != "" %}
 <div class="signup">
 <b>Get it in your inbox.</b> Key findings, charts and the movers; no other mail.

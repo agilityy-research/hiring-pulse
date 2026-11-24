@@ -258,6 +258,7 @@ footer.site a{color:inherit;text-decoration:none;display:block;padding:.15rem 0}
 footer.site a:hover{color:var(--accent)}
 footer.site .legal{grid-column:1 / -1;border-top:1px solid var(--line);padding-top:1rem;font-size:.85rem}
 </style>
+<!-- Cloudflare Web Analytics: cookieless page-view counting, see /privacy/ --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "d533c0a40546460e9fd42d933ecff5c6"}'></script>
 </head>
 <body>
 <header class="site"><div class="wrap">
@@ -287,7 +288,7 @@ footer.site .legal{grid-column:1 / -1;border-top:1px solid var(--line);padding-t
 <div class="report-nav">
 {%- if is_baseline %}<span><span class="tag">Baseline study</span> One-off 14-day readout on {{ site.coverage.yc_subset }} Y Combinator companies ({{ site.coverage.yc_subset_since }} to {{ report_date }}); not part of the weekly series.</span>
 {%- elsif is_preview %}<span><span class="tag">Preview</span> Edition of {{ report_date }}. The weekly series starts with the first Monday edition.</span>
-{%- else %}<span>Weekly edition of {{ report_date }} (Monday, 07:00 UTC).</span>{% endif %}
+{%- else %}<span>Weekly edition · published Monday 07:00 UTC</span>{% endif %}
 <a href="{{ '/reports/' | relative_url }}">All reports</a>
 <a href="{{ '/methodology/' | relative_url }}">How the numbers are measured</a>
 <a href="{{ '/get-the-data/' | relative_url }}">Get the data</a>
@@ -302,7 +303,7 @@ footer.site .legal{grid-column:1 / -1;border-top:1px solid var(--line);padding-t
 <div><h4>Read</h4><a href="{{ '/reports/latest/' | relative_url }}">This week's report</a><a href="{{ '/reports/' | relative_url }}">All editions</a><a href="{{ '/methodology/' | relative_url }}">Methodology</a><a href="{{ '/feed.xml' | relative_url }}">Atom feed</a></div>
 <div><h4>Buy</h4><a href="{{ '/get-the-data/' | relative_url }}">How you get the data</a><a href="{{ '/data/' | relative_url }}">Products and prices</a><a href="{{ '/for-data-teams/' | relative_url }}">For data teams</a><a href="https://apify.com/agilityy">Apify Store</a></div>
 <div><h4>Company</h4><a href="{{ '/about/' | relative_url }}">About</a><a href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">Contact / request data</a><a href="https://github.com/agilityy-research/hiring-pulse">Source on GitHub</a><a href="{{ '/privacy/' | relative_url }}">Privacy</a></div>
-<div class="legal">© {{ site.time | date: "%Y" }} Agilityy Research. No cookies, no trackers: see <a href="{{ '/privacy/' | relative_url }}" style="display:inline;text-decoration:underline">privacy</a>.</div>
+<div class="legal">© {{ site.time | date: "%Y" }} Agilityy Research. No cookies; cookieless page-view counting only: <a href="{{ '/privacy/' | relative_url }}" style="display:inline;text-decoration:underline">privacy</a>.</div>
 </div></footer>
 </body>
 </html>

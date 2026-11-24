@@ -6,7 +6,9 @@ permalink: /privacy/
 ---
 # Privacy
 
-**This site sets no cookies and loads no third-party scripts.** There is no analytics, advertising or tracking code.
+**This site sets no cookies.** One script, Cloudflare Web Analytics, counts page views without cookies, fingerprinting or
+cross-site tracking, under the [Cloudflare privacy policy](https://www.cloudflare.com/privacypolicy/). Nothing else is
+loaded from third parties; there is no advertising code.
 
 - **Hosting.** The site is served by GitHub Pages. GitHub may log requests (IP address, user agent, page) for security
   and operations under the [GitHub Privacy Statement](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement).

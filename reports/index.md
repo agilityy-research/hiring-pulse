@@ -25,15 +25,14 @@ subscribe with the [Atom feed]({{ '/feed.xml' | relative_url }}). Markdown sourc
 {%- endfor %}
 </ul>
 {%- else %}
-<p>The first Monday edition is published on 2026-11-23 at 07:00 UTC. Until then the
+<p>The first Monday edition is published next Monday at 07:00 UTC. Until then the
 <a href="{{ '/reports/latest/' | relative_url }}">preview edition</a> shows the current numbers in the same format.</p>
 {%- endif %}
 
-Editions before {{ site.coverage.flows_from }} carry the stock figures for the whole universe (open roles, functions,
-AI/ML share, remote share, seniority, the largest boards) and the flow figures (growth, roles opened and closed,
-days-to-fill, movers) for the companies that already have 14 days of daily history. From {{ site.coverage.flows_from }}
-the flow figures cover the whole universe, and the "since previous edition" columns and the trend chart lengthen
-with every edition. How the numbers are measured: [methodology]({{ '/methodology/' | relative_url }}).
+Until {{ site.coverage.flows_from }} the flow figures (growth, roles opened and closed, days-to-fill, movers) cover
+only the companies that already have 14 days of daily history; the stock figures (open roles, functions, AI/ML share,
+remote share, seniority, the largest boards) always cover the whole universe. From then on the flow figures do too, and
+the "since previous edition" columns and the trend chart lengthen with every edition. How the numbers are measured: [methodology]({{ '/methodology/' | relative_url }}).
 
 ## Baseline study
 
