@@ -16,7 +16,7 @@ stay open, the AI/ML share, the remote share.
 
 The weekly report is free under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The daily data behind it is
 sold: per row through the [Hiring Signals Feed](https://apify.com/agilityy/hiring-signals-feed) and the other products
-on the [Apify Store](https://apify.com/agilityy), and in bulk as monthly files or a Snowflake share for
+on the [Apify Store](https://apify.com/agilityy); the schema and a free sample are on the page for
 [data teams]({{ '/for-data-teams/' | relative_url }}). No advertising, no sponsored findings.
 
 ## Principles

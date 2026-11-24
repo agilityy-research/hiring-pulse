@@ -1,7 +1,7 @@
 ---
-title: "How to buy: download, API or a bulk feed"
+title: "How to buy: pay per row, download or API"
 description: >-
-  Three ways to get the daily hiring data behind Hiring Pulse: download JSON/CSV/Excel in the browser, call the API or schedule it, or take the full history as files or a Snowflake share
+  How to buy the daily hiring data behind Hiring Pulse: pay per row on the Apify Store, download JSON/CSV/Excel in the browser, or call the API and schedule it
 permalink: /get-the-data/
 jsonld: dataset
 dataset_name: "Hiring Pulse daily hiring signals and job events"
@@ -10,9 +10,22 @@ dataset_name: "Hiring Pulse daily hiring signals and job events"
 
 The numbers in every report come from a daily archive: one row per company per day (open roles, roles opened and
 closed, growth, days-to-fill, function and seniority mix, AI/ML and remote share, a one-word signal) and one row per
-role opened or closed. There are three ways to get it: download it in the browser, call it from code or a schedule,
-or take the whole history as files. The first two run on the [Apify Store](https://apify.com/agilityy): you pay per
-row, Apify bills you and adds a few cents of compute per run, there is no subscription and nothing to install.
+role opened or closed. It is sold per row on the [Apify Store](https://apify.com/agilityy): you pay for the rows you
+receive, Apify bills you and adds a few cents of compute per run, there is no subscription and nothing to install.
+Get the rows two ways: download them in the browser, or call them from code or a schedule.
+
+## What it costs
+
+| You want | Rows | Our price | Notes |
+|---|---|---|---|
+| A watch list of 100 companies, every day for a month | 3,000 | about $30 | runs on a schedule into a sheet or Slack |
+| One industry (about 700 companies) for one day | 700 | about $7 | |
+| Every company for one day | 21,598 | about $219 | the day the Monday report is computed from |
+| A small cut, to try it | up to 500 | $0 | every Apify account has $5 of free usage a month |
+
+Spending above the free $5 needs an Apify plan, from $19 a month, paid to Apify. The whole history delivered to your
+own warehouse is not a listed product yet; if you need it, [ask](https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml)
+and say what for.
 
 ## Pick the product
 
@@ -63,32 +76,12 @@ HubSpot, Zapier, Make or n8n ([Apify's integrations guide](https://docs.apify.co
 assistants can run the same products through Apify's MCP server at `https://mcp.apify.com`
 ([guide](https://docs.apify.com/platform/integrations/mcp)).
 
-## 3. The full history for data teams: monthly files or a Snowflake share
-
-For a warehouse, a model or a product you want the whole archive, every company and every day since
-{{ site.coverage.daily_since }}, delivered as files or a share rather than fetched row by row. Three tables
-(`companies`, `daily_signals`, `job_events`), appended daily, with a Snowflake DDL and the same columns as the free
-sample.
-
-| Route | Delivery | Price |
-|---|---|---|
-| Monthly CSV files, 1-month term | CSV files in S3 now; AWS Data Exchange listing from late December 2026 | $149 per month |
-| Annual feed with the full history | CSV files in S3 now; AWS Data Exchange listing from late December 2026 | $1,200 per year |
-| Snowflake share | Secure share now; Marketplace listing from late December 2026 | $249 per month |
-| Enterprise: redistribution rights, custom cuts, SLA | As above | $5,000–8,000 per year |
-
-Every bulk route starts with the short [data access request](https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml)
-form (organisation, use, tables, delivery); we reply within two business days; ask in the form for a private channel. Schema, sample rows and coverage details: [for data teams]({{ '/for-data-teams/' | relative_url }}).
-Academic and journalistic use is usually a free cut with attribution.
-
 ## Terms for the data
 
 - **Self-serve products** (the feed, the trackers, the lookup, the leads) are billed, refunded and supported under
   [Apify's terms](https://apify.com/terms-of-service); the rows you fetch are yours to use in your own analyses and products.
-- **Bulk files and the Snowflake share** are licensed for internal use by the buying organisation. Raw rows may not be
+- **Custom deliveries** (history cuts, files, a warehouse share) are licensed for internal use by the buying organisation. Raw rows may not be
   redistributed or resold; aggregates and derived metrics may be published with attribution to Agilityy Research.
-- **Terms**: monthly plans can be cancelled at the end of any month; annual plans run twelve months. Invoices in USD,
-  by card or bank transfer; the contracting entity and tax details are stated on the quote.
 - **Support**: replies within two business days; a private channel on request.
 
 ## Free samples, no account needed

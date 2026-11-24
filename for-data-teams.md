@@ -1,20 +1,20 @@
 ---
-title: "Job board data for data teams: the full history as files or a Snowflake share"
+title: "Job board data for data teams: schema, sample and the daily archive"
 description: >-
-  The full Hiring Pulse history for data teams: daily signals and job events for 21,000+ companies, as monthly CSV or a Snowflake share. Schema, sample, prices.
+  The daily archive behind Hiring Pulse for data teams: daily signals and job events for 21,000+ companies. Schema, free sample, how to load it.
 permalink: /for-data-teams/
 jsonld: dataset
 dataset_name: "Hiring Pulse full history: daily_signals, job_events, companies"
 ---
-# For data teams: the full history as a feed
+# For data teams: the archive, its schema and a sample
 
 The weekly report is one view of a daily archive. The archive itself, every company, every day, every role opened or
-closed, is available as a monthly feed for teams that build on it: hiring-momentum signals for sales and investing,
-time-to-fill and department-demand benchmarks for talent teams, labour-market research on early-stage companies. No
-personal data is collected; the sources are the job boards companies publish for embedding on their own sites.
-Want rows now rather than files? Every day of the archive is available immediately, pay per row, on the
-[Hiring Signals Feed](https://apify.com/agilityy/hiring-signals-feed), pay per row; the
-[other ways to get the data]({{ '/get-the-data/' | relative_url }}) are listed in one place.
+closed, is what teams build on: hiring-momentum signals for sales and investing, time-to-fill and department-demand
+benchmarks for talent teams, labour-market research on early-stage companies. No personal data is collected; the
+sources are the job boards companies publish for embedding on their own sites. Any day or 30-day window of the archive
+is available now, pay per row, on the [Hiring Signals Feed](https://apify.com/agilityy/hiring-signals-feed);
+[how to buy]({{ '/get-the-data/' | relative_url }}) has worked prices. Daily collection began on
+{{ site.coverage.daily_since }}, so the history is short today and grows by one day every day.
 
 ## What is in it
 
@@ -37,9 +37,9 @@ function) can be included.
 
 The CSV headers in the sample below are authoritative and match the rows the
 [Hiring Signals Feed](https://apify.com/agilityy/hiring-signals-feed) emits today, so a pipeline built on the sample
-works on the feed and on the monthly files alike; a Snowflake DDL for the three tables comes with the feed files. Nested
+works on the feed and on the API alike. Nested
 fields (`functions`, `seniorityMix`, `topDepartments`, `topLocations`) are JSON arrays of `{name, count}` in the CSV
-and VARIANT columns in Snowflake. Consumers deduplicate `job_events` on vendor, slug, job id and event type.
+and JSON objects in the API output; load them as VARIANT or JSON columns. Consumers deduplicate `job_events` on vendor, slug, job id and event type.
 
 ## Free sample
 
@@ -52,17 +52,13 @@ and VARIANT columns in Snowflake. Consumers deduplicate `job_events` on vendor, 
 - Any day or 30-day window of the full archive, filtered, is available immediately, pay per row, on the
   [Hiring Signals Feed](https://apify.com/agilityy/hiring-signals-feed) (pay per row, no request needed).
 
-## Delivery and pricing
+## Getting it into a warehouse
 
-| Offer | Delivery | Price |
-|---|---|---|
-| Monthly feed, 1-month term | CSV files in S3 now; AWS Data Exchange listing from late December 2026 | $149 per month |
-| Annual feed with the full history | CSV files in S3 now; AWS Data Exchange listing from late December 2026 | $1,200 per year |
-| Snowflake share | Secure share now; Marketplace listing from late December 2026 | $249 per month |
-| Enterprise: redistribution rights, custom cuts, SLA | As above | $5,000–8,000 per year |
-| Per row, self-serve, today | Apify Store, pay per row | $0.01 per company-day, $0.004 per role event |
-
-Prices valid for orders placed before 2027-01-21. Direct delivery (S3 files, Snowflake secure share) is available now; the marketplace listings (AWS Data Exchange, Snowflake Marketplace) open in late December 2026, once the archive holds 30 days. Academic and journalistic use: ask, the answer is usually a free cut with attribution.
+Today the archive is fetched per row from the feed: one scheduled run a day, written to S3, BigQuery or Snowflake
+through Apify's integrations or a few lines of code against the API, at $0.01 per company-day and $0.004 per role
+event. A delivered history (files or a warehouse share) is not a listed product yet, because the daily history is
+only weeks old; if you need one, [ask](https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml)
+and say what for. Academic and journalistic use: usually a free cut with attribution.
 
 ## Quality
 
@@ -74,10 +70,8 @@ boards and a re-fetch of 10 closed roles, with alert thresholds. The checks and 
 
 - **Self-serve products** (the feed, the trackers, the lookup, the leads) are billed, refunded and supported under
   [Apify's terms](https://apify.com/terms-of-service); the rows you fetch are yours to use in your own analyses and products.
-- **Bulk files and the Snowflake share** are licensed for internal use by the buying organisation. Raw rows may not be
+- **Custom deliveries** (history cuts, files, a warehouse share) are licensed for internal use by the buying organisation. Raw rows may not be
   redistributed or resold; aggregates and derived metrics may be published with attribution to Agilityy Research.
-- **Terms**: monthly plans can be cancelled at the end of any month; annual plans run twelve months. Invoices in USD,
-  by card or bank transfer; the contracting entity and tax details are stated on the quote.
 - **Support**: replies within two business days; a private channel on request.
 
 ## Request access

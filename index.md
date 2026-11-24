@@ -134,20 +134,20 @@ permalink: /
 
 <section class="band tint" id="data"><div class="wrap">
 <p class="eyebrow">The data behind the report</p>
-<h2>What is for sale</h2>
-<p class="sub muted">The report is free. The daily data it is computed from is sold in three forms, each with one price.</p>
+<h2>The report is free. The daily data is pay as you go.</h2>
+<p class="sub muted">Every number on this page comes from one row per company per day. Those rows are sold on the Apify Store at $0.01 each, with no subscription and nothing to install. You pick the companies, the days and the filters, and pay for the rows you receive.</p>
 <div class="plans">
-<div class="card plan"><div class="for">Daily feed · every company</div><p class="price">$0.01</p><p class="per">per company per day</p>
-<ul><li>One row per company per day: open roles, roles opened and closed, growth, days-to-fill, AI/ML and remote share, a one-word signal.</li><li>Pick a day or a 30-day window; filter by industry, function or signal.</li><li>All {{ v_companies | default: site.coverage.companies }} companies for one day cost about $219; one industry costs a few dollars.</li></ul>
-<a class="btn" href="https://apify.com/agilityy/hiring-signals-feed">Buy on the Apify Store</a></div>
-<div class="card plan"><div class="for">Track your own list</div><p class="price">$0.025</p><p class="per">per company per check</p>
-<ul><li>Name the companies: a portfolio, a sector, your competitors. We read their boards on your schedule.</li><li>Same row as the feed, plus the roles opened and closed since the last check.</li><li>200 companies checked daily is about $150 a month.</li></ul>
-<a class="btn" href="https://apify.com/agilityy/hiring-velocity-signals">Buy on the Apify Store</a></div>
-<div class="card plan"><div class="for">Full history · data teams</div><p class="price">$149</p><p class="per">per month</p>
-<ul><li>Every company, every day since collection began, as monthly CSV files or a Snowflake share.</li><li>Three tables with a published schema; a free sample to load today.</li><li>Starts with a short access request; we reply within two business days.</li></ul>
-<a class="btn" href="{{ '/for-data-teams/' | relative_url }}">Request access</a></div>
+<div class="card plan"><div class="for">A watch list</div><p class="price">about $30</p><p class="per">100 companies, every day, for a month</p>
+<ul><li>Your competitors, your accounts or your portfolio: open roles, roles opened and closed, growth, a one-word signal, every morning.</li><li>Runs on a schedule into Google Sheets, Slack or a webhook.</li></ul></div>
+<div class="card plan"><div class="for">One industry, one day</div><p class="price">a few dollars</p><p class="per">about 700 companies for $7</p>
+<ul><li>Every Fintech, Health or Developer Tools company in the benchmark, with who is accelerating and who is cutting.</li><li>The first $5 a month is free on any Apify account, so a small cut costs nothing.</li></ul></div>
+<div class="card plan"><div class="for">Every company, one day</div><p class="price">about $219</p><p class="per">21,598 rows, the whole benchmark</p>
+<ul><li>The full day the Monday report is computed from, as CSV, JSON or Excel.</li><li>Each role opened or closed that day is available too, at $0.004 per event.</li></ul></div>
 </div>
-<p class="muted small">Self-serve products are billed per row by the Apify Store, with no subscription. <a href="{{ '/get-the-data/' | relative_url }}">How buying works</a> · <a href="{{ '/data/' | relative_url }}">Full catalogue and prices</a> · <a href="{{ '/samples/daily_signals_sample.csv' | relative_url }}" download>Free sample CSV</a></p>
+<div class="actions"><a class="btn" href="https://apify.com/agilityy/hiring-signals-feed">Open the feed on the Apify Store</a>
+<a class="btn alt" href="{{ '/get-the-data/' | relative_url }}">How buying works</a>
+<a class="btn alt" href="{{ '/samples/daily_signals_sample.csv' | relative_url }}" download>Free sample CSV</a></div>
+<p class="muted small">Apify bills you and adds a few cents of compute per run; spending above the free $5 needs an Apify plan, from $19 a month. Tracking companies outside the benchmark, a one-company lookup and funded-company leads are in the <a href="{{ '/data/' | relative_url }}">catalogue</a>. Need the whole history in your own warehouse? <a href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">Ask</a>.</p>
 </div></section>
 
 <section class="band"><div class="wrap">

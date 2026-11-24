@@ -25,8 +25,8 @@ a closure is observed rather than inferred. Full method: [methodology](methodolo
 
 ## Get the data
 
-Three ways to buy, from a CSV download to a Snowflake share: [how to buy](get-the-data.md). Products and prices:
-[data](data.md). The whole history as monthly files or a Snowflake share: [for data teams](for-data-teams.md).
+Pay per row on the Apify Store, with worked prices: [how to buy](get-the-data.md). Products and prices:
+[data](data.md). Schema and a free sample: [for data teams](for-data-teams.md).
 
 | Product | What it is | Price |
 |---|---|---|

@@ -10,8 +10,8 @@ dataset_name: "Hiring Pulse data products"
 
 Everything below is sold per row on the [Apify Store](https://apify.com/agilityy): no subscription, you pay for the
 rows you receive plus a few cents of compute per run, Apify bills you, and every product can run on a schedule, be
-called from code or be used from an AI assistant. How buying works is on
-[how to buy]({{ '/get-the-data/' | relative_url }}); the whole history as files or a share is on
+called from code or be used from an AI assistant. How buying works, with worked prices, is on
+[how to buy]({{ '/get-the-data/' | relative_url }}); the schema and the free sample are on
 [for data teams]({{ '/for-data-teams/' | relative_url }}). The weekly report on this site is computed from the same data.
 
 ## Hiring signals
