@@ -25,7 +25,7 @@ a closure is observed rather than inferred. Full method: [methodology](methodolo
 
 ## Get the data
 
-Six ways, from a CSV download to an AI assistant: [get the data](get-the-data.md). Products and prices:
+Three ways to buy, from a CSV download to a Snowflake share: [how to buy](get-the-data.md). Products and prices:
 [data](data.md). The whole history as monthly files or a Snowflake share: [for data teams](for-data-teams.md).
 
 | Product | What it is | Price |

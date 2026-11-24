@@ -41,21 +41,20 @@ permalink: /
 <p class="eyebrow">Weekly startup hiring benchmarks · Edition {{ latest_date }}</p>
 <h1>Where startup hiring is moving this week</h1>
 {%- if v_open != "" %}
-<p class="hero">This week: {{ v_open }} open roles on the job boards of the {{ v_companies | default: site.coverage.companies }} companies we track.</p>
+<p class="hero">{{ v_open }} open roles on the job boards of {{ v_companies | default: site.coverage.companies }} startups and scale-ups, counted this week.</p>
 {%- elsif items.size > 1 %}
 {%- assign first = items[1] | split: nl2 | first -%}
 {%- assign hero = first | split: "**" | first %}
 <p class="hero">{{ hero }}</p>
 {%- endif %}
-<p class="sub muted">Free report every Monday. The daily data behind it is for sale.</p>
+<p class="sub">How we count: once a day we read the public job board of every startup and scale-up we have found on {{ site.coverage.vendors }}, and count every role that is open. Companies with more than 1,000 open roles and staffing agencies are left out, so the benchmark stays about startups. <a href="{{ '/methodology/' | relative_url }}">The method</a>.</p>
 <div class="actions"><a class="btn" href="{{ '/reports/latest/' | relative_url }}">Read this week's report</a>
-<a class="btn alt" href="{{ '/get-the-data/' | relative_url }}">How to buy</a></div>
+<a class="btn alt" href="#data">Get the daily data</a></div>
 {%- if v_open != "" %}
 <div class="stats" aria-label="Headline numbers">
 <div class="stat"><b>{{ v_open }}</b><span>open roles</span>{% if d_open != "" and d_open != "—" %}<span class="delta">{{ d_open }} vs previous edition</span>{% endif %}</div>
-{%- if v_companies != "" %}<div class="stat"><b>{{ v_companies }}</b><span>companies tracked this week</span></div>{% endif %}
+{%- if v_companies != "" %}<div class="stat"><b>{{ v_companies }}</b><span>job boards read this week</span></div>{% endif %}
 {%- if v_fill != "" and v_fill != "—" %}<div class="stat"><b>{{ v_fill }}</b><span>median days a role stays posted</span>{% if d_fill != "" and d_fill != "—" %}<span class="delta">{{ d_fill }}</span>{% endif %}</div>{% endif %}
-{%- if v_ai != "" %}<div class="stat"><b>{{ v_ai }}</b><span>of open roles are AI/ML</span>{% if d_ai != "" and d_ai != "—" %}<span class="delta">{{ d_ai }}</span>{% endif %}</div>{% endif %}
 {%- if v_remote != "" and v_remote != "—" %}<div class="stat"><b>{{ v_remote }}</b><span>of open roles are remote</span>{% if d_remote != "" and d_remote != "—" %}<span class="delta">{{ d_remote }}</span>{% endif %}</div>{% endif %}
 </div>
 {%- endif %}
@@ -63,27 +62,23 @@ permalink: /
 
 <section class="band" id="lookup"><div class="wrap">
 <p class="eyebrow">Try the data</p>
-<h2>Look up any of the {{ v_companies | default: site.coverage.companies }} companies</h2>
+<h2>Look up a company</h2>
+<p class="sub muted">This week's numbers for any of the {{ v_companies | default: site.coverage.companies }} companies in the benchmark.</p>
 <div class="search" id="company-search" hidden>
 <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
 <label class="visually-hidden" for="company-q">Search a company</label>
 <input id="company-q" type="search" autocomplete="off" spellcheck="false" placeholder="Type a company name, e.g. Fivetran">
 <ul class="search-results" id="company-results" aria-live="polite"></ul>
 </div>
-<p class="muted small" id="company-search-note" hidden>One line per company from this week's edition. The roles, the daily history and every opened or closed event are in the <a href="{{ '/get-the-data/' | relative_url }}">feed</a>. Company missing? <a href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">Ask for it</a>.</p>
+<p class="muted small" id="company-search-note" hidden>One line per company, from this week's edition. The roles themselves and the day-by-day history are in the <a href="#data">daily data</a>. Not finding a company? <a href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">Request it</a>.</p>
 <noscript><p class="muted small">The search needs JavaScript; the same preview rows are in <a href="{{ '/reports/data/companies.json' | relative_url }}">reports/data/companies.json</a>.</p></noscript>
 </div></section>
 
 <section class="band tint"><div class="wrap">
 <p class="eyebrow">Key findings</p>
 <h2>What the data says this week</h2>
-<div class="chips" id="audience-chips" hidden role="group" aria-label="Show the findings for">
-<button type="button" data-who="" aria-pressed="true">Everyone</button>
-<button type="button" data-who="talent|recruit" aria-pressed="false">Talent teams</button>
-<button type="button" data-who="sales|revenue" aria-pressed="false">Sales &amp; revenue</button>
-<button type="button" data-who="investor|analyst" aria-pressed="false">Investors &amp; analysts</button>
-<button type="button" data-who="employer|compensation" aria-pressed="false">Employer brand</button>
-</div>
+<p class="sub muted">Six findings, one per theme. The full report has the tables behind each.</p>
+{%- assign labels = "Demand|Momentum|Movers|Time to fill|AI/ML roles|Remote work" | split: "|" -%}
 {%- if items.size > 1 %}
 <div class="insights">
 {%- for item in items offset: 1 %}
@@ -94,6 +89,7 @@ permalink: /
 {%- if rest contains "- *" -%}{%- assign rp = rest | split: "- *" -%}{%- assign detail = rp[0] | strip -%}{%- assign who = rp[1] | split: "*" | first -%}{%- endif -%}
 {%- assign wp = who | split: ": " -%}
 <div class="card" data-who="{{ who | downcase | escape }}">
+<p class="label">{{ labels[forloop.index0] | default: "Finding" }}</p>
 <h3>{{ head | strip }}</h3>
 {%- if detail != "" %}<p>{{ detail | markdownify | strip_html }}</p>{% endif %}
 {%- if who != "" %}{%- assign who_rest = who | remove_first: wp[0] | remove_first: ": " | strip -%}{%- assign who_tag = wp[0] | remove_first: "For " | strip -%}
@@ -137,22 +133,21 @@ permalink: /
 {%- endif %}
 
 <section class="band tint" id="data"><div class="wrap">
-<p class="eyebrow">Get the data behind it</p>
-<h2>Three ways to buy</h2>
+<p class="eyebrow">The data behind the report</p>
+<h2>What is for sale</h2>
+<p class="sub muted">The report is free. The daily data it is computed from is sold in three forms, each with one price.</p>
 <div class="plans">
-<div class="card plan"><div class="for">Sales &amp; revenue teams</div><p class="price">$0.01</p><p class="per">per company and day · job events $0.004 each</p>
-<ul><li>Yesterday's signal for every tracked company: open roles, opened and closed, 30-day growth, days-to-fill, a one-word signal.</li><li>Every role opened or closed as an event, with title, function, location and URL.</li><li>JSON, CSV or Excel download; REST API; schedules to Google Sheets, Slack or a webhook; MCP in Claude or Cursor.</li></ul>
-<a class="btn" href="https://apify.com/agilityy/hiring-signals-feed">Open the feed</a></div>
-<div class="card plan"><div class="for">Data teams</div><p class="price">$149 <span class="per" style="display:inline;font-size:1rem">/ month</span></p><p class="per">or $1,200 a year for the files · Snowflake share $249 / month</p>
-<ul><li>The whole history: daily signals and job events for every company since collection began.</li><li>Monthly CSV files, or a Snowflake share refreshed daily.</li><li>Published schema and a free sample to load today.</li></ul>
-<a class="btn" href="{{ '/for-data-teams/' | relative_url }}">Schema, sample, access</a></div>
-<div class="card plan"><div class="for">Investors &amp; analysts</div><p class="price">$0.025</p><p class="per">per company and day on your own list · funded leads $0.015 each</p>
-<ul><li>Daily tracking of the companies you name: a portfolio, a sector, a watch list.</li><li>SEC Form D funded companies with a live hiring check.</li><li>Custom cuts of the history, often free with attribution for research and press.</li></ul>
-<a class="btn" href="{{ '/data/' | relative_url }}">Products and prices</a></div>
+<div class="card plan"><div class="for">Daily feed · every company</div><p class="price">$0.01</p><p class="per">per company per day</p>
+<ul><li>One row per company per day: open roles, roles opened and closed, growth, days-to-fill, AI/ML and remote share, a one-word signal.</li><li>Pick a day or a 30-day window; filter by industry, function or signal.</li><li>All {{ v_companies | default: site.coverage.companies }} companies for one day cost about $219; one industry costs a few dollars.</li></ul>
+<a class="btn" href="https://apify.com/agilityy/hiring-signals-feed">Buy on the Apify Store</a></div>
+<div class="card plan"><div class="for">Track your own list</div><p class="price">$0.025</p><p class="per">per company per check</p>
+<ul><li>Name the companies: a portfolio, a sector, your competitors. We read their boards on your schedule.</li><li>Same row as the feed, plus the roles opened and closed since the last check.</li><li>200 companies checked daily is about $150 a month.</li></ul>
+<a class="btn" href="https://apify.com/agilityy/hiring-velocity-signals">Buy on the Apify Store</a></div>
+<div class="card plan"><div class="for">Full history · data teams</div><p class="price">$149</p><p class="per">per month</p>
+<ul><li>Every company, every day since collection began, as monthly CSV files or a Snowflake share.</li><li>Three tables with a published schema; a free sample to load today.</li><li>Starts with a short access request; we reply within two business days.</li></ul>
+<a class="btn" href="{{ '/for-data-teams/' | relative_url }}">Request access</a></div>
 </div>
-<div class="actions"><a class="btn alt" href="{{ '/samples/daily_signals_sample.csv' | relative_url }}" download>Download a sample CSV: daily signals</a>
-<a class="btn alt" href="{{ '/samples/job_events_sample.csv' | relative_url }}" download>Sample CSV: job events</a>
-<a class="btn alt" href="{{ '/get-the-data/' | relative_url }}">How to buy: all six routes</a></div>
+<p class="muted small">Self-serve products are billed per row by the Apify Store, with no subscription. <a href="{{ '/get-the-data/' | relative_url }}">How buying works</a> · <a href="{{ '/data/' | relative_url }}">Full catalogue and prices</a> · <a href="{{ '/samples/daily_signals_sample.csv' | relative_url }}" download>Free sample CSV</a></p>
 </div></section>
 
 <section class="band"><div class="wrap">
@@ -160,11 +155,10 @@ permalink: /
 <h2>Why these numbers hold up</h2>
 <div class="facts">
 <div class="card"><h3>First-party</h3><p>Every company's own job board ({{ site.coverage.vendors }}) is read once a day. A role is counted once, from the source; a closure is observed the day the posting disappears.</p></div>
-<div class="card"><h3>Broad</h3><p>{{ site.coverage.companies }} companies, mostly venture-backed technology companies; {{ site.coverage.with_industry }} of them with industry and team size for the segment tables. The exact count of the day is in every report.</p></div>
+<div class="card"><h3>Broad</h3><p>{{ site.coverage.companies }} companies found by scanning the public job boards of six hiring systems: mostly venture-backed technology companies. Employers with more than 1,000 open roles, staffing agencies and franchises are left out of the benchmark. The exact count of the day is in every report.</p></div>
 <div class="card"><h3>Comparable</h3><p>Functions, seniority and the AI/ML flag come from one fixed title taxonomy, so this week's figures compare with last week's and with yours.</p></div>
 <div class="card"><h3>Checked daily</h3><p>Fetch rate, day-over-day stability, a careers-page re-count and a re-fetch of closed roles are measured every day with alert thresholds. <a href="{{ '/methodology/' | relative_url }}">The methodology</a> lists them.</p></div>
 </div>
-<p class="muted small" style="margin-top:1rem">Launched November 2026, so no customer logos yet. Judge the data itself: <a href="{{ '/samples/daily_signals_sample.csv' | relative_url }}">the sample</a>, <a href="{{ '/methodology/' | relative_url }}">the method</a>, <a href="https://github.com/agilityy-research/hiring-pulse">the source of every report</a>.</p>
 </div></section>
 
 <section class="band tint"><div class="wrap">
@@ -231,23 +225,10 @@ permalink: /
       }
       var extra = [ai != null ? ai + "% AI/ML" : null, remote != null ? remote + "% remote" : null].filter(Boolean).join(" · ");
       return "<li><b>" + esc(name) + "</b><span>" + fmt(open) + " open roles</span>" + line + (meta ? '<span class="muted">' + esc(meta) + "</span>" : "") +
-             (extra ? '<span class="muted">' + esc(extra) + "</span>" : "") + ' <a href="{{ '/get-the-data/' | relative_url }}">Which roles? Unlock the feed</a></li>';
+             (extra ? '<span class="muted">' + esc(extra) + "</span>" : "") + '</li>';
     }).join("");
   }
   q.addEventListener("focus", function () { load(); });
   q.addEventListener("input", function () { var v = q.value.trim(); load().then(function () { if (q.value.trim() === v) render(v); }); });
-  var chips = document.getElementById("audience-chips"), cards = document.querySelectorAll(".insights .card");
-  if (chips && cards.length) {
-    chips.hidden = false;
-    chips.addEventListener("click", function (e) {
-      var b = e.target.closest("button"); if (!b) return;
-      chips.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
-      var keys = (b.getAttribute("data-who") || "").split("|").filter(Boolean);
-      cards.forEach(function (c) {
-        var who = (c.getAttribute("data-who") || "").toLowerCase();
-        c.classList.toggle("dim", keys.length > 0 && !keys.some(function (k) { return who.indexOf(k) !== -1; }));
-      });
-    });
-  }
 })();
 </script>
