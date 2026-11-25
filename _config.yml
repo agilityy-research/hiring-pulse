@@ -29,6 +29,9 @@ coverage:
 # Kit, MailerLite and Beehiiv work the same way), paste the form's action URL here, and the site renders a signup box.
 newsletter_action: ""
 newsletter_email_field: "email"
+# Hiring Pulse Daily: the flat plan ($99 a month, Stripe). Leave empty and the plan is not shown anywhere. Paste the
+# Stripe Payment Link URL here once the delivery Worker is deployed (private repo, RUNBOOK "Switching on Hiring Pulse Daily").
+stripe_payment_link: ""
 # One-off studies that sit outside the weekly series (file names in reports/ without the .md).
 baseline_reports:
   - "2026-11-20"

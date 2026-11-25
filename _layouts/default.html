@@ -216,7 +216,8 @@ main.report #key-findings + ul > li > ul{padding-left:0;margin:.25rem 0 0}
 main.report #key-findings + ul > li > ul > li{list-style:none;font-size:.93rem;color:var(--muted);margin:0}
 /* pricing */
 .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1rem 0}
-@media (max-width:900px){.plans{grid-template-columns:1fr}}
+.plans.four{grid-template-columns:repeat(2,1fr)}
+@media (max-width:900px){.plans,.plans.four{grid-template-columns:1fr}}
 .plan{display:flex;flex-direction:column}
 .plan .for{font-size:.82rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2)}
 .plan .price{font-size:1.7rem;font-weight:800;letter-spacing:-.02em;margin:.2rem 0 0;white-space:normal}

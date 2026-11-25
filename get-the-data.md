@@ -29,6 +29,22 @@ Spending above the free $5 needs an Apify plan, from $19 a month, paid to Apify.
 own warehouse is not a listed product yet; if you need it, [ask us](https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml)
 and say what for.
 
+{%- if site.stripe_payment_link != "" %}
+## Hiring Pulse Daily: everything, every day, $99 a month
+
+For teams that want the whole benchmark every morning without an Apify account: a flat plan, billed by Stripe,
+cancel any time.
+
+- Every tracked company, every day: `daily_signals` (one row per company per day) and `job_events` (one row per role
+  opened or closed), the latest day plus the previous 30 days, as CSV and JSON, the same columns as the
+  [free sample]({{ '/for-data-teams/' | relative_url }}#free-sample).
+- New files by 07:00 UTC. One URL per file with your key, for `curl`, Python, a scheduled job or a Google Sheet
+  (`IMPORTDATA`). The key is shown once after checkout; the welcome page has copy-paste examples.
+- Card, invoices and cancellation in the Stripe customer portal, linked from the welcome page.
+
+<p><a class="btn" href="{{ site.stripe_payment_link }}">Subscribe to Hiring Pulse Daily, $99 a month</a></p>
+
+{% endif -%}
 ## Which product
 
 | You want | Product | Price |
@@ -91,6 +107,13 @@ assistants can run the same products through Apify's MCP server at `https://mcp.
 - **Custom deliveries** (history cuts, files, a warehouse share) are licensed for internal use by the buying organisation. Raw rows may not be
   redistributed or resold; aggregates and derived metrics may be published with attribution to Agilityy Research.
 - **Support**: replies within two business days; a private channel on request.
+{%- if site.stripe_payment_link != "" %}
+- **Hiring Pulse Daily subscribers**: the files are licensed for internal use by the subscribing organisation; raw rows
+  may not be redistributed or resold, aggregates and derived metrics may be published with attribution. Cancel any time
+  in the customer portal; access runs to the end of the paid month. The data is provided as is, read from public job
+  boards once a day, with no guarantee that every board answered on a given day; the daily quality checks are on the
+  methodology page. Support within two business days.
+{%- endif %}
 
 ## Next
 

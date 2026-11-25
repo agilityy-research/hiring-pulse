@@ -134,9 +134,14 @@ permalink: /
 
 <section class="band tint" id="data"><div class="wrap">
 <p class="eyebrow">The data behind the report</p>
-<h2>The report is free. The daily data is pay as you go.</h2>
+<h2>The report is free. The daily data is pay as you go{% if site.stripe_payment_link != "" %}, or $99 a month for all of it{% endif %}.</h2>
 <p class="sub muted">Every number on this page comes from one row per company per day (a "company-day"). You buy those rows on the Apify Store at $0.01 each, with no subscription and nothing to install: pick the companies, the days and the filters, and pay for the rows you receive. The product is called the Hiring Signals Feed.</p>
-<div class="plans">
+<div class="plans{% if site.stripe_payment_link != "" %} four{% endif %}">
+{%- if site.stripe_payment_link != "" %}
+<div class="card plan"><div class="for">Hiring Pulse Daily</div><p class="price">$99 a month</p><p class="per">every company, every day, no Apify account</p>
+<ul><li>The latest day plus the previous 30 days, as CSV and JSON: one row per company per day and one row per role opened or closed, the same columns as the free sample.</li><li>One URL per file for curl, Python or a Google Sheet; cancel any time.</li></ul>
+<a class="btn" href="{{ site.stripe_payment_link }}">Subscribe, $99 a month</a></div>
+{%- endif %}
 <div class="card plan"><div class="for">A watch list</div><p class="price">about $30</p><p class="per">100 companies, every day, for a month</p>
 <ul><li>Your competitors, your accounts or your portfolio: open roles, roles opened and closed, growth, and a one-word signal (accelerating, steady, flat or contracting), every morning.</li><li>Runs on a schedule into Google Sheets, Slack or a webhook.</li></ul></div>
 <div class="card plan"><div class="for">One industry, one day</div><p class="price">a few dollars</p><p class="per">about 700 companies for $7</p>
