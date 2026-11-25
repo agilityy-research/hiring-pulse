@@ -24,7 +24,7 @@ Three tables, appended daily, with the history from the first day of collection.
 
 | Table | One row per | Rows per day | Columns |
 |---|---|---|---|
-| `companies` | company | one per company, refreshed monthly | key, name, job-board vendor and slug, careers URL, website; for the {{ site.coverage.with_industry }} YC-backed companies also industry, sub-industry, team size, batch |
+| `companies` | company | one per company, refreshed monthly | key, name, job-board vendor and slug, careers URL, website; for the YC-backed companies ({{ site.coverage.with_industry }}) also industry, sub-industry, team size, batch |
 | `daily_signals` | company × day | one per tracked company, {{ site.coverage.companies }} a day | snapshot time, open roles, previous open roles, new and closed roles, net change, growth %, 30-day trend, roles opened and closed in 30 days, median days-to-fill, remote share, AI/ML roles and share, functions, seniority mix, top departments, top locations, snapshots recorded, one-word signal |
 | `job_events` | role opened or closed | about 2,000 (roughly 0.3% of open roles) | event type, company, vendor, slug, job id, title, department, location, remote flag, URL, first seen, closed at, days open; plus one baseline row per role that was already open when a board entered the history |
 
