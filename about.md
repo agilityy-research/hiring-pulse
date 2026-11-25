@@ -7,28 +7,34 @@ permalink: /about/
 # About
 
 **Hiring Pulse** is a weekly benchmark of startup hiring, published every Monday at 07:00 UTC by **Agilityy Research**,
-an independent data publisher. We read the public job boards of {{ site.coverage.companies }} companies every day
-({{ site.coverage.vendors }}), record every role that opens or closes, and turn that into numbers that are
-comparable week after week: open roles by function and industry, who is growing and who is cutting, how long roles
-stay open, the AI/ML share, the remote share.
+an independent data publisher. Every day we read the public job boards of {{ site.coverage.companies }} companies
+({{ site.coverage.vendors }}), record every role that opens or closes, and turn that into numbers you can compare week
+after week: open roles by function and industry, who is growing and who is cutting, how long roles stay open, the AI/ML
+share, the remote share.
 
-## How it is funded
+## How it is paid for
 
-The weekly report is free under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The daily data behind it is
-sold: per row through the [Hiring Signals Feed](https://apify.com/agilityy/hiring-signals-feed) and the other products
-on the [Apify Store](https://apify.com/agilityy); the schema and a free sample are on the page for
-[data teams]({{ '/for-data-teams/' | relative_url }}). No advertising, no sponsored findings.
+The weekly report is free to read and to quote under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The daily
+data behind it is for sale, pay as you go, through the [Hiring Signals Feed](https://apify.com/agilityy/hiring-signals-feed)
+and the other products on the [Apify Store](https://apify.com/agilityy); [how to buy]({{ '/get-the-data/' | relative_url }})
+has the prices. No advertising, no sponsored findings.
 
-## Principles
+## What you can rely on
 
-- **First-party.** Every number comes from the company's own job board, read by us, not from an aggregator.
+- **First-party.** Every number comes from the company's own job board, read by us, not from a job aggregator.
 - **Published method.** The [methodology]({{ '/methodology/' | relative_url }}) describes every definition and the daily
   quality checks; every report's source file is on [GitHub](https://github.com/agilityy-research/hiring-pulse).
-- **Fixed definitions.** The function, seniority and AI/ML taxonomy does not change between editions without a note.
+- **Fixed definitions.** The function, seniority and AI/ML classification does not change between editions without a note.
 - **No tracking.** The site sets no cookies; one cookieless beacon counts page views ([privacy]({{ '/privacy/' | relative_url }})).
 
 ## Contact
 
-Data requests, corrections, press and research questions: the
+For data requests, corrections, press and research questions, use the
 [request form](https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml) on GitHub
-(public), or a private message through the [Apify Store profile](https://apify.com/agilityy). We answer within two working days.
+(public) or send a private message through the [Apify Store profile](https://apify.com/agilityy). We answer within two
+working days.
+
+## Next
+
+- Read [this week's report]({{ '/reports/latest/' | relative_url }}).
+- Buy the daily data: [how to buy]({{ '/get-the-data/' | relative_url }}).

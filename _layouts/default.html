@@ -237,6 +237,7 @@ th,td{border-bottom:1px solid var(--line);padding:.42rem .65rem;text-align:left;
 th{background:var(--tint);font-weight:600}
 main.narrow th,main.narrow td{white-space:normal;min-width:7rem}
 main.narrow td:first-child{min-width:11rem}
+@media (max-width:640px){main.narrow th,main.narrow td{min-width:0;font-size:.9rem;padding:.4rem .45rem}main.narrow td:first-child{min-width:7rem}}
 code{background:var(--tint);padding:.1rem .35rem;border-radius:5px;font-size:.9em}
 pre{background:var(--tint);border:1px solid var(--line);padding:.9rem 1rem;border-radius:10px;overflow-x:auto;font-size:.88rem}
 pre code{background:none;padding:0}
@@ -294,15 +295,15 @@ footer.site .legal{grid-column:1 / -1;border-top:1px solid var(--line);padding-t
 {%- else %}<span>Weekly edition · published Monday 07:00 UTC</span>{% endif %}
 <a href="{{ '/reports/' | relative_url }}">All reports</a>
 <a href="{{ '/methodology/' | relative_url }}">How the numbers are measured</a>
-<a href="{{ '/get-the-data/' | relative_url }}">Get the data</a>
-<a href="{{ '/feed.xml' | relative_url }}">Feed</a></div>
+<a href="{{ '/get-the-data/' | relative_url }}">Buy the daily data</a>
+<a href="{{ '/feed.xml' | relative_url }}">Atom feed</a></div>
 {%- endif %}
 {{ content }}
 {%- if is_report or page.url != "/" %}</div>{% endif %}
 </main>
 <footer class="site"><div class="wrap">
 <div><a class="brand" href="{{ '/' | relative_url }}" style="display:inline-flex;margin-bottom:.5rem"><span class="mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 22l6-7 5 4 9-11"/></svg></span>Hiring Pulse</a>
-<p style="margin:0;max-width:30rem">Weekly startup hiring benchmarks from the public job boards of {{ site.coverage.companies }} companies, read every day by Agilityy Research. Reports are free under <a href="https://creativecommons.org/licenses/by/4.0/" style="display:inline;text-decoration:underline">CC BY 4.0</a>; the daily data behind them is for sale.</p></div>
+<p style="margin:0;max-width:30rem">Weekly startup hiring benchmarks from the public job boards of {{ site.coverage.companies }} companies, read every day by Agilityy Research. The reports are free under <a href="https://creativecommons.org/licenses/by/4.0/" style="display:inline;text-decoration:underline">CC BY 4.0</a>; the daily data behind them is pay as you go.</p></div>
 <div><h4>Read</h4><a href="{{ '/reports/latest/' | relative_url }}">This week's report</a><a href="{{ '/reports/' | relative_url }}">All editions</a><a href="{{ '/methodology/' | relative_url }}">Methodology</a><a href="{{ '/feed.xml' | relative_url }}">Atom feed</a></div>
 <div><h4>Buy</h4><a href="{{ '/get-the-data/' | relative_url }}">How to buy</a><a href="{{ '/data/' | relative_url }}">Products and prices</a><a href="{{ '/for-data-teams/' | relative_url }}">For data teams</a><a href="https://apify.com/agilityy">Apify Store</a></div>
 <div><h4>Company</h4><a href="{{ '/about/' | relative_url }}">About</a><a href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">Contact / request data</a><a href="https://github.com/agilityy-research/hiring-pulse">Source on GitHub</a><a href="{{ '/privacy/' | relative_url }}">Privacy</a></div>
