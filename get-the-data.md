@@ -44,7 +44,7 @@ cancel any time.
 
 <p><a class="btn" href="{{ site.stripe_payment_link }}">Subscribe to Hiring Pulse Daily, $99 a month</a></p>
 
-{% endif -%}
+{% endif %}
 ## Which product
 
 | You want | Product | Price |
