@@ -6,87 +6,102 @@ permalink: /methodology/
 ---
 # Methodology
 
-## Sources
+This page tells you where every number on the site comes from, what each term means, how the collection checks itself,
+and what the numbers cannot tell you. If you want to quote a figure or build on the data, read this first.
 
-- **Job boards.** Companies that publish a job board on {{ site.coverage.vendors }}. Each vendor offers a public feed
-  that the company's own careers page is built from; we read that feed once a day per board. No login, no scraping
-  of pages behind a login, no personal data.
-- **Universe.** The list of companies comes from public accelerator directories and public web indexes, is rebuilt
-  monthly, and every board is verified against the company name before it enters the list. Since
+## Where the numbers come from
+
+- **Company job boards.** Most startups run their careers page on job-board software: {{ site.coverage.vendors }}.
+  We call those six systems the *vendors*. Each vendor publishes a public list of a company's open roles, the same list
+  the company's careers page is built from. We read that list once a day for every company we track. No login, no
+  pages behind a login, no personal data.
+- **Which companies.** The list of companies is built from public accelerator directories and public web indexes,
+  refreshed monthly, and every board is checked against the company name before it enters the list. Since
   {{ site.coverage.companies_since }} it holds {{ site.coverage.companies }} companies ({{ site.coverage.companies_before }} from
-  {{ site.coverage.daily_since }} to {{ site.coverage.companies_since }}, on Greenhouse, Lever and Ashby); {{ site.coverage.with_industry }} of them are Y
-  Combinator companies with industry, sub-industry, batch and team size from the public YC directory, which is where
-  the industry and size segments come from.
-- **Funding.** The funded-and-hiring products read the SEC's public EDGAR daily index and Form D filings. The weekly
-  report does not use them.
+  {{ site.coverage.daily_since }} to {{ site.coverage.companies_since }}, on Greenhouse, Lever and Ashby). About
+  {{ site.coverage.with_industry }} of them are Y Combinator companies with industry, sub-industry, batch and team size
+  from the public YC directory; that is where the industry and company-size breakdowns come from.
+- **Funding.** The funded-and-hiring products on [products and prices]({{ '/data/' | relative_url }}) read the SEC's public
+  EDGAR daily index and Form D filings. The weekly report does not use them.
 
-## Definitions
+## What each term means
 
-- **Snapshot.** The set of open roles on a board at the time of the daily read. A role is identified by the vendor's
-  job id.
-- **Opened / closed.** A role is *opened* the first day it appears and *closed* the first day it is gone. If a board
-  returns an empty list after having had roles, the previous snapshot is kept and no closures are recorded, so a vendor
-  hiccup cannot show up as a mass lay-off.
-- **Days-to-fill.** The age of a role on the day it closes, counted from the day it was first seen. Roles older than
-  365 days at closure are excluded as evergreen postings. We do not know whether a closed role was filled or withdrawn;
-  "days-to-fill" is the posting's lifetime.
-- **Window.** Growth, roles opened and roles closed compare today with 30 days earlier for the same companies.
-- **Stock and flow figures.** Open roles, functions, AI/ML share, remote share and seniority (the stock) are reported
-  for every company with a snapshot in the last 3 days. Growth, roles opened and closed, days-to-fill and the movers
-  (the flows) are reported for companies with at least 14 days of daily history; until {{ site.coverage.flows_from }}
-  that is the Y Combinator subset collected from {{ site.coverage.yc_subset_since }}, from then on the whole universe.
+- **Daily read.** The set of open roles on a company's board at the time we read it that day. A role is identified by
+  the vendor's job id, so a retitled role is still the same role.
+- **Opened and closed.** A role is *opened* the first day it appears and *closed* the first day it is gone. If a board
+  returns an empty list after having had roles, we keep the previous day's list and record no closures, so a vendor
+  outage cannot show up as a mass lay-off.
+- **Days-to-fill.** How many days a posting stayed up: the age of a role on the day it closes, counted from the day we
+  first saw it. We do not know whether a closed role was filled or withdrawn, so "days-to-fill" is the posting's
+  lifetime, not the hiring time. Roles older than 365 days at closure are left out as evergreen postings.
+- **Growth and the 30-day window.** Growth, roles opened and roles closed compare today with 30 days earlier for the
+  same companies. While the history is shorter than 30 days, the report says which span it measured (for example
+  "16 days earlier").
+- **Figures that need history, and figures that do not.** Open roles, functions, AI/ML share, remote share and
+  seniority need only today's read, so they cover every company read in the last 3 days. Growth, roles opened and
+  closed, days-to-fill and the movers need history, so they cover companies with at least 14 days of daily reads:
+  until {{ site.coverage.flows_from }} that is the Y Combinator subset collected since {{ site.coverage.yc_subset_since }},
+  from then on every company.
+- **Signal.** One word per company per day that sums up the change in its open roles over the window: accelerating,
+  steady, flat or contracting. It is derived from the same growth figures by the same rule for every company, so you can
+  filter on it without reading the numbers.
 - **Since previous edition.** Each Monday edition is compared with the one before it on the same definitions; the
-  trend chart lengthens by one point per edition. When the universe changes size the report says so next to the number.
-- **Segments.** A segment (industry, size bucket, vendor) is reported only when it has at least 5 companies. Growth is
-  computed on the segment's total open roles; days-to-fill and remote share are medians across companies.
-- **Function, seniority, AI/ML.** Assigned from the job title with a fixed, published keyword taxonomy, the same one
-  the data products use, so numbers are comparable week to week. "AI/ML roles" means the title names machine
-  learning, AI, LLM, data science or a close variant; a software engineer who will use AI tools is not counted.
-- **Remote share.** Share of a company's open roles whose location or remote flag says remote.
+  trend chart gains one point per edition. When the set of companies changes size, the report says so next to the number.
+- **Segments.** An industry, company-size bucket or vendor is reported only when it has at least 5 companies. Growth is
+  computed on the segment's total open roles; days-to-fill and remote share are medians across its companies.
+- **Function, seniority, AI/ML.** Assigned from the job title with a fixed, published list of keywords, the same one
+  the data products use, so numbers compare week to week. "AI/ML roles" means the title names machine learning, AI,
+  LLM, data science or a close variant; a software engineer who will use AI tools is not counted.
+- **Remote share.** The share of a company's open roles whose location or remote flag says remote.
 
-## Verification: how we know the data is complete and accurate
+## How we know the data is complete and accurate
 
-No manual review: the collection measures itself at the end of every run and writes a quality record for the day;
-a monitoring job turns the thresholds below into alerts, and a run that fails them is repaired or re-run before the
+No manual review: the collection measures itself at the end of every run and writes a quality record for the day. A
+monitoring job turns the thresholds below into alerts, and a run that fails them is repaired or re-run before the
 next report.
 
 | Check | How | Threshold |
 |---|---|---|
-| Fetched-OK rate | Boards that answered with a job list, over all boards in the universe | alert below 97% |
-| Open-roles stability | Total open roles against the previous day, overall and per vendor | alert on a move of more than ±15% in a day |
+| Boards answered | Boards that returned a job list, over all boards tracked | alert below 97% |
+| Day-to-day stability | Total open roles against the previous day, overall and per vendor | alert on a move of more than ±15% in a day |
 | Careers-page agreement | Every run, 25 boards (a fixed sample for the date) are re-counted on the vendor's human careers page, HTML not JSON; agreement means within ±5% | alert below 90% agreement |
-| Closure confirmation | Every run, 10 roles the diff just marked closed are re-fetched at their job URL; confirmed means gone, redirected or no longer naming the role | alert below 90% confirmed |
+| Closures confirmed | Every run, 10 roles just marked closed are re-fetched at their job URL; confirmed means gone, redirected or no longer naming the role | alert below 90% confirmed |
 | Freshness | A day without a quality record | alert after 2 days |
-| Suspicious empties | Boards returning zero roles after having some (previous snapshot kept) | reviewed when they cluster on one vendor |
+| Suspicious empties | Boards returning zero roles after having some (previous day's list kept) | reviewed when they cluster on one vendor |
 
-A healthy day looks like: fetched OK about 99%, open roles within a few percent of yesterday, careers-page agreement
-22 or more of 25, closures confirmed 10 of 10. The first full-universe day, 2026-11-22, measured 99.5% of boards
-fetched, 21 of 21 verifiable boards in agreement and 10 of 10 closures confirmed.
+A healthy day looks like: about 99% of boards answered, open roles within a few percent of yesterday, careers-page
+agreement on 22 or more of 25 boards, closures confirmed 10 of 10. The first full day, 2026-11-22, measured 99.5% of
+boards answered, 21 of 21 verifiable boards in agreement and 10 of 10 closures confirmed.
 
 ## Who is in the benchmark, and who is not
 
-The universe is every company with a public job board on the six vendors that our monthly refresh can find; it is
-mostly venture-backed technology companies, but a public board does not make a startup. **Large employers, staffing
-and recruiting agencies and franchise networks are tracked in the daily feed but excluded from the benchmark**: the
-findings, charts, headline numbers and tables. A company is excluded when the universe record tags it
-(`excludeFromBenchmarks`, with the reason), or, until it is tagged, when its board lists more than 1,000 open roles,
-a size very few startups reach. Every edition states how many companies were excluded and why. The rule was introduced on
-2026-11-24 after the first full-universe edition listed Domino's, AECOM and two staffing agencies among the largest
+We track every company with a public job board on the six vendors that our monthly refresh can find. That is mostly
+venture-backed technology companies, but a public board does not make a startup. **Large employers, staffing and
+recruiting agencies, franchise networks, hospitals, universities and public bodies, and vendors' own test boards are
+tracked in the daily data but excluded from the benchmark**: the findings, charts, headline numbers and tables. A company
+is excluded when our company record tags it with a reason, or, until it is tagged, when its board lists more than 1,000
+open roles, a size very few startups reach. Every edition states how many companies were excluded and why. The rule was
+introduced on 2026-11-24 after the first full edition listed Domino's, AECOM and two staffing agencies among the largest
 "startup" boards.
 
-## Known limits
+## What the numbers cannot tell you
 
 - Only companies on the six vendors are covered. Companies with a custom careers site, or on Workday, iCIMS,
-  Workable and the like, are not in the daily universe; the sample skews to venture-backed technology companies.
+  Workable and the like, are not tracked daily; the sample leans to venture-backed technology companies.
 - A posting is not a hire. Days-to-fill measures how long a role stays advertised.
 - Titles are classified by keywords; unusual titles land in "Other".
-- Industry and size segments exist only for the YC-backed subset, where the public directory provides them.
-- Daily history on the full universe starts on {{ site.coverage.daily_since }} ({{ site.coverage.companies_before }} companies) and
+- Industry and company-size breakdowns exist only for the Y Combinator subset, where the public directory provides them.
+- Daily history on the full set of companies starts on {{ site.coverage.daily_since }} ({{ site.coverage.companies_before }} companies) and
   {{ site.coverage.companies_since }} ({{ site.coverage.companies }}); the {{ site.coverage.yc_subset }}-company YC subset was collected
-  from {{ site.coverage.yc_subset_since }}. Flow figures for the whole universe therefore mature through December 2026.
+  from {{ site.coverage.yc_subset_since }}. The history-based figures for every company therefore fill in through December 2026.
 
-## Licence and citation
+## Quoting the reports
 
 Reports are released under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Cite as
-"Agilityy Research, Hiring Pulse, YYYY-MM-DD" (the edition date) with a link to the report. Corrections and questions:
-[open an issue](https://github.com/agilityy-research/hiring-pulse/issues) in the repository.
+"Agilityy Research, Hiring Pulse, YYYY-MM-DD" (the edition date) with a link to the report. Found an error or have a
+question about a definition? [Open an issue](https://github.com/agilityy-research/hiring-pulse/issues) on GitHub.
+
+## Next
+
+- Read [this week's report]({{ '/reports/latest/' | relative_url }}), measured exactly as described here.
+- Want the rows behind it, for your own companies and days? See [how to buy]({{ '/get-the-data/' | relative_url }}).
