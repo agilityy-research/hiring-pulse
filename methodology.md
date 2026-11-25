@@ -18,7 +18,7 @@ and what the numbers cannot tell you. If you want to quote a figure or build on 
 - **Which companies.** The list of companies is built from public accelerator directories and public web indexes,
   refreshed monthly, and every board is checked against the company name before it enters the list. Since
   {{ site.coverage.companies_since }} it holds {{ site.coverage.companies }} companies ({{ site.coverage.companies_before }} from
-  {{ site.coverage.daily_since }} to {{ site.coverage.companies_since }}, on Greenhouse, Lever and Ashby). About
+  {{ site.coverage.daily_since }} to {{ site.coverage.companies_since }}, on Greenhouse, Lever and Ashby). Of these,
   {{ site.coverage.with_industry }} of them are Y Combinator companies with industry, sub-industry, batch and team size
   from the public YC directory; that is where the industry and company-size breakdowns come from.
 - **Funding.** The funded-and-hiring products on [products and prices]({{ '/data/' | relative_url }}) read the SEC's public
