@@ -53,7 +53,7 @@ permalink: /
 {%- if v_open != "" %}
 <div class="stats" aria-label="Headline numbers">
 <div class="stat"><b>{{ v_open }}</b><span>open roles</span>{% if d_open != "" and d_open != "—" %}<span class="delta">{{ d_open }} vs previous edition</span>{% endif %}</div>
-{%- if v_companies != "" %}<div class="stat"><b>{{ v_companies }}</b><span>companies in the benchmark</span></div>{% endif %}
+{%- if v_companies != "" %}<div class="stat"><b>{{ v_companies }}</b><span>companies tracked</span></div>{% endif %}
 {%- if v_fill != "" and v_fill != "—" %}<div class="stat"><b>{{ v_fill }}</b><span>median days a role stays posted before it closes</span>{% if d_fill != "" and d_fill != "—" %}<span class="delta">{{ d_fill }}</span>{% endif %}</div>{% endif %}
 {%- if v_remote != "" and v_remote != "—" %}<div class="stat"><b>{{ v_remote }}</b><span>of open roles are remote</span>{% if d_remote != "" and d_remote != "—" %}<span class="delta">{{ d_remote }}</span>{% endif %}</div>{% endif %}
 </div>
@@ -63,7 +63,7 @@ permalink: /
 <section class="band" id="lookup"><div class="wrap">
 <p class="eyebrow">Try the data</p>
 <h2>Look up a company</h2>
-<p class="sub muted">This week's numbers for any company in the benchmark: open roles, the change over recent weeks, and the share of AI/ML and remote roles.</p>
+<p class="sub muted">This week's numbers for any company in the benchmark: open roles, the share of AI/ML and remote roles, and the recent change once a company has two weeks of history.</p>
 <div class="search" id="company-search" hidden>
 <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
 <label class="visually-hidden" for="company-q">Search a company</label>
@@ -138,7 +138,7 @@ permalink: /
 <p class="sub muted">Every number on this page comes from one row per company per day (a "company-day"). You buy those rows on the Apify Store at $0.01 each, with no subscription and nothing to install: pick the companies, the days and the filters, and pay for the rows you receive. The product is called the Hiring Signals Feed.</p>
 <div class="plans">
 <div class="card plan"><div class="for">A watch list</div><p class="price">about $30</p><p class="per">100 companies, every day, for a month</p>
-<ul><li>Your competitors, your accounts or your portfolio: open roles, roles opened and closed, growth, and a one-word signal (accelerating, steady or contracting), every morning.</li><li>Runs on a schedule into Google Sheets, Slack or a webhook.</li></ul></div>
+<ul><li>Your competitors, your accounts or your portfolio: open roles, roles opened and closed, growth, and a one-word signal (accelerating, steady, flat or contracting), every morning.</li><li>Runs on a schedule into Google Sheets, Slack or a webhook.</li></ul></div>
 <div class="card plan"><div class="for">One industry, one day</div><p class="price">a few dollars</p><p class="per">about 700 companies for $7</p>
 <ul><li>Every Fintech, Health or Developer Tools company in the benchmark, with who is accelerating and who is cutting.</li><li>The first $5 a month is free on any Apify account, so a small cut costs nothing.</li></ul></div>
 <div class="card plan"><div class="for">Every company, one day</div><p class="price">about $219</p><p class="per">one row per company, the whole benchmark</p>

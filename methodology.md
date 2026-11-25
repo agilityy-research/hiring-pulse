@@ -26,7 +26,7 @@ and what the numbers cannot tell you. If you want to quote a figure or build on 
 
 ## What each term means
 
-- **Daily read.** The set of open roles on a company's board at the time we read it that day. A role is identified by
+- **Daily read.** The set of open roles on a company's board at the time we read it that day (called a *snapshot* in the column names of the data). A role is identified by
   the vendor's job id, so a retitled role is still the same role.
 - **Opened and closed.** A role is *opened* the first day it appears and *closed* the first day it is gone. If a board
   returns an empty list after having had roles, we keep the previous day's list and record no closures, so a vendor

@@ -35,8 +35,8 @@ files are in the [GitHub repository](https://github.com/agilityy-research/hiring
 **Reading the early editions.** Daily collection of the full set of companies began on {{ site.coverage.daily_since }}, so the
 figures that need history (growth, roles opened and closed, days-to-fill and the movers) are computed, until
 {{ site.coverage.flows_from }}, only from the companies that already have 14 days of daily history. The figures that need
-only today's read (open roles, functions, AI/ML share, remote share, seniority, the largest boards) always cover every
-company in the benchmark. From {{ site.coverage.flows_from }} the history-based figures cover every company too, and the
+only today's read (open roles, functions, AI/ML share, remote share, seniority, the largest boards) cover every company
+in the benchmark that was read in the last three days. From {{ site.coverage.flows_from }} the history-based figures cover every company too, and the
 "since previous edition" columns and the trend chart lengthen with each edition. The definitions are in the
 [methodology]({{ '/methodology/' | relative_url }}).
 

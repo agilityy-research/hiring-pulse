@@ -22,7 +22,7 @@ purchases:
 
 - **A watch list of 100 companies, every day for a month:** 3,000 rows, about $30. Runs on a schedule into a sheet or Slack.
 - **One industry (about 700 companies) for one day:** 700 rows, about $7.
-- **Every company for one day:** 21,598 rows, about $219. This is the day the Monday report is computed from.
+- **Every company for one day:** about 21,600 rows, about $219. This is the day the Monday report is computed from.
 - **A small cut, to try it:** up to 500 rows, $0. Every Apify account has $5 of free usage a month.
 
 Spending above the free $5 needs an Apify plan, from $19 a month, paid to Apify. The whole history delivered to your
