@@ -47,14 +47,14 @@ permalink: /
 {%- assign hero = first | split: "**" | first %}
 <p class="hero">{{ hero }}</p>
 {%- endif %}
-<p class="sub">How we count: once a day we read the public job board of every startup and scale-up we have found on {{ site.coverage.vendors }}, and count every role that is open. Companies with more than 1,000 open roles and staffing agencies are left out, so the benchmark stays about startups. <a href="{{ '/methodology/' | relative_url }}">The method</a>.</p>
+<p class="sub">How we count: once a day we read the public job board (the list of open roles behind the careers page) of every startup and scale-up we have found on {{ site.coverage.vendors }}, and count every role that is open. Employers with more than 1,000 open roles, staffing agencies and franchises are left out, so the benchmark stays about startups. <a href="{{ '/methodology/' | relative_url }}">How the numbers are measured</a>.</p>
 <div class="actions"><a class="btn" href="{{ '/reports/latest/' | relative_url }}">Read this week's report</a>
 <a class="btn alt" href="#data">Get the daily data</a></div>
 {%- if v_open != "" %}
 <div class="stats" aria-label="Headline numbers">
 <div class="stat"><b>{{ v_open }}</b><span>open roles</span>{% if d_open != "" and d_open != "—" %}<span class="delta">{{ d_open }} vs previous edition</span>{% endif %}</div>
-{%- if v_companies != "" %}<div class="stat"><b>{{ v_companies }}</b><span>job boards read this week</span></div>{% endif %}
-{%- if v_fill != "" and v_fill != "—" %}<div class="stat"><b>{{ v_fill }}</b><span>median days a role stays posted</span>{% if d_fill != "" and d_fill != "—" %}<span class="delta">{{ d_fill }}</span>{% endif %}</div>{% endif %}
+{%- if v_companies != "" %}<div class="stat"><b>{{ v_companies }}</b><span>companies in the benchmark</span></div>{% endif %}
+{%- if v_fill != "" and v_fill != "—" %}<div class="stat"><b>{{ v_fill }}</b><span>median days a role stays posted before it closes</span>{% if d_fill != "" and d_fill != "—" %}<span class="delta">{{ d_fill }}</span>{% endif %}</div>{% endif %}
 {%- if v_remote != "" and v_remote != "—" %}<div class="stat"><b>{{ v_remote }}</b><span>of open roles are remote</span>{% if d_remote != "" and d_remote != "—" %}<span class="delta">{{ d_remote }}</span>{% endif %}</div>{% endif %}
 </div>
 {%- endif %}
@@ -63,21 +63,21 @@ permalink: /
 <section class="band" id="lookup"><div class="wrap">
 <p class="eyebrow">Try the data</p>
 <h2>Look up a company</h2>
-<p class="sub muted">This week's numbers for any of the {{ v_companies | default: site.coverage.companies }} companies in the benchmark.</p>
+<p class="sub muted">This week's numbers for any company in the benchmark: open roles, the change over recent weeks, and the share of AI/ML and remote roles.</p>
 <div class="search" id="company-search" hidden>
 <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
 <label class="visually-hidden" for="company-q">Search a company</label>
 <input id="company-q" type="search" autocomplete="off" spellcheck="false" placeholder="Type a company name, e.g. Fivetran">
 <ul class="search-results" id="company-results" aria-live="polite"></ul>
 </div>
-<p class="muted small" id="company-search-note" hidden>One line per company, from this week's edition. The roles themselves and the day-by-day history are in the <a href="#data">daily data</a>. Not finding a company? <a href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">Request it</a>.</p>
+<p class="muted small" id="company-search-note" hidden>One line per company, from this week's edition. The roles themselves and the day-by-day history are in the <a href="#data">daily data</a>, which you can buy below. Not finding a company? <a href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">Request it</a>.</p>
 <noscript><p class="muted small">The search needs JavaScript; the same preview rows are in <a href="{{ '/reports/data/companies.json' | relative_url }}">reports/data/companies.json</a>.</p></noscript>
 </div></section>
 
 <section class="band tint"><div class="wrap">
 <p class="eyebrow">Key findings</p>
 <h2>What the data says this week</h2>
-<p class="sub muted">Six findings, one per theme. The full report has the tables behind each.</p>
+<p class="sub muted">Six findings, one per theme, with a line on what each means for your team. The full report has the tables behind each.</p>
 {%- assign labels = "Demand|Momentum|Movers|Time to fill|AI/ML roles|Remote work" | split: "|" -%}
 {%- if items.size > 1 %}
 <div class="insights">
@@ -123,7 +123,7 @@ permalink: /
 {%- endfor %}
 </div>
 {%- if headline != "" %}
-<details><summary>All headline numbers and the change since the previous edition</summary>
+<details><summary>All headline numbers, with the change since the previous edition</summary>
 {{ headline | markdownify }}
 </details>
 {%- endif %}
@@ -135,29 +135,29 @@ permalink: /
 <section class="band tint" id="data"><div class="wrap">
 <p class="eyebrow">The data behind the report</p>
 <h2>The report is free. The daily data is pay as you go.</h2>
-<p class="sub muted">Every number on this page comes from one row per company per day. Those rows are sold on the Apify Store at $0.01 each, with no subscription and nothing to install. You pick the companies, the days and the filters, and pay for the rows you receive.</p>
+<p class="sub muted">Every number on this page comes from one row per company per day (a "company-day"). You buy those rows on the Apify Store at $0.01 each, with no subscription and nothing to install: pick the companies, the days and the filters, and pay for the rows you receive. The product is called the Hiring Signals Feed.</p>
 <div class="plans">
 <div class="card plan"><div class="for">A watch list</div><p class="price">about $30</p><p class="per">100 companies, every day, for a month</p>
-<ul><li>Your competitors, your accounts or your portfolio: open roles, roles opened and closed, growth, a one-word signal, every morning.</li><li>Runs on a schedule into Google Sheets, Slack or a webhook.</li></ul></div>
+<ul><li>Your competitors, your accounts or your portfolio: open roles, roles opened and closed, growth, and a one-word signal (accelerating, steady or contracting), every morning.</li><li>Runs on a schedule into Google Sheets, Slack or a webhook.</li></ul></div>
 <div class="card plan"><div class="for">One industry, one day</div><p class="price">a few dollars</p><p class="per">about 700 companies for $7</p>
 <ul><li>Every Fintech, Health or Developer Tools company in the benchmark, with who is accelerating and who is cutting.</li><li>The first $5 a month is free on any Apify account, so a small cut costs nothing.</li></ul></div>
-<div class="card plan"><div class="for">Every company, one day</div><p class="price">about $219</p><p class="per">21,598 rows, the whole benchmark</p>
-<ul><li>The full day the Monday report is computed from, as CSV, JSON or Excel.</li><li>Each role opened or closed that day is available too, at $0.004 per event.</li></ul></div>
+<div class="card plan"><div class="for">Every company, one day</div><p class="price">about $219</p><p class="per">one row per company, the whole benchmark</p>
+<ul><li>The full day the Monday report is computed from, as CSV, JSON or Excel.</li><li>Each role opened or closed that day is available too, one row per role, at $0.004 each.</li></ul></div>
 </div>
-<div class="actions"><a class="btn" href="https://apify.com/agilityy/hiring-signals-feed">Open the feed on the Apify Store</a>
+<div class="actions"><a class="btn" href="https://apify.com/agilityy/hiring-signals-feed">Buy on the Apify Store</a>
 <a class="btn alt" href="{{ '/get-the-data/' | relative_url }}">How buying works</a>
 <a class="btn alt" href="{{ '/samples/daily_signals_sample.csv' | relative_url }}" download>Free sample CSV</a></div>
-<p class="muted small">Apify bills you and adds a few cents of compute per run; spending above the free $5 needs an Apify plan, from $19 a month. Tracking companies outside the benchmark, a one-company lookup and funded-company leads are in the <a href="{{ '/data/' | relative_url }}">catalogue</a>. Need the whole history in your own warehouse? <a href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">Ask</a>.</p>
+<p class="muted small">Apify bills you and adds a few cents of computing cost per run; spending above the free $5 needs an Apify plan, from $19 a month. Want to track companies outside the benchmark, check one company, or find companies that just raised money? Those are separate products on <a href="{{ '/data/' | relative_url }}">products and prices</a>. Need the whole history in your own warehouse? <a href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">Ask us</a>.</p>
 </div></section>
 
 <section class="band"><div class="wrap">
 <p class="eyebrow">Method</p>
 <h2>Why these numbers hold up</h2>
 <div class="facts">
-<div class="card"><h3>First-party</h3><p>Every company's own job board ({{ site.coverage.vendors }}) is read once a day. A role is counted once, from the source; a closure is observed the day the posting disappears.</p></div>
-<div class="card"><h3>Broad</h3><p>{{ site.coverage.companies }} companies found by scanning the public job boards of six hiring systems: mostly venture-backed technology companies. Employers with more than 1,000 open roles, staffing agencies and franchises are left out of the benchmark. The exact count of the day is in every report.</p></div>
-<div class="card"><h3>Comparable</h3><p>Functions, seniority and the AI/ML flag come from one fixed title taxonomy, so this week's figures compare with last week's and with yours.</p></div>
-<div class="card"><h3>Checked daily</h3><p>Fetch rate, day-over-day stability, a careers-page re-count and a re-fetch of closed roles are measured every day with alert thresholds. <a href="{{ '/methodology/' | relative_url }}">The methodology</a> lists them.</p></div>
+<div class="card"><h3>First-party</h3><p>Every company's own job board ({{ site.coverage.vendors }}) is read once a day. A role is counted once, from the source; a role counts as closed the day its posting disappears.</p></div>
+<div class="card"><h3>Broad</h3><p>{{ site.coverage.companies }} companies found by scanning the public job boards of six hiring systems: mostly venture-backed technology companies. Employers with more than 1,000 open roles, staffing agencies and franchises are left out of the benchmark but stay in the daily data. The exact count of the day is in every report.</p></div>
+<div class="card"><h3>Comparable</h3><p>Function, seniority and the AI/ML flag are assigned from the job title with one fixed list of keywords, so this week's figures compare with last week's and with yours.</p></div>
+<div class="card"><h3>Checked daily</h3><p>Every day we measure how many boards answered, how much the totals moved, whether a sample of boards matches its careers page, and whether closed roles are really gone. <a href="{{ '/methodology/' | relative_url }}">The methodology</a> lists the checks and their alert thresholds.</p></div>
 </div>
 </div></section>
 
@@ -166,16 +166,16 @@ permalink: /
 <h2>Who uses it, and for what</h2>
 <div class="grid four">
 <div class="card"><h3>Talent and recruiting teams</h3><p class="muted small">Which functions are hard to fill and how long roles stay open, by industry and company size; which competitors are opening or closing teams.</p></div>
-<div class="card"><h3>Sales and revenue operations</h3><p class="muted small">A company that just doubled its open roles is buying tools, office space, payroll and insurance. Hiring momentum per company is the earliest public budget signal.</p></div>
+<div class="card"><h3>Sales and revenue operations</h3><p class="muted small">A company that just doubled its open roles is buying tools, office space, payroll and insurance. Hiring momentum per company is the earliest public sign of a budget.</p></div>
 <div class="card"><h3>Investors and analysts</h3><p class="muted small">Portfolio and sector hiring trends from first-party reads, not aggregator counts: roles opened and closed, net growth, AI/ML share, remote share, week after week.</p></div>
-<div class="card"><h3>Journalists and researchers</h3><p class="muted small">Citable numbers every Monday under CC BY 4.0, with the method published. A custom cut of the history for a story or a paper is usually free with attribution.</p></div>
+<div class="card"><h3>Journalists and researchers</h3><p class="muted small">Citable numbers every Monday under CC BY 4.0, with the method published. A custom cut of the history for a story or a paper is usually free with attribution: <a href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">ask us</a>.</p></div>
 </div>
 </div></section>
 
 <section class="band navy"><div class="wrap">
 <p class="eyebrow">Stay current</p>
 <h2>A new edition every Monday at 07:00 UTC</h2>
-<p class="sub muted">Free to quote under CC BY 4.0: cite as "Agilityy Research, Hiring Pulse, {{ latest_date }}" with a link to this site.</p>
+<p class="sub muted">Free to read and to quote under CC BY 4.0: cite as "Agilityy Research, Hiring Pulse, {{ latest_date }}" with a link to this site.</p>
 {%- if site.newsletter_action != "" %}
 <div class="signup">
 <b>Get it in your inbox.</b> Key findings, charts and the movers; no other mail.
