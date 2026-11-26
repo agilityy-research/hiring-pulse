@@ -33,7 +33,7 @@ newsletter_email_field: "email"
 # Leave beta_signup_action empty and nothing about the beta is shown anywhere. To switch it on, paste the Kit form's
 # action URL (https://app.kit.com/forms/<FORM_ID>/subscriptions); the three field names must match Kit's embed code.
 # beta_end must be the same date as the private repo's BETA_END variable (the e-mails print it).
-beta_signup_action: ""
+beta_signup_action: "https://app.kit.com/forms/10247967/subscriptions"
 beta_email_field: "email_address"
 beta_role_field: "fields[role]"
 beta_use_field: "fields[use_case]"
