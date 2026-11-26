@@ -40,7 +40,7 @@ bands: true
 <span class="rk">{{ c.rank }}</span>
 <span class="name">{{ c.label }}{% if c.note != "" %}*{% endif %}<small>{{ c.country | replace: "United States", "US" | replace: "United Kingdom", "UK" | replace: "Netherlands", "NL" }} · {{ c.companiesT }} cos.</small></span>
 <span class="cityrow"><span class="track"><span class="fill" style="width:{{ c.barPct }}%"></span></span>{% if md.knownPct %}<span class="mix" aria-label="Remote {{ md.remote }}%, hybrid {{ md.hybrid }}%, on-site {{ md.onsite }}%"><i class="r" style="width:{{ md.remote }}%"></i><i class="h" style="width:{{ md.hybrid }}%"></i><i class="o" style="width:{{ md.onsite }}%"></i></span>{% else %}<span></span>{% endif %}</span>
-<span class="val">{{ c.rolesT }}{% if c.change != nil %}<small>{{ c.changeT }}</small>{% elsif c.newRoles > 0 %}<small>+{{ c.newRolesT }} new</small>{% endif %}</span>
+<span class="val">{{ c.rolesT }}{% if c.change != nil %}<small>{{ c.changeT }}</small>{% elsif cov.newReady and c.newRoles > 0 %}<small>+{{ c.newRolesT }} new</small>{% endif %}</span>
 </li>
 {%- endfor %}
 </ol>
@@ -48,18 +48,18 @@ bands: true
 </div>
 {%- assign noted = m.cities | where_exp: "c", "c.note != ''" -%}
 {%- for c in noted %}<p class="note">* {{ c.label }}: {{ c.note }}; the postings do not say which.</p>{% endfor %}
-<p class="note">{% if m.comparable %}The small figure under each count is the change since the previous edition.{% else %}The small figure under each count is the roles first seen in the last {{ cov.newWindowDays }} days; the change since the previous edition appears from next Monday's edition.{% endif %} Hover or tap a row for the work-mode split.</p>
+<p class="note">{% if m.comparable %}The small figure under each count is the change since the previous edition.{% elsif cov.newReady %}The small figure under each count is the roles first seen in the last {{ cov.newWindowDays }} days.{% else %}Roles new this week and the change since the previous edition join this list once every company has more than a week of daily reads.{% endif %} Hover or tap a row for the work-mode split.</p>
 </div></section>
 
 <section class="band tint"><div class="wrap">
 <p class="eyebrow">By role</p>
 <h2>Where each function hires</h2>
-<p class="kicker">The top cities for every job function, as a share of that function's roles that name a city. Engineering clusters in a few hubs; sales, customer and operations roles spread wider.</p>
+<p class="kicker">The top cities for every job function, as a share of that function's roles that name a city.</p>
 <div class="dgrid three">
 {%- for f in m.byFunction %}
 <div class="panel">
 <h3>{{ f.function }}</h3>
-<p class="muted">{{ f.rolesT }} open roles{% if f.newRoles > 0 %}, {{ f.newRolesT }} new in {{ cov.newWindowDays }} days{% endif %}</p>
+<p class="muted">{{ f.rolesT }} open roles{% if cov.newReady and f.newRoles > 0 %}, {{ f.newRolesT }} new in {{ cov.newWindowDays }} days{% endif %}</p>
 <ol class="bars">
 {%- for c in f.cities %}
 <li title="{{ f.function }} in {{ c.label }}: {{ c.rolesT }} roles, {{ c.sharePct }}% of the function's roles with a city"><span class="name">{{ c.label }}</span><span class="track"><span class="fill" style="width:{{ c.barPct }}%"></span></span><span class="val">{{ c.rolesT }}<small>{{ c.sharePct }}%</small></span></li>
@@ -70,7 +70,7 @@ bands: true
 </div>
 </div></section>
 
-{%- if m.newCities.size > 2 and cov.newRoles > 500 %}
+{%- if cov.newReady and m.newCities.size > 2 %}
 <section class="band"><div class="wrap">
 <p class="eyebrow">Momentum</p>
 <h2>Where the new roles are</h2>
@@ -84,7 +84,7 @@ bands: true
 </div></section>
 {%- endif %}
 
-<section class="band{% if m.newCities.size > 2 and cov.newRoles > 500 %} tint{% endif %}"><div class="wrap">
+<section class="band{% if cov.newReady and m.newCities.size > 2 %} tint{% endif %}"><div class="wrap">
 <p class="eyebrow">Countries</p>
 <h2>The countries behind the roles, and how they work</h2>
 <p class="kicker">Open roles by country, the work-mode split of the roles that state one, and the share of roles that advertise pay. The share with pay follows the law: US states with pay-transparency rules lead.</p>
@@ -95,7 +95,7 @@ bands: true
 {%- for c in m.countries %}
 <tr><td>{{ c.country }}</td><td>{{ c.rolesT }}</td><td>{{ c.sharePct }}%</td>
 <td>{% if c.modes.knownPct %}<span class="mix" style="width:8rem;display:inline-flex;vertical-align:middle" aria-hidden="true"><i class="r" style="width:{{ c.modes.remote }}%"></i><i class="h" style="width:{{ c.modes.hybrid }}%"></i><i class="o" style="width:{{ c.modes.onsite }}%"></i></span> {{ c.modes.remote }} / {{ c.modes.hybrid }} / {{ c.modes.onsite }}%{% else %}—{% endif %}</td>
-<td>{{ c.modes.knownPct }}%</td><td>{{ c.payPct }}%</td></tr>
+<td>{{ c.modes.knownPct | default: 0 }}%</td><td>{{ c.payPct }}%</td></tr>
 {%- endfor %}
 </tbody></table>
 <p class="note">Across all open roles: {{ m.workMode.overall.remote }}% remote, {{ m.workMode.overall.hybrid }}% hybrid and {{ m.workMode.overall.onsite }}% on-site, among the {{ m.workMode.overall.knownPct }}% whose posting states it. Greenhouse and Personio boards have no work-mode field, so their roles count only when the title or location says it.</p>

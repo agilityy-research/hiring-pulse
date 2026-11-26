@@ -110,11 +110,11 @@ bands: true
 <section class="band{% if hourly and hourly.byFunction.size > 1 %} tint{% endif %}"><div class="wrap">
 <p class="eyebrow">Other currencies</p>
 <h2>Pay outside the US dollar</h2>
-<p class="kicker">Each currency and pay period is its own figure; nothing is converted. Functions appear where {{ m.pay.minRoles }} or more roles from {{ m.pay.minCompanies }} or more companies publish a range.</p>
+<p class="kicker">Each currency and pay period is its own figure; nothing is converted. Up to six functions and three cities per currency, each shown where {{ m.pay.minRoles }} or more roles from {{ m.pay.minCompanies }} or more companies publish a range.</p>
 <table><thead><tr><th>Currency, period</th><th>Group</th><th>Median</th><th>Middle half</th><th>Roles</th><th>Companies</th></tr></thead><tbody>
 {%- for x in others %}
 <tr><td><b>{{ x.currency }}</b> {{ x.periodWord }}</td><td>All roles</td><td>{{ x.all.medianText }}</td><td>{{ x.all.p25Text }} – {{ x.all.p75Text }}</td><td>{{ x.all.nT }}</td><td>{{ x.all.companiesT }}</td></tr>
-{%- for r in x.byFunction %}<tr><td></td><td>{{ r.name }}</td><td>{{ r.medianText }}</td><td>{{ r.p25Text }} – {{ r.p75Text }}</td><td>{{ r.nT }}</td><td>{{ r.companiesT }}</td></tr>{% endfor %}
+{%- for r in x.byFunction limit: 6 %}<tr><td></td><td>{{ r.name }}</td><td>{{ r.medianText }}</td><td>{{ r.p25Text }} – {{ r.p75Text }}</td><td>{{ r.nT }}</td><td>{{ r.companiesT }}</td></tr>{% endfor %}
 {%- for r in x.byCity limit: 3 %}<tr><td></td><td>{{ r.name }}</td><td>{{ r.medianText }}</td><td>{{ r.p25Text }} – {{ r.p75Text }}</td><td>{{ r.nT }}</td><td>{{ r.companiesT }}</td></tr>{% endfor %}
 {%- endfor %}
 </tbody></table>
