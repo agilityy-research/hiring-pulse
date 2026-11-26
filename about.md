@@ -32,7 +32,7 @@ has the prices. No advertising, no sponsored findings.
 For data requests, corrections, press and research questions, use the
 [request form](https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml) on GitHub
 (public) or send a private message through the [Apify Store profile](https://apify.com/agilityy). We answer within two
-working days.
+working days.{% if site.beta_signup_action != "" %} Beta subscribers can also reply to any of the daily e-mails.{% endif %}
 
 ## Next
 

@@ -1,0 +1,19 @@
+{%- comment -%}
+The free beta signup (daily files by e-mail). Rendered only when site.beta_signup_action is set (the Kit form's action
+URL, private repo RUNBOOK §12). Field names come from _config.yml so they can follow Kit's embed code.
+{%- endcomment -%}
+{%- if site.beta_signup_action != "" -%}
+<div class="beta card" id="beta">
+<p class="for">Free during the beta{% if site.beta_end != "" %}, until {{ site.beta_end | date: "%-d %B %Y" }}{% endif %}</p>
+<h3>Every company, every day, in your inbox</h3>
+<p class="muted small">Each morning by about 07:30 UTC: download links for that day's two CSV files, every tracked company, plus the six days before. Confirm your address from the e-mail we send, and the next morning's files are yours.</p>
+<form action="{{ site.beta_signup_action }}" method="post">
+<label><span>Work e-mail</span><input type="email" name="{{ site.beta_email_field | default: 'email_address' }}" autocomplete="email" required></label>
+<label><span>Your role</span><select name="{{ site.beta_role_field | default: 'fields[role]' }}" required>
+<option value="">Choose one</option><option>Sales or revenue operations</option><option>Recruiting or talent</option><option>Investor or analyst</option><option>Data or engineering</option><option>Journalist or researcher</option><option>Other</option></select></label>
+<label class="wide"><span>What would you use it for?</span><input type="text" name="{{ site.beta_use_field | default: 'fields[use_case]' }}" maxlength="300" placeholder="One line is plenty" required></label>
+<button type="submit" class="btn">Send me the daily files</button>
+</form>
+<p class="muted small">One e-mail a day, unsubscribe in one click. After the beta the full daily files will be $99 a month; you decide then. The files are for use inside your organisation. <a href="{{ '/privacy/' | relative_url }}">Privacy</a>.</p>
+</div>
+{%- endif -%}

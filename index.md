@@ -49,7 +49,7 @@ permalink: /
 {%- endif %}
 <p class="sub">How we count: once a day we read the public job board (the list of open roles behind the careers page) of every startup and scale-up we have found on {{ site.coverage.vendors }}, and count every role that is open. Employers with more than 1,000 open roles, staffing agencies and franchises are left out, so the benchmark stays about startups. <a href="{{ '/methodology/' | relative_url }}">How the numbers are measured</a>.</p>
 <div class="actions"><a class="btn" href="{{ '/reports/latest/' | relative_url }}">Read this week's report</a>
-<a class="btn alt" href="#data">Get the daily data</a></div>
+<a class="btn alt" href="#{% if site.beta_signup_action != "" %}beta{% else %}data{% endif %}">Get the daily data{% if site.beta_signup_action != "" %} free{% endif %}</a></div>
 {%- if v_open != "" %}
 <div class="stats" aria-label="Headline numbers">
 <div class="stat"><b>{{ v_open }}</b><span>open roles</span>{% if d_open != "" and d_open != "—" %}<span class="delta">{{ d_open }} vs previous edition</span>{% endif %}</div>
@@ -134,8 +134,15 @@ permalink: /
 
 <section class="band tint" id="data"><div class="wrap">
 <p class="eyebrow">The data behind the report</p>
+{%- if site.beta_signup_action != "" %}
+<h2>The report is free. During the beta, so is the daily data.</h2>
+<p class="sub muted">Every number on this page comes from one row per company per day (a "company-day"). Until {{ site.beta_end | date: "%-d %B %Y" }}, every company's rows for the day come free by e-mail, as two CSV files each morning. Afterwards the full daily files will be $99 a month. If you need filters, a 30-day window or an API call today, the same rows are on the Apify Store at $0.01 each, in a product called the Hiring Signals Feed.</p>
+{% include beta-signup.html %}
+<h3>Or pay per row on the Apify Store</h3>
+{%- else %}
 <h2>The report is free. The daily data is pay as you go{% if site.stripe_payment_link != "" %}, or $99 a month for all of it{% endif %}.</h2>
 <p class="sub muted">Every number on this page comes from one row per company per day (a "company-day"). You buy those rows on the Apify Store at $0.01 each, with no subscription and nothing to install: pick the companies, the days and the filters, and pay for the rows you receive. The product is called the Hiring Signals Feed.</p>
+{%- endif %}
 <div class="plans{% if site.stripe_payment_link != "" %} four{% endif %}">
 {%- if site.stripe_payment_link != "" %}
 <div class="card plan"><div class="for">Hiring Pulse Daily</div><p class="price">$99 a month</p><p class="per">every company, every day, no Apify account</p>
@@ -189,6 +196,9 @@ permalink: /
 <button type="submit">Subscribe</button>
 </form>
 </div>
+{%- endif %}
+{%- if site.beta_signup_action != "" %}
+<p class="muted">The data files behind it are free by e-mail during the beta: <a href="#beta">get every company's daily files</a>.</p>
 {%- endif %}
 <div class="actions"><a class="btn" href="{{ '/feed.xml' | relative_url }}">Subscribe with the Atom feed</a>
 <a class="btn alt" href="{{ '/reports/' | relative_url }}">Browse every edition</a>

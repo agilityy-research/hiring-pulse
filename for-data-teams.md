@@ -13,7 +13,9 @@ you build on: hiring-momentum signals for sales and investing, time-to-fill and 
 teams, labour-market research on early-stage companies. No personal data is collected; the sources are the job boards
 companies publish for their own careers pages.
 
-You can buy any day or 30-day window of it now, pay per row, on the
+{% if site.beta_signup_action != "" %}During the beta, every company's daily files are free by e-mail until
+{{ site.beta_end | date: "%-d %B %Y" }}: [sign up here]({{ '/get-the-data/' | relative_url }}#beta). {% endif %}You can
+also buy any day or 30-day window of it now, pay per row, on the
 [Hiring Signals Feed](https://apify.com/agilityy/hiring-signals-feed); [how to buy]({{ '/get-the-data/' | relative_url }})
 has the prices and the API calls. Daily collection began on {{ site.coverage.daily_since }}, so the history is short
 today and grows by one day every day.

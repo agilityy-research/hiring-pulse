@@ -29,6 +29,15 @@ coverage:
 # Kit, MailerLite and Beehiiv work the same way), paste the form's action URL here, and the site renders a signup box.
 newsletter_action: ""
 newsletter_email_field: "email"
+# Free beta: every company's daily files by e-mail, free until beta_end, then $99 a month (private repo RUNBOOK §12).
+# Leave beta_signup_action empty and nothing about the beta is shown anywhere. To switch it on, paste the Kit form's
+# action URL (https://app.kit.com/forms/<FORM_ID>/subscriptions); the three field names must match Kit's embed code.
+# beta_end must be the same date as the private repo's BETA_END variable (the e-mails print it).
+beta_signup_action: ""
+beta_email_field: "email_address"
+beta_role_field: "fields[role]"
+beta_use_field: "fields[use_case]"
+beta_end: "2027-01-31"
 # Hiring Pulse Daily: the flat plan ($99 a month, Stripe). Leave empty and the plan is not shown anywhere. Paste the
 # Stripe Payment Link URL here once the delivery Worker is deployed (private repo, RUNBOOK "Switching on Hiring Pulse Daily").
 stripe_payment_link: ""

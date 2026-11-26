@@ -8,6 +8,30 @@ dataset_name: "Hiring Pulse daily hiring signals and job events"
 ---
 # How to buy
 
+{% if site.beta_signup_action != "" %}
+<p id="beta-thanks" class="beta-thanks card"><b>Thanks.</b> Check your inbox for the confirmation e-mail and click its link; the next morning's files arrive by about 07:30 UTC. Nothing there? Look in the spam folder, or sign up again below.</p>
+
+## Free during the beta: every company's daily files by e-mail
+
+Until {{ site.beta_end | date: "%-d %B %Y" }}, the whole daily data is free. Sign up with a work e-mail and two short
+answers, confirm the address from the e-mail we send, and every morning you get:
+
+- **Two CSV files for the day**, every tracked company: `daily_signals` (one row per company: open roles, roles opened
+  and closed, growth, days-to-fill, function and seniority mix, AI/ML, remote and pay shares, a one-word signal) and
+  `job_events` (one row per role opened or closed). The columns are those of the
+  [free sample]({{ '/for-data-teams/' | relative_url }}#free-sample) plus location and pay fields.
+- **The six days before**, linked in the same e-mail. Every link works for 7 days, so a missed morning costs nothing.
+- **A short summary**: how many roles opened and closed, and which companies opened the most.
+
+Each e-mail ends with one question; replies reach us directly, and they decide what the paid version looks like. After
+the beta the full daily files will be $99 a month; we will write two weeks before the end date, and nothing is charged
+unless you choose to subscribe then.
+
+{% include beta-signup.html %}
+
+## Pay per row: the Apify Store
+
+{% endif %}
 The numbers in every report come from the daily data: one row per company per day (open roles, roles opened and
 closed, growth, days-to-fill, function and seniority mix, AI/ML and remote share, a one-word signal) and one row per
 role opened or closed. You buy those rows on the [Apify Store](https://apify.com/agilityy), in a product called the
@@ -106,6 +130,12 @@ assistants can run the same products through Apify's MCP server at `https://mcp.
   [Apify's terms](https://apify.com/terms-of-service); the rows you fetch are yours to use in your own analyses and products.
 - **Custom deliveries** (history cuts, files, a warehouse share) are licensed for internal use by the buying organisation. Raw rows may not be
   redistributed or resold; aggregates and derived metrics may be published with attribution to Agilityy Research.
+{%- if site.beta_signup_action != "" %}
+- **Free beta files** (by e-mail, until the beta end date) are licensed for internal use by the subscriber's
+  organisation. Raw rows may not be redistributed or resold; aggregates and derived metrics may be published with
+  attribution to Agilityy Research. Provided as is, read from public job boards once a day, with no guarantee that every
+  board answered on a given day. Unsubscribe at any time from any e-mail.
+{%- endif %}
 - **Support**: replies within two business days; a private channel on request.
 {%- if site.stripe_payment_link != "" %}
 - **Hiring Pulse Daily subscribers**: the files are licensed for internal use by the subscribing organisation; raw rows

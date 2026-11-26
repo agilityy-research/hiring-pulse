@@ -253,6 +253,17 @@ ol.steps li{margin:.35rem 0}
 .signup form{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.6rem}
 .signup input[type=email]{flex:1 1 14rem;font:inherit;padding:.6rem .85rem;border:1px solid transparent;border-radius:9px;background:#fff;color:#17202a}
 .signup button{font:inherit;font-weight:650;background:#fff;color:var(--navy-2);border:0;border-radius:9px;padding:.6rem 1rem;cursor:pointer}
+.beta{margin:1rem 0 1.2rem;border-color:var(--accent-2)}
+.beta .for{font-size:.82rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2);margin:0}
+.beta h3{margin:.25rem 0 .35rem}
+.beta form{display:grid;grid-template-columns:1fr 1fr;gap:.7rem 1rem;margin:.8rem 0 .6rem}
+.beta label{display:flex;flex-direction:column;gap:.25rem;font-size:.9rem;font-weight:600}
+.beta label.wide{grid-column:1/-1}
+.beta input,.beta select{font:inherit;font-weight:400;padding:.6rem .8rem;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--fg);width:100%;box-sizing:border-box}
+.beta input:focus,.beta select:focus{outline:2px solid var(--accent-2);border-color:transparent}
+.beta button{justify-self:start;cursor:pointer;font:inherit;font-weight:650}
+@media (max-width:640px){.beta form{grid-template-columns:1fr}}
+.beta-thanks{display:none;border-color:var(--pos)}.beta-thanks:target{display:block}
 .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 footer.site{border-top:1px solid var(--line);background:var(--tint);color:var(--muted);font-size:.92rem}
 footer.site .wrap{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:1.5rem;padding:2.2rem 1.1rem}
@@ -274,7 +285,7 @@ footer.site .legal{grid-column:1 / -1;border-top:1px solid var(--line);padding-t
 <a href="{{ '/for-data-teams/' | relative_url }}" {% if page.url == '/for-data-teams/' %}class="on"{% endif %}>For data teams</a>
 <a href="{{ '/methodology/' | relative_url }}" {% if page.url == '/methodology/' %}class="on"{% endif %}>Methodology</a>
 <a href="{{ '/about/' | relative_url }}" {% if page.url == '/about/' %}class="on"{% endif %}>About</a>
-<a class="cta" href="{{ '/get-the-data/' | relative_url }}">How to buy</a>
+{% if site.beta_signup_action != "" %}<a class="cta" href="{{ '/get-the-data/' | relative_url }}#beta">Get the data free</a>{% else %}<a class="cta" href="{{ '/get-the-data/' | relative_url }}">How to buy</a>{% endif %}
 </nav>
 <details class="menu"><summary>Menu</summary>
 <nav aria-label="Site">
