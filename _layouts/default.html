@@ -102,8 +102,8 @@
 </script>
 {%- endif %}
 <style>
-:root{--bg:#fff;--fg:#17202a;--muted:#5b6673;--line:#e2e7ed;--accent:#0f4c81;--accent-2:#2a78d6;--accent-bg:#eaf1f9;--card:#fff;--tint:#f4f7fb;--navy:#0b3a63;--navy-2:#0f4c81;--warm:#d95926;--pos:#1a7f37;--neg:#c9362a;--shadow:0 1px 2px rgba(16,24,40,.05),0 6px 20px -12px rgba(16,24,40,.18)}
-@media (prefers-color-scheme:dark){:root{--bg:#0e1116;--fg:#e8ebef;--muted:#9aa4b1;--line:#262d36;--accent:#7cb3ea;--accent-2:#5b9ce6;--accent-bg:#152235;--card:#151a21;--tint:#121820;--navy:#0b2f4f;--navy-2:#0f3d66;--pos:#5fcf7a;--neg:#f0836f;--shadow:none}}
+:root{--band:color-mix(in srgb,#2a78d6 35%,transparent);--bar:#2a78d6;--c-remote:#2a78d6;--c-hybrid:#1baf7a;--c-onsite:#eb6834;--bg:#fff;--fg:#17202a;--muted:#5b6673;--line:#e2e7ed;--accent:#0f4c81;--accent-2:#2a78d6;--accent-bg:#eaf1f9;--card:#fff;--tint:#f4f7fb;--navy:#0b3a63;--navy-2:#0f4c81;--warm:#d95926;--pos:#1a7f37;--neg:#c9362a;--shadow:0 1px 2px rgba(16,24,40,.05),0 6px 20px -12px rgba(16,24,40,.18)}
+@media (prefers-color-scheme:dark){:root{--band:color-mix(in srgb,#3987e5 58%,transparent);--bar:#3987e5;--c-remote:#3987e5;--c-hybrid:#199e70;--c-onsite:#d95926;--bg:#0e1116;--fg:#e8ebef;--muted:#9aa4b1;--line:#262d36;--accent:#7cb3ea;--accent-2:#5b9ce6;--accent-bg:#152235;--card:#151a21;--tint:#121820;--navy:#0b2f4f;--navy-2:#0f3d66;--pos:#5fcf7a;--neg:#f0836f;--shadow:none}}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;overflow-x:hidden}
 body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;overflow-x:clip}
@@ -136,7 +136,7 @@ details.menu summary{list-style:none;cursor:pointer;font-weight:600;padding:.4re
 details.menu summary::-webkit-details-marker{display:none}
 details.menu nav{position:absolute;left:0;right:0;top:100%;background:var(--bg);border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:0;padding:.4rem 1.1rem 1rem;box-shadow:var(--shadow)}
 details.menu nav a{padding:.65rem 0;border-bottom:1px solid var(--line);color:var(--fg);text-decoration:none;font-weight:500}
-@media (max-width:900px){nav.site{display:none}details.menu{display:block}}
+@media (max-width:1020px){nav.site{display:none}details.menu{display:block}}
 /* layout */
 main{display:block}
 main.narrow .wrap,main.report .wrap{max-width:52rem;padding-top:1.6rem;padding-bottom:3rem}
@@ -214,6 +214,45 @@ main.report #key-findings + ul{padding-left:1.2rem}
 main.report #key-findings + ul > li{font-size:1.04rem;margin:.9rem 0;line-height:1.5}
 main.report #key-findings + ul > li > ul{padding-left:0;margin:.25rem 0 0}
 main.report #key-findings + ul > li > ul > li{list-style:none;font-size:.93rem;color:var(--muted);margin:0}
+/* data pages (cities, pay, skills): bars, mixes and ranges drawn in HTML, so they read on a phone and follow dark mode */
+.dgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.2rem 2.4rem}
+.dgrid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:1000px){.dgrid.three{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){.dgrid,.dgrid.three{grid-template-columns:minmax(0,1fr)}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1rem 1.15rem;box-shadow:var(--shadow);min-width:0}
+.panel h3{margin:0 0 .15rem;font-size:1.02rem}
+.panel .muted{font-size:.86rem;margin:0 0 .4rem}
+.bars{list-style:none;padding:0;margin:.5rem 0 0;counter-reset:bar}
+.bars li{display:grid;grid-template-columns:minmax(5.5rem,9.5rem) minmax(0,1fr) auto;gap:.1rem .7rem;align-items:center;padding:.3rem 0;font-size:.94rem;border-bottom:1px solid var(--line)}
+.bars li:last-child{border-bottom:0}
+.bars.ranked li{grid-template-columns:1.6rem minmax(7rem,11.5rem) minmax(0,1fr) auto}
+.bars .rk{color:var(--muted);font-size:.82rem;font-variant-numeric:tabular-nums}
+.bars .name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:550}
+.bars .name small{display:block;font-weight:400;color:var(--muted);font-size:.78rem;line-height:1.2}
+.bars .track{height:.75rem}
+.bars .fill{display:block;height:100%;min-width:2px;background:var(--bar);border-radius:0 4px 4px 0}
+.bars .val{font-variant-numeric:tabular-nums;font-weight:650;text-align:right;white-space:nowrap}
+.bars .val small{display:block;font-weight:400;color:var(--muted);font-size:.78rem;text-align:right}
+.bars li:hover .fill{opacity:.8}
+.mix{display:flex;gap:2px;height:.75rem;min-width:4rem}
+.mix i{display:block;height:100%;min-width:0}
+.mix i:first-child{border-radius:4px 0 0 4px}.mix i:last-child{border-radius:0 4px 4px 0}
+.mix .r{background:var(--c-remote)}.mix .h{background:var(--c-hybrid)}.mix .o{background:var(--c-onsite)}
+.legend{display:flex;flex-wrap:wrap;gap:.2rem 1.1rem;font-size:.86rem;color:var(--muted);margin:.4rem 0}
+.legend i{display:inline-block;width:.75rem;height:.75rem;border-radius:3px;margin-right:.35rem;vertical-align:-1px}
+.legend .r{background:var(--c-remote)}.legend .h{background:var(--c-hybrid)}.legend .o{background:var(--c-onsite)}
+.legend .band{background:var(--band)}.legend .med{background:var(--bar);width:3px}
+.range{position:relative;height:1.1rem;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+.range .band{position:absolute;top:.25rem;height:.6rem;background:var(--band);border-radius:3px}
+.range .med{position:absolute;top:0;width:3px;height:1.1rem;margin-left:-1.5px;background:var(--bar);border-radius:2px}
+.scale{display:flex;justify-content:space-between;font-size:.76rem;color:var(--muted);margin:.1rem 0 0}
+.bars.pay li{grid-template-columns:minmax(6rem,10rem) minmax(0,1fr) 5.2rem}
+.cityrow{display:grid;grid-template-columns:minmax(0,1fr) 5.5rem;gap:.6rem;align-items:center}
+@media (max-width:480px){.bars li,.bars.ranked li{grid-template-columns:minmax(5rem,7.5rem) minmax(0,1fr) auto}.bars.ranked .rk{display:none}.bars.pay li{grid-template-columns:minmax(5rem,7.5rem) minmax(0,1fr) 4.6rem}}
+table.heat td.c{text-align:right;font-variant-numeric:tabular-nums}
+table.heat td small{color:var(--muted);font-size:.78rem;margin-left:.25rem}
+.kicker{font-size:.95rem;color:var(--muted);max-width:46rem}
+.note{font-size:.86rem;color:var(--muted)}
 /* pricing */
 .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1rem 0}
 .plans.four{grid-template-columns:repeat(2,1fr)}
@@ -280,16 +319,20 @@ footer.site .legal{grid-column:1 / -1;border-top:1px solid var(--line);padding-t
 <a class="brand" href="{{ '/' | relative_url }}"><span class="mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 22l6-7 5 4 9-11"/></svg></span>Hiring Pulse<small>by Agilityy Research</small></a>
 <nav class="site" aria-label="Site">
 <a href="{{ '/reports/latest/' | relative_url }}" {% if page.url == '/reports/latest/' %}class="on"{% endif %}>This week</a>
+<a href="{{ '/cities/' | relative_url }}" {% if page.url == '/cities/' %}class="on"{% endif %}>Cities</a>
+<a href="{{ '/pay/' | relative_url }}" {% if page.url == '/pay/' %}class="on"{% endif %}>Pay</a>
+<a href="{{ '/skills/' | relative_url }}" {% if page.url == '/skills/' %}class="on"{% endif %}>Skills</a>
 <a href="{{ '/reports/' | relative_url }}" {% if page.url == '/reports/' %}class="on"{% endif %}>Reports</a>
 <a href="{{ '/data/' | relative_url }}" {% if page.url == '/data/' %}class="on"{% endif %}>Products &amp; prices</a>
-<a href="{{ '/for-data-teams/' | relative_url }}" {% if page.url == '/for-data-teams/' %}class="on"{% endif %}>For data teams</a>
 <a href="{{ '/methodology/' | relative_url }}" {% if page.url == '/methodology/' %}class="on"{% endif %}>Methodology</a>
-<a href="{{ '/about/' | relative_url }}" {% if page.url == '/about/' %}class="on"{% endif %}>About</a>
 {% if site.beta_signup_action != "" %}<a class="cta" href="{{ '/get-the-data/' | relative_url }}#beta">Get the data free</a>{% else %}<a class="cta" href="{{ '/get-the-data/' | relative_url }}">How to buy</a>{% endif %}
 </nav>
 <details class="menu"><summary>Menu</summary>
 <nav aria-label="Site">
 <a href="{{ '/reports/latest/' | relative_url }}">This week's report</a>
+<a href="{{ '/cities/' | relative_url }}">Top hiring cities</a>
+<a href="{{ '/pay/' | relative_url }}">Pay by role and city</a>
+<a href="{{ '/skills/' | relative_url }}">Skills in demand</a>
 <a href="{{ '/reports/' | relative_url }}">All reports</a>
 <a href="{{ '/get-the-data/' | relative_url }}">How to buy</a>
 <a href="{{ '/data/' | relative_url }}">Products &amp; prices</a>
@@ -298,8 +341,9 @@ footer.site .legal{grid-column:1 / -1;border-top:1px solid var(--line);padding-t
 <a href="{{ '/about/' | relative_url }}">About</a>
 </nav></details>
 </div></header>
-<main class="{% if is_report %}report{% elsif page.url == "/" %}latest{% else %}narrow{% endif %}">
-{%- if is_report or page.url != "/" %}<div class="wrap">{% endif %}
+{%- assign bands = false -%}{%- if page.url == "/" or page.bands -%}{%- assign bands = true -%}{%- endif -%}
+<main class="{% if is_report %}report{% elsif bands %}latest{% else %}narrow{% endif %}">
+{%- if is_report or bands == false %}<div class="wrap">{% endif %}
 {%- if is_report %}
 <div class="report-nav">
 {%- if is_baseline %}<span><span class="tag">Baseline study</span> One-off 14-day readout on {{ site.coverage.yc_subset }} Y Combinator companies ({{ site.coverage.yc_subset_since }} to {{ report_date }}); not part of the weekly series.</span>
@@ -311,12 +355,12 @@ footer.site .legal{grid-column:1 / -1;border-top:1px solid var(--line);padding-t
 <a href="{{ '/feed.xml' | relative_url }}">Atom feed</a></div>
 {%- endif %}
 {{ content }}
-{%- if is_report or page.url != "/" %}</div>{% endif %}
+{%- if is_report or bands == false %}</div>{% endif %}
 </main>
 <footer class="site"><div class="wrap">
 <div><a class="brand" href="{{ '/' | relative_url }}" style="display:inline-flex;margin-bottom:.5rem"><span class="mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 22l6-7 5 4 9-11"/></svg></span>Hiring Pulse</a>
 <p style="margin:0;max-width:30rem">Weekly startup hiring benchmarks from the public job boards of {{ site.coverage.companies }} companies, read every day by Agilityy Research. The reports are free under <a href="https://creativecommons.org/licenses/by/4.0/" style="display:inline;text-decoration:underline">CC BY 4.0</a>; the daily data behind them is pay as you go.</p></div>
-<div><h4>Read</h4><a href="{{ '/reports/latest/' | relative_url }}">This week's report</a><a href="{{ '/reports/' | relative_url }}">All editions</a><a href="{{ '/methodology/' | relative_url }}">Methodology</a><a href="{{ '/feed.xml' | relative_url }}">Atom feed</a></div>
+<div><h4>Read</h4><a href="{{ '/reports/latest/' | relative_url }}">This week's report</a><a href="{{ '/cities/' | relative_url }}">Top hiring cities</a><a href="{{ '/pay/' | relative_url }}">Pay by role and city</a><a href="{{ '/skills/' | relative_url }}">Skills in demand</a><a href="{{ '/reports/' | relative_url }}">All editions</a><a href="{{ '/methodology/' | relative_url }}">Methodology</a><a href="{{ '/feed.xml' | relative_url }}">Atom feed</a></div>
 <div><h4>Buy</h4><a href="{{ '/get-the-data/' | relative_url }}">How to buy</a><a href="{{ '/data/' | relative_url }}">Products and prices</a><a href="{{ '/for-data-teams/' | relative_url }}">For data teams</a><a href="https://apify.com/agilityy">Apify Store</a></div>
 <div><h4>Company</h4><a href="{{ '/about/' | relative_url }}">About</a><a href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">Contact / request data</a><a href="https://github.com/agilityy-research/hiring-pulse">Source on GitHub</a><a href="{{ '/privacy/' | relative_url }}">Privacy</a></div>
 <div class="legal">© {{ site.time | date: "%Y" }} Agilityy Research. No cookies; cookieless page-view counting only: <a href="{{ '/privacy/' | relative_url }}" style="display:inline;text-decoration:underline">privacy</a>.</div>

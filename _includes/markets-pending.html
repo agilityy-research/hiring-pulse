@@ -1,0 +1,9 @@
+{%- comment -%} Shown while _data/markets.json is missing or not yet ready (the per-role city, pay and skills fields reach most roles over a few daily reads). {%- endcomment -%}
+{%- assign m = site.data.markets -%}
+<section class="band navy hero"><div class="wrap">
+<p class="eyebrow">{% if include.topic == "pay" %}Pay{% elsif include.topic == "skills" %}Skills{% else %}Cities{% endif %} · first figures with the Monday edition</p>
+<h1>{% if include.topic == "pay" %}What startups pay{% elsif include.topic == "skills" %}The skills startups hire for{% else %}Where startups are hiring{% endif %}</h1>
+<p class="hero">{% if include.topic == "pay" %}Advertised pay by role, seniority and city, from the roles whose posting publishes a range.{% elsif include.topic == "skills" %}The tools, languages and certifications named in the job descriptions, by function.{% else %}Open roles by city and by function, with the remote, hybrid and on-site split.{% endif %}</p>
+<p class="sub">Since 25 November 2026 every role we read carries its city, country, work mode and advertised pay. This page fills in from the weekly edition once most open roles have been re-read with those fields{% if m and m.date %} (last check {{ m.dateText }}: {{ m.coverage.cityPct }}% of roles with a city{% if include.topic == "skills" %}, {{ m.skills.coveragePct }}% of descriptions tagged with skills{% endif %}){% endif %}.</p>
+<div class="actions"><a class="btn" href="{{ '/reports/latest/' | relative_url }}">Read this week's report</a><a class="btn alt" href="{{ '/get-the-data/' | relative_url }}">Get the daily data</a></div>
+</div></section>

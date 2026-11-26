@@ -1,0 +1,122 @@
+---
+title: "Top hiring cities for startups, by role"
+description: >-
+  Where startups and scale-ups are hiring this week: open roles by city, the cities each function hires in, new roles,
+  remote, hybrid and on-site shares, and the countries behind them. Counted from 21,000+ public job boards, refreshed every Monday.
+permalink: /cities/
+layout: default
+bands: true
+---
+{%- assign m = site.data.markets -%}
+{%- if m and m.ready -%}
+{%- assign c1 = m.cities[0] -%}{%- assign c2 = m.cities[1] -%}{%- assign c3 = m.cities[2] -%}{%- assign cov = m.coverage -%}
+{%- assign us = m.countries | where: "country", "United States" | first -%}
+<section class="band navy hero"><div class="wrap">
+<p class="eyebrow">Cities · figures as of {{ m.dateText }} · refreshed every Monday</p>
+<h1>Where startups are hiring</h1>
+<p class="hero">{{ c1.label }} leads with {{ c1.rolesT }} open roles at {{ c1.companiesT }} companies, ahead of {{ c2.label }} ({{ c2.rolesT }}) and {{ c3.label }} ({{ c3.rolesT }}).</p>
+<p class="sub">Every open role on the job boards of {{ cov.companiesT }} startups and scale-ups, placed in the city its posting names. {{ cov.cityPct }}% of the {{ cov.rolesT }} open roles name one; the rest say only a country, a region or "remote".</p>
+<div class="stats" aria-label="City figures">
+<div class="stat"><b>{{ cov.citiesWithFiveCompaniesT }}</b><span>cities where 5 or more of the companies are hiring</span></div>
+<div class="stat"><b>{{ c1.rolesT }}</b><span>open roles in {{ c1.label }}, the largest startup job market</span></div>
+{%- if us %}<div class="stat"><b>{{ us.sharePct }}%</b><span>of open roles are in the United States</span></div>{% endif %}
+<div class="stat"><b>{{ m.workMode.overall.remote }}%</b><span>of roles that state a work mode are fully remote</span></div>
+</div>
+</div></section>
+
+<section class="band"><div class="wrap">
+<p class="eyebrow">Top {{ m.cities.size }}</p>
+<h2>The cities with the most open startup roles</h2>
+<p class="kicker">Open roles this week, the number of companies hiring there, and how the roles are offered. A city needs {{ cov.cityMinCompanies }} or more companies hiring to be listed, so a single large employer does not make a town a market.</p>
+<div class="legend" aria-hidden="true"><span><i class="r"></i>Remote</span><span><i class="h"></i>Hybrid</span><span><i class="o"></i>On-site</span><span>(share of the roles whose posting states it)</span></div>
+<div class="dgrid">
+{%- assign halves = m.cities.size | plus: 1 | divided_by: 2 -%}
+{%- for col in (0..1) %}
+<ol class="bars ranked" start="{{ col | times: halves | plus: 1 }}">
+{%- assign off = col | times: halves -%}
+{%- for c in m.cities limit: halves offset: off %}
+{%- assign md = c.modes -%}
+<li title="{{ c.label }}: {{ c.rolesT }} open roles at {{ c.companiesT }} companies{% if md.knownPct %}; remote {{ md.remote }}%, hybrid {{ md.hybrid }}%, on-site {{ md.onsite }}% of the {{ md.knownPct }}% that state a mode{% endif %}{% if c.change != nil %}; {{ c.changeT }} since the previous edition{% endif %}">
+<span class="rk">{{ c.rank }}</span>
+<span class="name">{{ c.label }}{% if c.note != "" %}*{% endif %}<small>{{ c.country | replace: "United States", "US" | replace: "United Kingdom", "UK" | replace: "Netherlands", "NL" }} · {{ c.companiesT }} cos.</small></span>
+<span class="cityrow"><span class="track"><span class="fill" style="width:{{ c.barPct }}%"></span></span>{% if md.knownPct %}<span class="mix" aria-label="Remote {{ md.remote }}%, hybrid {{ md.hybrid }}%, on-site {{ md.onsite }}%"><i class="r" style="width:{{ md.remote }}%"></i><i class="h" style="width:{{ md.hybrid }}%"></i><i class="o" style="width:{{ md.onsite }}%"></i></span>{% else %}<span></span>{% endif %}</span>
+<span class="val">{{ c.rolesT }}{% if c.change != nil %}<small>{{ c.changeT }}</small>{% elsif c.newRoles > 0 %}<small>+{{ c.newRolesT }} new</small>{% endif %}</span>
+</li>
+{%- endfor %}
+</ol>
+{%- endfor %}
+</div>
+{%- assign noted = m.cities | where_exp: "c", "c.note != ''" -%}
+{%- for c in noted %}<p class="note">* {{ c.label }}: {{ c.note }}; the postings do not say which.</p>{% endfor %}
+<p class="note">{% if m.comparable %}The small figure under each count is the change since the previous edition.{% else %}The small figure under each count is the roles first seen in the last {{ cov.newWindowDays }} days; the change since the previous edition appears from next Monday's edition.{% endif %} Hover or tap a row for the work-mode split.</p>
+</div></section>
+
+<section class="band tint"><div class="wrap">
+<p class="eyebrow">By role</p>
+<h2>Where each function hires</h2>
+<p class="kicker">The top cities for every job function, as a share of that function's roles that name a city. Engineering clusters in a few hubs; sales, customer and operations roles spread wider.</p>
+<div class="dgrid three">
+{%- for f in m.byFunction %}
+<div class="panel">
+<h3>{{ f.function }}</h3>
+<p class="muted">{{ f.rolesT }} open roles{% if f.newRoles > 0 %}, {{ f.newRolesT }} new in {{ cov.newWindowDays }} days{% endif %}</p>
+<ol class="bars">
+{%- for c in f.cities %}
+<li title="{{ f.function }} in {{ c.label }}: {{ c.rolesT }} roles, {{ c.sharePct }}% of the function's roles with a city"><span class="name">{{ c.label }}</span><span class="track"><span class="fill" style="width:{{ c.barPct }}%"></span></span><span class="val">{{ c.rolesT }}<small>{{ c.sharePct }}%</small></span></li>
+{%- endfor %}
+</ol>
+</div>
+{%- endfor %}
+</div>
+</div></section>
+
+{%- if m.newCities.size > 2 and cov.newRoles > 500 %}
+<section class="band"><div class="wrap">
+<p class="eyebrow">Momentum</p>
+<h2>Where the new roles are</h2>
+<p class="kicker">Roles first posted in the last {{ cov.newWindowDays }} days ({{ cov.newRolesT }} across {{ cov.newBaseRolesT }} open roles at companies tracked long enough to tell). Left: the most new roles. Right: new roles as a share of each city's open roles, among cities with 300 or more.</p>
+<div class="dgrid">
+<div class="panel"><h3>Most new roles</h3>
+<ol class="bars">{% for c in m.newCities limit: 10 %}<li><span class="name">{{ c.label }}<small>{{ c.country }}</small></span><span class="track"><span class="fill" style="width:{{ c.barPct }}%"></span></span><span class="val">{{ c.newRolesT }}<small>of {{ c.rolesT }}</small></span></li>{% endfor %}</ol></div>
+<div class="panel"><h3>Busiest relative to size</h3>
+<ol class="bars">{% for c in m.hotCities %}<li><span class="name">{{ c.label }}<small>{{ c.country }}</small></span><span class="track"><span class="fill" style="width:{{ c.barPct }}%"></span></span><span class="val">{{ c.newSharePct }}%<small>{{ c.newRolesT }} new</small></span></li>{% endfor %}</ol></div>
+</div>
+</div></section>
+{%- endif %}
+
+<section class="band{% if m.newCities.size > 2 and cov.newRoles > 500 %} tint{% endif %}"><div class="wrap">
+<p class="eyebrow">Countries</p>
+<h2>The countries behind the roles, and how they work</h2>
+<p class="kicker">Open roles by country, the work-mode split of the roles that state one, and the share of roles that advertise pay. The share with pay follows the law: US states with pay-transparency rules lead.</p>
+<div class="legend" aria-hidden="true"><span><i class="r"></i>Remote</span><span><i class="h"></i>Hybrid</span><span><i class="o"></i>On-site</span></div>
+<table>
+<thead><tr><th>Country</th><th>Open roles</th><th>Share</th><th>Remote / hybrid / on-site</th><th>Roles stating a mode</th><th>Roles with pay</th></tr></thead>
+<tbody>
+{%- for c in m.countries %}
+<tr><td>{{ c.country }}</td><td>{{ c.rolesT }}</td><td>{{ c.sharePct }}%</td>
+<td>{% if c.modes.knownPct %}<span class="mix" style="width:8rem;display:inline-flex;vertical-align:middle" aria-hidden="true"><i class="r" style="width:{{ c.modes.remote }}%"></i><i class="h" style="width:{{ c.modes.hybrid }}%"></i><i class="o" style="width:{{ c.modes.onsite }}%"></i></span> {{ c.modes.remote }} / {{ c.modes.hybrid }} / {{ c.modes.onsite }}%{% else %}—{% endif %}</td>
+<td>{{ c.modes.knownPct }}%</td><td>{{ c.payPct }}%</td></tr>
+{%- endfor %}
+</tbody></table>
+<p class="note">Across all open roles: {{ m.workMode.overall.remote }}% remote, {{ m.workMode.overall.hybrid }}% hybrid and {{ m.workMode.overall.onsite }}% on-site, among the {{ m.workMode.overall.knownPct }}% whose posting states it. Greenhouse and Personio boards have no work-mode field, so their roles count only when the title or location says it.</p>
+</div></section>
+
+<section class="band"><div class="wrap">
+<p class="eyebrow">How these numbers are made</p>
+<h2>What stands behind each figure</h2>
+<div class="facts">
+<div class="card"><h3>One role, one city</h3><p>A role counts once, in the first city its posting names. A posting listing five offices counts in the first.</p></div>
+<div class="card"><h3>Names cleaned</h3><p>Spellings of one city are merged (NYC and New York City, München and Munich). A city with no country takes the country most of its roles name.</p></div>
+<div class="card"><h3>Startups only</h3><p>Employers with more than 1,000 open roles, staffing agencies and franchises are left out, as in the weekly report.</p></div>
+<div class="card"><h3>Refreshed weekly</h3><p>Recomputed every Monday from that morning's read of every board. <a href="{{ '/methodology/' | relative_url }}">Methodology</a>.</p></div>
+</div>
+<details><summary>Coverage by job-board vendor</summary>
+<table><thead><tr><th>Vendor</th><th>Open roles</th><th>Names a city</th><th>Names a country</th><th>States a work mode</th><th>Advertises pay</th></tr></thead><tbody>
+{%- for v in cov.vendors %}<tr><td>{{ v.vendor | capitalize | replace: "Smartrecruiters", "SmartRecruiters" }}</td><td>{{ v.rolesT }}</td><td>{{ v.cityPct }}%</td><td>{{ v.countryPct }}%</td><td>{{ v.modePct }}%</td><td>{{ v.payPct }}%</td></tr>{% endfor %}
+</tbody></table></details>
+<div class="actions"><a class="btn" href="{{ '/get-the-data/' | relative_url }}">Get every role with its city</a><a class="btn alt" href="{{ '/pay/' | relative_url }}">Pay by role and city</a><a class="btn alt" href="{{ '/skills/' | relative_url }}">Skills in demand</a></div>
+<p class="note">The daily data has one row per role opened or closed, with its city, country, work mode and advertised pay. Figures here are free to quote under CC BY 4.0 with a link to this page.</p>
+</div></section>
+{%- else -%}
+{% include markets-pending.html topic="cities" %}
+{%- endif -%}

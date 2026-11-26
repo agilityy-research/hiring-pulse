@@ -132,6 +132,36 @@ permalink: /
 </div></section>
 {%- endif %}
 
+{%- assign mk = site.data.markets -%}
+{%- if mk and mk.ready %}
+{%- assign mkpay = mk.pay.tables | where: "period", "year" | first -%}
+<section class="band" id="explore"><div class="wrap">
+<p class="eyebrow">Explore the data · {{ mk.dateText }}</p>
+<h2>Where startups hire, what they pay, what they ask for</h2>
+<p class="sub muted">Every open role placed in its city, with its work mode, advertised pay and the skills its description names. Refreshed with each Monday edition.</p>
+<div class="dgrid three">
+<div class="panel"><h3><a href="{{ '/cities/' | relative_url }}">Top hiring cities</a></h3><p class="muted">Open roles, {{ mk.coverage.cityPct }}% of roles name a city</p>
+<ol class="bars">{% for c in mk.cities limit: 6 %}<li><span class="name">{{ c.label }}</span><span class="track"><span class="fill" style="width:{{ c.barPct }}%"></span></span><span class="val">{{ c.rolesT }}</span></li>{% endfor %}</ol>
+<p class="small"><a href="{{ '/cities/' | relative_url }}">All {{ mk.cities.size }} cities, by function and work mode</a></p></div>
+{%- if mkpay and mkpay.byFunction.size > 1 %}
+<div class="panel"><h3><a href="{{ '/pay/' | relative_url }}">Advertised pay</a></h3><p class="muted">Median salary, {{ mkpay.currency }} {{ mkpay.periodWord }}, {{ mkpay.all.nT }} ranges</p>
+<ol class="bars pay">{% for r in mkpay.byFunction limit: 6 %}<li title="{{ r.name }}: median {{ r.medianText }}, middle half {{ r.p25Text }} to {{ r.p75Text }}, {{ r.nT }} roles"><span class="name">{{ r.name }}</span><span class="range"><span class="band" style="left:{{ r.leftPct }}%;width:{{ r.widthPct }}%"></span><span class="med" style="left:{{ r.medPct }}%"></span></span><span class="val">{{ r.medianText }}</span></li>{% endfor %}</ol>
+<p class="small"><a href="{{ '/pay/' | relative_url }}">Pay by seniority and city</a></p></div>
+{%- endif %}
+{%- if mk.skills.ready %}
+<div class="panel"><h3><a href="{{ '/skills/' | relative_url }}">Skills in demand</a></h3><p class="muted">Share of job descriptions naming each</p>
+<ol class="bars">{% for k in mk.skills.top limit: 6 %}<li><span class="name">{{ k.name }}</span><span class="track"><span class="fill" style="width:{{ k.barPct }}%"></span></span><span class="val">{{ k.sharePct }}%</span></li>{% endfor %}</ol>
+<p class="small"><a href="{{ '/skills/' | relative_url }}">Top skills by function</a></p></div>
+{%- else %}
+<div class="panel"><h3><a href="{{ '/skills/' | relative_url }}">How roles are offered</a></h3><p class="muted">Among roles that state a work mode</p>
+{%- assign wm = mk.workMode.overall %}
+<ol class="bars"><li><span class="name">Remote</span><span class="track"><span class="fill" style="width:{{ wm.remote }}%"></span></span><span class="val">{{ wm.remote }}%</span></li><li><span class="name">Hybrid</span><span class="track"><span class="fill" style="width:{{ wm.hybrid }}%"></span></span><span class="val">{{ wm.hybrid }}%</span></li><li><span class="name">On-site</span><span class="track"><span class="fill" style="width:{{ wm.onsite }}%"></span></span><span class="val">{{ wm.onsite }}%</span></li></ol>
+<p class="small">Skills from the job descriptions join here once every description has been read ({{ mk.skills.coveragePct }}% so far).</p></div>
+{%- endif %}
+</div>
+</div></section>
+{%- endif %}
+
 <section class="band tint" id="data"><div class="wrap">
 <p class="eyebrow">The data behind the report</p>
 {%- if site.beta_signup_action != "" %}

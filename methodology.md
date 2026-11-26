@@ -84,6 +84,32 @@ open roles, a size very few startups reach. Every edition states how many compan
 introduced on 2026-11-24 after the first full edition listed Domino's, AECOM and two staffing agencies among the largest
 "startup" boards.
 
+## Cities, work mode, pay and skills
+
+Since 25 November 2026 every role we read carries the city and country its posting names, its work mode, its advertised
+pay range and the skills its description names. The [cities]({{ '/cities/' | relative_url }}), [pay]({{ '/pay/' | relative_url }})
+and [skills]({{ '/skills/' | relative_url }}) pages are recomputed with every Monday edition, over the same companies as the benchmark.
+
+- **City.** Taken from the vendor's structured address where there is one, otherwise from the location text. A role counts
+  once, in the first city its posting names. Spellings of one city are merged (NYC and New York City, München and Munich); a
+  city written without a country takes the country most of its other roles name. A city is listed only when five or more
+  companies are hiring there. "Washington" combines Washington, DC with postings that name only Washington State, because
+  the postings do not say which.
+- **Work mode.** Remote, hybrid or on-site from the vendor's field (Lever, Ashby, SmartRecruiters, Recruitee) or, where the
+  vendor has none (Greenhouse, Personio), from words in the title or location. Shares are of the roles that state a mode; the
+  pages say how many do.
+- **New roles.** First seen (or posted, where the vendor publishes a date) in the last seven days, counted only at companies
+  we have read for longer than that.
+- **Pay.** The range the posting advertises, not offers or pay received. Each role counts at the midpoint of its range.
+  Currencies and pay periods are never converted: salaries, hourly wages and monthly pay are separate figures. The same
+  title and range posted several times by one company counts once. A figure needs 30 roles from 8 companies, and no single
+  company may supply more than half of it; ranges outside plausible bounds for their period (a bonus or a budget read as
+  pay) are dropped. About a sixth to a quarter of open roles advertise pay, mostly at US employers in states with
+  pay-transparency laws, so the pay figures describe the companies that publish pay.
+- **Skills.** Each description is matched against one fixed vocabulary of about 480 terms (languages, frameworks, cloud and
+  data platforms, business tools, methods, certifications, licences and spoken languages); short or ambiguous names match
+  only in their exact form. The skills page is published once nine in ten descriptions have been read with the vocabulary.
+
 ## What the numbers cannot tell you
 
 - Only companies on the six vendors are covered. Companies with a custom careers site, or on Workday, iCIMS,
@@ -91,6 +117,7 @@ introduced on 2026-11-24 after the first full edition listed Domino's, AECOM and
 - A posting is not a hire. Days-to-fill measures how long a role stays advertised.
 - Titles are classified by keywords; unusual titles land in "Other".
 - Industry and company-size breakdowns exist only for the Y Combinator subset, where the public directory provides them.
+- Pay is what a posting advertises, and only some postings advertise it; cities are the first one a posting names.
 - Daily history on the full set of companies starts on {{ site.coverage.daily_since }} ({{ site.coverage.companies_before }} companies) and
   {{ site.coverage.companies_since }} ({{ site.coverage.companies }}); the {{ site.coverage.yc_subset }}-company YC subset was collected
   from {{ site.coverage.yc_subset_since }}. The history-based figures for every company therefore fill in through December 2026.

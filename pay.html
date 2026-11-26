@@ -1,0 +1,138 @@
+---
+title: "What startups pay: advertised salaries by role, seniority and city"
+description: >-
+  Advertised startup pay this week: median salary and the middle half of the range by job function, seniority and city,
+  from the roles whose posting publishes a range. Every figure with its sample size. Refreshed every Monday.
+permalink: /pay/
+layout: default
+bands: true
+---
+{%- assign m = site.data.markets -%}
+{%- assign tables = m.pay.tables -%}
+{%- assign t = tables | where: "period", "year" | first -%}
+{%- if m and m.ready and t and t.byFunction.size > 1 -%}
+{%- assign cov = m.coverage -%}
+{%- assign hourly = tables | where: "currency", t.currency | where: "period", "hour" | first -%}
+{%- assign top_fn = t.byFunction | where_exp: "r", "r.name != 'Other'" | sort: "median" | reverse | first -%}
+{%- assign top_city = t.byCity | first -%}
+{%- assign staff = t.bySeniority | where: "name", "Staff/Principal" | first -%}
+{%- assign entry = t.bySeniority | where: "name", "Entry" | first -%}
+<section class="band navy hero"><div class="wrap">
+<p class="eyebrow">Pay · figures as of {{ m.dateText }} · refreshed every Monday</p>
+<h1>What startups pay</h1>
+<p class="hero">The typical advertised startup salary is {{ t.all.medianText }} {{ t.periodWord }} ({{ t.currency }}); the middle half of roles pays between {{ t.all.p25Text }} and {{ t.all.p75Text }}.</p>
+<p class="sub">From {{ t.all.nT }} {{ t.currency }} salary ranges published by {{ t.all.companiesT }} companies. {{ cov.payPct }}% of all open roles advertise pay, most of them in US states whose pay-transparency laws require a range in the posting. Each role counts at the midpoint of its range.</p>
+<div class="stats" aria-label="Pay figures">
+<div class="stat"><b>{{ t.all.medianText }}</b><span>median advertised salary, {{ t.all.nT }} roles</span></div>
+<div class="stat"><b>{{ top_fn.medianText }}</b><span>{{ top_fn.name }}, the best-paid function</span></div>
+{%- if staff and entry %}<div class="stat"><b>{{ entry.medianText }} → {{ staff.medianText }}</b><span>entry level to staff or principal</span></div>{% endif %}
+{%- if top_city %}<div class="stat"><b>{{ top_city.medianText }}</b><span>median in {{ top_city.name }}, {{ top_city.nT }} roles</span></div>{% endif %}
+</div>
+</div></section>
+
+{%- capture legend %}<div class="legend" aria-hidden="true"><span><i class="band"></i>Middle half of roles (25th to 75th percentile)</span><span><i class="med"></i>Median</span></div>{% endcapture -%}
+
+<section class="band"><div class="wrap">
+<p class="eyebrow">By function</p>
+<h2>Salary by job function</h2>
+<p class="kicker">Median advertised salary {{ t.periodWord }} in {{ t.currency }}, with the range the middle half of roles falls in. All bars share one scale, {{ t.scaleMin }} to {{ t.scaleMax }}.</p>
+{{ legend }}
+<div class="dgrid">
+<div>
+<ol class="bars pay">
+{%- for r in t.byFunction %}
+<li title="{{ r.name }}: median {{ r.medianText }}, middle half {{ r.p25Text }} to {{ r.p75Text }}; {{ r.nT }} roles at {{ r.companiesT }} companies"><span class="name">{{ r.name }}<small>{{ r.nT }} roles · {{ r.companiesT }} cos.</small></span><span class="range"><span class="band" style="left:{{ r.leftPct }}%;width:{{ r.widthPct }}%"></span><span class="med" style="left:{{ r.medPct }}%"></span></span><span class="val">{{ r.medianText }}<small>{{ r.p25Text }}–{{ r.p75Text }}</small></span></li>
+{%- endfor %}
+</ol>
+<div class="scale"><span>{{ t.scaleMin }}</span><span>{{ t.scaleMax }}</span></div>
+</div>
+<div>
+<h3>By seniority</h3>
+<p class="muted small">From the job title: "Mid" is every title without a level word.</p>
+<ol class="bars pay">
+{%- for r in t.bySeniority %}
+<li title="{{ r.name }}: median {{ r.medianText }}, middle half {{ r.p25Text }} to {{ r.p75Text }}; {{ r.nT }} roles"><span class="name">{{ r.name }}<small>{{ r.nT }} roles</small></span><span class="range"><span class="band" style="left:{{ r.leftPct }}%;width:{{ r.widthPct }}%"></span><span class="med" style="left:{{ r.medPct }}%"></span></span><span class="val">{{ r.medianText }}<small>{{ r.p25Text }}–{{ r.p75Text }}</small></span></li>
+{%- endfor %}
+</ol>
+<div class="scale"><span>{{ t.scaleMin }}</span><span>{{ t.scaleMax }}</span></div>
+</div>
+</div>
+</div></section>
+
+{%- if t.byCity.size > 2 %}
+<section class="band tint"><div class="wrap">
+<p class="eyebrow">By city</p>
+<h2>Salary by city</h2>
+<p class="kicker">The same {{ t.currency }} salaries, by the city the posting names. Cities differ in their mix of roles as well as in pay; the table below compares like with like.</p>
+{{ legend }}
+<div class="dgrid">
+{%- assign halves = t.byCity.size | plus: 1 | divided_by: 2 -%}
+{%- for col in (0..1) %}{%- assign off = col | times: halves %}
+<div><ol class="bars pay">
+{%- for r in t.byCity limit: halves offset: off %}
+<li title="{{ r.name }}: median {{ r.medianText }}, middle half {{ r.p25Text }} to {{ r.p75Text }}; {{ r.nT }} roles at {{ r.companiesT }} companies"><span class="name">{{ r.name }}<small>{{ r.nT }} roles · {{ r.companiesT }} cos.</small></span><span class="range"><span class="band" style="left:{{ r.leftPct }}%;width:{{ r.widthPct }}%"></span><span class="med" style="left:{{ r.medPct }}%"></span></span><span class="val">{{ r.medianText }}<small>{{ r.p25Text }}–{{ r.p75Text }}</small></span></li>
+{%- endfor %}
+</ol><div class="scale"><span>{{ t.scaleMin }}</span><span>{{ t.scaleMax }}</span></div></div>
+{%- endfor %}
+</div>
+{%- if t.cityFunction.rows.size > 1 %}
+<h3 style="margin-top:2rem">Median salary by city and function</h3>
+<p class="muted small">{{ t.currency }} {{ t.periodWord }}; the small figure is the number of roles. A blank cell has fewer than {{ m.pay.minRoles }} roles or {{ m.pay.minCompanies }} companies.</p>
+<table class="heat"><thead><tr><th>City</th>{% for f in t.cityFunction.functions %}<th>{{ f }}</th>{% endfor %}</tr></thead><tbody>
+{%- for row in t.cityFunction.rows %}<tr><td>{{ row.city }}</td>{% for cell in row.cells %}<td class="c">{% if cell %}{{ cell.medianText }}<small>{{ cell.nT }}</small>{% else %}<span class="muted">·</span>{% endif %}</td>{% endfor %}</tr>{% endfor %}
+</tbody></table>
+{%- endif %}
+</div></section>
+{%- endif %}
+
+{%- if hourly and hourly.byFunction.size > 1 %}
+<section class="band"><div class="wrap">
+<p class="eyebrow">Hourly roles</p>
+<h2>Hourly wages</h2>
+<p class="kicker">Roles advertised at an hourly rate are kept apart from salaries, never converted: {{ hourly.all.nT }} {{ hourly.currency }} hourly ranges at {{ hourly.all.companiesT }} companies, median {{ hourly.all.medianText }} {{ hourly.periodWord }}, middle half {{ hourly.all.p25Text }} to {{ hourly.all.p75Text }}.</p>
+{{ legend }}
+<div class="dgrid"><div>
+<ol class="bars pay">
+{%- for r in hourly.byFunction %}
+<li title="{{ r.name }}: median {{ r.medianText }} an hour; {{ r.nT }} roles"><span class="name">{{ r.name }}<small>{{ r.nT }} roles · {{ r.companiesT }} cos.</small></span><span class="range"><span class="band" style="left:{{ r.leftPct }}%;width:{{ r.widthPct }}%"></span><span class="med" style="left:{{ r.medPct }}%"></span></span><span class="val">{{ r.medianText }}<small>{{ r.p25Text }}–{{ r.p75Text }}</small></span></li>
+{%- endfor %}
+</ol><div class="scale"><span>{{ hourly.scaleMin }}</span><span>{{ hourly.scaleMax }}</span></div></div>
+{%- if hourly.bySeniority.size > 1 %}<div><h3>By seniority</h3><ol class="bars pay">
+{%- for r in hourly.bySeniority %}<li><span class="name">{{ r.name }}<small>{{ r.nT }} roles</small></span><span class="range"><span class="band" style="left:{{ r.leftPct }}%;width:{{ r.widthPct }}%"></span><span class="med" style="left:{{ r.medPct }}%"></span></span><span class="val">{{ r.medianText }}<small>{{ r.p25Text }}–{{ r.p75Text }}</small></span></li>{% endfor %}
+</ol><div class="scale"><span>{{ hourly.scaleMin }}</span><span>{{ hourly.scaleMax }}</span></div></div>{% endif %}
+</div>
+</div></section>
+{%- endif %}
+
+{%- assign others = "" | split: "" -%}
+{%- for x in tables -%}{%- unless x.key == t.key or hourly and x.key == hourly.key -%}{%- assign others = others | push: x -%}{%- endunless -%}{%- endfor -%}
+{%- if others.size > 0 %}
+<section class="band{% if hourly and hourly.byFunction.size > 1 %} tint{% endif %}"><div class="wrap">
+<p class="eyebrow">Other currencies</p>
+<h2>Pay outside the US dollar</h2>
+<p class="kicker">Each currency and pay period is its own figure; nothing is converted. Functions appear where {{ m.pay.minRoles }} or more roles from {{ m.pay.minCompanies }} or more companies publish a range.</p>
+<table><thead><tr><th>Currency, period</th><th>Group</th><th>Median</th><th>Middle half</th><th>Roles</th><th>Companies</th></tr></thead><tbody>
+{%- for x in others %}
+<tr><td><b>{{ x.currency }}</b> {{ x.periodWord }}</td><td>All roles</td><td>{{ x.all.medianText }}</td><td>{{ x.all.p25Text }} – {{ x.all.p75Text }}</td><td>{{ x.all.nT }}</td><td>{{ x.all.companiesT }}</td></tr>
+{%- for r in x.byFunction %}<tr><td></td><td>{{ r.name }}</td><td>{{ r.medianText }}</td><td>{{ r.p25Text }} – {{ r.p75Text }}</td><td>{{ r.nT }}</td><td>{{ r.companiesT }}</td></tr>{% endfor %}
+{%- for r in x.byCity limit: 3 %}<tr><td></td><td>{{ r.name }}</td><td>{{ r.medianText }}</td><td>{{ r.p25Text }} – {{ r.p75Text }}</td><td>{{ r.nT }}</td><td>{{ r.companiesT }}</td></tr>{% endfor %}
+{%- endfor %}
+</tbody></table>
+</div></section>
+{%- endif %}
+
+<section class="band"><div class="wrap">
+<p class="eyebrow">How to read these numbers</p>
+<h2>Advertised pay, counted carefully</h2>
+<div class="facts">
+<div class="card"><h3>What the posting says</h3><p>The range the employer publishes, not offers or pay received. Each role counts at the midpoint of its range, or at the one figure given.</p></div>
+<div class="card"><h3>No mixing</h3><p>Currencies and periods are never converted into each other: salaries, hourly wages and monthly pay are separate figures.</p></div>
+<div class="card"><h3>Duplicates count once</h3><p>The same title and range posted many times by one company counts once (once per city in the city figures).</p></div>
+<div class="card"><h3>Minimum sample</h3><p>A figure needs {{ m.pay.minRoles }} roles from {{ m.pay.minCompanies }} companies, and no company may supply more than half of it. Below that, the cell is left blank.</p></div>
+</div>
+<p class="note">{{ cov.withPayT }} of {{ cov.rolesT }} open roles ({{ cov.payPct }}%) advertise pay; {{ cov.payRejectedT }} ranges outside plausible bounds for their period (a bonus or a budget read as pay) are dropped. Pay is published mostly by US employers on Greenhouse, Lever and Ashby; SmartRecruiters' job lists and Personio never carry it, so this page describes the companies that publish pay, mostly in the US. Seniority comes from words in the job title. <a href="{{ '/methodology/' | relative_url }}">Methodology</a>.</p>
+<div class="actions"><a class="btn" href="{{ '/get-the-data/' | relative_url }}">Get every role with its pay range</a><a class="btn alt" href="{{ '/cities/' | relative_url }}">Top hiring cities</a><a class="btn alt" href="{{ '/skills/' | relative_url }}">Skills in demand</a></div>
+</div></section>
+{%- else -%}
+{% include markets-pending.html topic="pay" %}
+{%- endif -%}

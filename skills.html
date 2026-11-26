@@ -1,0 +1,95 @@
+---
+title: "Skills in demand at startups: tools, languages and certifications by role"
+description: >-
+  The skills startups ask for this week: the tools, programming languages, platforms and certifications named in the
+  job descriptions of open roles, overall and by function, plus how the roles are offered. Refreshed every Monday.
+permalink: /skills/
+layout: default
+bands: true
+---
+{%- assign m = site.data.markets -%}
+{%- if m and m.ready and m.skills.ready -%}
+{%- assign s = m.skills -%}{%- assign s1 = s.top[0] -%}{%- assign s2 = s.top[1] -%}{%- assign s3 = s.top[2] -%}
+{%- assign full = m.employment.types | where: "type", "full_time" | first -%}
+<section class="band navy hero"><div class="wrap">
+<p class="eyebrow">Skills · figures as of {{ m.dateText }} · refreshed every Monday</p>
+<h1>The skills startups hire for</h1>
+<p class="hero">{{ s1.name }} is named in {{ s1.sharePct }}% of startup job descriptions this week, then {{ s2.name }} ({{ s2.sharePct }}%) and {{ s3.name }} ({{ s3.sharePct }}%).</p>
+<p class="sub">Read from the full text of {{ s.taggedT }} job descriptions against one fixed vocabulary of tools, languages, platforms, methods and certifications, so the counts compare week to week.</p>
+<div class="stats" aria-label="Skill figures">
+<div class="stat"><b>{{ s.taggedT }}</b><span>job descriptions read</span></div>
+<div class="stat"><b>{{ s1.sharePct }}%</b><span>ask for {{ s1.name }}</span></div>
+{%- if full %}<div class="stat"><b>{{ full.sharePct }}%</b><span>of roles with a stated contract are full-time</span></div>{% endif %}
+<div class="stat"><b>{{ m.workMode.overall.remote }}%</b><span>of roles that state a work mode are remote</span></div>
+</div>
+</div></section>
+
+<section class="band"><div class="wrap">
+<p class="eyebrow">Top {{ s.top.size }}</p>
+<h2>The most requested skills</h2>
+<p class="kicker">Share of job descriptions that name each skill. A description can name many.</p>
+<div class="dgrid">
+{%- assign halves = s.top.size | plus: 1 | divided_by: 2 -%}
+{%- for col in (0..1) %}{%- assign off = col | times: halves %}
+<ol class="bars ranked">
+{%- for k in s.top limit: halves offset: off %}
+<li title="{{ k.name }}: {{ k.rolesT }} descriptions, {{ k.sharePct }}%"><span class="rk">{{ forloop.index | plus: off }}</span><span class="name">{{ k.name }}</span><span class="track"><span class="fill" style="width:{{ k.barPct }}%"></span></span><span class="val">{{ k.sharePct }}%<small>{{ k.rolesT }}</small></span></li>
+{%- endfor %}
+</ol>
+{%- endfor %}
+</div>
+</div></section>
+
+<section class="band tint"><div class="wrap">
+<p class="eyebrow">By role</p>
+<h2>What each function asks for</h2>
+<p class="kicker">The eight skills named most often in each function's job descriptions, as a share of that function's descriptions.</p>
+<div class="dgrid three">
+{%- for f in s.byFunction %}
+{%- assign mx = f.skills[0].roles -%}
+<div class="panel"><h3>{{ f.function }}</h3><p class="muted">{{ f.taggedRolesT }} descriptions</p>
+<ol class="bars">{% for k in f.skills %}<li><span class="name">{{ k.name }}</span><span class="track"><span class="fill" style="width:{{ k.roles | times: 100.0 | divided_by: mx }}%"></span></span><span class="val">{{ k.sharePct }}%</span></li>{% endfor %}</ol>
+</div>
+{%- endfor %}
+</div>
+</div></section>
+
+<section class="band"><div class="wrap">
+<p class="eyebrow">Beyond tools</p>
+<h2>Languages, licences and visas</h2>
+<p class="kicker">What job descriptions require besides tools: a spoken language, a certification or licence, and what they say about visa sponsorship.</p>
+<div class="dgrid">
+{%- if s.languages.size > 0 %}<div class="panel"><h3>Spoken languages asked for</h3><p class="muted">Share of all job descriptions</p>
+<ol class="bars">{% for k in s.languages limit: 8 %}<li><span class="name">{{ k.name }}</span><span class="track"><span class="fill" style="width:{{ k.barPct }}%"></span></span><span class="val">{{ k.sharePct }}%<small>{{ k.rolesT }}</small></span></li>{% endfor %}</ol></div>{% endif %}
+{%- if s.certifications.size > 0 %}<div class="panel"><h3>Certifications and licences</h3><p class="muted">Share of all job descriptions</p>
+<ol class="bars">{% for k in s.certifications limit: 8 %}<li><span class="name">{{ k.name }}</span><span class="track"><span class="fill" style="width:{{ k.barPct }}%"></span></span><span class="val">{{ k.sharePct }}%<small>{{ k.rolesT }}</small></span></li>{% endfor %}</ol></div>{% endif %}
+</div>
+<p class="note">Visas: {{ s.visa["no-sponsorship"] }}% of job descriptions say the company will not sponsor a visa, {{ s.visa["sponsorship-available"] }}% say it will; the rest do not say. {{ s.clearancePct }}% require a security clearance.</p>
+</div></section>
+
+<section class="band tint"><div class="wrap">
+<p class="eyebrow">How roles are offered</p>
+<h2>Work mode by function, and contract types</h2>
+<div class="legend" aria-hidden="true"><span><i class="r"></i>Remote</span><span><i class="h"></i>Hybrid</span><span><i class="o"></i>On-site</span><span>(share of the roles whose posting states it)</span></div>
+<div class="dgrid">
+<div><ol class="bars">
+{%- for f in m.workMode.byFunction %}{%- assign md = f.modes -%}
+<li title="{{ f.function }}: remote {{ md.remote }}%, hybrid {{ md.hybrid }}%, on-site {{ md.onsite }}%, of the {{ md.knownPct }}% that state a mode"><span class="name">{{ f.function }}<small>{{ f.rolesT }} roles</small></span><span class="mix"><i class="r" style="width:{{ md.remote }}%"></i><i class="h" style="width:{{ md.hybrid }}%"></i><i class="o" style="width:{{ md.onsite }}%"></i></span><span class="val">{{ md.remote }}%<small>remote</small></span></li>
+{%- endfor %}
+</ol></div>
+<div class="panel"><h3>Contract types</h3><p class="muted">Among the {{ m.employment.knownPct }}% of roles whose posting states one</p>
+{%- assign emx = m.employment.types[0].sharePct -%}
+<ol class="bars">{% for e in m.employment.types %}<li><span class="name">{{ e.type | replace: "_", "-" | capitalize }}</span><span class="track"><span class="fill" style="width:{{ e.sharePct | times: 100.0 | divided_by: emx }}%"></span></span><span class="val">{{ e.sharePct }}%<small>{{ e.rolesT }}</small></span></li>{% endfor %}</ol>
+</div>
+</div>
+</div></section>
+
+<section class="band"><div class="wrap">
+<p class="eyebrow">How these numbers are made</p>
+<h2>One vocabulary, every description</h2>
+<p class="kicker">Each job description is matched against a fixed list of about 480 terms (programming languages, frameworks, cloud and data platforms, business tools, methods, certifications, licences and spoken languages). Short or ambiguous names (Go, R, C) match only in their exact form, so "go to market" is not Go. A skill counts once per description. Roles whose board publishes no description (some Personio and SmartRecruiters boards) are not in these shares; {{ s.coveragePct }}% of the roles with a description are tagged this week. <a href="{{ '/methodology/' | relative_url }}">Methodology</a>.</p>
+<div class="actions"><a class="btn" href="{{ '/get-the-data/' | relative_url }}">Get every role with its skills</a><a class="btn alt" href="{{ '/cities/' | relative_url }}">Top hiring cities</a><a class="btn alt" href="{{ '/pay/' | relative_url }}">Pay by role and city</a></div>
+</div></section>
+{%- else -%}
+{% include markets-pending.html topic="skills" %}
+{%- endif -%}
