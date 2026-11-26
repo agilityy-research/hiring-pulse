@@ -21,7 +21,7 @@ answers, confirm the address from the e-mail we send, and every morning you get:
   `job_events` (one row per role opened or closed). The columns are those of the
   [free sample]({{ '/for-data-teams/' | relative_url }}#free-sample) plus location and pay fields.
 - **The six days before**, linked in the same e-mail. Every link works for 7 days, so a missed morning costs nothing.
-- **A short summary**: how many roles opened and closed, and which companies opened the most.
+- **Who moved**: the companies that added and cut the most roles since the day before.
 
 Each e-mail ends with one question; replies reach us directly, and they decide what the paid version looks like. After
 the beta the full daily files will be $99 a month; we will write two weeks before the end date, and nothing is charged
