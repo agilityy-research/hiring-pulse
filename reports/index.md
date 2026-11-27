@@ -6,7 +6,7 @@ permalink: /reports/
 ---
 # All weekly reports
 
-A new edition every Monday at 07:00 UTC, computed from that morning's read of {{ site.coverage.companies }} company job
+A new edition every Monday, before the US workday starts, built from that morning's read of {{ site.coverage.companies }} company job
 boards. Each edition gives you the week's key findings and charts first, then the headline numbers with their change since
 the previous edition, then the full tables by function, industry, company size and job-board vendor. Every edition is free
 to read and to quote under CC BY 4.0.
@@ -24,19 +24,19 @@ files are in the [GitHub repository](https://github.com/agilityy-research/hiring
 {%- if weekly.size > 0 %}
 <ul class="report-list">
 {%- for p in weekly %}
-<li><a href="{{ p.url | relative_url }}">Hiring Pulse {{ p.name | remove: ".md" }}</a>{% if forloop.first %} <span class="muted small">(latest)</span>{% endif %}</li>
+<li><a href="{{ p.url | relative_url }}">Hiring Pulse {{ p.name | remove: ".md" | date: "%-d %B %Y" }}</a>{% if forloop.first %} <span class="muted small">(latest)</span>{% endif %}</li>
 {%- endfor %}
 </ul>
 {%- else %}
-<p>The first Monday edition is published next Monday at 07:00 UTC. Until then the
+<p>The first Monday edition is published next Monday. Until then the
 <a href="{{ '/reports/latest/' | relative_url }}">preview edition</a> shows the current numbers in the same format.</p>
 {%- endif %}
 
-**Reading the early editions.** Daily collection of the full set of companies began on {{ site.coverage.daily_since }}, so the
+**Reading the early editions.** Daily collection of the full set of companies began on {{ site.coverage.daily_since | date: "%-d %B %Y" }}, so the
 figures that need history (growth, roles opened and closed, days-to-fill and the movers) are computed, until
-{{ site.coverage.flows_from }}, only from the companies that already have 14 days of daily history. The figures that need
+{{ site.coverage.flows_from | date: "%-d %B %Y" }}, only from the companies that already have 14 days of daily history. The figures that need
 only today's read (open roles, functions, AI/ML share, remote share, seniority, the largest boards) cover every company
-in the benchmark that was read in the last three days. From {{ site.coverage.flows_from }} the history-based figures cover every company too, and the
+in the benchmark that was read in the last three days. From {{ site.coverage.flows_from | date: "%-d %B %Y" }} the history-based figures cover every company too, and the
 "since previous edition" columns and the trend chart lengthen with each edition. The definitions are in the
 [methodology]({{ '/methodology/' | relative_url }}).
 
@@ -44,13 +44,13 @@ in the benchmark that was read in the last three days. From {{ site.coverage.flo
 
 {%- for p in baselines %}
 <ul class="report-list">
-<li><a href="{{ p.url | relative_url }}">Hiring Pulse {{ p.name | remove: ".md" }}</a> <span class="tag">Baseline study</span>
-<span class="muted small">A 14-day readout on {{ site.coverage.yc_subset }} Y Combinator companies, collected daily from {{ site.coverage.yc_subset_since }}: the first look at
+<li><a href="{{ p.url | relative_url }}">Hiring Pulse {{ p.name | remove: ".md" | date: "%-d %B %Y" }}</a> <span class="tag">Baseline study</span>
+<span class="muted small">A 14-day readout on {{ site.coverage.yc_subset }} Y Combinator companies, collected daily from {{ site.coverage.yc_subset_since | date: "%-d %B %Y" }}: the first look at
 growth, days-to-fill and movers before the full set of companies had history. Not part of the weekly series.</span></li>
 </ul>
 {%- endfor %}
 
 ## Want the numbers behind a report?
 
-Each edition is computed from one row per company per day. Every company's
-numbers for the day are free by e-mail during the beta: [get the data]({{ '/get-the-data/' | relative_url }}).
+Each edition is built from a daily record for each company. Every company's
+records for the day are free by e-mail during the beta: [get the data]({{ '/get-the-data/' | relative_url }}).

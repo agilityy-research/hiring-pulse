@@ -13,16 +13,16 @@ and closed, growth, days-to-fill, function and seniority mix, AI/ML, remote and 
 line per role opened or closed.
 
 {% if site.beta_signup_action != "" %}
-<p id="beta-thanks" class="beta-thanks card"><b>Thanks.</b> Check your inbox for the confirmation e-mail and click its link; the next morning's files arrive by about 07:30 UTC. Nothing there? Look in the spam folder, or sign up again below.</p>
+<p id="beta-thanks" class="beta-thanks card"><b>Thanks.</b> Check your inbox for the confirmation e-mail and click its link; the next morning's files arrive before the US workday starts. Nothing there? Look in the spam folder, or sign up again below.</p>
 
 ## Free during the beta: every company's daily files by e-mail
 
 Until {{ site.beta_end | date: "%-d %B %Y" }}, the whole daily data is free. Sign up with a work e-mail and two short
 answers, confirm the address from the e-mail we send, and every morning you get:
 
-- **Two CSV files for the day**, every tracked company: `daily_signals` (one row per company: open roles, roles opened
-  and closed, growth, days-to-fill, function and seniority mix, AI/ML, remote and pay shares, a one-word signal) and
-  `job_events` (one row per role opened or closed). The columns are those of the
+- **Two spreadsheets for the day** that open in Excel or Google Sheets. One has a line per company: open roles, roles
+  opened and closed, growth, how long roles stay open, the mix of functions and seniority, the AI/ML, remote and pay
+  shares, and a one-word signal (accelerating, steady, flat or contracting). The other has a line per role opened or closed. The columns are those of the
   [free sample]({{ '/for-data-teams/' | relative_url }}#free-sample) plus location and pay fields.
 - **The six days before**, linked in the same e-mail. Every link works for 7 days, so a missed morning costs nothing.
 - **Who moved**: the companies that added and cut the most roles since the day before.
@@ -43,7 +43,7 @@ cancel any time.
 - Every tracked company, every day: `daily_signals` (one row per company per day) and `job_events` (one row per role
   opened or closed), the latest day plus the previous 30 days, as CSV and JSON, the same columns as the
   [free sample]({{ '/for-data-teams/' | relative_url }}#free-sample).
-- New files by 07:00 UTC. One URL per file with your key, for `curl`, Python, a scheduled job or a Google Sheet
+- New files every morning, before the US workday starts. One URL per file with your key, for `curl`, Python, a scheduled job or a Google Sheet
   (`IMPORTDATA`). The key is shown once after checkout; the welcome page has copy-paste examples.
 - Card, invoices and cancellation in the Stripe customer portal, linked from the welcome page.
 

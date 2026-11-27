@@ -6,7 +6,7 @@ permalink: /about/
 ---
 # About
 
-**Hiring Pulse** is a weekly benchmark of startup hiring, published every Monday at 07:00 UTC by **Agilityy Research**,
+**Hiring Pulse** is a weekly benchmark of startup hiring, published every Monday by **Agilityy Research**,
 an independent data publisher. Every day we read the public job boards of {{ site.coverage.companies }} companies
 ({{ site.coverage.vendors }}), record every role that opens or closes, and turn that into numbers you can compare week
 after week: open roles by function and industry, who is growing and who is cutting, how long roles stay open, the AI/ML
@@ -24,7 +24,7 @@ has the details. No advertising, no sponsored findings.
 - **Published method.** The [methodology]({{ '/methodology/' | relative_url }}) describes every definition and the daily
   quality checks; every report's source file is on [GitHub](https://github.com/agilityy-research/hiring-pulse).
 - **Fixed definitions.** The function, seniority and AI/ML classification does not change between editions without a note.
-- **No tracking.** The site sets no cookies; one cookieless beacon counts page views ([privacy]({{ '/privacy/' | relative_url }})).
+- **No tracking.** The site sets no cookies; a privacy-friendly counter tallies page views and nothing else ([privacy]({{ '/privacy/' | relative_url }})).
 
 ## Contact
 
