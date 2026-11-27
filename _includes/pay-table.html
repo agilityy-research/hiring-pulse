@@ -1,18 +1,20 @@
 {%- comment -%}
-  One pay table: a row per group with a bar on the table's rounded scale (labelled ticks above it), then the figures.
+  One pay table: a row per group with a bar on the table's rounded scale (labelled ticks above it; where the bar column is narrow only the first, middle and last labels show), then the figures.
   The bar runs from the typical bottom to the typical top of the posted ranges; the dark mark is the median role
   (counted at the middle of its range); the ring is the high end: the range top that one role in ten reaches or exceeds.
   Params: rows, ticks, head (first column heading), unit ("a year" / "an hour"), labels (optional "Key=Label|..." map),
-  key (row field holding the name; default "name"), caption.
+  key (row field holding the name; default "name"), caption. A row's note (Washington) becomes an asterisk and a
+  footnote under the table, so it does not widen the name column.
 {%- endcomment -%}
 {%- assign key = include.key | default: "name" -%}
 {%- assign pairs = include.labels | default: "" | split: "|" -%}
+{%- assign foot = "" -%}
 <div class="paywrap"><table class="paytab">
 {%- if include.caption %}<caption>{{ include.caption }}</caption>{% endif %}
-<thead><tr><th scope="col" class="nm">{{ include.head }}</th><th scope="col" class="barcol"><span class="sr">Range on a scale</span><span class="axis" aria-hidden="true">{% for t in include.ticks %}{% assign odd = forloop.index0 | modulo: 2 %}<span style="left:{{ t.pct }}%"{% if odd == 1 %} class="odd"{% endif %}>{{ t.text }}</span>{% endfor %}</span></th><th scope="col" class="num">Median</th><th scope="col" class="num">Typical range</th><th scope="col" class="num" title="The range top that 1 role in 10 reaches or exceeds">High end</th></tr></thead>
+<thead><tr><th scope="col" class="nm">{{ include.head }}</th><th scope="col" class="barcol"><span class="sr">Range on a scale</span><span class="axis" aria-hidden="true">{% assign t_last = include.ticks.size | minus: 1 %}{% assign t_mid = -1 %}{% assign t_even = t_last | modulo: 2 %}{% if t_even == 0 %}{% assign t_mid = t_last | divided_by: 2 %}{% endif %}{% for t in include.ticks %}<span style="left:{{ t.pct }}%"{% if forloop.first or forloop.last or forloop.index0 == t_mid %} class="k"{% endif %}>{{ t.text }}</span>{% endfor %}</span></th><th scope="col" class="num">Median</th><th scope="col" class="num">Typical range</th><th scope="col" class="num" title="The range top that 1 role in 10 reaches or exceeds">High end</th></tr></thead>
 <tbody>
 {%- for r in include.rows %}{% assign nm = r[key] %}{% if nm != "Other" %}
 {%- assign label = nm -%}{%- for pr in pairs -%}{%- assign kv = pr | split: "=" -%}{%- if kv[0] == nm -%}{%- assign label = kv[1] -%}{%- endif -%}{%- endfor %}
-<tr><th scope="row" class="nm">{{ label }}<small>{{ r.nT }} roles · {{ r.companiesT }} companies{% assign nt = r.note | default: "" %}{% if nt != "" %}<br>{{ nt }}{% endif %}</small></th><td class="barcol"><span class="range" aria-hidden="true">{% for t in include.ticks %}<i class="grid" style="left:{{ t.pct }}%"></i>{% endfor %}<span class="band" style="left:{{ r.lowPct }}%;width:{{ r.widthPct }}%"></span><span class="med" style="left:{{ r.medPct }}%"></span><span class="top" style="left:{{ r.topPct }}%"></span></span></td><td class="num med-v">{{ r.medianText }}</td><td class="num">{{ r.medianMinText }}–{{ r.medianMaxText }}</td><td class="num">{{ r.topP90Text }}+</td></tr>
+<tr><th scope="row" class="nm">{% assign nt = r.note | default: "" %}{{ label }}{% if nt != "" %}*{% capture foot %}{{ foot }}<p class="small muted">* {{ nt }}.</p>{% endcapture %}{% endif %}<small>{{ r.nT }} roles · {{ r.companiesT }} companies</small></th><td class="barcol"><span class="range" aria-hidden="true">{% for t in include.ticks %}<i class="grid" style="left:{{ t.pct }}%"></i>{% endfor %}<span class="band" style="left:{{ r.lowPct }}%;width:{{ r.widthPct }}%"></span><span class="med" style="left:{{ r.medPct }}%"></span><span class="top" style="left:{{ r.topPct }}%"></span></span></td><td class="num med-v">{{ r.medianText }}</td><td class="num">{{ r.medianMinText }}–{{ r.medianMaxText }}</td><td class="num">{{ r.topP90Text }}+</td></tr>
 {%- endif %}{% endfor %}
-</tbody></table></div>
+</tbody></table></div>{{ foot }}
