@@ -1,0 +1,52 @@
+---
+title: "The data: startup salaries, hiring by city and skills in demand"
+description: >-
+  Hiring Pulse data, updated weekly from the job boards of 21,000+ startups: salary benchmarks by role, level
+  and city; where startups hire and how; the skills their job descriptions ask for; and every company's daily files.
+permalink: /data/
+layout: default
+bands: true
+---
+{%- assign m = site.data.markets -%}
+{%- assign t = m.pay.tables | where: "key", "usd-year" | first -%}
+{%- assign eng = t.levelsByFunction | where: "function", "Engineering" | first -%}
+{%- if eng -%}{%- assign e_dir = eng.rows | where: "name", "Director" | first -%}{%- assign e_staff = eng.rows | where: "name", "Staff/Principal" | first -%}{%- endif -%}
+<section class="band navy hero"><div class="wrap">
+<h1>Startup hiring data</h1>
+<p class="hero">Every day we read the job boards of {{ site.coverage.companies }} startups and scale-ups. These pages turn what they publish into figures on who is hiring, where, for what and at what pay.</p>{% if m.dateText %}
+<p class="sub">Roles open on {{ m.dateText }}.</p>{% endif %}
+<div class="actions"><a class="btn" href="{{ '/get-the-data/' | relative_url }}{% if site.beta_signup_action != "" %}#beta{% endif %}">Get the daily data{% if site.beta_signup_action != "" %} free{% endif %}</a><a class="btn alt" href="{{ '/reports/latest/' | relative_url }}">This week's report</a></div>
+</div></section>
+
+<section class="band"><div class="wrap">
+<h2>Who is hiring, where, and for what</h2>
+<div class="hub">
+<a class="card hub-card" href="{{ '/data/salaries/' | relative_url }}">
+<span class="k">Salaries</span>
+{%- if t and t.all.medianMaxText %}<b class="n">{{ t.all.medianText }}</b><p>Median yearly salary offered across {{ t.all.nT }} distinct US roles that publish one. One in ten tops out at {{ t.all.topP90Text }} or more.</p>{% else %}<p>The salary ranges startups publish, by function, level and city.</p>{% endif %}
+<span class="more">By function, level and city</span></a>
+<a class="card hub-card" href="{{ '/data/cities/' | relative_url }}">
+<span class="k">Hiring by city</span>
+{%- if m.cities.size > 0 %}<b class="n">{{ m.cities[0].rolesT }}</b><p>Open startup roles in {{ m.cities[0].label }}, the largest market, at {{ m.cities[0].companiesT }} companies. {{ m.cities[0].modes.remote }}% of its roles that state a work mode are fully remote, against {{ m.workMode.overall.remote }}% of all roles that state one.</p>{% else %}<p>Where startups hire, and how.</p>{% endif %}
+<span class="more">Top cities, roles and work mode</span></a>
+<a class="card hub-card" href="{{ '/data/skills/' | relative_url }}">
+<span class="k">Skills in demand</span>
+{%- if m.skills.ready and m.skills.top.size > 0 %}<b class="n">{{ m.skills.top[0].sharePct }}%</b><p>of startup job descriptions name {{ m.skills.top[0].name }}, the most requested skill this week.</p>{% else %}<b class="n">{{ m.skills.coveragePct }}%</b><p>of job descriptions read so far. The skills ranking appears once nine in ten descriptions have been read.</p>{% endif %}
+<span class="more">Tools, languages and certifications</span></a>
+</div>
+</div></section>
+
+<section class="band tint"><div class="wrap">
+<h2>The daily data behind every page</h2>
+<div class="hub two">
+<a class="card hub-card" href="{{ '/get-the-data/' | relative_url }}{% if site.beta_signup_action != "" %}#beta{% endif %}">
+<span class="k">Get the daily data</span>
+<p>Every tracked company, every day: open roles, roles opened and closed, growth, pay and work mode.{% if site.beta_signup_action != "" %} Free by e-mail until {{ site.beta_end | date: "%-d %B %Y" }}.{% endif %}</p>
+<span class="more">{% if site.beta_signup_action != "" %}Sign up free{% else %}See what you get{% endif %}</span></a>
+<a class="card hub-card" href="{{ '/for-data-teams/' | relative_url }}">
+<span class="k">For data teams</span>
+<p>The columns, a free sample file and notes on loading the history into a warehouse.</p>
+<span class="more">Columns and a sample</span></a>
+</div>
+<p class="note">How every figure is measured, and the checks that run each day: <a href="{{ '/methodology/' | relative_url }}">methodology</a>.</p>
+</div></section>

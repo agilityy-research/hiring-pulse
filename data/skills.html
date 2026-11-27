@@ -2,8 +2,8 @@
 title: "Skills in demand at startups: tools, languages and certifications by role"
 description: >-
   The skills startups ask for this week: the tools, programming languages, platforms and certifications named in the
-  job descriptions of open roles, overall and by function, plus how the roles are offered. Refreshed every Monday.
-permalink: /skills/
+  job descriptions of open roles, overall and by function. Updated weekly.
+permalink: /data/skills/
 layout: default
 bands: true
 ---
@@ -12,20 +12,19 @@ bands: true
 {%- assign s = m.skills -%}{%- assign s1 = s.top[0] -%}{%- assign s2 = s.top[1] -%}{%- assign s3 = s.top[2] -%}
 {%- assign full = m.employment.types | where: "type", "full_time" | first -%}
 <section class="band navy hero"><div class="wrap">
-<p class="eyebrow">Skills · figures as of {{ m.dateText }} · refreshed every Monday</p>
+<p class="crumbs"><a href="{{ '/data/' | relative_url }}">Data</a> › Skills in demand</p>
 <h1>The skills startups hire for</h1>
 <p class="hero">{{ s1.name }} is named in {{ s1.sharePct }}% of startup job descriptions this week, then {{ s2.name }} ({{ s2.sharePct }}%) and {{ s3.name }} ({{ s3.sharePct }}%).</p>
-<p class="sub">Read from the full text of {{ s.taggedT }} job descriptions against one fixed vocabulary of tools, languages, platforms, methods and certifications, so the counts compare week to week.</p>
+<p class="sub">Read from the full text of {{ s.taggedT }} job descriptions against one fixed vocabulary of tools, languages, platforms, methods and certifications, so the counts compare week to week. Roles open on {{ m.dateText }}.</p>
 <div class="stats" aria-label="Skill figures">
 <div class="stat"><b>{{ s.taggedT }}</b><span>job descriptions read</span></div>
 <div class="stat"><b>{{ s1.sharePct }}%</b><span>ask for {{ s1.name }}</span></div>
-{%- if full %}<div class="stat"><b>{{ full.sharePct }}%</b><span>of roles with a stated contract are full-time</span></div>{% endif %}
-<div class="stat"><b>{{ m.workMode.overall.remote }}%</b><span>of roles that state a work mode are remote</span></div>
+<div class="stat"><b>{{ s2.sharePct }}%</b><span>ask for {{ s2.name }}</span></div>
+{%- if s.visa["no-sponsorship"] %}<div class="stat"><b>{{ s.visa["no-sponsorship"] }}%</b><span>say the company will not sponsor a visa</span></div>{% endif %}
 </div>
 </div></section>
 
 <section class="band"><div class="wrap">
-<p class="eyebrow">Top {{ s.top.size }}</p>
 <h2>The most requested skills</h2>
 <p class="kicker">Share of job descriptions that name each skill. A description can name many.</p>
 <div class="dgrid">
@@ -41,7 +40,6 @@ bands: true
 </div></section>
 
 <section class="band tint"><div class="wrap">
-<p class="eyebrow">By role</p>
 <h2>What each function asks for</h2>
 <p class="kicker">The eight skills named most often in each function's job descriptions, as a share of that function's descriptions.</p>
 <div class="dgrid three">
@@ -55,7 +53,6 @@ bands: true
 </div></section>
 
 <section class="band"><div class="wrap">
-<p class="eyebrow">Beyond tools</p>
 <h2>Languages, licences and visas</h2>
 <p class="kicker">What job descriptions require besides tools: a spoken language, a certification or licence, and what they say about visa sponsorship.</p>
 <div class="dgrid">
@@ -68,27 +65,9 @@ bands: true
 </div></section>
 
 <section class="band tint"><div class="wrap">
-<p class="eyebrow">How roles are offered</p>
-<h2>Work mode by function, and contract types</h2>
-<div class="legend" aria-hidden="true"><span><i class="r"></i>Remote</span><span><i class="h"></i>Hybrid</span><span><i class="o"></i>On-site</span><span>(share of the roles whose posting states it)</span></div>
-<div class="dgrid">
-<div><ol class="bars">
-{%- for f in m.workMode.byFunction %}{%- assign md = f.modes -%}
-<li title="{{ f.function }}: remote {{ md.remote }}%, hybrid {{ md.hybrid }}%, on-site {{ md.onsite }}%, of the {{ md.knownPct }}% that state a mode"><span class="name">{{ f.function }}<small>{{ f.rolesT }} roles</small></span><span class="mix"><i class="r" style="width:{{ md.remote }}%"></i><i class="h" style="width:{{ md.hybrid }}%"></i><i class="o" style="width:{{ md.onsite }}%"></i></span><span class="val">{{ md.remote }}%<small>remote</small></span></li>
-{%- endfor %}
-</ol></div>
-<div class="panel"><h3>Contract types</h3><p class="muted">Among the {{ m.employment.knownPct }}% of roles whose posting states one</p>
-{%- assign emx = m.employment.types[0].sharePct -%}
-<ol class="bars">{% for e in m.employment.types %}<li><span class="name">{{ e.type | replace: "_", "-" | capitalize }}</span><span class="track"><span class="fill" style="width:{{ e.sharePct | times: 100.0 | divided_by: emx }}%"></span></span><span class="val">{{ e.sharePct }}%<small>{{ e.rolesT }}</small></span></li>{% endfor %}</ol>
-</div>
-</div>
-</div></section>
-
-<section class="band"><div class="wrap">
-<p class="eyebrow">How these numbers are made</p>
 <h2>One vocabulary, every description</h2>
-<p class="kicker">Each job description is matched against a fixed list of about 480 terms (programming languages, frameworks, cloud and data platforms, business tools, methods, certifications, licences and spoken languages). Short or ambiguous names (Go, R, C) match only in their exact form, so "go to market" is not Go. A skill counts once per description. Roles whose board publishes no description (some Personio and SmartRecruiters boards) are not in these shares; {{ s.coveragePct }}% of the roles with a description are tagged this week. <a href="{{ '/methodology/' | relative_url }}">Methodology</a>.</p>
-<div class="actions"><a class="btn" href="{{ '/get-the-data/' | relative_url }}">Get every role with its skills</a><a class="btn alt" href="{{ '/cities/' | relative_url }}">Top hiring cities</a><a class="btn alt" href="{{ '/pay/' | relative_url }}">Pay by role and city</a></div>
+<p class="kicker">Each job description is matched against a fixed list of about 480 terms (programming languages, frameworks, cloud and data platforms, business tools, methods, certifications, licences and spoken languages). Short or ambiguous names (Go, R, C) match only in their exact form, so "go to market" is not Go. A skill counts once per description. SmartRecruiters roles (about a third of all open roles) are not in these shares: their descriptions are on each posting's own page, which we do not read yet. Neither are other roles whose posting has no description, most of them on Personio; {{ s.coveragePct }}% of the roles with a description are tagged this week. <a href="{{ '/methodology/' | relative_url }}">Methodology</a>.</p>
+<div class="actions"><a class="btn" href="{{ '/get-the-data/' | relative_url }}">Get every role with its skills</a><a class="btn alt" href="{{ '/data/cities/' | relative_url }}">Top hiring cities</a><a class="btn alt" href="{{ '/data/salaries/' | relative_url }}">Pay by role and city</a></div>
 </div></section>
 {%- else -%}
 {% include markets-pending.html topic="skills" %}

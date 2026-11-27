@@ -3,7 +3,7 @@ title: "Startup hiring trends, week by week"
 description: >-
   How startup hiring changes over time: open roles, the AI/ML and remote share, companies growing and cutting, and how
   long roles stay open, one point per weekly edition from 21,000+ public job boards. Grows every Monday.
-permalink: /trends/
+permalink: /reports/trends/
 layout: default
 bands: true
 ---
@@ -59,7 +59,7 @@ each Monday edition: nothing to edit. The baseline study (site.baseline_reports)
 <p class="kicker">Each column is one Monday edition, newest on the right. Every value is in the table further down.</p>
 <div class="dgrid three">
 {%- include trend-card.html title="Open roles" values=tr_open dates=tr_dates kind="count" next=tr_next note="Across every company in the benchmark" %}
-{%- include trend-card.html title="Share that are AI/ML roles" values=tr_ai dates=tr_dates kind="pct" next=tr_next note="Job titles that name AI, machine learning, LLMs or data science" %}
+{%- include trend-card.html title="Share that are AI/ML roles" values=tr_ai dates=tr_dates kind="pct" next=tr_next note="Job titles that name AI, machine learning, LLMs, deep learning, NLP or computer vision" %}
 {%- include trend-card.html title="Share that are remote" values=tr_remote dates=tr_dates kind="pct" next=tr_next note="Roles whose location or remote flag says remote" %}
 {%- include trend-card.html title="Companies growing fast" values=tr_acc dates=tr_dates kind="pct" next=tr_next note="Share of companies whose open roles are clearly rising (the report's &ldquo;accelerating&rdquo;)" %}
 {%- include trend-card.html title="Companies cutting" values=tr_con dates=tr_dates kind="pct" next=tr_next lower_is_good=true note="Share of companies whose open roles are clearly falling (&ldquo;contracting&rdquo;)" %}
@@ -96,7 +96,7 @@ each Monday edition: nothing to edit. The baseline study (site.baseline_reports)
 <tr><td><a href="{{ tr_urls[k] | relative_url }}">{{ tr_dates[k] | date: "%-d %b %Y" }}</a></td><td>{{ tr_companies[k] | default: "—" }}</td><td>{{ tr_open[k] | default: "—" }}</td><td>{{ tr_ai[k] | default: "—" }}</td><td>{{ tr_remote[k] | default: "—" }}</td><td>{{ tr_acc[k] | default: "—" }}</td><td>{{ tr_con[k] | default: "—" }}</td><td>{{ tr_fill[k] | default: "—" }}</td><td>{{ tr_entry[k] | default: "—" }}</td></tr>
 {%- endfor %}
 </tbody></table></div>
-<p class="note">Growing fast and cutting are the shares of companies the report calls accelerating and contracting; days open is the median days-to-fill; entry-level is the share of open roles. The definitions are in the <a href="{{ '/methodology/' | relative_url }}">methodology</a>.</p>
+<p class="note">The job-title rules and the days-to-fill measure were revised on 27 November 2026, so the AI/ML share, the entry-level share and days open before and after that date are not directly comparable. Growing fast and cutting are the shares of companies whose open roles rose or fell by a fifth or more (the report's accelerating and contracting); days open is the median days-to-fill; entry-level is the share of open roles. The definitions are in the <a href="{{ '/methodology/' | relative_url }}">methodology</a>.</p>
 
 {%- if tr_fn_latest.size > 0 %}
 {%- assign tr_cols = tr_n -%}{%- if tr_cols > 8 -%}{%- assign tr_cols = 8 -%}{%- endif -%}{%- assign tr_c0 = tr_n | minus: tr_cols -%}

@@ -38,7 +38,7 @@ permalink: /
 {%- endfor -%}
 
 <section class="band navy hero"><div class="wrap">
-<p class="eyebrow">Weekly startup hiring benchmarks · Edition {{ latest_date | date: "%-d %B %Y" }}</p>
+<p class="eyebrow">Weekly edition of {{ latest_date | date: "%-d %B %Y" }}</p>
 <h1>Where startup hiring is moving this week</h1>
 {%- if v_open != "" %}
 <p class="hero">{{ v_open }} open roles on the job boards of {{ v_companies | default: site.coverage.companies }} startups and scale-ups, counted this week.</p>
@@ -47,7 +47,7 @@ permalink: /
 {%- assign hero = first | split: "**" | first %}
 <p class="hero">{{ hero }}</p>
 {%- endif %}
-<p class="sub">How we count: once a day we read the public job board (the list of open roles behind the careers page) of every startup and scale-up we have found on {{ site.coverage.vendors }}, and count every role that is open. Employers with more than 1,000 open roles, staffing agencies and franchises are left out, so the benchmark stays about startups. <a href="{{ '/methodology/' | relative_url }}">How the numbers are measured</a>.</p>
+<p class="sub">How we count: once a day we read the public job board (the list of open roles behind the careers page) of every startup and scale-up we have found on {{ site.coverage.vendors }}, and count every role that is open. Employers with more than 1,000 open roles, staffing agencies, franchises and test boards are left out, so the benchmark stays about startups. <a href="{{ '/methodology/' | relative_url }}">How the numbers are measured</a>.</p>
 <div class="actions"><a class="btn" href="{{ '/reports/latest/' | relative_url }}">Read this week's report</a>
 <a class="btn alt" href="#{% if site.beta_signup_action != "" %}beta{% else %}data{% endif %}">Get the daily data{% if site.beta_signup_action != "" %} free{% endif %}</a></div>
 {%- if v_open != "" %}
@@ -55,18 +55,12 @@ permalink: /
 <div class="stat"><b>{{ v_open }}</b><span>open roles</span>{% if d_open != "" and d_open != "—" %}<span class="delta">{{ d_open }} vs previous edition</span>{% endif %}</div>
 {%- if v_companies != "" %}<div class="stat"><b>{{ v_companies }}</b><span>companies tracked</span></div>{% endif %}
 {%- if v_fill != "" and v_fill != "—" %}<div class="stat"><b>{{ v_fill }}</b><span>median days a role stays posted before it closes</span>{% if d_fill != "" and d_fill != "—" %}<span class="delta">{{ d_fill }}</span>{% endif %}</div>{% endif %}
-{%- if v_remote != "" and v_remote != "—" %}<div class="stat"><b>{{ v_remote }}</b><span>of open roles are remote</span>{% if d_remote != "" and d_remote != "—" %}<span class="delta">{{ d_remote }}</span>{% endif %}</div>{% endif %}
+{%- if v_remote != "" and v_remote != "—" %}<div class="stat"><b>{{ v_remote }}</b><span>of open roles are flagged remote</span>{% if d_remote != "" and d_remote != "—" %}<span class="delta">{{ d_remote }}</span>{% endif %}</div>{% endif %}
 </div>
 {%- endif %}
 </div></section>
 
-{%- assign entry_pct = "" -%}{%- assign mid_pct = "" -%}
-{%- if latest_raw contains "Seniority mix of open roles: Entry " -%}
-{%- assign mix = latest_raw | split: "Seniority mix of open roles: " | last | split: nl | first -%}
-{%- assign entry_pct = mix | split: "Entry " | last | split: "%" | first | strip -%}
-{%- if mix contains "Mid " -%}{%- assign mid_pct = mix | split: "Mid " | last | split: "%" | first | strip -%}{%- endif -%}
-{%- endif -%}
-{% include curious-facts.html entry_pct=entry_pct mid_pct=mid_pct %}
+{% include curious-facts.html report_date=latest_date %}
 
 <section class="band" id="lookup"><div class="wrap">
 <p class="eyebrow">Try the data</p>
@@ -132,7 +126,7 @@ permalink: /
 </div>
 {%- if headline != "" %}
 <details><summary>All headline numbers, with the change since the previous edition</summary>
-{{ headline | markdownify }}
+{{ headline | split: "Seniority mix of open roles:" | first | markdownify }}
 </details>
 {%- endif %}
 <div class="actions"><a class="btn" href="{{ '/reports/latest/' | relative_url }}">Read the full report</a>
@@ -142,29 +136,28 @@ permalink: /
 
 {%- assign mk = site.data.markets -%}
 {%- if mk and mk.ready %}
-{%- assign mkpay = mk.pay.tables | where: "period", "year" | first -%}
+{%- assign mkpay = mk.pay.tables | where: "key", "usd-year" | first -%}
 <section class="band" id="explore"><div class="wrap">
-<p class="eyebrow">Explore the data · {{ mk.dateText }}</p>
 <h2>Where startups hire, what they pay, what they ask for</h2>
-<p class="sub muted">Every open role placed in its city, with its work mode, advertised pay and the skills its description names. Refreshed with each Monday edition.</p>
+<p class="sub muted">Every open role placed in its city, with its work mode, advertised pay and the skills its description names, as read on {{ mk.dateText }}.</p>
 <div class="dgrid three">
-<div class="panel"><h3><a href="{{ '/cities/' | relative_url }}">Top hiring cities</a></h3><p class="muted">Open roles, {{ mk.coverage.cityPct }}% of roles name a city</p>
+<div class="panel"><h3><a href="{{ '/data/cities/' | relative_url }}">Hiring by city</a></h3><p class="muted">Open roles, {{ mk.coverage.cityPct }}% of roles name a city</p>
 <ol class="bars">{% for c in mk.cities limit: 6 %}<li><span class="name">{{ c.label }}</span><span class="track"><span class="fill" style="width:{{ c.barPct }}%"></span></span><span class="val">{{ c.rolesT }}</span></li>{% endfor %}</ol>
-<p class="small"><a href="{{ '/cities/' | relative_url }}">All {{ mk.cities.size }} cities, by function and work mode</a></p></div>
-{%- if mkpay and mkpay.byFunction.size > 1 %}
-<div class="panel"><h3><a href="{{ '/pay/' | relative_url }}">Advertised pay</a></h3><p class="muted">Median salary, {{ mkpay.currency }} {{ mkpay.periodWord }}, {{ mkpay.all.nT }} ranges</p>
-<ol class="bars pay">{% for r in mkpay.byFunction limit: 6 %}<li title="{{ r.name }}: median {{ r.medianText }}, middle half {{ r.p25Text }} to {{ r.p75Text }}, {{ r.nT }} roles"><span class="name">{{ r.name }}</span><span class="range"><span class="band" style="left:{{ r.leftPct }}%;width:{{ r.widthPct }}%"></span><span class="med" style="left:{{ r.medPct }}%"></span></span><span class="val">{{ r.medianText }}</span></li>{% endfor %}</ol>
-<p class="small"><a href="{{ '/pay/' | relative_url }}">Pay by seniority and city</a></p></div>
+<p class="small"><a href="{{ '/data/cities/' | relative_url }}">All {{ mk.cities.size }} cities, by function and work mode</a></p></div>
+{%- if mkpay and mkpay.ticks and mkpay.region == "United States" and mkpay.byFunction.size > 1 %}
+<div class="panel"><h3><a href="{{ '/data/salaries/' | relative_url }}">Salaries</a></h3><p class="muted">Median salary offered, US roles; bar: typical range</p>
+<ol class="bars pay">{% for r in mkpay.byFunction limit: 6 %}{% if r.lowPct %}<li title="{{ r.name }}: median {{ r.medianText }}, typical range {{ r.medianMinText }} to {{ r.medianMaxText }}, top 10% reach {{ r.topP90Text }}; {{ r.nT }} roles"><span class="name">{{ r.name }}</span><span class="range"><span class="band" style="left:{{ r.lowPct }}%;width:{{ r.widthPct }}%"></span><span class="med" style="left:{{ r.medPct }}%"></span></span><span class="val">{{ r.medianText }}</span></li>{% endif %}{% endfor %}</ol>
+<p class="small"><a href="{{ '/data/salaries/' | relative_url }}">Salary by level and city</a></p></div>
 {%- endif %}
 {%- if mk.skills.ready %}
-<div class="panel"><h3><a href="{{ '/skills/' | relative_url }}">Skills in demand</a></h3><p class="muted">Share of job descriptions naming each</p>
+<div class="panel"><h3><a href="{{ '/data/skills/' | relative_url }}">Skills in demand</a></h3><p class="muted">Share of job descriptions naming each</p>
 <ol class="bars">{% for k in mk.skills.top limit: 6 %}<li><span class="name">{{ k.name }}</span><span class="track"><span class="fill" style="width:{{ k.barPct }}%"></span></span><span class="val">{{ k.sharePct }}%</span></li>{% endfor %}</ol>
-<p class="small"><a href="{{ '/skills/' | relative_url }}">Top skills by function</a></p></div>
+<p class="small"><a href="{{ '/data/skills/' | relative_url }}">Top skills by function</a></p></div>
 {%- else %}
-<div class="panel"><h3><a href="{{ '/skills/' | relative_url }}">How roles are offered</a></h3><p class="muted">Among roles that state a work mode</p>
+<div class="panel"><h3><a href="{{ '/data/cities/#work-mode' | relative_url }}">How roles are offered</a></h3><p class="muted">Among roles that state a work mode</p>
 {%- assign wm = mk.workMode.overall %}
 <ol class="bars"><li><span class="name">Remote</span><span class="track"><span class="fill" style="width:{{ wm.remote }}%"></span></span><span class="val">{{ wm.remote }}%</span></li><li><span class="name">Hybrid</span><span class="track"><span class="fill" style="width:{{ wm.hybrid }}%"></span></span><span class="val">{{ wm.hybrid }}%</span></li><li><span class="name">On-site</span><span class="track"><span class="fill" style="width:{{ wm.onsite }}%"></span></span><span class="val">{{ wm.onsite }}%</span></li></ol>
-<p class="small">Skills from the job descriptions join here once every description has been read ({{ mk.skills.coveragePct }}% so far).</p></div>
+<p class="small">Skills from the job descriptions join here once nine in ten descriptions have been read ({{ mk.skills.coveragePct }}% so far).</p></div>
 {%- endif %}
 </div>
 </div></section>
@@ -194,8 +187,8 @@ permalink: /
 <h2>Why these numbers hold up</h2>
 <div class="facts">
 <div class="card"><h3>Straight from the source</h3><p>We read every company's own job board ({{ site.coverage.vendors }}) once a day, not a job site that copies listings. Each role is counted once, and counts as closed the day its posting comes down.</p></div>
-<div class="card"><h3>Broad</h3><p>{{ site.coverage.companies }} companies found by scanning the public job boards of six hiring systems: mostly venture-backed technology companies. Employers with more than 1,000 open roles, staffing agencies and franchises are left out of the benchmark but stay in the daily data. The exact count of the day is in every report.</p></div>
-<div class="card"><h3>Comparable</h3><p>Every role is sorted by its job title into a function (Engineering, Sales and so on), a seniority level and AI/ML or not, with the same rules every week. So this week's figures compare with last week's, and with your own.</p></div>
+<div class="card"><h3>Broad</h3><p>{{ site.coverage.companies }} companies found by scanning the public job boards of six hiring systems: mostly venture-backed technology companies. Employers with more than 1,000 open roles, staffing agencies, franchises and test boards are left out of the benchmark but stay in the daily data. The exact count of the day is in every report.</p></div>
+<div class="card"><h3>Comparable</h3><p>Every role is sorted by its job title (or, when the title names no function, its department) into a function (Engineering, Sales and so on), a seniority level and AI/ML or not, with the same rules every week. When a rule changes, the report says so and does not compare the figures it affects.</p></div>
 <div class="card"><h3>Checked daily</h3><p>Every day we measure how many boards answered, how much the totals moved, whether a sample of boards matches its careers page, and whether closed roles are really gone. <a href="{{ '/methodology/' | relative_url }}">The methodology</a> lists the checks and their alert thresholds.</p></div>
 </div>
 </div></section>
@@ -205,7 +198,7 @@ permalink: /
 <h2>Who uses it, and for what</h2>
 <div class="grid four">
 <div class="card"><h3>Talent and recruiting teams</h3><p class="muted small">Which functions are hard to fill and how long roles stay open, by industry and company size; which competitors are opening or closing teams.</p></div>
-<div class="card"><h3>Sales and revenue operations</h3><p class="muted small">A company that just doubled its open roles is buying tools, office space, payroll and insurance. Hiring momentum per company is the earliest public sign of a budget.</p></div>
+<div class="card"><h3>Sales and revenue operations</h3><p class="muted small">Which companies are adding open roles fastest (the feed marks a company accelerating when its open roles rise by a fifth or more), named daily with the roles they added, so you can reach growing teams early.</p></div>
 <div class="card"><h3>Investors and analysts</h3><p class="muted small">Portfolio and sector hiring, read from each company's own job board rather than job sites: roles opened and closed, net growth, AI/ML share, remote share, week after week.</p></div>
 <div class="card"><h3>Journalists and researchers</h3><p class="muted small">Citable numbers every Monday under CC BY 4.0, with the method published. A custom cut of the history for a story or a paper is usually free with attribution: <a href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">ask us</a>.</p></div>
 </div>

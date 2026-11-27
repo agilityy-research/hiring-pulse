@@ -29,8 +29,8 @@ headline table, the seniority line and the function table. Used by
     {%- elsif pe_r contains "| Median days-to-fill |" -%}{%- assign ed_fill = pe_v -%}
     {%- elsif pe_r contains "| Roles opened / closed" -%}{%- assign pe_p = pe_v | split: " / " -%}{%- assign ed_opened = pe_p[0] | strip -%}{%- assign ed_closed = pe_p[1] | strip -%}
     {%- elsif pe_r contains "| Companies accelerating / contracting |" -%}{%- assign pe_p = pe_v | split: " / " -%}{%- assign ed_acc = pe_p[0] | strip -%}{%- assign ed_con = pe_p[1] | strip -%}
-    {%- elsif pe_r contains "Seniority mix of open roles:" -%}
-      {%- assign pe_mix = pe_r | split: ":" | last | split: "," -%}
+    {%- elsif pe_r contains "Seniority mix of open roles:" or pe_r contains "Level named in the job title" -%}
+      {%- assign pe_mix = pe_r | split: ":" | last | split: ";" | first | split: "," -%}
       {%- for pe_m in pe_mix -%}
         {%- assign pe_w = pe_m | strip | split: " " -%}{%- assign pe_val = pe_w | last | split: "%" | first | append: "%" -%}
         {%- if pe_m contains "Entry" -%}{%- assign ed_entry = pe_val -%}

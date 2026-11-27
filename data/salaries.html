@@ -1,0 +1,118 @@
+---
+title: "Startup salaries: what US startups offer in their job postings"
+description: >-
+  The salary ranges US startups and scale-ups publish in their open job postings: the median, the typical range and the
+  high end for every job function, for each level within a function (senior, staff, manager, director) and for the main
+  hiring cities, with the number of roles behind every figure. Updated weekly.
+permalink: /data/salaries/
+layout: default
+bands: true
+---
+{%- assign m = site.data.markets -%}
+{%- assign tables = m.pay.tables -%}
+{%- assign t = tables | where: "key", "usd-year" | first -%}
+{%- if m and m.ready and t and t.byFunction.size > 1 and t.ticks and t.all.postings -%}
+{%- assign cov = m.coverage -%}
+{%- assign hourly = tables | where: "key", "usd-hour" | first -%}
+{%- assign eng = t.levelsByFunction | where: "function", "Engineering" | first -%}
+{%- if eng -%}{%- assign e_staff = eng.rows | where: "name", "Staff/Principal" | first -%}{%- endif -%}
+{%- capture level_labels -%}Entry=Entry level|Mid=Title names no level|Senior=Senior|Staff/Principal=Staff / principal|Manager=Manager|Director=Director|Executive=VP, head of, C-level{%- endcapture -%}
+{%- capture legend %}<div class="legend" aria-hidden="true"><span><i class="band"></i>Typical range: the median posted minimum to the median posted maximum</span><span><i class="med"></i>Median: the median role, each counted at the midpoint of its range</span><span><i class="top"></i>High end: 1 role in 10 has a range top at or above this</span></div>{% endcapture -%}
+
+<section class="band navy hero"><div class="wrap">
+<p class="crumbs"><a href="{{ '/data/' | relative_url }}">Data</a> › Salaries</p>
+<h1>What US startups offer when they hire</h1>
+<p class="hero">{{ t.all.postingsT | default: t.all.postings }} open US job postings at {{ t.all.companiesT }} startups and scale-ups publish a yearly salary range. The median role offers {{ t.all.medianText }} a year; one in ten offers {{ t.all.topP90Text }} or more at the top of its range.</p>
+<p class="sub">Roles open on {{ m.dateText }}. A title and range that one company posts several times counts once, leaving {{ t.all.nT }} distinct roles.</p>
+<div class="stats" aria-label="Salary figures">
+<div class="stat"><b>{{ t.all.medianText }}</b><span>median salary offered, a year</span></div>
+<div class="stat"><b>{{ t.all.medianMinText }}–{{ t.all.medianMaxText }}</b><span>typical posted range</span></div>
+<div class="stat"><b>{{ t.all.topP90Text }}+</b><span>high end: 1 role in 10 tops out at {{ t.all.topP90Text }} or more</span></div>
+{%- if e_staff %}<div class="stat"><b>{{ e_staff.medianMinText }}–{{ e_staff.medianMaxText }}</b><span>typical range, staff / principal engineer</span></div>{% endif %}
+</div>
+</div></section>
+
+<section class="band"><div class="wrap">
+<h2>Salary by job function</h2>
+<p class="kicker">What each function's open roles offer a year. Functions differ in their mix of levels, so the next section compares levels inside one function.</p>
+{{ legend }}
+{% include pay-table.html rows=t.byFunction ticks=t.ticks head="Function" %}
+{%- assign other = t.byFunction | where: "name", "Other" | first -%}
+{%- if other %}<p class="note">Not shown as a row: {{ other.nT }} roles whose title and department fit none of these functions (teachers, property and store managers, for example). They are in the headline figures.</p>{% endif %}
+<p class="note">The high end is not the highest salary posted: {{ t.all.topsAtLeast500kT | default: t.all.topsAtLeast500k }} roles offer $500k or more at the top of their range. The very highest single postings include typos and placeholders, so no maximum is shown.</p>
+</div></section>
+
+{%- if t.levelsByFunction.size > 0 %}
+<section class="band tint" id="levels"><div class="wrap">
+<h2>Salary by level, within each function</h2>
+<p class="kicker">The level comes from words in the job title. Titles with none ("Software Engineer", "Product Manager", "Account Executive") are shown last, as <em>title names no level</em>: they span every level, so they are not a step on the ladder.{% if e_staff %}{% assign e_entry = eng.rows | where: "name", "Entry" | first %}{% assign e_sen = eng.rows | where: "name", "Senior" | first %}{% assign e_dir = eng.rows | where: "name", "Director" | first %}{% if e_entry and e_sen and e_dir %} In engineering, the median senior title offers {{ e_sen.medianText }}, staff or principal {{ e_staff.medianText }} and director {{ e_dir.medianText }}, against {{ e_entry.medianText }} at entry level.{% endif %}{% endif %}</p>
+<details class="small"><summary>Which title words set each level</summary>
+<ul>
+<li><b>Entry level</b>: intern, internship, junior, jr., graduate, new grad, associate, apprentice, trainee, co-op, early career, entry. "Associate" does not count for lawyers, physicians, dentists and veterinarians ("Litigation Associate", "Associate Veterinarian"), nor at a law firm, where an "Insurance Recovery Associate" is a practising lawyer.</li>
+<li><b>Senior</b>: senior, sr., experienced, lead (not shift, crew, store or warehouse lead), account or client director, assistant or associate vice president, an engineer, scientist, developer or analyst III ("Engineer III"). "Vice President" and "AVP" engineers, developers, analysts, scientists, traders and designers (the title grade banks and asset managers use) count as senior.</li>
+<li><b>Staff / principal</b>: staff, principal, distinguished, chief engineer or architect, an engineer, scientist, developer or analyst IV or higher. Not "Member of Technical Staff" (or of any other staff), "Chief of Staff", "staff accountant", "staff nurse" and similar.</li>
+<li><b>Manager</b>: manager, mgr, team lead, supervisor, controller. Not product, program, project, account, territory, relationship, brand, marketing, growth, content, community, office, partner(ships) or customer success managers, which are usually individual roles.</li>
+<li><b>Director</b>: director, dir. (not account or client director).</li>
+<li><b>VP, head of, C-level</b>: VP, vice president, SVP, EVP, head of, chief … officer, CEO, CFO, COO, CTO, CMO, CPO, CISO, president, general manager (not assistant, restaurant or store), founder. Not chief of staff, executive assistant, "assistant to" or executive business partner, and not a role in the "Office of the CEO".</li>
+</ul></details>
+{{ legend }}
+<div class="tabs" role="tablist" aria-label="Job function" hidden>{% for g in t.levelsByFunction %}<button type="button" role="tab" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="lv-{{ forloop.index }}" id="lvt-{{ forloop.index }}">{{ g.function }}</button>{% endfor %}</div>
+{%- for g in t.levelsByFunction %}
+<div class="lvpanel" id="lv-{{ forloop.index }}" role="tabpanel" aria-labelledby="lvt-{{ forloop.index }}">
+{% include pay-table.html rows=g.rows ticks=t.ticks head=g.function labels=level_labels %}
+</div>
+{%- endfor %}
+<p class="note">A level is shown where at least {{ m.pay.minRoles }} roles from {{ m.pay.minCompanies }} companies publish a range and no company supplies more than half of them.</p>
+<script>
+(function(){var bar=document.querySelector('#levels .tabs');if(!bar)return;var tabs=bar.querySelectorAll('button'),panels=document.querySelectorAll('#levels .lvpanel');
+function show(i){tabs.forEach(function(b,j){b.setAttribute('aria-selected',j===i?'true':'false');b.tabIndex=j===i?0:-1});panels.forEach(function(p,j){p.hidden=j!==i})}
+tabs.forEach(function(b,i){b.addEventListener('click',function(){show(i)});b.addEventListener('keydown',function(e){var k=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(k){var n=(i+k+tabs.length)%tabs.length;show(n);tabs[n].focus()}})});
+bar.hidden=false;show(0)})();
+</script>
+</div></section>
+{%- endif %}
+
+{%- if t.byCity.size > 2 %}
+<section class="band"><div class="wrap">
+<h2>Salary by city</h2>
+<p class="kicker">The same roles, by the city the posting names. A city's figure also reflects which roles it hires for; the table below holds the function constant.</p>
+{{ legend }}
+{% include pay-table.html rows=t.byCity ticks=t.ticks head="City" %}
+{%- if t.cityFunction.rows.size > 1 %}
+<h3 style="margin-top:2rem">Median salary by city and function</h3>
+<p class="muted small">Median role, a year; the small figure is the number of roles. A dot means fewer than {{ m.pay.minRoles }} roles or {{ m.pay.minCompanies }} companies, or one company posted more than half of them.</p>
+<div class="scroll"><table class="heat"><thead><tr><th>City</th>{% for f in t.cityFunction.functions %}<th>{{ f }}</th>{% endfor %}</tr></thead><tbody>
+{%- for row in t.cityFunction.rows %}<tr><td>{{ row.city }}{% assign nt = row.note | default: "" %}{% if nt != "" %}*{% endif %}</td>{% for cell in row.cells %}<td class="c">{% if cell %}{{ cell.medianText }}<small>{{ cell.nT | default: cell.n }}</small>{% else %}<span class="muted">·</span>{% endif %}</td>{% endfor %}</tr>{% endfor %}
+</tbody></table></div>
+{%- assign noted = nil -%}{%- for r in t.byCity -%}{%- assign nt = r.note | default: "" -%}{%- if nt != "" and noted == nil -%}{%- assign noted = r -%}{%- endif -%}{%- endfor -%}
+{%- if noted %}<p class="muted small">* {{ noted.note }}.</p>{% endif %}
+{%- endif %}
+</div></section>
+{%- endif %}
+
+{%- if hourly and hourly.byFunction.size > 1 and hourly.ticks %}
+<section class="band tint"><div class="wrap">
+<h2>Hourly pay</h2>
+<p class="kicker">{{ hourly.all.nT }} distinct roles at {{ hourly.all.companiesT }} companies give an hourly rate instead of a salary. They are kept separate and never converted to a year. The median hourly role offers {{ hourly.all.medianText }} an hour.</p>
+{{ legend }}
+{% include pay-table.html rows=hourly.byFunction ticks=hourly.ticks head="Function" %}
+{%- assign h_other = hourly.byFunction | where: "name", "Other" | first -%}
+{%- if h_other %}<p class="note">Not shown as a row: {{ h_other.nT }} hourly roles whose title and department fit none of these functions, nor any function with fewer than {{ m.pay.minRoles }} hourly roles or {{ m.pay.minCompanies }} companies. All count in the median above.</p>{% endif %}
+</div></section>
+{%- endif %}
+
+<section class="band"><div class="wrap">
+<h2>How these figures are made</h2>
+<div class="facts">
+<div class="card"><h3>From the posting itself</h3><p>The range as the posting states it. Postings rarely say whether it is base salary or, as in many sales roles, on-target earnings including commission, so the two are not separated. Equity is not counted. Where a posting lists several ranges (for example by location), the first one is used.</p></div>
+<div class="card"><h3>Three numbers per row</h3><p><b>Median</b>: the middle role, each counted at the midpoint of its range. <b>Typical range</b>: the median posted minimum to the median posted maximum. <b>High end</b>: one role in ten has a range top at or above this.</p></div>
+<div class="card"><h3>US roles only</h3><p>The posting, or the job board's own country field, places the role in the US (a US city or state, or "Remote US"). A remote posting with no country is left out. Many states (California, Colorado, New York, Washington and others) require a range in the posting.</p></div>
+<div class="card"><h3>Counted once, checked</h3><p>A title and range one company posts several times counts once. A figure needs {{ m.pay.minRoles }} roles from {{ m.pay.minCompanies }} companies, and no company may supply more than half of it.</p></div>
+</div>
+<p class="note">Of {{ cov.withPayT | default: cov.withPay }} open postings that publish pay in any currency, {{ t.all.postingsT | default: t.all.postings }} are US postings with a yearly range in dollars; {{ t.all.nT }} distinct roles remain once repeats count once. {{ cov.payRejectedT | default: cov.payRejected }} ranges were left out as unreadable or implausible: for example a yearly figure below $10,000 or above $2 million, or a top more than five times the bottom (placeholders such as "$12,345–$123,456"). Employers with more than 1,000 open roles, staffing agencies, franchises and test boards are left out of every figure.</p>
+<p class="note">Pay is read from Greenhouse, Lever, Ashby and Recruitee postings. SmartRecruiters publishes pay only on each posting's own page, which we do not read yet, so its roles are not in these figures; Personio's feed carries no pay. Lever and Ashby ranges written only in the description text are not read. <a href="{{ '/methodology/' | relative_url }}">Methodology</a>.</p>
+<div class="actions"><a class="btn" href="{{ '/get-the-data/' | relative_url }}">Get every posting with its range</a><a class="btn alt" href="{{ '/data/cities/' | relative_url }}">Hiring by city</a><a class="btn alt" href="{{ '/data/skills/' | relative_url }}">Skills in demand</a></div>
+</div></section>
+{%- else -%}
+{% include markets-pending.html topic="pay" %}
+{%- endif -%}

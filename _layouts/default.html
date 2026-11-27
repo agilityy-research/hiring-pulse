@@ -119,6 +119,7 @@ p{margin:.6rem 0}
 .wrap{max-width:74rem;margin:0 auto;padding:0 1.1rem}
 /* header */
 header.site{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
+[id]{scroll-margin-top:4.75rem}
 header.site .wrap{display:flex;align-items:center;gap:1rem;min-height:3.6rem;position:relative}
 .brand{display:flex;align-items:center;gap:.6rem;color:var(--fg);text-decoration:none;font-weight:800;font-size:1.12rem;letter-spacing:-.01em}
 .brand .mark{width:30px;height:30px;border-radius:8px;background:var(--navy-2);display:grid;place-items:center;flex:none}
@@ -131,12 +132,23 @@ nav.site a{color:var(--fg);text-decoration:none;padding:.3rem 0;border-bottom:2p
 nav.site a:hover,nav.site a.on{color:var(--accent);border-color:var(--accent)}
 nav.site .cta{background:var(--accent);color:#fff;padding:.42rem .9rem;border-radius:999px;border:0}
 nav.site .cta:hover{color:#fff;filter:brightness(1.08)}
+nav.site{align-items:center}
+.dd{position:relative}
+.dd-t::after{content:"";display:inline-block;width:.38em;height:.38em;margin-left:.42em;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:translateY(-.2em) rotate(45deg);opacity:.7}
+.dd-m{display:none;position:absolute;top:100%;left:-1rem;min-width:300px;padding:.45rem;margin-top:.35rem;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);flex-direction:column;z-index:20}
+.dd::before{content:"";position:absolute;left:0;right:0;top:100%;height:.6rem}
+.dd:hover .dd-m,.dd:focus-within .dd-m{display:flex}
+nav.site .dd-m a{display:block;padding:.55rem .7rem;border:0;border-radius:8px}
+nav.site .dd-m a:hover{background:var(--accent-bg)}
+.dd-m a b{display:block;font-weight:600;color:var(--fg)}
+.dd-m a span{display:block;font-size:.84rem;color:var(--muted);font-weight:400}
+details.menu nav .mh{margin:.8rem 0 .1rem;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
 details.menu{display:none;margin-left:auto}
 details.menu summary{list-style:none;cursor:pointer;font-weight:600;padding:.4rem .8rem;border:1px solid var(--line);border-radius:8px}
 details.menu summary::-webkit-details-marker{display:none}
 details.menu nav{position:absolute;left:0;right:0;top:100%;background:var(--bg);border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:0;padding:.4rem 1.1rem 1rem;box-shadow:var(--shadow)}
 details.menu nav a{padding:.65rem 0;border-bottom:1px solid var(--line);color:var(--fg);text-decoration:none;font-weight:500}
-@media (max-width:1140px){nav.site{display:none}details.menu{display:block}}
+@media (max-width:860px){nav.site{display:none}details.menu{display:block}}
 /* layout */
 main{display:block}
 main.narrow .wrap,main.report .wrap{max-width:52rem;padding-top:1.6rem;padding-bottom:3rem}
@@ -234,6 +246,7 @@ main.report #key-findings + ul > li > ul > li{list-style:none;font-size:.93rem;c
 .bars .val{font-variant-numeric:tabular-nums;font-weight:650;text-align:right;white-space:nowrap}
 .bars .val small{display:block;font-weight:400;color:var(--muted);font-size:.78rem;text-align:right}
 .bars li:hover .fill{opacity:.8}
+.bars.wide,.scale.wide{max-width:860px}
 .mix{display:flex;gap:2px;height:.75rem;min-width:4rem}
 .mix i{display:block;height:100%;min-width:0}
 .mix i:first-child{border-radius:4px 0 0 4px}.mix i:last-child{border-radius:0 4px 4px 0}
@@ -246,6 +259,35 @@ main.report #key-findings + ul > li > ul > li{list-style:none;font-size:.93rem;c
 .range .band{position:absolute;top:.25rem;height:.6rem;background:var(--band);border-radius:3px}
 .range .med{position:absolute;top:0;width:3px;height:1.1rem;margin-left:-1.5px;background:var(--bar);border-radius:2px}
 .scale{display:flex;justify-content:space-between;font-size:.76rem;color:var(--muted);margin:.1rem 0 0}
+.paywrap{margin:.6rem 0 0}
+.paytab{width:100%;border-collapse:collapse;font-size:.94rem;font-variant-numeric:tabular-nums}
+.paytab caption{text-align:left;font-weight:650;padding:0 0 .4rem}
+.paytab th,.paytab td{padding:.42rem .5rem;border-bottom:1px solid var(--line);vertical-align:middle;text-align:left}
+.paytab thead th{font-size:.78rem;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);white-space:nowrap}
+.paytab th.nm{font-weight:550;width:11rem;padding-left:0}
+.paytab tbody th.nm small{display:block;font-weight:400;color:var(--muted);font-size:.76rem;line-height:1.25}
+.paytab .num{text-align:right;white-space:nowrap;width:1%}
+.paytab td.med-v{font-weight:650}
+.paytab .barcol{width:auto;min-width:9rem;padding-left:.9rem;padding-right:.9rem}
+.paytab .axis{position:relative;display:block;height:1rem}
+.paytab .axis span{position:absolute;transform:translateX(-50%);font-size:.72rem;font-weight:500;white-space:nowrap}
+.paytab .axis span:first-child{transform:none}.paytab .axis span:last-child{transform:translateX(-100%)}
+.paytab .range{position:relative;display:block;height:1.1rem}
+.paytab .range .grid{position:absolute;top:0;bottom:0;width:1px;background:var(--line)}
+.paytab .range .band{position:absolute;top:.25rem;height:.6rem;background:var(--band);border-radius:3px}
+.paytab .range .med{position:absolute;top:0;width:3px;height:1.1rem;margin-left:-1.5px;background:var(--bar);border-radius:2px}
+.paytab .range .top{position:absolute;top:.2rem;width:.7rem;height:.7rem;margin-left:-.35rem;border:2px solid var(--bar);border-radius:50%;background:var(--card);box-sizing:border-box}
+.paytab tbody tr:last-child th,.paytab tbody tr:last-child td{border-bottom:0}
+.panel .paytab th.nm{width:9rem}
+.legend .top{width:.7rem;height:.7rem;border:2px solid var(--bar);border-radius:50%;background:transparent;box-sizing:border-box}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.tabs{display:flex;flex-wrap:wrap;gap:.4rem;margin:.8rem 0 .2rem}
+.tabs button{font:inherit;font-size:.88rem;padding:.35rem .8rem;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--fg);cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.crumbs{font-size:.86rem;margin:0 0 .6rem;color:#bcd6f2}.crumbs a{color:inherit}
+@media (max-width:1000px){.paytab .axis span.odd{visibility:hidden}}
+.paywrap{overflow-x:auto}
+@media (max-width:640px){.paytab .barcol{display:none}.paytab th.nm{width:34%;white-space:normal}.paytab{font-size:.84rem}.paytab th,.paytab td{padding:.4rem .25rem}.paytab thead th{white-space:normal;font-size:.72rem;line-height:1.2}.paytab tbody th.nm small{font-size:.7rem}.tabs{flex-wrap:nowrap;overflow-x:auto;padding-bottom:.3rem;scrollbar-width:thin}.tabs button{flex:0 0 auto}}
 .bars.pay li{grid-template-columns:minmax(6rem,10rem) minmax(0,1fr) 5.2rem}
 .cityrow{display:grid;grid-template-columns:minmax(0,1fr) 5.5rem;gap:.6rem;align-items:center}
 @media (max-width:480px){.bars li,.bars.ranked li{grid-template-columns:minmax(5rem,7.5rem) minmax(0,1fr) auto}.bars.ranked .rk{display:none}.bars.pay li{grid-template-columns:minmax(5rem,7.5rem) minmax(0,1fr) 4.6rem}}
@@ -257,6 +299,16 @@ table.heat td small{color:var(--muted);font-size:.78rem;margin-left:.25rem}
 .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1rem 0}
 .plans.four{grid-template-columns:repeat(2,1fr)}
 @media (max-width:900px){.plans,.plans.four{grid-template-columns:1fr}}
+.hub{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.1rem;margin:1.2rem 0}
+.hub.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:900px){.hub,.hub.two{grid-template-columns:minmax(0,1fr)}}
+.hub-card{display:flex;flex-direction:column;gap:.5rem;color:inherit;text-decoration:none;transition:border-color .15s,transform .15s}
+.hub-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.hub-card .k{font-size:.82rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2)}
+.hub-card .n{font-size:clamp(1.9rem,3.4vw,2.5rem);line-height:1;font-weight:750;letter-spacing:-.02em;color:var(--accent)}
+.hub-card p{margin:0;line-height:1.5;color:var(--muted)}
+.hub-card .more{margin-top:auto;padding-top:.3rem;font-size:.9rem;font-weight:600;color:var(--accent)}
+.hub-card .more::after{content:" \2192"}
 .plan{display:flex;flex-direction:column}
 .plan .for{font-size:.82rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2)}
 .plan .price{font-size:1.7rem;font-weight:800;letter-spacing:-.02em;margin:.2rem 0 0;white-space:normal}
@@ -341,28 +393,41 @@ footer.site .legal{grid-column:1 / -1;border-top:1px solid var(--line);padding-t
 <body>
 <header class="site"><div class="wrap">
 <a class="brand" href="{{ '/' | relative_url }}"><span class="mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 22l6-7 5 4 9-11"/></svg></span>Hiring Pulse<small>by Agilityy Research</small></a>
+{%- assign u = page.url -%}
+{%- assign in_reports = false -%}{%- if u contains "/reports/" -%}{%- assign in_reports = true -%}{%- endif -%}
+{%- assign in_data = false -%}{%- if u contains "/data/" or u == "/get-the-data/" or u == "/for-data-teams/" -%}{%- assign in_data = true -%}{%- endif -%}
 <nav class="site" aria-label="Site">
-<a href="{{ '/reports/latest/' | relative_url }}" {% if page.url == '/reports/latest/' %}class="on"{% endif %}>This week</a>
-<a href="{{ '/trends/' | relative_url }}" {% if page.url == '/trends/' %}class="on"{% endif %}>Trends</a>
-<a href="{{ '/cities/' | relative_url }}" {% if page.url == '/cities/' %}class="on"{% endif %}>Cities</a>
-<a href="{{ '/pay/' | relative_url }}" {% if page.url == '/pay/' %}class="on"{% endif %}>Pay</a>
-<a href="{{ '/skills/' | relative_url }}" {% if page.url == '/skills/' %}class="on"{% endif %}>Skills</a>
-<a href="{{ '/reports/' | relative_url }}" {% if page.url == '/reports/' %}class="on"{% endif %}>Reports</a>
-<a href="{{ '/get-the-data/' | relative_url }}" {% if page.url == '/get-the-data/' %}class="on"{% endif %}>Get the data</a>
-<a href="{{ '/methodology/' | relative_url }}" {% if page.url == '/methodology/' %}class="on"{% endif %}>Methodology</a>
-{% if site.beta_signup_action != "" %}<a class="cta" href="{{ '/get-the-data/' | relative_url }}#beta">Get the data free</a>{% else %}<a class="cta" href="{{ '/get-the-data/' | relative_url }}">How to buy</a>{% endif %}
+<div class="dd"><a class="dd-t{% if in_reports %} on{% endif %}" href="{{ '/reports/' | relative_url }}" aria-haspopup="true">Reports</a>
+<div class="dd-m">
+<a href="{{ '/reports/latest/' | relative_url }}"><b>This week's report</b><span>Findings, movers and charts, every Monday</span></a>
+<a href="{{ '/reports/trends/' | relative_url }}"><b>Trends</b><span>How the headline numbers move, week by week</span></a>
+<a href="{{ '/reports/' | relative_url }}"><b>Every edition</b><span>The archive of weekly reports</span></a>
+</div></div>
+<div class="dd"><a class="dd-t{% if in_data %} on{% endif %}" href="{{ '/data/' | relative_url }}" aria-haspopup="true">Data</a>
+<div class="dd-m">
+<a href="{{ '/data/salaries/' | relative_url }}"><b>Salaries</b><span>What startups offer, by function, level and city</span></a>
+<a href="{{ '/data/cities/' | relative_url }}"><b>Hiring by city</b><span>Where startups hire, and how: remote, hybrid, on-site</span></a>
+<a href="{{ '/data/skills/' | relative_url }}"><b>Skills in demand</b><span>Tools, languages and certifications by role</span></a>
+<a href="{{ '/get-the-data/' | relative_url }}"><b>Get the daily data</b><span>Every company, every day, by e-mail</span></a>
+<a href="{{ '/for-data-teams/' | relative_url }}"><b>For data teams</b><span>Columns, a free sample, loading notes</span></a>
+</div></div>
+<a href="{{ '/methodology/' | relative_url }}" {% if u == '/methodology/' %}class="on"{% endif %}>Methodology</a>
+<a href="{{ '/about/' | relative_url }}" {% if u == '/about/' %}class="on"{% endif %}>About</a>
+{% if site.beta_signup_action != "" %}<a class="cta" href="{{ '/get-the-data/' | relative_url }}#beta">Get the data free</a>{% else %}<a class="cta" href="{{ '/get-the-data/' | relative_url }}">Get the data</a>{% endif %}
 </nav>
 <details class="menu"><summary>Menu</summary>
 <nav aria-label="Site">
+<p class="mh">Reports</p>
 <a href="{{ '/reports/latest/' | relative_url }}">This week's report</a>
-<a href="{{ '/trends/' | relative_url }}">Trends over time</a>
-<a href="{{ '/cities/' | relative_url }}">Top hiring cities</a>
-<a href="{{ '/pay/' | relative_url }}">Pay by role and city</a>
-<a href="{{ '/skills/' | relative_url }}">Skills in demand</a>
-<a href="{{ '/reports/' | relative_url }}">All reports</a>
-<a href="{{ '/get-the-data/' | relative_url }}">How to buy</a>
-<a href="{{ '/get-the-data/' | relative_url }}">Get the data</a>
+<a href="{{ '/reports/trends/' | relative_url }}">Trends</a>
+<a href="{{ '/reports/' | relative_url }}">Every edition</a>
+<p class="mh">Data</p>
+<a href="{{ '/data/salaries/' | relative_url }}">Salaries</a>
+<a href="{{ '/data/cities/' | relative_url }}">Hiring by city</a>
+<a href="{{ '/data/skills/' | relative_url }}">Skills in demand</a>
+<a href="{{ '/get-the-data/' | relative_url }}">Get the daily data</a>
 <a href="{{ '/for-data-teams/' | relative_url }}">For data teams</a>
+<p class="mh">Agilityy Research</p>
 <a href="{{ '/methodology/' | relative_url }}">Methodology</a>
 <a href="{{ '/about/' | relative_url }}">About</a>
 </nav></details>
@@ -386,8 +451,8 @@ footer.site .legal{grid-column:1 / -1;border-top:1px solid var(--line);padding-t
 <footer class="site"><div class="wrap">
 <div><a class="brand" href="{{ '/' | relative_url }}" style="display:inline-flex;margin-bottom:.5rem"><span class="mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 22l6-7 5 4 9-11"/></svg></span>Hiring Pulse</a>
 <p style="margin:0;max-width:30rem">Weekly startup hiring benchmarks from the public job boards of {{ site.coverage.companies }} companies, read every day by Agilityy Research. The reports are free under <a href="https://creativecommons.org/licenses/by/4.0/" style="display:inline;text-decoration:underline">CC BY 4.0</a>; the daily data behind them is pay as you go.</p></div>
-<div><h4>Read</h4><a href="{{ '/reports/latest/' | relative_url }}">This week's report</a><a href="{{ '/trends/' | relative_url }}">Trends over time</a><a href="{{ '/cities/' | relative_url }}">Top hiring cities</a><a href="{{ '/pay/' | relative_url }}">Pay by role and city</a><a href="{{ '/skills/' | relative_url }}">Skills in demand</a><a href="{{ '/reports/' | relative_url }}">All editions</a><a href="{{ '/methodology/' | relative_url }}">Methodology</a><a href="{{ '/feed.xml' | relative_url }}">Atom feed</a></div>
-<div><h4>Data</h4><a href="{{ '/get-the-data/' | relative_url }}">Get the data</a><a href="{{ '/for-data-teams/' | relative_url }}">For data teams</a><a href="{{ '/samples/daily_signals_sample.csv' | relative_url }}">Free sample</a></div>
+<div><h4>Reports</h4><a href="{{ '/reports/latest/' | relative_url }}">This week's report</a><a href="{{ '/reports/trends/' | relative_url }}">Trends</a><a href="{{ '/reports/' | relative_url }}">Every edition</a><a href="{{ '/methodology/' | relative_url }}">Methodology</a><a href="{{ '/feed.xml' | relative_url }}">Atom feed</a></div>
+<div><h4>Data</h4><a href="{{ '/data/salaries/' | relative_url }}">Salaries</a><a href="{{ '/data/cities/' | relative_url }}">Hiring by city</a><a href="{{ '/data/skills/' | relative_url }}">Skills in demand</a><a href="{{ '/get-the-data/' | relative_url }}">Get the daily data</a><a href="{{ '/for-data-teams/' | relative_url }}">For data teams</a></div>
 <div><h4>Company</h4><a href="{{ '/about/' | relative_url }}">About</a><a href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">Contact / request data</a><a href="https://github.com/agilityy-research/hiring-pulse">Source on GitHub</a><a href="{{ '/privacy/' | relative_url }}">Privacy</a></div>
 <div class="legal">© {{ site.time | date: "%Y" }} Agilityy Research. No cookies; cookieless page-view counting only: <a href="{{ '/privacy/' | relative_url }}" style="display:inline;text-decoration:underline">privacy</a>.</div>
 </div></footer>
