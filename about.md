@@ -15,9 +15,8 @@ share, the remote share.
 ## How it is paid for
 
 The weekly report is free to read and to quote under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The daily
-data behind it is for sale, pay as you go, through the [Hiring Signals Feed](https://apify.com/agilityy/hiring-signals-feed)
-and the other products on the [Apify Store](https://apify.com/agilityy); [how to buy]({{ '/get-the-data/' | relative_url }})
-has the prices. No advertising, no sponsored findings.
+data behind it is free by e-mail during the beta and will then be a paid subscription; [get the data]({{ '/get-the-data/' | relative_url }})
+has the details. No advertising, no sponsored findings.
 
 ## What you can rely on
 
@@ -30,8 +29,8 @@ has the prices. No advertising, no sponsored findings.
 ## Contact
 
 For data requests, corrections, press and research questions, use the
-[request form](https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml) on GitHub
-(public) or send a private message through the [Apify Store profile](https://apify.com/agilityy). We answer within two
+[request form](https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml) on GitHub;
+say in the form if you would rather continue privately. We answer within two
 working days.{% if site.beta_signup_action != "" %} Beta subscribers can also reply to any of the daily e-mails.{% endif %}
 
 ## Next

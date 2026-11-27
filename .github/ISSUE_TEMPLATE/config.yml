@@ -1,8 +1,5 @@
 blank_issues_enabled: true
 contact_links:
-  - name: Buy per record now
-    url: https://apify.com/agilityy/hiring-signals-feed
-    about: The Hiring Signals Feed on the Apify Store serves any day or 30-day window of the archive, pay per row, no request needed.
-  - name: All products
-    url: https://apify.com/agilityy
-    about: Trackers, lookups, scrapers and funding leads from the same pipeline.
+  - name: Every company's daily files
+    url: https://hiring.agilityy.com/get-the-data/
+    about: Free by e-mail during the beta; no request needed.

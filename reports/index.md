@@ -52,5 +52,5 @@ growth, days-to-fill and movers before the full set of companies had history. No
 
 ## Want the numbers behind a report?
 
-Each edition is computed from one row per company per day. You can buy those rows, for the companies and days you
-choose, on the Apify Store: [how to buy]({{ '/get-the-data/' | relative_url }}) has the prices with worked examples.
+Each edition is computed from one row per company per day. Every company's
+numbers for the day are free by e-mail during the beta: [get the data]({{ '/get-the-data/' | relative_url }}).

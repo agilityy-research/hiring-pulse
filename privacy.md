@@ -26,8 +26,7 @@ loaded from third parties; there is no advertising code.
 {%- endif %}
 - **E-mail subscription.** If a signup box is shown, submitting it sends your address directly to the named
   mailing-list provider, which processes it under its own policy. We see the address only as a subscriber of that list.
-- **Requests and purchases.** Data requests go through GitHub issues; purchases of the daily data go through the Apify
-  Store. Both are governed by those services' policies, and we see only what they show us.
+- **Requests.** Data requests go through GitHub issues, under GitHub's policies; we see only what GitHub shows us.
 - **The data we publish** is about companies and their job postings, taken from public job boards. It contains no
   personal data about candidates. If a posting contains personal data and you want it removed from our files, use the
   [request form](https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml).

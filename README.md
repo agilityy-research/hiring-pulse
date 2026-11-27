@@ -25,18 +25,9 @@ a closure is observed rather than inferred. Full method: [methodology](methodolo
 
 ## Get the data
 
-Pay per row on the Apify Store, with worked prices: [how to buy](get-the-data.md). Products and prices:
-[data](data.md). Schema and a free sample: [for data teams](for-data-teams.md).
-
-| Product | What it is | Price |
-|---|---|---|
-| [Hiring Signals Feed](https://apify.com/agilityy/hiring-signals-feed) | Any day or 30-day window of this archive, filtered, one row per company-day | $0.01 per company-day, $0.004 per role event |
-| [Hiring Velocity Signals](https://apify.com/agilityy/hiring-velocity-signals) | Daily tracking of your own company list: new vs closed roles, growth, 30-day trend, days-to-fill, function and seniority mix | $0.025 per company (launch price, list $0.05) |
-| [Company Hiring Lookup](https://apify.com/agilityy/company-hiring-lookup) | One company now: open roles by function and seniority, AI/ML roles, remote share | $0.02 per company |
-| [Funded & Hiring Leads](https://apify.com/agilityy/funded-and-hiring-leads) | Companies that just filed an SEC Form D, with a live hiring check | $0.015 per lead (launch price, list $0.03) |
-| [Hiring Pulse Benchmarks](https://apify.com/agilityy/hiring-pulse-benchmarks) | Benchmarks, leaderboards and a report like this one from your own tracked set | $0.10 per benchmark row |
-
-More from the same team: [apify.com/agilityy](https://apify.com/agilityy).
+Every tracked company's daily numbers, free by e-mail during the beta: [get the data](get-the-data.md). Schema and a
+free sample: [for data teams](for-data-teams.md). The whole history or a custom cut:
+[ask us](https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml).
 
 ## How this repository works
 

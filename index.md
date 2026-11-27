@@ -60,6 +60,14 @@ permalink: /
 {%- endif %}
 </div></section>
 
+{%- assign entry_pct = "" -%}{%- assign mid_pct = "" -%}
+{%- if latest_raw contains "Seniority mix of open roles: Entry " -%}
+{%- assign mix = latest_raw | split: "Seniority mix of open roles: " | last | split: nl | first -%}
+{%- assign entry_pct = mix | split: "Entry " | last | split: "%" | first | strip -%}
+{%- if mix contains "Mid " -%}{%- assign mid_pct = mix | split: "Mid " | last | split: "%" | first | strip -%}{%- endif -%}
+{%- endif -%}
+{% include curious-facts.html entry_pct=entry_pct mid_pct=mid_pct %}
+
 <section class="band" id="lookup"><div class="wrap">
 <p class="eyebrow">Try the data</p>
 <h2>Look up a company</h2>
@@ -70,7 +78,7 @@ permalink: /
 <input id="company-q" type="search" autocomplete="off" spellcheck="false" placeholder="Type a company name, e.g. Fivetran">
 <ul class="search-results" id="company-results" aria-live="polite"></ul>
 </div>
-<p class="muted small" id="company-search-note" hidden>One line per company, from this week's edition. The roles themselves and the day-by-day history are in the <a href="#data">daily data</a>, which you can buy below. Not finding a company? <a href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">Request it</a>.</p>
+<p class="muted small" id="company-search-note" hidden>One line per company, from this week's edition. The roles themselves and the day-by-day history are in the <a href="#data">daily data</a>. Not finding a company? <a href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">Request it</a>.</p>
 <noscript><p class="muted small">The search needs JavaScript; the same preview rows are in <a href="{{ '/reports/data/companies.json' | relative_url }}">reports/data/companies.json</a>.</p></noscript>
 </div></section>
 
@@ -166,30 +174,19 @@ permalink: /
 <p class="eyebrow">The data behind the report</p>
 {%- if site.beta_signup_action != "" %}
 <h2>The report is free. During the beta, so is the daily data.</h2>
-<p class="sub muted">Every number on this page comes from one row per company per day (a "company-day"). Until {{ site.beta_end | date: "%-d %B %Y" }}, every company's rows for the day come free by e-mail, as two CSV files each morning. Afterwards the full daily files will be $99 a month. If you need filters, a 30-day window or an API call today, the same rows are on the Apify Store at $0.01 each, in a product called the Hiring Signals Feed.</p>
+<p class="sub muted">Every number on this page comes from one line per company per day. Until {{ site.beta_end | date: "%-d %B %Y" }}, every company's numbers for the day come free by e-mail each morning, as two spreadsheet files. After the beta the full daily files will be $99 a month, and you decide then.</p>
 {% include beta-signup.html %}
-<h3>Or pay per row on the Apify Store</h3>
+{%- elsif site.stripe_payment_link != "" %}
+<h2>The report is free. The daily data is $99 a month.</h2>
+<p class="sub muted">Every number on this page comes from one line per company per day. Hiring Pulse Daily sends you all of it every morning: every company, the latest day plus the 30 before, cancel any time.</p>
+<div class="actions"><a class="btn" href="{{ site.stripe_payment_link }}">Subscribe, $99 a month</a></div>
 {%- else %}
-<h2>The report is free. The daily data is pay as you go{% if site.stripe_payment_link != "" %}, or $99 a month for all of it{% endif %}.</h2>
-<p class="sub muted">Every number on this page comes from one row per company per day (a "company-day"). You buy those rows on the Apify Store at $0.01 each, with no subscription and nothing to install: pick the companies, the days and the filters, and pay for the rows you receive. The product is called the Hiring Signals Feed.</p>
+<h2>The report is free. Ask us for the data behind it.</h2>
+<p class="sub muted">Every number on this page comes from one line per company per day. Tell us which companies and days you need and what for, and we will send a cut.</p>
 {%- endif %}
-<div class="plans{% if site.stripe_payment_link != "" %} four{% endif %}">
-{%- if site.stripe_payment_link != "" %}
-<div class="card plan"><div class="for">Hiring Pulse Daily</div><p class="price">$99 a month</p><p class="per">every company, every day, no Apify account</p>
-<ul><li>The latest day plus the previous 30 days, as CSV and JSON: one row per company per day and one row per role opened or closed, the same columns as the free sample.</li><li>One URL per file for curl, Python or a Google Sheet; cancel any time.</li></ul>
-<a class="btn" href="{{ site.stripe_payment_link }}">Subscribe, $99 a month</a></div>
-{%- endif %}
-<div class="card plan"><div class="for">A watch list</div><p class="price">about $30</p><p class="per">100 companies, every day, for a month</p>
-<ul><li>Your competitors, your accounts or your portfolio: open roles, roles opened and closed, growth, and a one-word signal (accelerating, steady, flat or contracting), every morning.</li><li>Runs on a schedule into Google Sheets, Slack or a webhook.</li></ul></div>
-<div class="card plan"><div class="for">One industry, one day</div><p class="price">a few dollars</p><p class="per">about 700 companies for $7</p>
-<ul><li>Every Fintech, Health or Developer Tools company in the benchmark, with who is accelerating and who is cutting.</li><li>The first $5 a month is free on any Apify account, so a small cut costs nothing.</li></ul></div>
-<div class="card plan"><div class="for">Every company, one day</div><p class="price">about $219</p><p class="per">one row per company, the whole benchmark</p>
-<ul><li>The full day the Monday report is computed from, as CSV, JSON or Excel.</li><li>Each role opened or closed that day is available too, one row per role, at $0.004 each.</li></ul></div>
-</div>
-<div class="actions"><a class="btn" href="https://apify.com/agilityy/hiring-signals-feed">Buy on the Apify Store</a>
-<a class="btn alt" href="{{ '/get-the-data/' | relative_url }}">How buying works</a>
-<a class="btn alt" href="{{ '/samples/daily_signals_sample.csv' | relative_url }}" download>Free sample CSV</a></div>
-<p class="muted small">Apify bills you and adds a few cents of computing cost per run; spending above the free $5 needs an Apify plan, from $19 a month. Want to track companies outside the benchmark, check one company, or find companies that just raised money? Those are separate products on <a href="{{ '/data/' | relative_url }}">products and prices</a>. Need the whole history in your own warehouse? <a href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">Ask us</a>.</p>
+<div class="actions"><a class="btn alt" href="{{ '/get-the-data/' | relative_url }}">What you get</a>
+<a class="btn alt" href="{{ '/samples/daily_signals_sample.csv' | relative_url }}" download>Free sample file</a></div>
+<p class="muted small">Need the whole history in your own systems, or a cut for a story or a paper? <a href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">Ask us</a>.</p>
 </div></section>
 
 <section class="band"><div class="wrap">

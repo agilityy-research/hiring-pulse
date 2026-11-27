@@ -79,7 +79,7 @@
 <link rel="sitemap" type="application/xml" href="{{ '/sitemap.xml' | relative_url }}">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230f4c81'/%3E%3Cpath d='M6 22l6-7 5 4 9-11' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Organization","@id":"{{ site_abs }}#organization","name":"Agilityy Research","url":{{ site_abs | jsonify }},"logo":{{ og_image | jsonify }},"description":"Publisher of Hiring Pulse, the weekly startup hiring benchmark measured from {{ site.coverage.companies }} public job boards, and of the daily hiring data behind it.","sameAs":["https://apify.com/agilityy","https://github.com/agilityy-research"]}
+{"@context":"https://schema.org","@type":"Organization","@id":"{{ site_abs }}#organization","name":"Agilityy Research","url":{{ site_abs | jsonify }},"logo":{{ og_image | jsonify }},"description":"Publisher of Hiring Pulse, the weekly startup hiring benchmark measured from {{ site.coverage.companies }} public job boards, and of the daily hiring data behind it.","sameAs":["https://github.com/agilityy-research"]}
 </script>
 {%- if page.url == "/" %}
 <script type="application/ld+json">
@@ -93,7 +93,7 @@
 {%- endif %}
 {%- if page.jsonld == "dataset" %}
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Dataset","name":{{ page.dataset_name | default: "Hiring Pulse daily hiring signals" | jsonify }},"description":{{ page_description | strip_newlines | strip | jsonify }},"url":{{ canonical_abs | jsonify }},"sameAs":"https://apify.com/agilityy/hiring-signals-feed","creator":{"@id":"{{ site_abs }}#organization"},"publisher":{"@id":"{{ site_abs }}#organization"},"keywords":["hiring signals","job postings","startup hiring","days-to-fill","job board data","open roles"],"temporalCoverage":"{{ site.coverage.daily_since }}/..","spatialCoverage":"Worldwide","inLanguage":"en","isAccessibleForFree":false,"license":{{ '/get-the-data/' | absolute_url | jsonify }},"measurementTechnique":"Daily reads of public job boards ({{ site.coverage.vendors }}); roles counted once per company board, closures observed on the day a posting disappears","variableMeasured":["open roles","roles opened","roles closed","30-day growth","median days-to-fill","remote share","AI/ML role share","function mix","seniority mix"],"distribution":[{"@type":"DataDownload","name":"daily_signals sample (CSV)","encodingFormat":"text/csv","contentUrl":{{ '/samples/daily_signals_sample.csv' | absolute_url | jsonify }}},{"@type":"DataDownload","name":"job_events sample (CSV)","encodingFormat":"text/csv","contentUrl":{{ '/samples/job_events_sample.csv' | absolute_url | jsonify }}},{"@type":"DataDownload","name":"Hiring Signals Feed (pay per row: JSON, CSV, Excel)","encodingFormat":"application/json","contentUrl":"https://apify.com/agilityy/hiring-signals-feed"}],"offers":{"@type":"Offer","price":"0.01","priceCurrency":"USD","description":"Per company-day row on the Apify Store, pay as you go; custom history cuts on request","url":"https://apify.com/agilityy/hiring-signals-feed"}}
+{"@context":"https://schema.org","@type":"Dataset","name":{{ page.dataset_name | default: "Hiring Pulse daily hiring signals" | jsonify }},"description":{{ page_description | strip_newlines | strip | jsonify }},"url":{{ canonical_abs | jsonify }},"creator":{"@id":"{{ site_abs }}#organization"},"publisher":{"@id":"{{ site_abs }}#organization"},"keywords":["hiring signals","job postings","startup hiring","days-to-fill","job board data","open roles"],"temporalCoverage":"{{ site.coverage.daily_since }}/..","spatialCoverage":"Worldwide","inLanguage":"en","isAccessibleForFree":false,"license":{{ '/get-the-data/' | absolute_url | jsonify }},"measurementTechnique":"Daily reads of public job boards ({{ site.coverage.vendors }}); roles counted once per company board, closures observed on the day a posting disappears","variableMeasured":["open roles","roles opened","roles closed","30-day growth","median days-to-fill","remote share","AI/ML role share","function mix","seniority mix"],"distribution":[{"@type":"DataDownload","name":"daily_signals sample (CSV)","encodingFormat":"text/csv","contentUrl":{{ '/samples/daily_signals_sample.csv' | absolute_url | jsonify }}},{"@type":"DataDownload","name":"job_events sample (CSV)","encodingFormat":"text/csv","contentUrl":{{ '/samples/job_events_sample.csv' | absolute_url | jsonify }}}],"offers":{"@type":"Offer","price":"0","priceCurrency":"USD","description":"Every company's daily files by e-mail, free during the beta; custom history cuts on request","url":{{ '/get-the-data/' | absolute_url | jsonify }}}}
 </script>
 {%- endif %}
 {%- if page.url == "/reports/" %}
@@ -269,6 +269,16 @@ table.heat td small{color:var(--muted);font-size:.78rem;margin-left:.25rem}
 .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
 @media (max-width:900px){.facts{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:520px){.facts{grid-template-columns:1fr}}
+.curious{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:1.2rem}
+@media (max-width:980px){.curious{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.curious{grid-template-columns:minmax(0,1fr)}}
+.card.fact{display:flex;flex-direction:column;gap:.45rem}
+.card.fact .n{font-size:clamp(1.9rem,3.4vw,2.5rem);line-height:1;font-weight:750;letter-spacing:-.02em;color:var(--accent)}
+.card.fact p{margin:0;line-height:1.5}
+.card.fact p b{display:block;font-size:1.05rem;line-height:1.35;margin-bottom:.25rem;color:var(--fg)}
+.card.fact .more{margin-top:auto;padding-top:.3rem;font-size:.9rem;font-weight:600;text-decoration:none}
+.card.fact .more::after{content:" →"}
+@media (min-width:981px){.curious .card.fact:last-child:nth-child(3n+1){grid-column:1/-1}}
 .facts .card p{font-size:.95rem;color:var(--muted);margin:.3rem 0 0}
 .facts .card h3{font-size:1rem}
 .tag{display:inline-block;font-size:.78rem;font-weight:650;letter-spacing:.02em;padding:.12rem .55rem;border-radius:999px;background:var(--accent-bg);color:var(--accent);vertical-align:middle}
@@ -323,7 +333,7 @@ footer.site .legal{grid-column:1 / -1;border-top:1px solid var(--line);padding-t
 <a href="{{ '/pay/' | relative_url }}" {% if page.url == '/pay/' %}class="on"{% endif %}>Pay</a>
 <a href="{{ '/skills/' | relative_url }}" {% if page.url == '/skills/' %}class="on"{% endif %}>Skills</a>
 <a href="{{ '/reports/' | relative_url }}" {% if page.url == '/reports/' %}class="on"{% endif %}>Reports</a>
-<a href="{{ '/data/' | relative_url }}" {% if page.url == '/data/' %}class="on"{% endif %}>Products &amp; prices</a>
+<a href="{{ '/get-the-data/' | relative_url }}" {% if page.url == '/get-the-data/' %}class="on"{% endif %}>Get the data</a>
 <a href="{{ '/methodology/' | relative_url }}" {% if page.url == '/methodology/' %}class="on"{% endif %}>Methodology</a>
 {% if site.beta_signup_action != "" %}<a class="cta" href="{{ '/get-the-data/' | relative_url }}#beta">Get the data free</a>{% else %}<a class="cta" href="{{ '/get-the-data/' | relative_url }}">How to buy</a>{% endif %}
 </nav>
@@ -335,7 +345,7 @@ footer.site .legal{grid-column:1 / -1;border-top:1px solid var(--line);padding-t
 <a href="{{ '/skills/' | relative_url }}">Skills in demand</a>
 <a href="{{ '/reports/' | relative_url }}">All reports</a>
 <a href="{{ '/get-the-data/' | relative_url }}">How to buy</a>
-<a href="{{ '/data/' | relative_url }}">Products &amp; prices</a>
+<a href="{{ '/get-the-data/' | relative_url }}">Get the data</a>
 <a href="{{ '/for-data-teams/' | relative_url }}">For data teams</a>
 <a href="{{ '/methodology/' | relative_url }}">Methodology</a>
 <a href="{{ '/about/' | relative_url }}">About</a>
@@ -361,7 +371,7 @@ footer.site .legal{grid-column:1 / -1;border-top:1px solid var(--line);padding-t
 <div><a class="brand" href="{{ '/' | relative_url }}" style="display:inline-flex;margin-bottom:.5rem"><span class="mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 22l6-7 5 4 9-11"/></svg></span>Hiring Pulse</a>
 <p style="margin:0;max-width:30rem">Weekly startup hiring benchmarks from the public job boards of {{ site.coverage.companies }} companies, read every day by Agilityy Research. The reports are free under <a href="https://creativecommons.org/licenses/by/4.0/" style="display:inline;text-decoration:underline">CC BY 4.0</a>; the daily data behind them is pay as you go.</p></div>
 <div><h4>Read</h4><a href="{{ '/reports/latest/' | relative_url }}">This week's report</a><a href="{{ '/cities/' | relative_url }}">Top hiring cities</a><a href="{{ '/pay/' | relative_url }}">Pay by role and city</a><a href="{{ '/skills/' | relative_url }}">Skills in demand</a><a href="{{ '/reports/' | relative_url }}">All editions</a><a href="{{ '/methodology/' | relative_url }}">Methodology</a><a href="{{ '/feed.xml' | relative_url }}">Atom feed</a></div>
-<div><h4>Buy</h4><a href="{{ '/get-the-data/' | relative_url }}">How to buy</a><a href="{{ '/data/' | relative_url }}">Products and prices</a><a href="{{ '/for-data-teams/' | relative_url }}">For data teams</a><a href="https://apify.com/agilityy">Apify Store</a></div>
+<div><h4>Data</h4><a href="{{ '/get-the-data/' | relative_url }}">Get the data</a><a href="{{ '/for-data-teams/' | relative_url }}">For data teams</a><a href="{{ '/samples/daily_signals_sample.csv' | relative_url }}">Free sample</a></div>
 <div><h4>Company</h4><a href="{{ '/about/' | relative_url }}">About</a><a href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">Contact / request data</a><a href="https://github.com/agilityy-research/hiring-pulse">Source on GitHub</a><a href="{{ '/privacy/' | relative_url }}">Privacy</a></div>
 <div class="legal">© {{ site.time | date: "%Y" }} Agilityy Research. No cookies; cookieless page-view counting only: <a href="{{ '/privacy/' | relative_url }}" style="display:inline;text-decoration:underline">privacy</a>.</div>
 </div></footer>
