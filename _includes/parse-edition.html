@@ -1,0 +1,52 @@
+{%- comment -%}
+Reads one weekly edition (its Markdown, passed as include.raw) and sets ed_* variables in the caller's scope: the
+headline table, the seniority line and the function table. Used by
+/trends/ (one call per edition). Anything the edition does not have stays "" and the callers leave it out.
+{%- endcomment -%}
+{%- capture pe_nl %}
+{% endcapture -%}
+{%- assign ed_companies = "" -%}{%- assign ed_open = "" -%}{%- assign ed_ai = "" -%}{%- assign ed_ai_roles = "" -%}
+{%- assign ed_remote = "" -%}{%- assign ed_remote_median = "" -%}{%- assign ed_hist = "" -%}{%- assign ed_growth = "" -%}
+{%- assign ed_fill = "" -%}{%- assign ed_acc = "" -%}{%- assign ed_con = "" -%}{%- assign ed_opened = "" -%}{%- assign ed_closed = "" -%}
+{%- assign ed_entry = "" -%}{%- assign ed_senior = "" -%}{%- assign ed_staff = "" -%}{%- assign ed_director = "" -%}{%- assign ed_exec = "" -%}
+{%- assign ed_fn_names = "" | split: "" -%}{%- assign ed_fn_shares = "" | split: "" -%}{%- assign ed_fn_fill = "" | split: "" -%}
+{%- assign pe_section = "" -%}
+{%- assign pe_lines = include.raw | split: pe_nl -%}
+{%- for pe_r in pe_lines -%}
+  {%- assign pe_head = pe_r | slice: 0, 3 -%}
+  {%- if pe_head == "## " -%}{%- assign pe_section = pe_r | remove_first: "## " | strip -%}{%- continue -%}{%- endif -%}
+  {%- assign pe_c = pe_r | split: "|" -%}
+  {%- if pe_section == "Headline numbers" -%}
+    {%- assign pe_v = pe_c[2] | strip -%}
+    {%- if pe_r contains "| Companies tracked |" -%}{%- assign ed_companies = pe_v -%}
+    {%- elsif pe_r contains "| Open roles |" -%}{%- assign ed_open = pe_v -%}
+    {%- elsif pe_r contains "| AI/ML roles |" -%}{%- assign ed_ai_roles = pe_v -%}
+    {%- elsif pe_r contains "| AI/ML share of open roles |" -%}{%- assign ed_ai = pe_v -%}
+    {%- elsif pe_r contains "| Remote roles, share of open roles |" -%}{%- assign ed_remote = pe_v -%}
+    {%- elsif pe_r contains "| Median company's remote share |" -%}{%- assign ed_remote_median = pe_v -%}
+    {%- elsif pe_r contains "| Companies with 14+ days of history |" -%}{%- assign ed_hist = pe_v -%}
+    {%- elsif pe_r contains "| Open roles vs 16 days earlier |" -%}{%- assign ed_growth = pe_v -%}
+    {%- elsif pe_r contains "| Median days-to-fill |" -%}{%- assign ed_fill = pe_v -%}
+    {%- elsif pe_r contains "| Roles opened / closed" -%}{%- assign pe_p = pe_v | split: " / " -%}{%- assign ed_opened = pe_p[0] | strip -%}{%- assign ed_closed = pe_p[1] | strip -%}
+    {%- elsif pe_r contains "| Companies accelerating / contracting |" -%}{%- assign pe_p = pe_v | split: " / " -%}{%- assign ed_acc = pe_p[0] | strip -%}{%- assign ed_con = pe_p[1] | strip -%}
+    {%- elsif pe_r contains "Seniority mix of open roles:" -%}
+      {%- assign pe_mix = pe_r | split: ":" | last | split: "," -%}
+      {%- for pe_m in pe_mix -%}
+        {%- assign pe_w = pe_m | strip | split: " " -%}{%- assign pe_val = pe_w | last | split: "%" | first | append: "%" -%}
+        {%- if pe_m contains "Entry" -%}{%- assign ed_entry = pe_val -%}
+        {%- elsif pe_m contains "Staff" -%}{%- assign ed_staff = pe_val -%}
+        {%- elsif pe_m contains "Senior" -%}{%- assign ed_senior = pe_val -%}
+        {%- elsif pe_m contains "Director" -%}{%- assign ed_director = pe_val -%}
+        {%- elsif pe_m contains "Executive" -%}{%- assign ed_exec = pe_val -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+  {%- elsif pe_section == "Open roles by function" and pe_c.size > 4 -%}
+    {%- assign pe_name = pe_c[1] | strip -%}
+    {%- if pe_name != "" and pe_name != "Function" and pe_name != "Other" -%}{%- unless pe_name contains "---" -%}
+      {%- assign ed_fn_names = ed_fn_names | push: pe_name -%}
+      {%- assign pe_s = pe_c[3] | strip -%}{%- assign ed_fn_shares = ed_fn_shares | push: pe_s -%}
+      {%- assign pe_f = pe_c[5] | strip | default: "—" -%}{%- assign ed_fn_fill = ed_fn_fill | push: pe_f -%}
+    {%- endunless -%}{%- endif -%}
+  {%- endif -%}
+{%- endfor -%}

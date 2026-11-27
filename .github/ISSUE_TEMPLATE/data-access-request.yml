@@ -46,7 +46,7 @@ body:
       options:
         - CSV files (S3 or AWS Data Exchange)
         - Snowflake share
-        - Apify feed, pay per row
+        - Daily files by e-mail
         - Not sure yet
   - type: textarea
     id: details

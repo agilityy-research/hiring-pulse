@@ -1,0 +1,127 @@
+---
+title: "Startup hiring trends, week by week"
+description: >-
+  How startup hiring changes over time: open roles, the AI/ML and remote share, companies growing and cutting, and how
+  long roles stay open, one point per weekly edition from 21,000+ public job boards. Grows every Monday.
+permalink: /trends/
+layout: default
+bands: true
+---
+{%- comment -%}
+Every number here is read from the weekly editions in reports/ (parse-edition.html), so the page grows by itself with
+each Monday edition: nothing to edit. The baseline study (site.baseline_reports) and latest.md are left out.
+{%- endcomment -%}
+{%- assign tr_pages = site.pages | where_exp: "p", "p.path contains 'reports/'" | where_exp: "p", "p.name != 'index.md'" | where_exp: "p", "p.name != 'latest.md'" | sort: "name" -%}
+{%- assign tr_dates = "" | split: "" -%}{%- assign tr_urls = "" | split: "" -%}
+{%- assign tr_companies = "" | split: "" -%}{%- assign tr_open = "" | split: "" -%}{%- assign tr_ai = "" | split: "" -%}
+{%- assign tr_remote = "" | split: "" -%}{%- assign tr_acc = "" | split: "" -%}{%- assign tr_con = "" | split: "" -%}
+{%- assign tr_fill = "" | split: "" -%}{%- assign tr_hist = "" | split: "" -%}{%- assign tr_entry = "" | split: "" -%}
+{%- assign tr_fnmap = "" | split: "" -%}
+{%- assign tr_fn_latest = "" | split: "" -%}
+{%- for p in tr_pages -%}
+  {%- assign d = p.name | remove: ".md" -%}
+  {%- if site.baseline_reports contains d -%}{%- continue -%}{%- endif -%}
+  {%- assign d4 = d | slice: 0, 4 | plus: 0 -%}{%- if d4 < 2000 -%}{%- continue -%}{%- endif -%}
+  {%- capture tr_raw %}{% include_relative reports/{{ p.name }} %}{% endcapture -%}
+  {%- include parse-edition.html raw=tr_raw -%}
+  {%- assign tr_dates = tr_dates | push: d -%}{%- assign tr_urls = tr_urls | push: p.url -%}
+  {%- assign tr_companies = tr_companies | push: ed_companies -%}{%- assign tr_open = tr_open | push: ed_open -%}
+  {%- assign tr_ai = tr_ai | push: ed_ai -%}{%- assign tr_remote = tr_remote | push: ed_remote -%}
+  {%- assign tr_acc = tr_acc | push: ed_acc -%}{%- assign tr_con = tr_con | push: ed_con -%}
+  {%- assign tr_fill = tr_fill | push: ed_fill -%}{%- assign tr_hist = tr_hist | push: ed_hist -%}{%- assign tr_entry = tr_entry | push: ed_entry -%}
+  {%- capture tr_m %}{% for f in ed_fn_names %}{{ f }}={{ ed_fn_shares[forloop.index0] }}{% unless forloop.last %}|{% endunless %}{% endfor %}{% endcapture -%}
+  {%- assign tr_fnmap = tr_fnmap | push: tr_m -%}
+  {%- assign tr_fn_latest = ed_fn_names -%}
+{%- endfor -%}
+{%- assign tr_n = tr_dates.size -%}
+{%- assign tr_first = tr_dates | first -%}{%- assign tr_last = tr_dates | last -%}
+{%- assign tr_next = tr_last | date: "%s" | plus: 604800 | date: "%Y-%m-%d" -%}
+{%- assign tr_second = tr_first | date: "%s" | plus: 604800 | date: "%Y-%m-%d" -%}
+{%- assign tr_fourth = tr_first | date: "%s" | plus: 1814400 | date: "%Y-%m-%d" -%}
+{%- assign tr_flows = site.coverage.flows_from -%}
+
+<section class="band navy hero"><div class="wrap">
+<p class="eyebrow">Trends · {{ tr_n }} weekly edition{% if tr_n != 1 %}s{% endif %} so far · a new point every Monday</p>
+<h1>How startup hiring changes, week by week</h1>
+{%- if tr_n > 0 %}
+<p class="hero">Every Monday edition adds one point to each line on this page. The first edition came out on {{ tr_first | date: "%-d %B %Y" }}; the next adds a point on {{ tr_next | date: "%-d %B" }}.</p>
+{%- else %}
+<p class="hero">Every Monday edition will add one point to each line on this page.</p>
+{%- endif %}
+<p class="sub">One week's move is often noise: a large company tidies its job board, a holiday slows posting. Four or more points show a direction. Until then, read this page as the starting line.</p>
+<div class="actions"><a class="btn" href="{{ '/reports/latest/' | relative_url }}">Read this week's report</a><a class="btn alt" href="{{ '/' | relative_url }}#facts">This week's surprising numbers</a></div>
+</div></section>
+
+{%- if tr_n > 0 %}
+<section class="band"><div class="wrap">
+<p class="eyebrow">The lines so far</p>
+<h2>Startup hiring, edition by edition</h2>
+<p class="kicker">Each column is one Monday edition, newest on the right. Every value is in the table further down.</p>
+<div class="dgrid three">
+{%- include trend-card.html title="Open roles" values=tr_open dates=tr_dates kind="count" next=tr_next note="Across every company in the benchmark" %}
+{%- include trend-card.html title="Share that are AI/ML roles" values=tr_ai dates=tr_dates kind="pct" next=tr_next note="Job titles that name AI, machine learning, LLMs or data science" %}
+{%- include trend-card.html title="Share that are remote" values=tr_remote dates=tr_dates kind="pct" next=tr_next note="Roles whose location or remote flag says remote" %}
+{%- include trend-card.html title="Companies growing fast" values=tr_acc dates=tr_dates kind="pct" next=tr_next note="Share of companies whose open roles are clearly rising (the report's &ldquo;accelerating&rdquo;)" %}
+{%- include trend-card.html title="Companies cutting" values=tr_con dates=tr_dates kind="pct" next=tr_next lower_is_good=true note="Share of companies whose open roles are clearly falling (&ldquo;contracting&rdquo;)" %}
+{%- include trend-card.html title="How long a role stays open" values=tr_fill dates=tr_dates kind="days" next=tr_next lower_is_good=true note="Median days a role stays posted before it comes down" %}
+</div>
+<p class="note">Growing fast, cutting and days open need two weeks of daily history per company. Until {{ tr_flows | date: "%-d %B %Y" }} they cover only the companies that have it ({{ tr_hist | first | default: "a few hundred" }} in the first edition); from that edition they cover every company. Expect a step in those three lines that week: that is the wider coverage, not a change in the market.</p>
+</div></section>
+{%- endif %}
+
+<section class="band tint"><div class="wrap">
+<p class="eyebrow">What will appear, and when</p>
+<h2>The page fills in on its own</h2>
+<ol class="timeline">
+{%- if tr_n > 0 %}
+<li class="done"><b>{{ tr_first | date: "%-d %B %Y" }}: the first weekly edition</b><span class="muted">The starting point of every line above.</span></li>
+<li{% if tr_n > 1 %} class="done"{% endif %}><b>{{ tr_second | date: "%-d %B %Y" }}: the second edition</b><span class="muted">The first change from one week to the next, for open roles, the AI/ML and remote shares and the mix of functions.</span></li>
+{%- endif %}
+<li{% if tr_last >= tr_flows %} class="done"{% endif %}><b>{{ tr_flows | date: "%-d %B %Y" }}: every company counts in every line</b><span class="muted">Growth, roles opened and closed, days open and the growing and cutting shares cover all {{ site.coverage.companies }} companies, not just those with two weeks of daily history.</span></li>
+{%- if tr_n > 0 %}
+<li{% if tr_n > 3 %} class="done"{% endif %}><b>{{ tr_fourth | date: "%-d %B %Y" }}: four points</b><span class="muted">A month of weekly change: the earliest a direction is worth reading. From the fifth edition each line also shows its change over four weeks.</span></li>
+{%- endif %}
+<li><b>Every Monday after that</b><span class="muted">One more point on every line, and one more column in the tables below. The last 26 editions are drawn; every edition stays in the table.</span></li>
+</ol>
+</div></section>
+
+{%- if tr_n > 0 %}
+<section class="band"><div class="wrap">
+<p class="eyebrow">Every edition</p>
+<h2>The numbers behind the lines</h2>
+<div class="scroll"><table>
+<thead><tr><th>Edition</th><th>Companies</th><th>Open roles</th><th>AI/ML</th><th>Remote</th><th>Growing fast</th><th>Cutting</th><th>Days open</th><th>Entry-level</th></tr></thead>
+<tbody>
+{%- for i in (1..tr_n) %}{%- assign k = tr_n | minus: i %}
+<tr><td><a href="{{ tr_urls[k] | relative_url }}">{{ tr_dates[k] | date: "%-d %b %Y" }}</a></td><td>{{ tr_companies[k] | default: "—" }}</td><td>{{ tr_open[k] | default: "—" }}</td><td>{{ tr_ai[k] | default: "—" }}</td><td>{{ tr_remote[k] | default: "—" }}</td><td>{{ tr_acc[k] | default: "—" }}</td><td>{{ tr_con[k] | default: "—" }}</td><td>{{ tr_fill[k] | default: "—" }}</td><td>{{ tr_entry[k] | default: "—" }}</td></tr>
+{%- endfor %}
+</tbody></table></div>
+<p class="note">Growing fast and cutting are the shares of companies the report calls accelerating and contracting; days open is the median days-to-fill; entry-level is the share of open roles. The definitions are in the <a href="{{ '/methodology/' | relative_url }}">methodology</a>.</p>
+
+{%- if tr_fn_latest.size > 0 %}
+{%- assign tr_cols = tr_n -%}{%- if tr_cols > 8 -%}{%- assign tr_cols = 8 -%}{%- endif -%}{%- assign tr_c0 = tr_n | minus: tr_cols -%}
+<h2 style="margin-top:2.2rem">Which functions startups hire for, over time</h2>
+<p class="kicker">Each function's share of all open roles{% if tr_cols > 1 %}, for the last {{ tr_cols }} editions{% endif %}. Roles whose title fits no function are left out, so a column does not add up to 100%.</p>
+<div class="scroll"><table class="heat">
+<thead><tr><th>Function</th>{% for j in (1..tr_cols) %}{% assign k = tr_c0 | plus: j | minus: 1 %}<th>{{ tr_dates[k] | date: "%-d %b" }}</th>{% endfor %}</tr></thead>
+<tbody>
+{%- for f in tr_fn_latest %}
+<tr><td>{{ f }}</td>
+{%- for j in (1..tr_cols) %}{%- assign k = tr_c0 | plus: j | minus: 1 -%}{%- assign cell = "—" -%}
+{%- assign parts = tr_fnmap[k] | split: "|" -%}{%- assign key = f | append: "=" -%}
+{%- for pt in parts -%}{%- assign head = pt | slice: 0, key.size -%}{%- if head == key -%}{%- assign cell = pt | remove_first: key -%}{%- endif -%}{%- endfor -%}
+<td class="c">{{ cell }}</td>
+{%- endfor %}</tr>
+{%- endfor %}
+</tbody></table></div>
+{%- endif %}
+</div></section>
+{%- endif %}
+
+<section class="band tint"><div class="wrap">
+<p class="eyebrow">Want the daily line?</p>
+<h2>The same numbers, for every company, every day</h2>
+<p class="sub muted">This page has one point a week for the whole market. The daily data has one record per company per day, so you can draw these lines for your competitors, your accounts or your portfolio.{% if site.beta_signup_action != "" %} It is free by e-mail until {{ site.beta_end | date: "%-d %B %Y" }}.{% endif %}</p>
+<div class="actions"><a class="btn" href="{{ '/get-the-data/' | relative_url }}{% if site.beta_signup_action != "" %}#beta{% endif %}">{% if site.beta_signup_action != "" %}Get the daily files free{% else %}How to buy{% endif %}</a>
+<a class="btn alt" href="{{ '/feed.xml' | relative_url }}">Follow in a feed reader</a></div>
+</div></section>

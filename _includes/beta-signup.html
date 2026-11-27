@@ -6,7 +6,7 @@ URL, private repo RUNBOOK §12). Field names come from _config.yml so they can f
 <div class="beta card" id="beta">
 <p class="for">Free during the beta{% if site.beta_end != "" %}, until {{ site.beta_end | date: "%-d %B %Y" }}{% endif %}</p>
 <h3>Every company, every day, in your inbox</h3>
-<p class="muted small">Each morning by about 07:30 UTC: download links for that day's two CSV files, every tracked company, plus the six days before. Confirm your address from the e-mail we send, and the next morning's files are yours.</p>
+<p class="muted small">Every morning, before the US workday starts: links to that day's two spreadsheets (every tracked company, and every role opened or closed), plus the six days before. Confirm your address from the e-mail we send, and the next morning's files are yours.</p>
 <form action="{{ site.beta_signup_action }}" method="post">
 <label><span>Work e-mail</span><input type="email" name="{{ site.beta_email_field | default: 'email_address' }}" autocomplete="email" required></label>
 <label><span>Your role</span><select name="{{ site.beta_role_field | default: 'fields[role]' }}" required>

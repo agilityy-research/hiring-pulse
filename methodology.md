@@ -21,8 +21,6 @@ and what the numbers cannot tell you. If you want to quote a figure or build on 
   {{ site.coverage.daily_since }} to {{ site.coverage.companies_since }}, on Greenhouse, Lever and Ashby). Of these,
   {{ site.coverage.with_industry }} of them are Y Combinator companies with industry, sub-industry, batch and team size
   from the public YC directory; that is where the industry and company-size breakdowns come from.
-- **Funding.** The funded-and-hiring products on [products and prices]({{ '/data/' | relative_url }}) read the SEC's public
-  EDGAR daily index and Form D filings. The weekly report does not use them.
 
 ## What each term means
 

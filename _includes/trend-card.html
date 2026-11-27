@@ -1,0 +1,48 @@
+{%- comment -%}
+One line on /trends/: the latest value, the change since the previous edition (and since four editions back once there
+are five), and a column per edition. include.values and include.dates are parallel arrays, oldest first; a value of ""
+or "—" is a gap. include.kind is "pct" (share, change in points), "days" or "count" (change in per cent).
+{%- endcomment -%}
+{%- assign tc_vals = include.values -%}{%- assign tc_dates = include.dates -%}{%- assign tc_n = tc_vals.size -%}
+{%- assign tc_from = tc_n | minus: 26 -%}{%- if tc_from < 0 -%}{%- assign tc_from = 0 -%}{%- endif -%}
+{%- assign tc_max = 0.0 -%}
+{%- for tc_v in tc_vals offset: tc_from -%}{%- if tc_v != "" and tc_v != "—" -%}
+  {%- assign tc_x = tc_v | remove: "," | remove: "%" | remove: "+" | replace: "−", "-" | plus: 0.0 -%}
+  {%- if tc_x > tc_max -%}{%- assign tc_max = tc_x -%}{%- endif -%}
+{%- endif -%}{%- endfor -%}
+{%- assign tc_last = tc_vals | last -%}
+<div class="panel">
+<h3>{{ include.title }}</h3>
+<p class="muted">{{ include.note }}</p>
+<p class="trend-val">{% if tc_last != "" %}{{ tc_last }}{% if include.kind == "days" %} days{% endif %}{% else %}—{% endif %}</p>
+{%- assign tc_lines = "" | split: "" -%}
+{%- for tc_back in (1..4) -%}
+  {%- if tc_back != 1 and tc_back != 4 -%}{%- continue -%}{%- endif -%}
+  {%- assign tc_i = tc_n | minus: 1 | minus: tc_back -%}
+  {%- if tc_i < 0 -%}{%- continue -%}{%- endif -%}
+  {%- assign tc_p = tc_vals[tc_i] -%}
+  {%- if tc_p == "" or tc_p == "—" or tc_last == "" or tc_last == "—" -%}{%- continue -%}{%- endif -%}
+  {%- assign tc_a = tc_last | remove: "," | remove: "%" | remove: "+" | replace: "−", "-" | plus: 0.0 -%}
+  {%- assign tc_b = tc_p | remove: "," | remove: "%" | remove: "+" | replace: "−", "-" | plus: 0.0 -%}
+  {%- if include.kind == "pct" -%}{%- assign tc_d = tc_a | minus: tc_b | round: 1 -%}{%- assign tc_u = " pts" -%}
+  {%- elsif include.kind == "days" -%}{%- assign tc_d = tc_a | minus: tc_b | round: 1 -%}{%- assign tc_u = " days" -%}
+  {%- elsif tc_b != 0 -%}{%- assign tc_d = tc_a | minus: tc_b | times: 100.0 | divided_by: tc_b | round: 1 -%}{%- assign tc_u = "%" -%}
+  {%- else -%}{%- continue -%}{%- endif -%}
+  {%- if tc_d > 0 -%}{%- assign tc_cls = "up" -%}{%- assign tc_sg = "+" -%}{%- elsif tc_d < 0 -%}{%- assign tc_cls = "down" -%}{%- assign tc_sg = "−" -%}{%- else -%}{%- assign tc_cls = "" -%}{%- assign tc_sg = "±" -%}{%- endif -%}
+  {%- if include.lower_is_good -%}{%- if tc_cls == "up" -%}{%- assign tc_cls = "down" -%}{%- elsif tc_cls == "down" -%}{%- assign tc_cls = "up" -%}{%- endif -%}{%- endif -%}
+  {%- capture tc_line %}<span class="{{ tc_cls }}">{{ tc_sg }}{{ tc_d | abs }}{{ tc_u }}</span> {% if tc_back == 1 %}since the previous edition{% else %}over four weeks{% endif %}{% endcapture -%}
+  {%- assign tc_lines = tc_lines | push: tc_line -%}
+{%- endfor %}
+<p class="trend-chg">{% if tc_lines.size > 0 %}{{ tc_lines | join: " · " }}{% else %}First point. The next one comes with the edition of {{ include.next | date: "%-d %B" }}.{% endif %}</p>
+<div class="cols" role="img" aria-label="{{ include.title }}, one column per weekly edition">
+{%- for tc_v in tc_vals offset: tc_from -%}
+  {%- assign tc_j = forloop.index0 | plus: tc_from -%}
+  {%- if tc_v == "" or tc_v == "—" or tc_max == 0 -%}<i class="gap" style="height:100%" title="{{ tc_dates[tc_j] | date: '%-d %b %Y' }}: not measured"></i>
+  {%- else -%}{%- assign tc_x = tc_v | remove: "," | remove: "%" | remove: "+" | replace: "−", "-" | plus: 0.0 -%}{%- assign tc_h = tc_x | times: 100.0 | divided_by: tc_max | round: 1 -%}
+  <i style="height:{{ tc_h }}%" title="{{ tc_dates[tc_j] | date: '%-d %b %Y' }}: {{ tc_v }}"></i>
+  {%- endif -%}
+{%- endfor -%}
+</div>
+{%- assign tc_d0 = tc_dates[tc_from] -%}{%- assign tc_d1 = tc_dates | last -%}
+<div class="colx" aria-hidden="true"><span>{{ tc_d0 | date: "%-d %b" }}</span>{% if tc_d1 != tc_d0 %}<span>{{ tc_d1 | date: "%-d %b" }}</span>{% endif %}</div>
+</div>

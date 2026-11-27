@@ -1,0 +1,140 @@
+{%- comment -%}
+  "Numbers worth sharing": the week's most surprising facts, each a big number, one quotable sentence and a link to
+  the page behind it. Everything comes from _data/markets.json (rewritten by the Monday Pulse run) plus the entry-level
+  share passed in from the latest report, so the facts refresh with each edition. A fact whose data is missing, or
+  whose claim no longer holds this week (for example staff pay no longer above director pay), is simply not shown.
+  Usage: {% include curious-facts.html entry_pct=... mid_pct=... %}
+{%- endcomment -%}
+{%- assign m = site.data.markets -%}
+{%- if m and m.ready -%}
+{%- assign usd = m.pay.tables | where: "key", "usd-year" | first -%}
+{%- assign gbp = m.pay.tables | where: "key", "gbp-year" | first -%}
+{%- assign eur = m.pay.tables | where: "key", "eur-year" | first -%}
+{%- capture cards -%}
+
+{%- comment -%} 1. The expert track out-earns the management track. {%- endcomment -%}
+{%- if usd -%}
+{%- assign staff = usd.bySeniority | where: "name", "Staff/Principal" | first -%}
+{%- assign director = usd.bySeniority | where: "name", "Director" | first -%}
+{%- if staff and director and staff.median > director.median -%}
+<div class="card fact"><b class="n">{{ staff.medianText }}</b>
+<p><b>Staff and principal roles are advertised above directors.</b> The median staff or principal salary is {{ staff.medianText }} a year, against {{ director.medianText }} for a director: at startups, the expert track out-earns the management track.</p>
+<a class="more" href="{{ '/pay/' | relative_url }}">Pay by seniority</a></div>
+{%- endif -%}
+{%- endif -%}
+
+{%- comment -%} 2. Almost nobody hires juniors. {%- endcomment -%}
+{%- if include.entry_pct and include.entry_pct != "" -%}
+{%- assign ep = include.entry_pct | plus: 0 -%}
+{%- if ep > 0 -%}
+{%- assign one_in = 100.0 | divided_by: ep | round -%}
+{%- assign entry = usd.bySeniority | where: "name", "Entry" | first -%}
+<div class="card fact"><b class="n">1 in {{ one_in }}</b>
+<p><b>Only {{ include.entry_pct }}% of startup openings are entry level.</b> {% if include.mid_pct and include.mid_pct != "" %}{{ include.mid_pct }}% are mid-level. {% endif %}{% if entry %}The entry-level roles that show pay offer a median {{ entry.medianText }}.{% endif %}</p>
+<a class="more" href="{{ '/reports/latest/' | relative_url }}">Seniority mix in the report</a></div>
+{%- endif -%}
+{%- endif -%}
+
+{%- comment -%} 3. Salary transparency: the US against the UK. {%- endcomment -%}
+{%- assign us = m.countries | where: "country", "United States" | first -%}
+{%- assign uk = m.countries | where: "country", "United Kingdom" | first -%}
+{%- if us and uk and uk.payPct > 0 -%}
+{%- assign ratio = us.payPct | divided_by: uk.payPct | round -%}
+{%- if ratio >= 2 -%}
+<div class="card fact"><b class="n">{{ ratio }}×</b>
+<p><b>A US startup job is {{ ratio }} times as likely to show its salary as a UK one.</b> {{ us.payPct }}% of US postings publish a pay range, against {{ uk.payPct }}% in the UK.</p>
+<a class="more" href="{{ '/pay/' | relative_url }}">What startups pay</a></div>
+{%- endif -%}
+{%- endif -%}
+
+{%- comment -%} 4. Functions that out-earn engineering. {%- endcomment -%}
+{%- if usd -%}
+{%- assign eng = usd.byFunction | where: "name", "Engineering" | first -%}
+{%- assign ranked = usd.byFunction | where_exp: "r", "r.name != 'Other'" | sort: "median" | reverse -%}
+{%- assign top_fn = ranked | first -%}
+{%- if eng and top_fn and top_fn.name != "Engineering" -%}
+{%- assign above = "" -%}{%- assign n_above = 0 -%}
+{%- for r in ranked -%}{%- if r.median > eng.median -%}{%- assign n_above = n_above | plus: 1 -%}{%- if above != "" -%}{%- assign above = above | append: "|" -%}{%- endif -%}{%- assign above = above | append: r.name -%}{%- endif -%}{%- endfor -%}
+{%- assign names = above | split: "|" -%}
+<div class="card fact"><b class="n">{{ top_fn.medianText }}</b>
+<p><b>{{ top_fn.name }} is the best-paid startup job, not engineering.</b> {% if n_above > 1 %}{% for x in names %}{% if forloop.last %} and {% elsif forloop.first == false %}, {% endif %}{{ x }}{% endfor %} roles all advertise more than engineering's {{ eng.medianText }}.{% else %}Engineering's median is {{ eng.medianText }}.{% endif %}</p>
+<a class="more" href="{{ '/pay/' | relative_url }}">Salary by job function</a></div>
+{%- endif -%}
+{%- endif -%}
+
+{%- comment -%} 5. The biggest startup hiring city. {%- endcomment -%}
+{%- if m.cities.size > 1 -%}
+{%- assign c0 = m.cities[0] -%}{%- assign c1 = m.cities[1] -%}
+<div class="card fact"><b class="n">{{ c0.rolesT }}</b>
+<p><b>{{ c0.label }} has more startup openings than any other city{% if c1.label == "San Francisco" %}, San Francisco included{% endif %}.</b> {{ c0.rolesT }} open roles at {{ c0.companiesT }} companies, against {{ c1.rolesT }} at {{ c1.companiesT }} in {{ c1.label }}.</p>
+<a class="more" href="{{ '/cities/' | relative_url }}">Top hiring cities</a></div>
+{%- endif -%}
+
+{%- comment -%} 6. The most and least remote function. {%- endcomment -%}
+{%- assign fmax = nil -%}{%- assign fmin = nil -%}
+{%- for f in m.workMode.byFunction -%}
+{%- if fmax == nil or f.modes.remote > fmax.modes.remote -%}{%- assign fmax = f -%}{%- endif -%}
+{%- if fmin == nil or f.modes.remote < fmin.modes.remote -%}{%- assign fmin = f -%}{%- endif -%}
+{%- endfor -%}
+{%- if fmax and fmin and fmax.function != fmin.function -%}
+<div class="card fact"><b class="n">{{ fmax.modes.remote }}%</b>
+<p><b>{{ fmax.function }} is the most remote startup job.</b> {{ fmax.modes.remote }}% of its roles that state a work mode are fully remote, against {{ fmin.modes.remote }}% in {{ fmin.function }}.</p>
+<a class="more" href="{{ '/cities/' | relative_url }}">Work mode by city and function</a></div>
+{%- endif -%}
+
+{%- comment -%} 7. Hybrid capital, remote capital, office capital (among the top cities). {%- endcomment -%}
+{%- assign hmax = nil -%}{%- assign rmax = nil -%}{%- assign rmin = nil -%}
+{%- for c in m.cities -%}
+{%- if c.modes.knownPct >= 40 -%}
+{%- if hmax == nil or c.modes.hybrid > hmax.modes.hybrid -%}{%- assign hmax = c -%}{%- endif -%}
+{%- if rmax == nil or c.modes.remote > rmax.modes.remote -%}{%- assign rmax = c -%}{%- endif -%}
+{%- if rmin == nil or c.modes.remote < rmin.modes.remote -%}{%- assign rmin = c -%}{%- endif -%}
+{%- endif -%}
+{%- endfor -%}
+{%- if hmax and rmax and rmin -%}
+<div class="card fact"><b class="n">{{ hmax.modes.hybrid }}%</b>
+<p><b>{{ hmax.label }} is the hybrid capital of startup hiring.</b> {{ hmax.modes.hybrid }}% of its roles are hybrid. {% if rmax.label != hmax.label %}{{ rmax.label }} is the most remote big city ({{ rmax.modes.remote }}% fully remote); {% endif %}{{ rmin.label }} the least ({{ rmin.modes.remote }}%).</p>
+<a class="more" href="{{ '/cities/' | relative_url }}">Every city's work mode</a></div>
+{%- endif -%}
+
+{%- comment -%} 8. The pay gap between cities. {%- endcomment -%}
+{%- if usd and usd.byCity.size > 2 -%}
+{%- assign bc = usd.byCity | sort: "median" -%}
+{%- assign low = bc | first -%}{%- assign high = bc | last -%}
+{%- assign gap = high.median | minus: low.median | divided_by: 1000 | round -%}
+<div class="card fact"><b class="n">${{ gap }}k</b>
+<p><b>Startup roles in {{ high.name }} advertise ${{ gap }}k more than in {{ low.name }}.</b> The median advertised salary is {{ high.medianText }} in {{ high.name }} and {{ low.medianText }} in {{ low.name }}, across all roles.</p>
+<a class="more" href="{{ '/pay/' | relative_url }}">Pay by city</a></div>
+{%- endif -%}
+
+{%- comment -%} 9. Dollars, pounds, euros (never converted). {%- endcomment -%}
+{%- if usd and gbp and eur -%}
+<div class="card fact"><b class="n">{{ usd.all.medianText }}</b>
+<p><b>The typical advertised startup salary is {{ usd.all.medianText }} in dollars, {{ gbp.all.medianText }} in pounds and {{ eur.all.medianText }} in euros.</b> Each figure is the median of the ranges published in that currency, with no conversion.</p>
+<a class="more" href="{{ '/pay/' | relative_url }}">Other currencies</a></div>
+{%- endif -%}
+
+{%- comment -%} 10. Internships and contracts. {%- endcomment -%}
+{%- assign intern = m.employment.types | where: "type", "internship" | first -%}
+{%- assign contract = m.employment.types | where: "type", "contract" | first -%}
+{%- assign ft = m.employment.types | where: "type", "full_time" | first -%}
+{%- if intern and intern.sharePct > 0 and ft -%}
+{%- assign i_in = 100.0 | divided_by: intern.sharePct | round -%}
+<div class="card fact"><b class="n">1 in {{ i_in }}</b>
+<p><b>One startup opening in {{ i_in }} is an internship.</b> {{ ft.sharePct }}% are full-time{% if contract %} and {{ contract.sharePct }}% are contracts{% endif %}, among the roles that state it.</p>
+{% if m.skills.ready %}<a class="more" href="{{ '/skills/' | relative_url }}">Contract types</a>{% endif %}</div>
+{%- endif -%}
+
+{%- endcapture -%}
+{%- if cards contains "fact" %}
+<section class="band" id="facts"><div class="wrap">
+<p class="eyebrow">Numbers worth sharing · {{ m.dateText }}</p>
+<h2>What surprised us in this week's data</h2>
+<p class="sub muted">From {{ m.coverage.rolesT }} open roles at {{ m.coverage.companiesT }} startups and scale-ups. Free to quote with a link to this site.</p>
+<div class="curious">
+{{ cards }}
+</div>
+<p class="small"><a href="{{ '/trends/' | relative_url }}">How the headline numbers change week by week</a></p>
+</div></section>
+{%- endif %}
+{%- endif -%}
