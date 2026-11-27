@@ -47,7 +47,7 @@ permalink: /
 {%- assign hero = first | split: "**" | first %}
 <p class="hero">{{ hero }}</p>
 {%- endif %}
-<p class="sub">Every day we read each company's own job board on {{ site.coverage.vendors }}. Employers with more than 1,000 open roles, staffing agencies, franchises and test boards are left out, so the benchmark stays about startups. <a href="{{ '/methodology/' | relative_url }}">How we count</a>.</p>
+<p class="sub">Read once a day from each company's own job board, never from a job site. Employers with more than 1,000 open roles, staffing agencies and franchises are left out, so the benchmark stays about startups. <a href="{{ '/methodology/' | relative_url }}">How we count</a>.</p>
 <div class="actions"><a class="btn" href="{{ '/reports/latest/' | relative_url }}">Read this week's report</a>
 <a class="btn alt" href="#{% if site.beta_signup_action != "" %}beta{% else %}data{% endif %}">Get the daily data{% if site.beta_signup_action != "" %} free{% endif %}</a></div>
 {%- if v_open != "" %}
