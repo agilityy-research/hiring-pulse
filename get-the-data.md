@@ -8,28 +8,29 @@ dataset_name: "Hiring Pulse daily hiring signals and job events"
 ---
 # Get the data
 
-Every number in the weekly report comes from the daily data: one line per company per day (open roles, roles opened
-and closed, growth, days-to-fill, function and seniority mix, AI/ML, remote and pay shares, a one-word signal) and one
-line per role opened or closed.
+The weekly report is one view of what we collect. Underneath it is a daily record of every tracked company: how many
+roles it has open, which ones it opened and closed, and whether it is growing or cutting. This page is how you get
+that record.
 
 {% if site.beta_signup_action != "" %}
 <p id="beta-thanks" class="beta-thanks card"><b>Thanks.</b> Check your inbox for the confirmation e-mail and click its link; the next morning's files arrive before the US workday starts. Nothing there? Look in the spam folder, or sign up again below.</p>
 
-## Free during the beta: every company's daily files by e-mail
+## Free during the beta: every company, every day, by e-mail
 
-Until {{ site.beta_end | date: "%-d %B %Y" }}, the whole daily data is free. Sign up with a work e-mail and two short
-answers, confirm the address from the e-mail we send, and every morning you get:
+Until {{ site.beta_end | date: "%-d %B %Y" }}, the whole daily record is free. Sign up with a work e-mail and two short
+answers, confirm the address from the e-mail we send, and every morning before the US workday starts you get:
 
-- **Two spreadsheets for the day** that open in Excel or Google Sheets. One has a line per company: open roles, roles
-  opened and closed, growth, how long roles stay open, the mix of functions and seniority, the AI/ML, remote and pay
-  shares, and a one-word signal (accelerating, steady, flat or contracting). The other has a line per role opened or closed. The columns are those of the
+- **Who moved.** The companies that added and cut the most roles since the day before, with their open-role counts.
+- **Two spreadsheets for the day**, opening in Excel or Google Sheets. *Companies*: one line per tracked company with its
+  open roles, roles opened and closed, growth, how long its roles stay open, its mix of functions and seniority, its
+  AI/ML, remote and pay shares, and a one-word signal (accelerating, steady, flat or contracting). *Roles opened and
+  closed*: one line per role, with its title, team, location and posting URL. The columns are those of the
   [free sample]({{ '/for-data-teams/' | relative_url }}#free-sample) plus location and pay fields.
 - **The six days before**, linked in the same e-mail. Every link works for 7 days, so a missed morning costs nothing.
-- **Who moved**: the companies that added and cut the most roles since the day before.
 
-Each e-mail ends with one question; replies reach us directly, and they decide what the paid version looks like. After
-the beta the full daily files will be $99 a month; we will write two weeks before the end date, and nothing is charged
-unless you choose to subscribe then.
+Each e-mail ends with one question. Replies reach a person, and they decide what the paid version looks like. After the
+beta the daily files will be $99 a month; we will write two weeks before the end date, and nothing is charged unless
+you choose to subscribe then.
 
 {% include beta-signup.html %}
 

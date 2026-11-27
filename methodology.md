@@ -149,4 +149,4 @@ question about a definition? [Open an issue](https://github.com/agilityy-researc
 ## Next
 
 - Read [this week's report]({{ '/reports/latest/' | relative_url }}), measured exactly as described here.
-- Want the rows behind it, for your own companies and days? See [how to buy]({{ '/get-the-data/' | relative_url }}).
+- Want the rows behind it, for your own companies and days? See [get the data]({{ '/get-the-data/' | relative_url }}).

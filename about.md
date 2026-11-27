@@ -36,4 +36,4 @@ working days.{% if site.beta_signup_action != "" %} Beta subscribers can also re
 ## Next
 
 - Read [this week's report]({{ '/reports/latest/' | relative_url }}).
-- Buy the daily data: [how to buy]({{ '/get-the-data/' | relative_url }}).
+- Get the daily data: [what you get, and how]({{ '/get-the-data/' | relative_url }}).

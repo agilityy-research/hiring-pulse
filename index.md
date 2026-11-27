@@ -35,51 +35,36 @@ permalink: /
   {%- elsif r contains "| AI/ML share of open roles |" -%}{%- assign v_ai = cells[2] | strip -%}{%- assign d_ai = cells[4] | strip -%}
   {%- elsif r contains "| Remote roles, share of open roles |" -%}{%- assign v_remote = cells[2] | strip -%}{%- assign d_remote = cells[4] | strip -%}
   {%- endif -%}
-{%- endfor -%}
 
 <section class="band navy hero"><div class="wrap">
 <p class="eyebrow">Weekly edition of {{ latest_date | date: "%-d %B %Y" }}</p>
-<h1>Where startup hiring is moving this week</h1>
+<h1>Who is hiring, who is cutting, what they pay</h1>
 {%- if v_open != "" %}
-<p class="hero">{{ v_open }} open roles on the job boards of {{ v_companies | default: site.coverage.companies }} startups and scale-ups, counted this week.</p>
+<p class="hero">{{ v_open }} open roles across {{ v_companies | default: site.coverage.companies }} startups and scale-ups, counted this week from their own job boards.</p>
 {%- elsif items.size > 1 %}
 {%- assign first = items[1] | split: nl2 | first -%}
 {%- assign hero = first | split: "**" | first %}
 <p class="hero">{{ hero }}</p>
 {%- endif %}
-<p class="sub">How we count: once a day we read the public job board (the list of open roles behind the careers page) of every startup and scale-up we have found on {{ site.coverage.vendors }}, and count every role that is open. Employers with more than 1,000 open roles, staffing agencies, franchises and test boards are left out, so the benchmark stays about startups. <a href="{{ '/methodology/' | relative_url }}">How the numbers are measured</a>.</p>
+<p class="sub">Every day we read each company's own job board on {{ site.coverage.vendors }}. Employers with more than 1,000 open roles, staffing agencies, franchises and test boards are left out, so the benchmark stays about startups. <a href="{{ '/methodology/' | relative_url }}">How we count</a>.</p>
 <div class="actions"><a class="btn" href="{{ '/reports/latest/' | relative_url }}">Read this week's report</a>
 <a class="btn alt" href="#{% if site.beta_signup_action != "" %}beta{% else %}data{% endif %}">Get the daily data{% if site.beta_signup_action != "" %} free{% endif %}</a></div>
 {%- if v_open != "" %}
 <div class="stats" aria-label="Headline numbers">
 <div class="stat"><b>{{ v_open }}</b><span>open roles</span>{% if d_open != "" and d_open != "—" %}<span class="delta">{{ d_open }} vs previous edition</span>{% endif %}</div>
 {%- if v_companies != "" %}<div class="stat"><b>{{ v_companies }}</b><span>companies tracked</span></div>{% endif %}
-{%- if v_fill != "" and v_fill != "—" %}<div class="stat"><b>{{ v_fill }}</b><span>median days a role stays posted before it closes</span>{% if d_fill != "" and d_fill != "—" %}<span class="delta">{{ d_fill }}</span>{% endif %}</div>{% endif %}
-{%- if v_remote != "" and v_remote != "—" %}<div class="stat"><b>{{ v_remote }}</b><span>of open roles are flagged remote</span>{% if d_remote != "" and d_remote != "—" %}<span class="delta">{{ d_remote }}</span>{% endif %}</div>{% endif %}
+{%- if v_fill != "" and v_fill != "—" %}<div class="stat"><b>{{ v_fill }}</b><span>median days a role stays open</span>{% if d_fill != "" and d_fill != "—" %}<span class="delta">{{ d_fill }}</span>{% endif %}</div>{% endif %}
+{%- if v_remote != "" and v_remote != "—" %}<div class="stat"><b>{{ v_remote }}</b><span>of open roles flagged remote</span>{% if d_remote != "" and d_remote != "—" %}<span class="delta">{{ d_remote }}</span>{% endif %}</div>{% endif %}
 </div>
 {%- endif %}
 </div></section>
 
 {% include curious-facts.html report_date=latest_date %}
 
-<section class="band" id="lookup"><div class="wrap">
-<p class="eyebrow">Try the data</p>
-<h2>Look up a company</h2>
-<p class="sub muted">This week's numbers for any company in the benchmark: open roles, the share of AI/ML and remote roles, and the recent change once a company has two weeks of history.</p>
-<div class="search" id="company-search" hidden>
-<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-<label class="visually-hidden" for="company-q">Search a company</label>
-<input id="company-q" type="search" autocomplete="off" spellcheck="false" placeholder="Type a company name, e.g. Fivetran">
-<ul class="search-results" id="company-results" aria-live="polite"></ul>
-</div>
-<p class="muted small" id="company-search-note" hidden>One line per company, from this week's edition. The roles themselves and the day-by-day history are in the <a href="#data">daily data</a>. Not finding a company? <a href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">Request it</a>.</p>
-<noscript><p class="muted small">The search needs JavaScript; the same preview rows are in <a href="{{ '/reports/data/companies.json' | relative_url }}">reports/data/companies.json</a>.</p></noscript>
-</div></section>
-
 <section class="band tint"><div class="wrap">
-<p class="eyebrow">Key findings</p>
+<p class="eyebrow">This week</p>
 <h2>What the data says this week</h2>
-<p class="sub muted">Six findings, one per theme, with a line on what each means for your team. The full report has the tables behind each.</p>
+<p class="sub muted">Six findings from the edition of {{ latest_date | date: "%-d %B %Y" }}, each with what it means for your team. The tables behind them are in the full report.</p>
 {%- assign labels = "Demand|Momentum|Movers|Time to fill|AI/ML roles|Remote work" | split: "|" -%}
 {%- if items.size > 1 %}
 <div class="insights">
@@ -103,6 +88,8 @@ permalink: /
 {%- else %}
 {{ sections[0] | remove_first: title_line | markdownify }}
 {%- endif %}
+<div class="actions"><a class="btn" href="{{ '/reports/latest/' | relative_url }}">Read the full report</a>
+<a class="btn alt" href="{{ '/reports/' | relative_url }}">Every edition</a></div>
 </div></section>
 
 {%- if charts != "" %}
@@ -129,17 +116,16 @@ permalink: /
 {{ headline | split: "Seniority mix of open roles:" | first | markdownify }}
 </details>
 {%- endif %}
-<div class="actions"><a class="btn" href="{{ '/reports/latest/' | relative_url }}">Read the full report</a>
-<a class="btn alt" href="{{ '/reports/' | relative_url }}">Every edition</a></div>
 </div></section>
 {%- endif %}
 
 {%- assign mk = site.data.markets -%}
 {%- if mk and mk.ready %}
 {%- assign mkpay = mk.pay.tables | where: "key", "usd-year" | first -%}
-<section class="band" id="explore"><div class="wrap">
+<section class="band tint" id="explore"><div class="wrap">
+<p class="eyebrow">Explore the data</p>
 <h2>Where startups hire, what they pay, what they ask for</h2>
-<p class="sub muted">Every open role placed in its city, with its work mode, advertised pay and the skills its description names, as read on {{ mk.dateText }}.</p>
+<p class="sub muted">Every open role placed in its city, with its work mode, the salary its posting publishes and the skills its description names, as read on {{ mk.dateText }}.</p>
 <div class="dgrid three">
 <div class="panel"><h3><a href="{{ '/data/cities/' | relative_url }}">Hiring by city</a></h3><p class="muted">Open roles, {{ mk.coverage.cityPct }}% of roles name a city</p>
 <ol class="bars">{% for c in mk.cities limit: 6 %}<li><span class="name">{{ c.label }}</span><span class="track"><span class="fill" style="width:{{ c.barPct }}%"></span></span><span class="val">{{ c.rolesT }}</span></li>{% endfor %}</ol>
@@ -163,44 +149,58 @@ permalink: /
 </div></section>
 {%- endif %}
 
-<section class="band tint" id="data"><div class="wrap">
-<p class="eyebrow">The data behind the report</p>
-{%- if site.beta_signup_action != "" %}
-<h2>The report is free. During the beta, so is the daily data.</h2>
-<p class="sub muted">Behind every number on this page is a daily record for each company: its open roles, the roles it opened and closed, and whether it is growing or cutting. Until {{ site.beta_end | date: "%-d %B %Y" }}, every company's numbers for the day come free by e-mail each morning, as two spreadsheet files. After the beta the full daily files will be $99 a month, and you decide then.</p>
-{% include beta-signup.html %}
-{%- elsif site.stripe_payment_link != "" %}
-<h2>The report is free. The daily data is $99 a month.</h2>
-<p class="sub muted">Behind every number on this page is a daily record for each company: its open roles, the roles it opened and closed, and whether it is growing or cutting. Hiring Pulse Daily sends you all of it every morning: every company, the latest day plus the 30 before, cancel any time.</p>
-<div class="actions"><a class="btn" href="{{ site.stripe_payment_link }}">Subscribe, $99 a month</a></div>
-{%- else %}
-<h2>The report is free. Ask us for the data behind it.</h2>
-<p class="sub muted">Behind every number on this page is a daily record for each company: its open roles, the roles it opened and closed, and whether it is growing or cutting. Tell us which companies and days you need and what for, and we will send a cut.</p>
-{%- endif %}
-<div class="actions"><a class="btn alt" href="{{ '/get-the-data/' | relative_url }}">What you get</a>
-<a class="btn alt" href="{{ '/samples/daily_signals_sample.csv' | relative_url }}" download>Free sample file</a></div>
-<p class="muted small">Need the whole history in your own systems, or a cut for a story or a paper? <a href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">Ask us</a>.</p>
-</div></section>
-
-<section class="band"><div class="wrap">
-<p class="eyebrow">Method</p>
-<h2>Why these numbers hold up</h2>
-<div class="facts">
-<div class="card"><h3>Straight from the source</h3><p>We read every company's own job board ({{ site.coverage.vendors }}) once a day, not a job site that copies listings. Each role is counted once, and counts as closed the day its posting comes down.</p></div>
-<div class="card"><h3>Broad</h3><p>{{ site.coverage.companies }} companies found by scanning the public job boards of six hiring systems: mostly venture-backed technology companies. Employers with more than 1,000 open roles, staffing agencies, franchises and test boards are left out of the benchmark but stay in the daily data. The exact count of the day is in every report.</p></div>
-<div class="card"><h3>Comparable</h3><p>Every role is sorted by its job title (or, when the title names no function, its department) into a function (Engineering, Sales and so on), a seniority level and AI/ML or not, with the same rules every week. When a rule changes, the report says so and does not compare the figures it affects.</p></div>
-<div class="card"><h3>Checked daily</h3><p>Every day we measure how many boards answered, how much the totals moved, whether a sample of boards matches its careers page, and whether closed roles are really gone. <a href="{{ '/methodology/' | relative_url }}">The methodology</a> lists the checks and their alert thresholds.</p></div>
+<section class="band" id="lookup"><div class="wrap">
+<p class="eyebrow">Try the data</p>
+<h2>Look up any company in the benchmark</h2>
+<p class="sub muted">Its open roles this week, the share of AI/ML and remote roles, and the recent change once it has two weeks of history.</p>
+<div class="search" id="company-search" hidden>
+<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+<label class="visually-hidden" for="company-q">Search a company</label>
+<input id="company-q" type="search" autocomplete="off" spellcheck="false" placeholder="Type a company name, e.g. Fivetran">
+<ul class="search-results" id="company-results" aria-live="polite"></ul>
 </div>
+<p class="muted small" id="company-search-note" hidden>One line per company, from this week's edition. The roles themselves and the day-by-day history are in the <a href="#data">daily data</a>. Not finding a company? <a href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">Request it</a>.</p>
+<noscript><p class="muted small">The search needs JavaScript; the same preview rows are in <a href="{{ '/reports/data/companies.json' | relative_url }}">reports/data/companies.json</a>.</p></noscript>
 </div></section>
 
 <section class="band tint"><div class="wrap">
 <p class="eyebrow">Readers</p>
 <h2>Who uses it, and for what</h2>
 <div class="grid four">
-<div class="card"><h3>Talent and recruiting teams</h3><p class="muted small">Which functions are hard to fill and how long roles stay open, by industry and company size; which competitors are opening or closing teams.</p></div>
-<div class="card"><h3>Sales and revenue operations</h3><p class="muted small">Which companies are adding open roles fastest (the feed marks a company accelerating when its open roles rise by a fifth or more), named daily with the roles they added, so you can reach growing teams early.</p></div>
-<div class="card"><h3>Investors and analysts</h3><p class="muted small">Portfolio and sector hiring, read from each company's own job board rather than job sites: roles opened and closed, net growth, AI/ML share, remote share, week after week.</p></div>
-<div class="card"><h3>Journalists and researchers</h3><p class="muted small">Citable numbers every Monday under CC BY 4.0, with the method published. A custom cut of the history for a story or a paper is usually free with attribution: <a href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">ask us</a>.</p></div>
+<div class="card"><h3>Sales and revenue teams</h3><p class="muted small">The companies adding open roles fastest, named every morning with the roles they added. A team that is hiring is a team with budget: reach it first.</p></div>
+<div class="card"><h3>Talent and recruiting teams</h3><p class="muted small">How long roles stay open by function, industry and company size, and which competitors are opening or closing teams.</p></div>
+<div class="card"><h3>Investors and analysts</h3><p class="muted small">Portfolio and sector hiring from each company's own job board: roles opened and closed, net growth, AI/ML share and remote share, week after week.</p></div>
+<div class="card"><h3>Journalists and researchers</h3><p class="muted small">Citable numbers every Monday under CC BY 4.0, with the method published. A cut of the history for a story or a paper is usually free with attribution: <a href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">ask us</a>.</p></div>
+</div>
+</div></section>
+
+<section class="band" id="data"><div class="wrap">
+<p class="eyebrow">The data behind the report</p>
+{%- if site.beta_signup_action != "" %}
+<h2>The report is free. During the beta, so is the daily data.</h2>
+<p class="sub muted">Behind every number on this page is one line per company per day: open roles, roles opened and closed, and whether it is growing or cutting. Until {{ site.beta_end | date: "%-d %B %Y" }}, every company's files arrive free by e-mail each morning. After that they will be $99 a month, and you decide then.</p>
+{% include beta-signup.html %}
+{%- elsif site.stripe_payment_link != "" %}
+<h2>The report is free. The daily data is $99 a month.</h2>
+<p class="sub muted">Behind every number on this page is one line per company per day: open roles, roles opened and closed, and whether it is growing or cutting. Hiring Pulse Daily sends you all of it every morning: every company, the latest day plus the 30 before, cancel any time.</p>
+<div class="actions"><a class="btn" href="{{ site.stripe_payment_link }}">Subscribe, $99 a month</a></div>
+{%- else %}
+<h2>The report is free. Ask us for the data behind it.</h2>
+<p class="sub muted">Behind every number on this page is one line per company per day: open roles, roles opened and closed, and whether it is growing or cutting. Tell us which companies and days you need and what for, and we will send a cut.</p>
+{%- endif %}
+<div class="actions"><a class="btn alt" href="{{ '/get-the-data/' | relative_url }}">What you get</a>
+<a class="btn alt" href="{{ '/samples/daily_signals_sample.csv' | relative_url }}" download>Free sample file</a></div>
+<p class="muted small">Need the whole history in your own systems, or a cut for a story or a paper? <a href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">Ask us</a>.</p>
+</div></section>
+
+<section class="band tint"><div class="wrap">
+<p class="eyebrow">Method</p>
+<h2>Why these numbers hold up</h2>
+<div class="facts">
+<div class="card"><h3>Straight from the source</h3><p>Each company's own job board, read once a day; never a job site that copies listings. A role is counted once, and counts as closed the day its posting comes down.</p></div>
+<div class="card"><h3>Broad</h3><p>{{ site.coverage.companies }} companies, found by scanning the public boards of six hiring systems: mostly venture-backed technology companies. Large employers, staffing agencies and franchises stay in the daily data but out of the benchmark.</p></div>
+<div class="card"><h3>Comparable</h3><p>Every role is sorted by its title into a function, a seniority level and AI/ML or not, with the same rules every week. When a rule changes, the report says so and does not compare the figures it affects.</p></div>
+<div class="card"><h3>Checked daily</h3><p>How many boards answered, how much the totals moved, whether a sample of boards matches its careers page, whether closed roles are really gone. <a href="{{ '/methodology/' | relative_url }}">The methodology</a> lists each check and its alert threshold.</p></div>
 </div>
 </div></section>
 
@@ -218,7 +218,7 @@ permalink: /
 </div>
 {%- endif %}
 {%- if site.beta_signup_action != "" %}
-<p class="muted">The data files behind it are free by e-mail during the beta: <a href="#beta">get every company's daily files</a>.</p>
+<p class="muted">The data behind it is free by e-mail during the beta: <a href="#beta">get every company's daily files</a>.</p>
 {%- endif %}
 <div class="actions"><a class="btn" href="{{ '/feed.xml' | relative_url }}">Follow in a feed reader</a>
 <a class="btn alt" href="{{ '/reports/' | relative_url }}">Browse every edition</a>

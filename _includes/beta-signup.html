@@ -6,7 +6,7 @@ URL, private repo RUNBOOK §12). Field names come from _config.yml so they can f
 <div class="beta card" id="beta">
 <p class="for">Free during the beta{% if site.beta_end != "" %}, until {{ site.beta_end | date: "%-d %B %Y" }}{% endif %}</p>
 <h3>Every company, every day, in your inbox</h3>
-<p class="muted small">Every morning, before the US workday starts: links to that day's two spreadsheets (every tracked company, and every role opened or closed), plus the six days before. Confirm your address from the e-mail we send, and the next morning's files are yours.</p>
+<p class="muted small">Each morning, before the US workday starts: the companies that added and cut the most roles since yesterday, and links to the day's two spreadsheets, one line per company and one per role opened or closed, plus the six days before. Confirm your address from the e-mail we send and the next morning's files are yours.</p>
 <form action="{{ site.beta_signup_action }}" method="post">
 <label><span>Work e-mail</span><input type="email" name="{{ site.beta_email_field | default: 'email_address' }}" autocomplete="email" required></label>
 <label><span>Your role</span><select name="{{ site.beta_role_field | default: 'fields[role]' }}" required>
@@ -14,6 +14,6 @@ URL, private repo RUNBOOK §12). Field names come from _config.yml so they can f
 <label class="wide"><span>What would you use it for?</span><input type="text" name="{{ site.beta_use_field | default: 'fields[use_case]' }}" maxlength="300" placeholder="One line is plenty" required></label>
 <button type="submit" class="btn">Send me the daily files</button>
 </form>
-<p class="muted small">One e-mail a day, unsubscribe in one click. After the beta the full daily files will be $99 a month; you decide then. The files are for use inside your organisation. <a href="{{ '/privacy/' | relative_url }}">Privacy</a>.</p>
+<p class="muted small">One e-mail a day, unsubscribe in one click, nothing charged. After the beta the daily files will be $99 a month; you decide then. For use inside your organisation. <a href="{{ '/privacy/' | relative_url }}">Privacy</a>.</p>
 </div>
 {%- endif -%}
