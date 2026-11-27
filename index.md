@@ -38,7 +38,7 @@ permalink: /
 {%- endfor -%}
 
 <section class="band navy hero"><div class="wrap">
-<p class="eyebrow">Weekly startup hiring benchmarks · Edition {{ latest_date }}</p>
+<p class="eyebrow">Weekly startup hiring benchmarks · Edition {{ latest_date | date: "%-d %B %Y" }}</p>
 <h1>Where startup hiring is moving this week</h1>
 {%- if v_open != "" %}
 <p class="hero">{{ v_open }} open roles on the job boards of {{ v_companies | default: site.coverage.companies }} startups and scale-ups, counted this week.</p>
@@ -105,7 +105,7 @@ permalink: /
 </div>
 {%- endfor %}
 </div>
-{% if findings_note != "" %}<p class="muted small" style="margin-top:1rem">{{ findings_note | markdownify | strip_html }}</p>{% endif %}
+{% if findings_note != "" %}<p class="muted small" style="margin-top:1rem">{{ findings_note | remove: ", 07:00 UTC" | markdownify | strip_html }}</p>{% endif %}
 {%- else %}
 {{ sections[0] | remove_first: title_line | markdownify }}
 {%- endif %}
@@ -174,15 +174,15 @@ permalink: /
 <p class="eyebrow">The data behind the report</p>
 {%- if site.beta_signup_action != "" %}
 <h2>The report is free. During the beta, so is the daily data.</h2>
-<p class="sub muted">Every number on this page comes from one line per company per day. Until {{ site.beta_end | date: "%-d %B %Y" }}, every company's numbers for the day come free by e-mail each morning, as two spreadsheet files. After the beta the full daily files will be $99 a month, and you decide then.</p>
+<p class="sub muted">Behind every number on this page is a daily record for each company: its open roles, the roles it opened and closed, and whether it is growing or cutting. Until {{ site.beta_end | date: "%-d %B %Y" }}, every company's numbers for the day come free by e-mail each morning, as two spreadsheet files. After the beta the full daily files will be $99 a month, and you decide then.</p>
 {% include beta-signup.html %}
 {%- elsif site.stripe_payment_link != "" %}
 <h2>The report is free. The daily data is $99 a month.</h2>
-<p class="sub muted">Every number on this page comes from one line per company per day. Hiring Pulse Daily sends you all of it every morning: every company, the latest day plus the 30 before, cancel any time.</p>
+<p class="sub muted">Behind every number on this page is a daily record for each company: its open roles, the roles it opened and closed, and whether it is growing or cutting. Hiring Pulse Daily sends you all of it every morning: every company, the latest day plus the 30 before, cancel any time.</p>
 <div class="actions"><a class="btn" href="{{ site.stripe_payment_link }}">Subscribe, $99 a month</a></div>
 {%- else %}
 <h2>The report is free. Ask us for the data behind it.</h2>
-<p class="sub muted">Every number on this page comes from one line per company per day. Tell us which companies and days you need and what for, and we will send a cut.</p>
+<p class="sub muted">Behind every number on this page is a daily record for each company: its open roles, the roles it opened and closed, and whether it is growing or cutting. Tell us which companies and days you need and what for, and we will send a cut.</p>
 {%- endif %}
 <div class="actions"><a class="btn alt" href="{{ '/get-the-data/' | relative_url }}">What you get</a>
 <a class="btn alt" href="{{ '/samples/daily_signals_sample.csv' | relative_url }}" download>Free sample file</a></div>
@@ -193,9 +193,9 @@ permalink: /
 <p class="eyebrow">Method</p>
 <h2>Why these numbers hold up</h2>
 <div class="facts">
-<div class="card"><h3>First-party</h3><p>Every company's own job board ({{ site.coverage.vendors }}) is read once a day. A role is counted once, from the source; a role counts as closed the day its posting disappears.</p></div>
+<div class="card"><h3>Straight from the source</h3><p>We read every company's own job board ({{ site.coverage.vendors }}) once a day, not a job site that copies listings. Each role is counted once, and counts as closed the day its posting comes down.</p></div>
 <div class="card"><h3>Broad</h3><p>{{ site.coverage.companies }} companies found by scanning the public job boards of six hiring systems: mostly venture-backed technology companies. Employers with more than 1,000 open roles, staffing agencies and franchises are left out of the benchmark but stay in the daily data. The exact count of the day is in every report.</p></div>
-<div class="card"><h3>Comparable</h3><p>Function, seniority and the AI/ML flag are assigned from the job title with one fixed list of keywords, so this week's figures compare with last week's and with yours.</p></div>
+<div class="card"><h3>Comparable</h3><p>Every role is sorted by its job title into a function (Engineering, Sales and so on), a seniority level and AI/ML or not, with the same rules every week. So this week's figures compare with last week's, and with your own.</p></div>
 <div class="card"><h3>Checked daily</h3><p>Every day we measure how many boards answered, how much the totals moved, whether a sample of boards matches its careers page, and whether closed roles are really gone. <a href="{{ '/methodology/' | relative_url }}">The methodology</a> lists the checks and their alert thresholds.</p></div>
 </div>
 </div></section>
@@ -206,15 +206,15 @@ permalink: /
 <div class="grid four">
 <div class="card"><h3>Talent and recruiting teams</h3><p class="muted small">Which functions are hard to fill and how long roles stay open, by industry and company size; which competitors are opening or closing teams.</p></div>
 <div class="card"><h3>Sales and revenue operations</h3><p class="muted small">A company that just doubled its open roles is buying tools, office space, payroll and insurance. Hiring momentum per company is the earliest public sign of a budget.</p></div>
-<div class="card"><h3>Investors and analysts</h3><p class="muted small">Portfolio and sector hiring trends from first-party reads, not aggregator counts: roles opened and closed, net growth, AI/ML share, remote share, week after week.</p></div>
+<div class="card"><h3>Investors and analysts</h3><p class="muted small">Portfolio and sector hiring, read from each company's own job board rather than job sites: roles opened and closed, net growth, AI/ML share, remote share, week after week.</p></div>
 <div class="card"><h3>Journalists and researchers</h3><p class="muted small">Citable numbers every Monday under CC BY 4.0, with the method published. A custom cut of the history for a story or a paper is usually free with attribution: <a href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">ask us</a>.</p></div>
 </div>
 </div></section>
 
 <section class="band navy"><div class="wrap">
 <p class="eyebrow">Stay current</p>
-<h2>A new edition every Monday at 07:00 UTC</h2>
-<p class="sub muted">Free to read and to quote under CC BY 4.0: cite as "Agilityy Research, Hiring Pulse, {{ latest_date }}" with a link to this site.</p>
+<h2>A new edition every Monday</h2>
+<p class="sub muted">Out before the US workday starts. Free to read and to quote under CC BY 4.0: cite as "Agilityy Research, Hiring Pulse, {{ latest_date | date: "%-d %B %Y" }}" with a link to this site.</p>
 {%- if site.newsletter_action != "" %}
 <div class="signup">
 <b>Get it in your inbox.</b> Key findings, charts and the movers; no other mail.
@@ -227,7 +227,7 @@ permalink: /
 {%- if site.beta_signup_action != "" %}
 <p class="muted">The data files behind it are free by e-mail during the beta: <a href="#beta">get every company's daily files</a>.</p>
 {%- endif %}
-<div class="actions"><a class="btn" href="{{ '/feed.xml' | relative_url }}">Subscribe with the Atom feed</a>
+<div class="actions"><a class="btn" href="{{ '/feed.xml' | relative_url }}">Follow in a feed reader</a>
 <a class="btn alt" href="{{ '/reports/' | relative_url }}">Browse every edition</a>
 <a class="btn alt" href="https://github.com/agilityy-research/hiring-pulse">Source on GitHub</a></div>
 </div></section>

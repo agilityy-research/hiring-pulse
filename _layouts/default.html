@@ -136,7 +136,7 @@ details.menu summary{list-style:none;cursor:pointer;font-weight:600;padding:.4re
 details.menu summary::-webkit-details-marker{display:none}
 details.menu nav{position:absolute;left:0;right:0;top:100%;background:var(--bg);border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:0;padding:.4rem 1.1rem 1rem;box-shadow:var(--shadow)}
 details.menu nav a{padding:.65rem 0;border-bottom:1px solid var(--line);color:var(--fg);text-decoration:none;font-weight:500}
-@media (max-width:1020px){nav.site{display:none}details.menu{display:block}}
+@media (max-width:1140px){nav.site{display:none}details.menu{display:block}}
 /* layout */
 main{display:block}
 main.narrow .wrap,main.report .wrap{max-width:52rem;padding-top:1.6rem;padding-bottom:3rem}
@@ -266,6 +266,25 @@ table.heat td small{color:var(--muted);font-size:.78rem;margin-left:.25rem}
 .plan .btn{margin-top:auto;align-self:flex-start}
 .price{font-weight:650;white-space:nowrap}
 /* misc */
+.numbers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin:0 0 1rem}
+@media (max-width:900px){.numbers{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.numbers{grid-template-columns:minmax(0,1fr)}}
+.num b{display:block;font-size:clamp(1.7rem,3vw,2.2rem);line-height:1.1;font-weight:800;letter-spacing:-.02em;color:var(--accent)}
+.num p{margin:.35rem 0 0;color:var(--muted);font-size:.95rem}
+/* trends: one column per weekly edition, drawn in HTML so it follows dark mode and reads on a phone */
+.cols{display:flex;align-items:flex-end;gap:4px;height:5rem;margin:.7rem 0 .2rem;border-bottom:1px solid var(--line)}
+.cols i{flex:1 1 0;max-width:2.4rem;min-height:2px;background:var(--bar,#2a78d6);border-radius:3px 3px 0 0;opacity:.55}
+.cols i:last-child{opacity:1}
+.cols i.gap{background:none;border:1px dashed var(--line);border-bottom:0}
+.colx{display:flex;justify-content:space-between;font-size:.74rem;color:var(--muted)}
+.trend-val{font-size:1.7rem;font-weight:800;letter-spacing:-.02em;line-height:1.15;margin:.2rem 0 0}
+.trend-chg{font-size:.86rem;color:var(--muted);margin:.1rem 0 0}
+.trend-chg .up{color:var(--pos)}.trend-chg .down{color:var(--neg)}
+ol.timeline{list-style:none;padding:0;margin:1rem 0;border-left:2px solid var(--line)}
+ol.timeline li{position:relative;padding:.1rem 0 1rem 1.2rem}
+ol.timeline li::before{content:"";position:absolute;left:-7px;top:.45rem;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--accent-2)}
+ol.timeline li.done::before{background:var(--accent-2)}
+ol.timeline b{display:block}
 .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
 @media (max-width:900px){.facts{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:520px){.facts{grid-template-columns:1fr}}
@@ -329,6 +348,7 @@ footer.site .legal{grid-column:1 / -1;border-top:1px solid var(--line);padding-t
 <a class="brand" href="{{ '/' | relative_url }}"><span class="mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 22l6-7 5 4 9-11"/></svg></span>Hiring Pulse<small>by Agilityy Research</small></a>
 <nav class="site" aria-label="Site">
 <a href="{{ '/reports/latest/' | relative_url }}" {% if page.url == '/reports/latest/' %}class="on"{% endif %}>This week</a>
+<a href="{{ '/trends/' | relative_url }}" {% if page.url == '/trends/' %}class="on"{% endif %}>Trends</a>
 <a href="{{ '/cities/' | relative_url }}" {% if page.url == '/cities/' %}class="on"{% endif %}>Cities</a>
 <a href="{{ '/pay/' | relative_url }}" {% if page.url == '/pay/' %}class="on"{% endif %}>Pay</a>
 <a href="{{ '/skills/' | relative_url }}" {% if page.url == '/skills/' %}class="on"{% endif %}>Skills</a>
@@ -340,6 +360,7 @@ footer.site .legal{grid-column:1 / -1;border-top:1px solid var(--line);padding-t
 <details class="menu"><summary>Menu</summary>
 <nav aria-label="Site">
 <a href="{{ '/reports/latest/' | relative_url }}">This week's report</a>
+<a href="{{ '/trends/' | relative_url }}">Trends over time</a>
 <a href="{{ '/cities/' | relative_url }}">Top hiring cities</a>
 <a href="{{ '/pay/' | relative_url }}">Pay by role and city</a>
 <a href="{{ '/skills/' | relative_url }}">Skills in demand</a>
@@ -356,13 +377,13 @@ footer.site .legal{grid-column:1 / -1;border-top:1px solid var(--line);padding-t
 {%- if is_report or bands == false %}<div class="wrap">{% endif %}
 {%- if is_report %}
 <div class="report-nav">
-{%- if is_baseline %}<span><span class="tag">Baseline study</span> One-off 14-day readout on {{ site.coverage.yc_subset }} Y Combinator companies ({{ site.coverage.yc_subset_since }} to {{ report_date }}); not part of the weekly series.</span>
-{%- elsif is_preview %}<span><span class="tag">Preview</span> Edition of {{ report_date }}. The weekly series starts with the first Monday edition.</span>
-{%- else %}<span>Weekly edition · published Monday 07:00 UTC</span>{% endif %}
+{%- if is_baseline %}<span><span class="tag">Baseline study</span> One-off 14-day readout on {{ site.coverage.yc_subset }} Y Combinator companies ({{ site.coverage.yc_subset_since | date: "%-d %B %Y" }} to {{ report_date | date: "%-d %B %Y" }}); not part of the weekly series.</span>
+{%- elsif is_preview %}<span><span class="tag">Preview</span> Edition of {{ report_date | date: "%-d %B %Y" }}. The weekly series starts with the first Monday edition.</span>
+{%- else %}<span>Weekly edition · out every Monday</span>{% endif %}
 <a href="{{ '/reports/' | relative_url }}">All reports</a>
 <a href="{{ '/methodology/' | relative_url }}">How the numbers are measured</a>
 <a href="{{ '/get-the-data/' | relative_url }}">Buy the daily data</a>
-<a href="{{ '/feed.xml' | relative_url }}">Atom feed</a></div>
+<a href="{{ '/feed.xml' | relative_url }}">Follow by feed</a></div>
 {%- endif %}
 {{ content }}
 {%- if is_report or bands == false %}</div>{% endif %}
@@ -370,7 +391,7 @@ footer.site .legal{grid-column:1 / -1;border-top:1px solid var(--line);padding-t
 <footer class="site"><div class="wrap">
 <div><a class="brand" href="{{ '/' | relative_url }}" style="display:inline-flex;margin-bottom:.5rem"><span class="mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 22l6-7 5 4 9-11"/></svg></span>Hiring Pulse</a>
 <p style="margin:0;max-width:30rem">Weekly startup hiring benchmarks from the public job boards of {{ site.coverage.companies }} companies, read every day by Agilityy Research. The reports are free under <a href="https://creativecommons.org/licenses/by/4.0/" style="display:inline;text-decoration:underline">CC BY 4.0</a>; the daily data behind them is pay as you go.</p></div>
-<div><h4>Read</h4><a href="{{ '/reports/latest/' | relative_url }}">This week's report</a><a href="{{ '/cities/' | relative_url }}">Top hiring cities</a><a href="{{ '/pay/' | relative_url }}">Pay by role and city</a><a href="{{ '/skills/' | relative_url }}">Skills in demand</a><a href="{{ '/reports/' | relative_url }}">All editions</a><a href="{{ '/methodology/' | relative_url }}">Methodology</a><a href="{{ '/feed.xml' | relative_url }}">Atom feed</a></div>
+<div><h4>Read</h4><a href="{{ '/reports/latest/' | relative_url }}">This week's report</a><a href="{{ '/trends/' | relative_url }}">Trends over time</a><a href="{{ '/cities/' | relative_url }}">Top hiring cities</a><a href="{{ '/pay/' | relative_url }}">Pay by role and city</a><a href="{{ '/skills/' | relative_url }}">Skills in demand</a><a href="{{ '/reports/' | relative_url }}">All editions</a><a href="{{ '/methodology/' | relative_url }}">Methodology</a><a href="{{ '/feed.xml' | relative_url }}">Atom feed</a></div>
 <div><h4>Data</h4><a href="{{ '/get-the-data/' | relative_url }}">Get the data</a><a href="{{ '/for-data-teams/' | relative_url }}">For data teams</a><a href="{{ '/samples/daily_signals_sample.csv' | relative_url }}">Free sample</a></div>
 <div><h4>Company</h4><a href="{{ '/about/' | relative_url }}">About</a><a href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">Contact / request data</a><a href="https://github.com/agilityy-research/hiring-pulse">Source on GitHub</a><a href="{{ '/privacy/' | relative_url }}">Privacy</a></div>
 <div class="legal">© {{ site.time | date: "%Y" }} Agilityy Research. No cookies; cookieless page-view counting only: <a href="{{ '/privacy/' | relative_url }}" style="display:inline;text-decoration:underline">privacy</a>.</div>
