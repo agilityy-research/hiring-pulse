@@ -1,9 +1,9 @@
 ---
-title: "Top hiring cities for startups, by role"
+title: "Hiring by city: where startups hire, by role and work mode"
 description: >-
   Where startups and scale-ups are hiring this week: open roles by city, the cities each function hires in, new roles,
-  remote, hybrid and on-site shares, and the countries behind them. Counted from 21,000+ public job boards, refreshed every Monday.
-permalink: /cities/
+  remote, hybrid and on-site shares, and the countries behind them. Counted from 21,000+ public job boards, updated weekly.
+permalink: /data/cities/
 layout: default
 bands: true
 ---
@@ -12,20 +12,19 @@ bands: true
 {%- assign c1 = m.cities[0] -%}{%- assign c2 = m.cities[1] -%}{%- assign c3 = m.cities[2] -%}{%- assign cov = m.coverage -%}
 {%- assign us = m.countries | where: "country", "United States" | first -%}
 <section class="band navy hero"><div class="wrap">
-<p class="eyebrow">Cities · figures as of {{ m.dateText }} · refreshed every Monday</p>
+<p class="crumbs"><a href="{{ '/data/' | relative_url }}">Data</a> › Hiring by city</p>
 <h1>Where startups are hiring</h1>
 <p class="hero">{{ c1.label }} leads with {{ c1.rolesT }} open roles at {{ c1.companiesT }} companies, ahead of {{ c2.label }} ({{ c2.rolesT }}) and {{ c3.label }} ({{ c3.rolesT }}).</p>
-<p class="sub">Every open role on the job boards of {{ cov.companiesT }} startups and scale-ups, placed in the city its posting names. {{ cov.cityPct }}% of the {{ cov.rolesT }} open roles name one; the rest say only a country, a region or "remote".</p>
+<p class="sub">Every open role on the job boards of {{ cov.companiesT }} startups and scale-ups, placed in the city its posting names. {{ cov.cityPct }}% of the {{ cov.rolesT }} open roles name one; the rest give only a country, a region, "remote", or a place we do not yet read as a city. Roles open on {{ m.dateText }}.</p>
 <div class="stats" aria-label="City figures">
 <div class="stat"><b>{{ cov.citiesWithFiveCompaniesT }}</b><span>cities where 5 or more of the companies are hiring</span></div>
 <div class="stat"><b>{{ c1.rolesT }}</b><span>open roles in {{ c1.label }}, the largest startup job market</span></div>
-{%- if us %}<div class="stat"><b>{{ us.sharePct }}%</b><span>of open roles are in the United States</span></div>{% endif %}
-<div class="stat"><b>{{ m.workMode.overall.remote }}%</b><span>of roles that state a work mode are fully remote</span></div>
+{%- if us %}<div class="stat"><b>{{ us.sharePct }}%+</b><span>of open roles are in the United States (at least: some roles name no country)</span></div>{% endif %}
+<div class="stat"><b>{{ m.workMode.overall.remote }}%</b><span>of roles that state a work mode are fully remote ({{ m.workMode.overall.knownPct }}% state one)</span></div>
 </div>
 </div></section>
 
 <section class="band"><div class="wrap">
-<p class="eyebrow">Top {{ m.cities.size }}</p>
 <h2>The cities with the most open startup roles</h2>
 <p class="kicker">Open roles this week, the number of companies hiring there, and how the roles are offered. A city needs {{ cov.cityMinCompanies }} or more companies hiring to be listed, so a single large employer does not make a town a market.</p>
 <div class="legend" aria-hidden="true"><span><i class="r"></i>Remote</span><span><i class="h"></i>Hybrid</span><span><i class="o"></i>On-site</span><span>(share of the roles whose posting states it)</span></div>
@@ -47,14 +46,13 @@ bands: true
 {%- endfor %}
 </div>
 {%- assign noted = m.cities | where_exp: "c", "c.note != ''" -%}
-{%- for c in noted %}<p class="note">* {{ c.label }}: {{ c.note }}; the postings do not say which.</p>{% endfor %}
-<p class="note">{% if m.comparable %}The small figure under each count is the change since the previous edition.{% elsif cov.newReady %}The small figure under each count is the roles first seen in the last {{ cov.newWindowDays }} days.{% else %}Roles new this week and the change since the previous edition join this list once every company has more than a week of daily reads.{% endif %} Hover or tap a row for the work-mode split.</p>
+{%- for c in noted %}<p class="note">* {{ c.note }}.</p>{% endfor %}
+<p class="note">{% if m.comparable %}The small figure under each count is the change since the previous edition.{% elsif cov.newReady %}The small figure under each count is the roles first seen in the last {{ cov.newWindowDays }} days.{% else %}Roles new this week join this list once at least half of the open roles are at companies read daily for more than a week; the change since the previous edition appears once two editions with city counts exist.{% endif %} Hover or tap a row for the work-mode split.</p>
 </div></section>
 
 <section class="band tint"><div class="wrap">
-<p class="eyebrow">By role</p>
 <h2>Where each function hires</h2>
-<p class="kicker">The top cities for every job function, as a share of that function's roles that name a city.</p>
+<p class="kicker">The top cities for every job function, as a share of that function's roles that name a city. A city is listed for a function only when {{ cov.cityMinCompanies }} or more companies hire for it there and none supplies more than half of those roles.</p>
 <div class="dgrid three">
 {%- for f in m.byFunction %}
 <div class="panel">
@@ -62,17 +60,18 @@ bands: true
 <p class="muted">{{ f.rolesT }} open roles{% if cov.newReady and f.newRoles > 0 %}, {{ f.newRolesT }} new in {{ cov.newWindowDays }} days{% endif %}</p>
 <ol class="bars">
 {%- for c in f.cities %}
-<li title="{{ f.function }} in {{ c.label }}: {{ c.rolesT }} roles, {{ c.sharePct }}% of the function's roles with a city"><span class="name">{{ c.label }}</span><span class="track"><span class="fill" style="width:{{ c.barPct }}%"></span></span><span class="val">{{ c.rolesT }}<small>{{ c.sharePct }}%</small></span></li>
+<li title="{{ f.function }} in {{ c.label }}: {{ c.rolesT }} roles, {{ c.sharePct }}% of the function's roles with a city"><span class="name">{{ c.label }}{% assign cn = c.note | default: "" %}{% if cn != "" %}*{% endif %}</span><span class="track"><span class="fill" style="width:{{ c.barPct }}%"></span></span><span class="val">{{ c.rolesT }}<small>{{ c.sharePct }}%</small></span></li>
 {%- endfor %}
 </ol>
 </div>
 {%- endfor %}
 </div>
+{%- assign fnote = "" -%}{%- for f in m.byFunction -%}{%- for c in f.cities -%}{%- assign cn = c.note | default: "" -%}{%- if cn != "" -%}{%- assign fnote = cn -%}{%- endif -%}{%- endfor -%}{%- endfor -%}
+{%- if fnote != "" %}<p class="note">* {{ fnote }}.</p>{% endif %}
 </div></section>
 
 {%- if cov.newReady and m.newCities.size > 2 %}
 <section class="band"><div class="wrap">
-<p class="eyebrow">Momentum</p>
 <h2>Where the new roles are</h2>
 <p class="kicker">Roles first posted in the last {{ cov.newWindowDays }} days ({{ cov.newRolesT }} across {{ cov.newBaseRolesT }} open roles at companies tracked long enough to tell). Left: the most new roles. Right: new roles as a share of each city's open roles, among cities with 300 or more.</p>
 <div class="dgrid">
@@ -85,9 +84,9 @@ bands: true
 {%- endif %}
 
 <section class="band{% if cov.newReady and m.newCities.size > 2 %} tint{% endif %}"><div class="wrap">
-<p class="eyebrow">Countries</p>
 <h2>The countries behind the roles, and how they work</h2>
-<p class="kicker">Open roles by country, the work-mode split of the roles that state one, and the share of roles that advertise pay. The share with pay follows the law: US states with pay-transparency rules lead.</p>
+{%- assign pay_lead = nil -%}{%- for c in m.countries -%}{%- if pay_lead == nil or c.payPct > pay_lead.payPct -%}{%- assign pay_lead = c -%}{%- endif -%}{%- endfor %}
+<p class="kicker">Open roles by country, the work-mode split of the roles that state one, and the share of roles that advertise pay. {% if pay_lead.country == "United States" %}The United States leads on pay, where several states require a range in the posting; the share also depends on the job board{% else %}The share with pay depends on the law (several US states require a range in the posting) and on the job board{% endif %}, since SmartRecruiters and Personio boards carry no pay we can read (coverage by vendor below).</p>
 <div class="legend" aria-hidden="true"><span><i class="r"></i>Remote</span><span><i class="h"></i>Hybrid</span><span><i class="o"></i>On-site</span></div>
 <table>
 <thead><tr><th>Country</th><th>Open roles</th><th>Share</th><th>Remote / hybrid / on-site</th><th>Roles stating a mode</th><th>Roles with pay</th></tr></thead>
@@ -101,20 +100,36 @@ bands: true
 <p class="note">Across all open roles: {{ m.workMode.overall.remote }}% remote, {{ m.workMode.overall.hybrid }}% hybrid and {{ m.workMode.overall.onsite }}% on-site, among the {{ m.workMode.overall.knownPct }}% whose posting states it. Greenhouse and Personio boards have no work-mode field, so their roles count only when the title or location says it.</p>
 </div></section>
 
-<section class="band"><div class="wrap">
-<p class="eyebrow">How these numbers are made</p>
+<section class="band{% unless cov.newReady and m.newCities.size > 2 %} tint{% endunless %}" id="work-mode"><div class="wrap">
+<h2>How each function works: remote, hybrid, on-site, and contract types</h2>
+<p class="kicker">Each share is of the roles whose posting states a work mode or a contract type.</p>
+<div class="legend" aria-hidden="true"><span><i class="r"></i>Remote</span><span><i class="h"></i>Hybrid</span><span><i class="o"></i>On-site</span><span>(share of the roles whose posting states it)</span></div>
+<div class="dgrid">
+<div><ol class="bars">
+{%- for f in m.workMode.byFunction %}{%- assign md = f.modes -%}
+<li title="{{ f.function }}: remote {{ md.remote }}%, hybrid {{ md.hybrid }}%, on-site {{ md.onsite }}%, of the {{ md.knownPct }}% that state a mode"><span class="name">{{ f.function }}<small>{{ f.rolesT }} roles</small></span><span class="mix"><i class="r" style="width:{{ md.remote }}%"></i><i class="h" style="width:{{ md.hybrid }}%"></i><i class="o" style="width:{{ md.onsite }}%"></i></span><span class="val">{{ md.remote }}%<small>remote</small></span></li>
+{%- endfor %}
+</ol></div>
+<div class="panel"><h3>Contract types</h3><p class="muted">Among the {{ m.employment.knownPct }}% of roles whose posting states one</p>
+{%- assign emx = m.employment.types[0].sharePct -%}
+<ol class="bars">{% for e in m.employment.types %}<li><span class="name">{{ e.type | replace: "_", "-" | capitalize }}</span><span class="track"><span class="fill" style="width:{{ e.sharePct | times: 100.0 | divided_by: emx }}%"></span></span><span class="val">{{ e.sharePct }}%<small>{{ e.rolesT }}</small></span></li>{% endfor %}</ol>
+</div>
+</div>
+</div></section>
+
+<section class="band{% if cov.newReady and m.newCities.size > 2 %} tint{% endif %}"><div class="wrap">
 <h2>What stands behind each figure</h2>
 <div class="facts">
 <div class="card"><h3>One role, one city</h3><p>A role counts once, in the first city its posting names. A posting listing five offices counts in the first.</p></div>
 <div class="card"><h3>Names cleaned</h3><p>Spellings of one city are merged (NYC and New York City, München and Munich). A city with no country takes the country most of its roles name.</p></div>
-<div class="card"><h3>Startups only</h3><p>Employers with more than 1,000 open roles, staffing agencies and franchises are left out, as in the weekly report.</p></div>
-<div class="card"><h3>Refreshed weekly</h3><p>Recomputed every Monday from that morning's read of every board. <a href="{{ '/methodology/' | relative_url }}">Methodology</a>.</p></div>
+<div class="card"><h3>Startups only</h3><p>Employers with more than 1,000 open roles, staffing agencies, franchises and test boards are left out, as in the weekly report.</p></div>
+<div class="card"><h3>Updated weekly</h3><p>Recomputed from the latest daily read of every board; the date at the top is that read. <a href="{{ '/methodology/' | relative_url }}">Methodology</a>.</p></div>
 </div>
 <details><summary>Coverage by job-board vendor</summary>
 <table><thead><tr><th>Vendor</th><th>Open roles</th><th>Names a city</th><th>Names a country</th><th>States a work mode</th><th>Advertises pay</th></tr></thead><tbody>
 {%- for v in cov.vendors %}<tr><td>{{ v.vendor | capitalize | replace: "Smartrecruiters", "SmartRecruiters" }}</td><td>{{ v.rolesT }}</td><td>{{ v.cityPct }}%</td><td>{{ v.countryPct }}%</td><td>{{ v.modePct }}%</td><td>{{ v.payPct }}%</td></tr>{% endfor %}
 </tbody></table></details>
-<div class="actions"><a class="btn" href="{{ '/get-the-data/' | relative_url }}">Get every role with its city</a><a class="btn alt" href="{{ '/pay/' | relative_url }}">Pay by role and city</a><a class="btn alt" href="{{ '/skills/' | relative_url }}">Skills in demand</a></div>
+<div class="actions"><a class="btn" href="{{ '/get-the-data/' | relative_url }}">Get every role with its city</a><a class="btn alt" href="{{ '/data/salaries/' | relative_url }}">Salaries by role and city</a><a class="btn alt" href="{{ '/data/skills/' | relative_url }}">Skills in demand</a></div>
 <p class="note">The daily data has one row per role opened or closed, with its city, country, work mode and advertised pay. Figures here are free to quote under CC BY 4.0 with a link to this page.</p>
 </div></section>
 {%- else -%}
