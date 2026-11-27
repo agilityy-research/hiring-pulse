@@ -285,7 +285,9 @@ main.report #key-findings + ul > li > ul > li{list-style:none;font-size:.93rem;c
 .tabs button{font:inherit;font-size:.88rem;padding:.35rem .8rem;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--fg);cursor:pointer}
 .tabs button[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
 .crumbs{font-size:.86rem;margin:0 0 .6rem;color:#bcd6f2}.crumbs a{color:inherit}
-@media (max-width:1000px){.paytab .axis span.odd{visibility:hidden}}
+.paytab .axis{container-type:inline-size}
+@container (max-width:34rem){.paytab .axis span:not(.k){visibility:hidden}}
+@supports not (container-type:inline-size){@media (max-width:1200px){.paytab .axis span:not(.k){visibility:hidden}}}
 .paywrap{overflow-x:auto}
 @media (max-width:640px){.paytab .barcol{display:none}.paytab th.nm{width:34%;white-space:normal}.paytab{font-size:.84rem}.paytab th,.paytab td{padding:.4rem .25rem}.paytab thead th{white-space:normal;font-size:.72rem;line-height:1.2}.paytab tbody th.nm small{font-size:.7rem}.tabs{flex-wrap:nowrap;overflow-x:auto;padding-bottom:.3rem;scrollbar-width:thin}.tabs button{flex:0 0 auto}}
 .bars.pay li{grid-template-columns:minmax(6rem,10rem) minmax(0,1fr) 5.2rem}
