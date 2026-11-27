@@ -35,6 +35,7 @@ permalink: /
   {%- elsif r contains "| AI/ML share of open roles |" -%}{%- assign v_ai = cells[2] | strip -%}{%- assign d_ai = cells[4] | strip -%}
   {%- elsif r contains "| Remote roles, share of open roles |" -%}{%- assign v_remote = cells[2] | strip -%}{%- assign d_remote = cells[4] | strip -%}
   {%- endif -%}
+{%- endfor -%}
 
 <section class="band navy hero"><div class="wrap">
 <p class="eyebrow">Weekly edition of {{ latest_date | date: "%-d %B %Y" }}</p>
