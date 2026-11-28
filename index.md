@@ -54,8 +54,9 @@ function), and the movers' names (example pills for the lookup). All from the la
   {%- if cells.size > 5 and r contains "%" -%}
     {%- assign fname = cells[1] | strip -%}
     {%- unless fname == "Function" or fname == "Other" -%}
-      {%- assign fn_shares = fn_shares | append: "|" | append: fname | append: ":" | append: cells[3] | strip | remove: "%" -%}
-      {%- assign fn_fill = fn_fill | append: "|" | append: fname | append: ":" | append: cells[5] | strip -%}
+      {%- assign sh_cell = cells[3] | strip | remove: "%" -%}{%- assign fill_cell = cells[5] | strip -%}
+      {%- assign fn_shares = fn_shares | append: "|" | append: fname | append: ":" | append: sh_cell -%}
+      {%- assign fn_fill = fn_fill | append: "|" | append: fname | append: ":" | append: fill_cell -%}
     {%- endunless -%}
   {%- endif -%}
 {%- endfor -%}
