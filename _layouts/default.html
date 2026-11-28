@@ -416,14 +416,14 @@ svg.sc .t{fill:var(--fg)}svg.sc .m{fill:var(--muted)}svg.sc .s{font-size:12px}sv
 .bars li.hd{font-size:.76rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:700;border-bottom:1px solid var(--line);padding-bottom:.15rem}
 .bars.two li{grid-template-columns:minmax(5.5rem,7.5rem) minmax(0,1fr) minmax(0,1fr)}
 .track2{display:flex;align-items:center;gap:.4rem;min-width:0}
-.track2 .fill{display:block;height:.75rem;min-width:2px;background:var(--bar);border-radius:0 4px 4px 0;flex:0 0 auto}
+.track2 .fill{display:block;height:.75rem;min-width:2px;max-width:calc(100% - 3.6rem);background:var(--bar);border-radius:0 4px 4px 0;flex:0 0 auto}
 .track2.pay .fill{background:var(--warm)}
 .track2 em{font-style:normal;font-size:.82rem;font-weight:650;font-variant-numeric:tabular-nums;white-space:nowrap}
 .bars.city li{grid-template-columns:minmax(5.5rem,7.5rem) minmax(0,1fr) 3.6rem 4.4rem 3.6rem}
 .bars.city .mix{height:.75rem}
 .bars.city .val.pay{font-weight:600}
 .bars.city li.hd .mixh{text-align:left}
-@media (max-width:520px){.bars.city li{grid-template-columns:minmax(5rem,6.5rem) 3.4rem 3.6rem 3.4rem}.bars.city .track{display:none}.bars.two li{grid-template-columns:minmax(4.5rem,6rem) minmax(0,1fr) minmax(0,1fr)}}
+@media (max-width:520px){.bars.city li{grid-template-columns:minmax(5rem,6.5rem) 3.4rem 3.6rem 3.4rem}.bars.city .track,.bars.city li.hd span:nth-child(3){display:none}.bars.city li.hd span:nth-child(2){grid-column:2}.hero h1{font-size:1.8rem}.bars.two li{grid-template-columns:minmax(4.5rem,6rem) minmax(0,1fr) minmax(0,1fr)}}
 .bars.split li{grid-template-columns:minmax(7rem,11rem) minmax(0,1fr) auto}
 .bars .val small{display:block;font-weight:400;color:var(--muted);font-size:.76rem}
 h3.sub-h{margin:2rem 0 .8rem;font-size:1.25rem}
