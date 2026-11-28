@@ -59,6 +59,8 @@ function), and the movers' names (example pills for the lookup). All from the la
     {%- endunless -%}
   {%- endif -%}
 {%- endfor -%}
+{%- assign win_days = "" -%}
+{%- if charts contains "net change in open roles over " -%}{%- assign win_days = charts | split: "net change in open roles over " | last | split: " days" | first | strip -%}{%- endif -%}
 {%- assign pills = "" | split: "" -%}
 {%- assign movers_desc = "" -%}
 {%- if charts contains "Largest movers" -%}
@@ -88,7 +90,7 @@ function), and the movers' names (example pills for the lookup). All from the la
 <input id="company-q" type="search" autocomplete="off" spellcheck="false" placeholder="Look up any of the {{ v_companies | default: site.coverage.companies }} companies">
 <ul class="search-results" id="company-results" aria-live="polite"></ul>
 </div>
-<p class="pills" id="company-pills" hidden><span>Open roles, {{ v_history | default: "16" }}-day change, AI and remote share. Try</span>{% for nm in pills %}<button type="button" data-q="{{ nm | escape }}">{{ nm }}</button>{% endfor %}</p>
+<p class="pills" id="company-pills" hidden><span>Open roles, {% if win_days != "" %}{{ win_days }}-day {% endif %}change, AI and remote share. Try</span>{% for nm in pills %}<button type="button" data-q="{{ nm | escape }}">{{ nm }}</button>{% endfor %}</p>
 <noscript><p class="sub">The company lookup needs JavaScript. <a href="{{ '/reports/latest/' | relative_url }}">This week's report</a> names the biggest movers.</p></noscript>
 {%- if v_open != "" %}
 <div class="stats" aria-label="Headline numbers">
@@ -104,7 +106,7 @@ function), and the movers' names (example pills for the lookup). All from the la
 
 <section class="band" id="this-week"><div class="wrap">
 <p class="eyebrow">This week · edition of {{ latest_date | date: "%-d %B %Y" }}</p>
-<h2>Four charts, four takeaways</h2>
+<h2>What moved this week, in charts</h2>
 {%- comment -%} Finding headlines by position: 0 demand, 1 momentum, 2 movers, 3 time to fill, 4 AI/ML, 5 remote. {%- endcomment -%}
 {%- assign heads = "" | split: "" -%}{%- assign whos = "" | split: "" -%}{%- assign details = "" | split: "" -%}
 {%- for item in items offset: 1 -%}
@@ -120,10 +122,10 @@ function), and the movers' names (example pills for the lookup). All from the la
 <div class="card ccard" id="chart-movers">
 <p class="label">Growing against shrinking</p>
 <p class="take">{{ heads[2] | default: "Which companies added and cut the most roles" }}</p>
-<p class="sub2">Every company with 14+ days of daily history ({{ v_history | default: "all" }} this week): open roles across, change in open roles over the window up and down. Click a dot for the company.</p>
+<p class="sub2">Each dot is one of the {{ v_history | default: "" }} companies with 14+ days of daily history: open roles across, change in open roles{% if win_days != "" %} over {{ win_days }} days{% endif %} up and down. Click a dot for the company.</p>
 {%- assign mv_rel = "/reports/charts/" | append: latest_date | append: "-movers.svg" -%}
 {%- assign mv_on_disk = site.static_files | where: "path", mv_rel | first -%}
-<div class="scroll" id="scatter">{% if mv_on_disk %}{% include_relative {{ mv_rel | remove_first: "/" }} %}{% endif %}</div>
+<div class="scroll" id="scatter" data-days="{{ win_days }}">{% if mv_on_disk %}{% include_relative {{ mv_rel | remove_first: "/" }} %}{% endif %}</div>
 <ul class="search-results" id="scatter-pick"></ul>
 <p class="small"><a href="{{ '/reports/latest/' | relative_url }}#largest-movers">The movers table in the report</a></p>
 </div>
@@ -303,8 +305,9 @@ function), and the movers' names (example pills for the lookup). All from the la
   }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]; }); }
   function fmt(n) { return Number(n).toLocaleString("en-US"); }
+  var pageDays = +((document.getElementById("scatter") || {getAttribute: function () { return 0; }}).getAttribute("data-days")) || 0;
   function rowHtml(r) {
-    var d = data.windowDays || 30;
+    var d = pageDays || data.windowDays || 30;
     var name = r[0], vendor = r[1], ind = r[2], open = r[3], net = r[4], growth = r[5], sig = r[6], ai = r[7], remote = r[8], fn = r[9];
     var meta = [vendor && vendor.charAt(0).toUpperCase() + vendor.slice(1), ind, fn && ("mostly " + fn)].filter(Boolean).join(" · ");
     var line;
@@ -337,7 +340,7 @@ function), and the movers' names (example pills for the lookup). All from the la
   function scatter() {
     var host = document.getElementById("scatter"), pick = document.getElementById("scatter-pick");
     if (!host) return;
-    var d = data.windowDays || 30, rows = data.companies.filter(function (r) { return r[4] !== null && r[4] !== undefined && r[5] !== null && r[5] !== undefined && r[3] > 0; });
+    var d = +host.getAttribute("data-days") || data.windowDays || 30, rows = data.companies.filter(function (r) { return r[4] !== null && r[4] !== undefined && r[5] !== null && r[5] !== undefined && r[3] > 0; });
     if (rows.length < 20) return;
     var W = 720, H = 380, L = 52, R = 18, T = 26, B = 44, lim = 100;
     var xs = rows.map(function (r) { return r[3]; }), xmin = Math.max(1, Math.min.apply(null, xs)), xmax = Math.max.apply(null, xs);
@@ -353,13 +356,20 @@ function), and the movers' names (example pills for the lookup). All from the la
     s += '<text x="' + ((L + W - R) / 2) + '" y="' + (H - 6) + '" text-anchor="middle" class="m c">Open roles today (log scale)</text>';
     s += '<text x="12" y="' + ((T + H - B) / 2) + '" text-anchor="middle" class="m c" transform="rotate(-90 12 ' + ((T + H - B) / 2) + ')">Change in open roles, ' + d + ' days</text>';
     var byNet = rows.slice().sort(function (a, b) { return b[4] - a[4]; });
-    var label = {}; byNet.slice(0, 4).concat(byNet.slice(-4)).forEach(function (r) { label[r[0]] = true; });
+    var label = {}; byNet.slice(0, 3).concat(byNet.slice(-3)).forEach(function (r) { label[r[0]] = true; });
     rows.forEach(function (r, i) {
       var cls = r[6] === "A" ? "p" : (r[6] === "C" ? "n" : "s");
       s += '<circle class="d ' + cls + '" data-i="' + i + '" cx="' + X(r[3]).toFixed(1) + '" cy="' + Y(r[5]).toFixed(1) + '" r="4.2"><title>' + esc(r[0]) + ': ' + fmt(r[3]) + ' open, ' + (r[4] > 0 ? '+' : '') + fmt(r[4]) + ' (' + (r[5] > 0 ? '+' : '') + r[5] + '%) in ' + d + ' days</title></circle>';
     });
     var k = 0;
-    rows.forEach(function (r) { if (!label[r[0]]) return; var x = X(r[3]), y = Y(r[5]); var left = x > W - 120; s += '<text class="t c" x="' + (left ? x - 7 : x + 7) + '" y="' + (y + (k++ % 2 ? 12 : -6)) + '" text-anchor="' + (left ? 'end' : 'start') + '">' + esc(r[0]) + '</text>'; });
+    var placed = [];
+    rows.forEach(function (r) {
+      if (!label[r[0]]) return;
+      var x = X(r[3]), y = Y(r[5]), left = x > W * 0.6, ty = y - 7;
+      for (var tries = 0; tries < 6; tries++) { var clash = placed.some(function (q) { return Math.abs(q[1] - ty) < 12 && Math.abs(q[0] - x) < 110; }); if (!clash) break; ty += 13; }
+      placed.push([x, ty]);
+      s += '<text class="t c" x="' + (left ? x - 7 : x + 7) + '" y="' + ty.toFixed(1) + '" text-anchor="' + (left ? 'end' : 'start') + '">' + esc(r[0]) + '</text>';
+    });
     s += '</svg>';
     host.innerHTML = s;
     var note = document.createElement("p"); note.className = "legend";
