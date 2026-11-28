@@ -216,9 +216,10 @@ class Shell:
     def __init__(self, site: Path):
         tpl = site / "company" / "_template" / "index.html"
         s = tpl.read_text()
-        m = re.search(r"<style>(.*?)</style>", s, re.S)
+        head_end = s.find("</head>")
+        m = re.search(r"<style>(.*?)</style>", s[:head_end] if head_end > 0 else "", re.S)
         if not m:
-            sys.exit("template: no <style> block found")
+            sys.exit("template: no <style> block in <head> (was the page built with the default layout?)")
         css = m.group(1)
         digest = hashlib.sha1(css.encode()).hexdigest()[:10]
         css_path = f"/assets/site-{digest}.css"
