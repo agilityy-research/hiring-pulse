@@ -145,7 +145,7 @@ function), and the movers' names (example pills for the lookup). All from the la
 {%- endif -%}{%- endif -%}
 <p class="take">{% if ratio_txt != "" %}{{ ratio_txt }}{% if v_history != "" %}, among the {{ v_history }} with 14+ days of history{% endif %}.{% else %}{{ heads[2] | default: "Which companies added and cut the most roles" }}{% endif %}</p>
 <p class="sub2">One dot per company with 14+ days of daily history: open roles across, on a log scale; change in open roles{% if win_days != "" %} over {{ win_days }} days{% endif %} up and down. Click a dot for the company, or filter.</p>
-<p class="chips" id="scatter-filters" hidden><button type="button" data-f="all" aria-pressed="true">All</button><button type="button" data-f="grow" aria-pressed="false">Growing 20%+</button><button type="button" data-f="ai" aria-pressed="false">AI-native, 50%+ AI/ML, 10+ roles</button><button type="button" data-f="remote" aria-pressed="false">Fully remote, 10+ roles</button></p>
+<p class="chips" id="scatter-filters" hidden><button type="button" data-f="all" aria-pressed="true">All</button><button type="button" data-f="grow" aria-pressed="false">Growing 20%+</button><button type="button" data-f="ai" aria-pressed="false">AI-heavy, 25%+ AI/ML titles, 10+ roles</button><button type="button" data-f="remote" aria-pressed="false">Fully remote, 10+ roles</button></p>
 {%- assign mv_rel = "/reports/charts/" | append: latest_date | append: "-movers.svg" -%}
 {%- assign mv_on_disk = site.static_files | where: "path", mv_rel | first -%}
 <div class="scroll" id="scatter" data-days="{{ win_days }}">{% if mv_on_disk %}{% include_relative {{ mv_rel | remove_first: "/" }} %}{% endif %}</div>
@@ -500,7 +500,7 @@ function), and the movers' names (example pills for the lookup). All from the la
     host.addEventListener("click", function (ev) { var c = ev.target.closest("circle[data-i]"); if (!c || !pick) return; pick.innerHTML = rowHtml(rows[+c.getAttribute("data-i")]); });
     var filters = document.getElementById("scatter-filters");
     if (!filters) return;
-    var tests = {all: function () { return true; }, grow: function (r) { return r[5] >= 20; }, ai: function (r) { return r[3] >= 10 && r[7] != null && r[7] >= 50; }, remote: function (r) { return r[3] >= 10 && r[8] != null && r[8] >= 99.5; }};
+    var tests = {all: function () { return true; }, grow: function (r) { return r[5] >= 20; }, ai: function (r) { return r[3] >= 10 && r[7] != null && r[7] >= 25; }, remote: function (r) { return r[3] >= 10 && r[8] != null && r[8] >= 99.5; }};
     filters.querySelectorAll("button").forEach(function (b) { var n = rows.filter(tests[b.getAttribute("data-f")]).length; b.textContent += " (" + fmt(n) + ")"; });
     filters.hidden = false;
     filters.addEventListener("click", function (ev) {
