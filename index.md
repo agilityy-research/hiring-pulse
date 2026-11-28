@@ -464,11 +464,12 @@ function), and the movers' names (example pills for the lookup). All from the la
     if (!bg || bg === "rgba(0, 0, 0, 0)") bg = getComputedStyle(document.body).backgroundColor;
     g.fillStyle = bg; g.fillRect(0, 0, W, H);
     var skip = function (el) { return el.closest(".tools, .chips, .search-results, button, a.more, p.small, noscript, .visually-hidden") || getComputedStyle(el).display === "none"; };
-    var pending = [];
+    var pending = [], maxY = 0;
     card.querySelectorAll("*").forEach(function (el) {
       if (skip(el)) return;
       var r = el.getBoundingClientRect(); if (!r.width || !r.height) return;
       var x = r.left - root.left, y = r.top - root.top, cs = getComputedStyle(el);
+      if (!el.closest("svg") && y + r.height > maxY) maxY = y + r.height;
       if (el.matches("svg.hp")) {
         pending.push(svgImage(el).then(function (img) { g.drawImage(img, x, y, r.width, r.height); }));
         return;
@@ -501,9 +502,11 @@ function), and the movers' names (example pills for the lookup). All from the la
       }
       g.restore();
     }
-    return Promise.all(pending).then(function () {
-      g.font = "500 12px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"; g.fillStyle = getComputedStyle(document.body).color; g.globalAlpha = .7; g.textAlign = "right"; g.textBaseline = "middle";
-      g.fillText(stamp(), W - pad, H - 13); g.globalAlpha = 1; return c;
+    return Promise.all(pending).then(function () {  // crop to the content, then the stamp
+      var H2 = Math.min(H, Math.ceil(maxY) + pad + 26), out = document.createElement("canvas"); out.width = W * k; out.height = H2 * k;
+      var g2 = out.getContext("2d"); g2.scale(k, k); g2.fillStyle = bg; g2.fillRect(0, 0, W, H2); g2.drawImage(c, 0, 0, W * k, H2 * k, 0, 0, W, H2);
+      g2.font = "500 12px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"; g2.fillStyle = getComputedStyle(document.body).color; g2.globalAlpha = .7; g2.textAlign = "right"; g2.textBaseline = "middle";
+      g2.fillText(stamp(), W - pad, H2 - 13); g2.globalAlpha = 1; return out;
     });
   }
   function roundRect(g, x, y, w, h, r) { g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); g.fill(); }
