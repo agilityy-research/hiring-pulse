@@ -121,8 +121,9 @@
 {%- endcapture -%}
 {%- if cards contains "fact" %}
 <section class="band" id="facts"><div class="wrap">
+<p class="eyebrow">Daily read · {{ m.dateText }}</p>
 <h2>Numbers worth sharing</h2>
-<p class="sub muted">Measured on {{ m.dateText }} across {{ m.coverage.rolesT }} open roles at {{ m.coverage.companiesT }} startups and scale-ups. Each sentence names what it counts. Free to quote with a link to this site.</p>
+<p class="sub muted">From the daily read of {{ m.dateText }}: {{ m.coverage.rolesT }} open roles at {{ m.coverage.companiesT }} startups and scale-ups{% if include.report_date %}, so the totals differ from the Monday edition above{% endif %}. Each sentence names what it counts. Free to quote with a link to this site.</p>
 <div class="curious">
 {{ cards }}
 </div>

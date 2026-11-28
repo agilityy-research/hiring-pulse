@@ -79,19 +79,29 @@ function), and the movers' names (example pills for the lookup). All from the la
 {%- assign mk_ready = false -%}{%- if mk and mk.ready -%}{%- assign mk_ready = true -%}{%- endif -%}
 {%- assign usd = nil -%}
 {%- if mk_ready -%}{%- assign usd = mk.pay.tables | where: "key", "usd-year" | first -%}{%- unless usd.region == "United States" and usd.ticks -%}{%- assign usd = nil -%}{%- endunless -%}{%- endif -%}
+{%- assign hm = site.data.home -%}
+{%- assign words = "|about as many|half|a third|a quarter|a fifth|a sixth|a seventh|an eighth|a ninth|a tenth" | split: "|" -%}
 {%- assign ai_agents = nil -%}{%- if mk_ready and mk.skills.ready -%}{%- assign ai_agents = mk.skills.top | where: "name", "AI agents" | first -%}{%- endif -%}
 
 <section class="band navy hero"><div class="wrap">
-<p class="eyebrow">Weekly edition of {{ latest_date | date: "%-d %B %Y" }}</p>
+<p class="eyebrow">Weekly benchmark · edition of {{ latest_date | date: "%-d %B %Y" }}</p>
 <h1>Which startups are hiring, which are cutting, and what they pay</h1>
 <p class="hero">Measured every day from the job boards of {{ v_companies | default: site.coverage.companies }} startups and scale-ups. Not job sites, not surveys: the companies' own postings.</p>
+<div id="vswrap">
 <div class="search hero-search" id="company-search" hidden>
 <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
 <label class="visually-hidden" for="company-q">Look up a company</label>
 <input id="company-q" type="search" autocomplete="off" spellcheck="false" placeholder="Look up any of the {{ v_companies | default: site.coverage.companies }} companies">
 <ul class="search-results" id="company-results" aria-live="polite"></ul>
 </div>
-<p class="pills" id="company-pills" hidden><span>Open roles, {% if win_days != "" %}{{ win_days }}-day {% endif %}change, AI and remote share. Try</span>{% for nm in pills %}<button type="button" data-q="{{ nm | escape }}">{{ nm }}</button>{% endfor %}</p>
+<div class="search hero-search vs2" id="company-search-2" hidden>
+<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+<label class="visually-hidden" for="company-q2">Compare with a second company</label>
+<input id="company-q2" type="search" autocomplete="off" spellcheck="false" placeholder="…compared with">
+<ul class="search-results" id="company-results-2" aria-live="polite"></ul>
+</div>
+</div>
+<p class="pills" id="company-pills" hidden><span>Open roles, {% if win_days != "" %}{{ win_days }}-day {% endif %}change, AI and remote share. Try</span>{% for nm in pills %}<button type="button" data-q="{{ nm | escape }}">{{ nm }}</button>{% endfor %}{% if pills.size > 1 %}<button type="button" class="vs-btn" data-vs="{{ pills[0] | escape }}|{{ pills[1] | escape }}">Compare {{ pills[0] }} with {{ pills[1] }}</button>{% endif %}</p>
 <noscript><p class="sub">The company lookup needs JavaScript. <a href="{{ '/reports/latest/' | relative_url }}">This week's report</a> names the biggest movers.</p></noscript>
 {%- if v_open != "" %}
 <div class="stats" aria-label="Headline numbers">
@@ -106,7 +116,7 @@ function), and the movers' names (example pills for the lookup). All from the la
 </div></section>
 
 <section class="band" id="this-week"><div class="wrap">
-<p class="eyebrow">This week · edition of {{ latest_date | date: "%-d %B %Y" }}</p>
+<p class="eyebrow">Weekly benchmark · edition of {{ latest_date | date: "%-d %B %Y" }}</p>
 <h2>What moved this week, in charts</h2>
 {%- comment -%} Finding headlines by position: 0 demand, 1 momentum, 2 movers, 3 time to fill, 4 AI/ML, 5 remote. {%- endcomment -%}
 {%- assign heads = "" | split: "" -%}{%- assign whos = "" | split: "" -%}{%- assign details = "" | split: "" -%}
@@ -122,12 +132,25 @@ function), and the movers' names (example pills for the lookup). All from the la
 
 <div class="card ccard" id="chart-movers">
 <p class="label">Growing against shrinking</p>
-<p class="take">{{ heads[2] | default: "Which companies added and cut the most roles" }}</p>
-<p class="sub2">One dot per company with 14+ days of daily history{% if v_history != "" %} ({{ v_history }} this week){% endif %}: open roles across, on a log scale; change in open roles{% if win_days != "" %} over {{ win_days }} days{% endif %} up and down. Click a dot for the company.</p>
+{%- assign ratio_txt = "" -%}
+{%- if v_contract != "" and v_accel != "" -%}
+{%- assign c_n = v_contract | remove: "%" | plus: 0.0 -%}{%- assign a_n = v_accel | remove: "%" | plus: 0.0 -%}
+{%- if a_n > 0 and c_n > 0 -%}
+{%- assign ratio = c_n | divided_by: a_n -%}
+{%- if ratio >= 2.2 -%}{%- assign ratio_txt = "More than twice as many startups are cutting (" | append: v_contract | append: ") as growing (" | append: v_accel | append: ")" -%}
+{%- elsif ratio >= 1.95 -%}{%- assign ratio_txt = "Twice as many startups are cutting (" | append: v_contract | append: ") as growing (" | append: v_accel | append: ")" -%}
+{%- elsif ratio >= 1.6 -%}{%- assign ratio_txt = "Nearly twice as many startups are cutting (" | append: v_contract | append: ") as growing (" | append: v_accel | append: ")" -%}
+{%- elsif ratio >= 1.0 -%}{%- assign ratio_txt = "More startups are cutting (" | append: v_contract | append: ") than growing (" | append: v_accel | append: ")" -%}
+{%- else -%}{%- assign ratio_txt = "More startups are growing (" | append: v_accel | append: ") than cutting (" | append: v_contract | append: ")" -%}{%- endif -%}
+{%- endif -%}{%- endif -%}
+<p class="take">{% if ratio_txt != "" %}{{ ratio_txt }}{% if v_history != "" %}, among the {{ v_history }} with 14+ days of history{% endif %}.{% else %}{{ heads[2] | default: "Which companies added and cut the most roles" }}{% endif %}</p>
+<p class="sub2">One dot per company with 14+ days of daily history: open roles across, on a log scale; change in open roles{% if win_days != "" %} over {{ win_days }} days{% endif %} up and down. Click a dot for the company, or filter.</p>
+<p class="chips" id="scatter-filters" hidden><button type="button" data-f="all" aria-pressed="true">All</button><button type="button" data-f="grow" aria-pressed="false">Growing 20%+</button><button type="button" data-f="ai" aria-pressed="false">AI-native, 50%+ AI/ML</button><button type="button" data-f="remote" aria-pressed="false">Fully remote</button></p>
 {%- assign mv_rel = "/reports/charts/" | append: latest_date | append: "-movers.svg" -%}
 {%- assign mv_on_disk = site.static_files | where: "path", mv_rel | first -%}
 <div class="scroll" id="scatter" data-days="{{ win_days }}">{% if mv_on_disk %}{% include_relative {{ mv_rel | remove_first: "/" }} %}{% endif %}</div>
 <ul class="search-results" id="scatter-pick"></ul>
+{%- if ratio_txt != "" and heads[2] %}<p class="small"><b>{{ heads[2] }}</b></p>{% endif %}
 <p class="small"><a href="{{ '/reports/latest/' | relative_url }}#largest-movers">The movers table in the report</a></p>
 </div>
 
@@ -144,8 +167,22 @@ function), and the movers' names (example pills for the lookup). All from the la
 {%- assign top_share_s = fn_shares | split: top_key | last | split: "|" | first -%}
 <div class="card ccard" id="chart-pay-demand">
 <p class="label">Volume against pay</p>
-<p class="take">{% if top_fn.name != "Engineering" %}{{ top_fn.name }} roles are the best paid at {{ top_fn.medianText }}, yet Engineering has {{ eng_share_s }}% of all openings against {{ top_share_s }}% and pays {{ eng.medianText }}.{% else %}Engineering is both the largest function ({{ eng_share_s }}% of openings) and the best paid ({{ eng.medianText }} median).{% endif %}</p>
-<p class="sub2">Share of this week's open roles, and the median salary among US postings that publish one.</p>
+{%- assign eng_share_n = eng_share_s | plus: 0.0 -%}
+{%- assign above_txt = "" -%}{%- assign frac_txt = "" -%}{%- assign n_above = 0 -%}
+{%- for r in ranked -%}
+{%- if r.median > eng.median and n_above < 2 -%}
+{%- assign key = "|" | append: r.name | append: ":" -%}
+{%- if fn_shares contains key -%}
+{%- assign sh_n = fn_shares | split: key | last | split: "|" | first | plus: 0.0 -%}
+{%- if sh_n > 0 -%}{%- assign q = eng_share_n | divided_by: sh_n | round -%}{%- else -%}{%- assign q = 99 -%}{%- endif -%}
+{%- if q > 10 -%}{%- assign w = "under a tenth" -%}{%- elsif q < 1 -%}{%- assign w = "more" -%}{%- else -%}{%- assign w = words[q] -%}{%- endif -%}
+{%- if n_above == 1 -%}{%- assign above_txt = above_txt | append: " and " -%}{%- assign frac_txt = frac_txt | append: " and " -%}{%- endif -%}
+{%- assign above_txt = above_txt | append: r.name | append: " (" | append: r.medianText | append: ")" -%}{%- assign frac_txt = frac_txt | append: w -%}
+{%- assign n_above = n_above | plus: 1 -%}
+{%- endif -%}{%- endif -%}
+{%- endfor -%}
+<p class="take">{% if n_above > 0 %}{{ above_txt }} advertise{% if n_above == 1 %}s{% endif %} more than Engineering ({{ eng.medianText }}), on {{ frac_txt }} of its openings.{% else %}Engineering is both the largest function ({{ eng_share_s }}% of openings) and the best paid ({{ eng.medianText }} median).{% endif %}</p>
+<p class="sub2">Share of this week's {{ v_open }} open roles by function, and the median salary among US postings that publish one.</p>
 <ol class="bars two">
 <li class="hd" aria-hidden="true"><span></span><span>Share of openings</span><span>Median US salary</span></li>
 {%- for r in ranked -%}
@@ -164,9 +201,11 @@ function), and the movers' names (example pills for the lookup). All from the la
 
 <div class="card ccard" id="chart-remote">
 <p class="label">Remote, company by company</p>
-<p class="take">{{ heads[5] | default: "Remote roles are concentrated in a minority of companies" }}</p>
-<p class="sub2">Companies with 10 or more open roles, by the share of their roles flagged remote. Fully remote means 99.5% or more of them, as in the report.</p>
-<ol class="bars split" id="remote-split"><li><span class="name muted">Loading…</span></li></ol>
+{%- assign rs = nil -%}{%- if hm and hm.remoteSplit and hm.remoteSplit.total > 0 -%}{%- assign rs = hm.remoteSplit -%}{%- endif -%}
+{%- assign none_b = nil -%}{%- if rs -%}{%- assign none_b = rs.buckets | where: "key", "none" | first -%}{%- endif -%}
+<p class="take">{% if v_remote != "" and none_b %}{{ v_remote }} of open roles are remote, yet {{ none_b.sharePct | round }}% of startups with {{ rs.minOpenRoles }}+ openings offer none.{% else %}{{ heads[5] | default: "Remote roles are concentrated in a minority of companies" }}{% endif %}</p>
+<p class="sub2">Startups with {{ rs.minOpenRoles | default: 10 }} or more open roles{% if rs %} ({{ rs.total }}){% endif %}, by the share of their roles flagged remote. Fully remote means {{ rs.fullyRemotePct | default: 99.5 }}% or more of them, as in the report.</p>
+<ol class="bars split" id="remote-split">{% if rs %}{% for b in rs.buckets %}<li><span class="name">{{ b.label }}</span><span class="track"><span class="fill" style="width:{{ b.sharePct }}%"></span></span><span class="val">{{ b.count }}<small>{{ b.sharePct | round }}% of {{ rs.total }}</small></span></li>{% endfor %}{% endif %}</ol>
 <p class="small"><a href="{{ '/data/cities/#work-mode' | relative_url }}">Remote, hybrid and on-site by city and function</a></p>
 </div>
 
@@ -179,7 +218,7 @@ function), and the movers' names (example pills for the lookup). All from the la
 {%- if usd -%}{%- for c in mk.cities limit: 10 -%}{%- assign pc = usd.byCity | where: "name", c.label | first -%}{%- if pc and c.country == "United States" -%}{%- if pmax == nil or pc.median > pmax.median -%}{%- assign pmax = pc -%}{%- endif -%}{%- endif -%}{%- endfor -%}{%- endif -%}
 <div class="card ccard" id="chart-cities">
 <p class="label">City trade-offs</p>
-<p class="take">{{ c0.label }} has the most startup openings{% if hmax or pmax %}; of the ten largest cities, {% endif %}{% if hmax %}{{ hmax.label }} is the most hybrid{% endif %}{% if hmax and pmax %} and {% endif %}{% if pmax %}{{ pmax.name }} advertises the highest median US salary{% endif %}.</p>
+<p class="take">{{ c0.label }} leads on volume ({{ c0.rolesT }} open roles){% if pmax %}, {{ pmax.name }} on advertised pay ({{ pmax.medianText }} median){% endif %}{% if hmax %}{% if pmax %} and{% else %},{% endif %} {{ hmax.label }} on hybrid ({{ hmax.modes.hybrid }}%){% endif %}, among the ten largest cities.</p>
 <p class="sub2">The ten largest cities: open roles, the remote / hybrid / on-site split of roles that state a work mode, and the median salary among postings that publish one, in that country's currency.</p>
 <ol class="bars city">
 <li class="hd"><span></span><span>Open roles</span><span></span><span class="mixh">Work mode</span><span>Median pay</span></li>
@@ -197,23 +236,46 @@ function), and the movers' names (example pills for the lookup). All from the la
 {%- endif %}
 </div>
 
-{%- if heads.size > 1 %}
-<h3 class="sub-h">And in the rest of the edition</h3>
-{%- assign labels = "Demand|Momentum|Movers|Time to fill|AI/ML roles|Remote work" | split: "|" -%}
-<div class="insights compact">
-{%- for head in heads -%}
-{%- assign i = forloop.index0 -%}
-{%- unless i == 2 or i == 5 -%}
-{%- assign who = whos[i] -%}{%- assign wp = who | split: ": " -%}
-<div class="card">
-<p class="label">{{ labels[i] | default: "Finding" }}</p>
-<h3>{{ head }}</h3>
-{%- if details[i] != "" %}<p>{{ details[i] | markdownify | strip_html }}</p>{% endif %}
-{%- if who != "" %}{%- assign who_rest = who | remove_first: wp[0] | remove_first: ": " | strip -%}{%- assign who_tag = wp[0] | remove_first: "For " | strip -%}
-<p class="who">{% if wp.size > 1 %}<b>{{ who_tag | slice: 0 | upcase }}{{ who_tag | slice: 1, 200 }}</b>{{ who_rest | slice: 0 | upcase }}{{ who_rest | slice: 1, 400 }}{% else %}{{ who }}{% endif %}</p>{% endif %}
-</div>
-{%- endunless -%}
+{%- if fn_fill != "" or hm.aiLeaders %}
+<div class="cgrid" style="margin-top:1.2rem">
+{%- if fn_fill != "" %}
+{%- assign fill_pairs = fn_fill | split: "|" -%}
+{%- assign f_max = nil -%}{%- assign f_min = nil -%}{%- assign f_top = 0.0 -%}
+{%- for pr in fill_pairs -%}{%- assign kv = pr | split: ":" -%}{%- if kv.size == 2 and kv[1] != "—" -%}{%- assign fv = kv[1] | plus: 0.0 -%}
+{%- if fv > f_top -%}{%- assign f_top = fv -%}{%- assign f_max = kv -%}{%- endif -%}
+{%- if f_min == nil -%}{%- assign f_min = kv -%}{%- else -%}{%- assign mn = f_min[1] | plus: 0.0 -%}{%- if fv < mn -%}{%- assign f_min = kv -%}{%- endif -%}{%- endif -%}
+{%- endif -%}{%- endfor -%}
+<div class="card ccard" id="chart-fill">
+<p class="label">Hiring bottlenecks</p>
+{%- if f_max and f_min -%}{%- assign mx = f_max[1] | plus: 0.0 -%}{%- assign mn = f_min[1] | plus: 0.0 -%}{%- assign times = mx | divided_by: mn | times: 10 | round | divided_by: 10.0 -%}
+<p class="take">{{ f_max[0] }} roles stay open {{ f_max[1] }} days, {{ f_min[0] }} roles {{ f_min[1] }}: {{ times }} times as long{% if v_fill != "" %}, around a median of {{ v_fill }} for all roles{% endif %}.</p>
+{%- else -%}<p class="take">{{ heads[3] | default: "How long roles stay open, by function" }}</p>{%- endif %}
+<p class="sub2">Median days a posting stayed up before it closed, by function, among roles that closed in the window at companies with 14+ days of history. Functions with too few closures are left out.</p>
+<ol class="bars fill">
+{%- assign sorted_fill = "" | split: "" -%}
+{%- for pr in fill_pairs -%}{%- assign kv = pr | split: ":" -%}{%- if kv.size == 2 and kv[1] != "—" -%}{%- assign padded = kv[1] | plus: 1000.0 | append: ":" | append: kv[0] -%}{%- assign sorted_fill = sorted_fill | push: padded -%}{%- endif -%}{%- endfor -%}
+{%- assign sorted_fill = sorted_fill | sort | reverse -%}
+{%- for item in sorted_fill -%}{%- assign kv = item | split: ":" -%}{%- assign fv = kv[0] | plus: 0.0 | minus: 1000.0 -%}{%- assign fw = fv | times: 100 | divided_by: f_top -%}
+<li><span class="name">{{ kv[1] }}</span><span class="track"><span class="fill" style="width:{{ fw }}%"></span></span><span class="val">{{ fv | round: 1 | replace: ".0", "" }}<small>days</small></span></li>
 {%- endfor %}
+</ol>
+<p class="small"><a href="{{ '/reports/latest/' | relative_url }}#open-roles-by-function">Days-to-fill by function in the report</a></p>
+</div>
+{%- endif %}
+{%- if hm.aiLeaders and hm.aiLeaders.rows.size > 0 %}
+<div class="card ccard" id="chart-ai">
+<p class="label">AI-native boards</p>
+<p class="take">{{ heads[4] | default: "Where AI/ML roles are most of the hiring" }}</p>
+<p class="sub2">Boards with {{ hm.aiLeaders.minOpenRoles }} or more open roles and the highest share of AI/ML titles{% if v_ai != "" %}, against {{ v_ai }} of all open roles{% endif %}.</p>
+<ol class="bars leaders">
+{%- for r in hm.aiLeaders.rows limit: 5 %}
+<li><span class="name">{{ r.company }}<small>{{ r.openRoles }} open{% if r.industry != "" %} · {{ r.industry }}{% endif %}</small></span><span class="track"><span class="fill" style="width:{{ r.aiSharePct }}%"></span></span><span class="val">{{ r.aiSharePct }}%<small>AI/ML</small></span></li>
+{%- endfor %}
+{%- if v_ai != "" %}<li class="base"><span class="name">All open roles</span><span class="track"><span class="fill" style="width:{{ v_ai | remove: "%" }}%"></span></span><span class="val">{{ v_ai }}<small>AI/ML</small></span></li>{% endif %}
+</ol>
+<p class="small"><a href="{{ '/reports/latest/' | relative_url }}">The AI/ML finding in the report</a></p>
+</div>
+{%- endif %}
 </div>
 {%- endif %}
 <div class="actions"><a class="btn" href="{{ '/reports/latest/' | relative_url }}">Read the full report</a>
@@ -293,7 +355,9 @@ function), and the movers' names (example pills for the lookup). All from the la
 <script>
 (function () {
   var box = document.getElementById("company-search"), q = document.getElementById("company-q"),
-      out = document.getElementById("company-results"), pills = document.getElementById("company-pills");
+      out = document.getElementById("company-results"), pills = document.getElementById("company-pills"),
+      box2 = document.getElementById("company-search-2"), q2 = document.getElementById("company-q2"),
+      out2 = document.getElementById("company-results-2"), wrap = document.getElementById("vswrap"), vs = false;
   if (!box || !q || !out) return;
   box.hidden = false; if (pills) pills.hidden = false;
   var data = null, loading = null, url = "{{ '/reports/data/companies.json' | relative_url }}";
@@ -322,20 +386,75 @@ function), and the movers' names (example pills for the lookup). All from the la
     return "<li><b>" + esc(name) + "</b><span>" + fmt(open) + " open roles</span>" + line + (meta ? '<span class="muted">' + esc(meta) + "</span>" : "") +
            (extra ? '<span class="muted">' + esc(extra) + "</span>" : "") + '</li>';
   }
-  function render(term) {
-    out.innerHTML = "";
+  function render(term, target) {
+    target = target || out; target.innerHTML = "";
     if (!data || term.length < 2) return;
-    var t = term.toLowerCase(), hits = [], rows = data.companies;
-    for (var i = 0; i < rows.length && hits.length < 8; i++) { if (String(rows[i][0]).toLowerCase().indexOf(t) !== -1) hits.push(rows[i]); }
-    if (!hits.length) { out.innerHTML = '<li><span class="muted">No board with that name among the tracked companies.</span></li>'; return; }
-    out.innerHTML = hits.map(rowHtml).join("");
+    var t = term.toLowerCase(), hits = [], rows = data.companies, exact = null;
+    for (var i = 0; i < rows.length && hits.length < 8; i++) {
+      var nm = String(rows[i][0]).toLowerCase();
+      if (nm === t && !exact) exact = rows[i];
+      if (nm.indexOf(t) !== -1) hits.push(rows[i]);
+    }
+    if (!hits.length) { target.innerHTML = '<li><span class="muted">No board with that name among the tracked companies.</span></li>'; return; }
+    if (vs) hits = [exact || hits[0]];  // compare mode: one card per side
+    target.innerHTML = hits.map(rowHtml).join("");
+  }
+  function setVs(on) {
+    vs = on; if (!box2 || !wrap) return;
+    box2.hidden = !on; wrap.classList.toggle("on", on);
+    var b = pills && pills.querySelector(".vs-btn"); if (b) b.textContent = on ? "Single lookup" : b.getAttribute("data-label");
+    load().then(function () { render(q.value.trim()); if (on) render(q2.value.trim(), out2); else out2.innerHTML = ""; });
   }
   q.addEventListener("focus", function () { load(); });
   q.addEventListener("input", function () { var v = q.value.trim(); load().then(function () { if (q.value.trim() === v) render(v); }); });
+  if (q2) q2.addEventListener("input", function () { var v = q2.value.trim(); load().then(function () { if (q2.value.trim() === v) render(v, out2); }); });
   if (pills) pills.addEventListener("click", function (ev) {
-    var b = ev.target.closest("button[data-q]"); if (!b) return;
-    q.value = b.getAttribute("data-q"); q.focus(); load().then(function () { render(q.value.trim()); });
+    var b = ev.target.closest("button"); if (!b) return;
+    if (b.classList.contains("vs-btn")) {
+      if (!b.getAttribute("data-label")) b.setAttribute("data-label", b.textContent);
+      if (!vs) { var pair = (b.getAttribute("data-vs") || "|").split("|"); q.value = pair[0]; if (q2) q2.value = pair[1]; }
+      setVs(!vs); return;
+    }
+    if (!b.getAttribute("data-q")) return;
+    var target = vs && q.value.trim() && !q2.value.trim() ? q2 : q;
+    target.value = b.getAttribute("data-q"); target.focus(); load().then(function () { render(target.value.trim(), target === q2 ? out2 : out); });
   });
+
+  // Copy the card as text, or save an SVG chart as a PNG with the site's stamp.
+  function stamp() { var e = document.querySelector(".hero .eyebrow"); return "hiring.agilityy.com · " + (e ? e.textContent.replace(/^.*·\s*/, "") : ""); }
+  function tools() {
+    document.querySelectorAll(".ccard").forEach(function (card) {
+      var bar = document.createElement("p"); bar.className = "tools";
+      bar.innerHTML = '<button type="button" data-act="copy">Copy text</button>' + (card.querySelector("svg.hp") ? '<button type="button" data-act="png">Save image</button>' : "");
+      var anchor = card.querySelector("p.small:last-of-type"); card.insertBefore(bar, anchor || null);
+      bar.addEventListener("click", function (ev) {
+        var b = ev.target.closest("button"); if (!b) return;
+        if (b.getAttribute("data-act") === "copy") {
+          var clone = card.cloneNode(true); clone.querySelectorAll(".tools, .search-results, .chips, svg").forEach(function (n) { n.remove(); });
+          var text = clone.innerText.replace(/\n{3,}/g, "\n\n").trim() + "\n\nSource: " + location.origin + location.pathname + "#" + card.id + " (" + stamp() + ")";
+          (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject()).then(function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy text"; }, 1500); }, function () { window.prompt("Copy this text", text); });
+        } else savePng(card.querySelector("svg.hp"), card.id);
+      });
+    });
+  }
+  function savePng(svg, id) {
+    var props = ["fill", "stroke", "stroke-width", "opacity", "font-size", "font-family", "font-weight", "text-anchor"];
+    var clone = svg.cloneNode(true), src = svg.querySelectorAll("*"), dst = clone.querySelectorAll("*");
+    for (var i = 0; i < src.length; i++) { var cs = getComputedStyle(src[i]); props.forEach(function (pn) { var v = cs.getPropertyValue(pn); if (v) dst[i].style.setProperty(pn, v); }); }
+    clone.querySelectorAll("title").forEach(function (t) { t.remove(); });
+    var vb = (svg.getAttribute("viewBox") || "0 0 720 360").split(/\s+/).map(Number), W = vb[2], H = vb[3] + 28;
+    clone.setAttribute("width", W); clone.setAttribute("height", vb[3]); clone.removeAttribute("class");
+    var bg = getComputedStyle(document.body).backgroundColor, fg = getComputedStyle(document.body).color;
+    var outer = '<svg xmlns="http://www.w3.org/2000/svg" width="' + W + '" height="' + H + '"><rect width="100%" height="100%" fill="' + bg + '"/>' +
+                new XMLSerializer().serializeToString(clone).replace(/<svg /, '<svg x="0" y="0" ') +
+                '<text x="' + (W - 8) + '" y="' + (H - 9) + '" text-anchor="end" font-family="-apple-system,Helvetica,Arial,sans-serif" font-size="12" fill="' + fg + '" opacity=".75">' + esc(stamp()) + '</text></svg>';
+    var img = new Image(), url = URL.createObjectURL(new Blob([outer], {type: "image/svg+xml;charset=utf-8"}));
+    img.onload = function () {
+      var c = document.createElement("canvas"), k = 2; c.width = W * k; c.height = H * k; c.getContext("2d").drawImage(img, 0, 0, c.width, c.height); URL.revokeObjectURL(url);
+      c.toBlob(function (blob) { var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "hiring-pulse-" + id + ".png"; a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000); }, "image/png");
+    };
+    img.src = url;
+  }
 
   // Growing against shrinking: every company with enough history, open roles across (log scale), change up and down.
   function scatter() {
@@ -379,17 +498,32 @@ function), and the movers' names (example pills for the lookup). All from the la
     note.innerHTML = '<span><i class="p"></i>Accelerating</span><span><i class="n"></i>Contracting</span><span><i class="sdot"></i>Steady or flat</span><span class="all">' + fmt(rows.length) + ' of ' + fmt(hist.length) + ' companies drawn' + (gone ? '; ' + gone + ' with no open roles left today cannot sit on a log scale' : '') + (clipped ? '; ' + clipped + ' beyond ±' + lim + '% drawn at the edge' : '') + '.</span>';
     host.parentNode.insertBefore(note, host.nextSibling);
     host.addEventListener("click", function (ev) { var c = ev.target.closest("circle[data-i]"); if (!c || !pick) return; pick.innerHTML = rowHtml(rows[+c.getAttribute("data-i")]); });
+    var filters = document.getElementById("scatter-filters");
+    if (!filters) return;
+    var tests = {all: function () { return true; }, grow: function (r) { return r[5] >= 20; }, ai: function (r) { return r[7] != null && r[7] >= 50; }, remote: function (r) { return r[8] != null && r[8] >= 99.5; }};
+    filters.querySelectorAll("button").forEach(function (b) { var n = rows.filter(tests[b.getAttribute("data-f")]).length; b.textContent += " (" + fmt(n) + ")"; });
+    filters.hidden = false;
+    filters.addEventListener("click", function (ev) {
+      var b = ev.target.closest("button[data-f]"); if (!b) return;
+      var f = b.getAttribute("data-f"), t = tests[f];
+      filters.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      host.querySelectorAll("circle[data-i]").forEach(function (c) { c.classList.toggle("dim", !t(rows[+c.getAttribute("data-i")])); });
+      if (!pick) return;
+      if (f === "all") { pick.innerHTML = ""; return; }
+      var sel = rows.filter(t).sort(function (a, b2) { return b2[4] - a[4]; });
+      pick.innerHTML = sel.length ? sel.slice(0, 8).map(rowHtml).join("") : '<li><span class="muted">No company matches this week.</span></li>';
+    });
   }
 
   // Remote, company by company: companies with 10+ open roles by the share of their roles flagged remote.
   function remoteSplit() {
-    var host = document.getElementById("remote-split"); if (!host) return;
+    var host = document.getElementById("remote-split"); if (!host || host.children.length) return;
     var ten = data.companies.filter(function (r) { return r[3] >= 10 && r[8] !== null && r[8] !== undefined; });
     if (!ten.length) { host.innerHTML = ""; return; }
     var b = [["No remote roles", 0], ["Under half remote", 0], ["Half or more remote", 0], ["Fully remote", 0]];
     ten.forEach(function (r) { var v = r[8]; b[v <= 0 ? 0 : v < 50 ? 1 : v < 99.5 ? 2 : 3][1]++; });
     host.innerHTML = b.map(function (x) { var pct = x[1] / ten.length * 100; return '<li><span class="name">' + x[0] + '</span><span class="track"><span class="fill" style="width:' + pct.toFixed(1) + '%"></span></span><span class="val">' + fmt(x[1]) + '<small>' + Math.round(pct) + '% of ' + fmt(ten.length) + '</small></span></li>'; }).join("");
   }
-  load().then(function () { try { scatter(); } catch (e) {} try { remoteSplit(); } catch (e) {} });
+  load().then(function () { try { scatter(); } catch (e) {} try { remoteSplit(); } catch (e) {} try { tools(); } catch (e) {} });
 })();
 </script>
