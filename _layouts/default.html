@@ -389,6 +389,53 @@ footer.site h4{margin:0 0 .5rem;color:var(--fg);font-size:.9rem}
 footer.site a{color:inherit;text-decoration:none;display:block;padding:.15rem 0}
 footer.site a:hover{color:var(--accent)}
 footer.site .legal{grid-column:1 / -1;border-top:1px solid var(--line);padding-top:1rem;font-size:.85rem}
+/* home v3: lookup in the hero, chart cards, portals */
+.hero .hero-search{margin:1.3rem 0 .5rem;max-width:42rem}
+.hero .hero-search input{border-color:transparent;box-shadow:0 10px 30px -14px rgba(0,0,0,.6)}
+.hero .search-results{color:var(--fg);text-align:left}
+.pills{display:flex;flex-wrap:wrap;gap:.4rem .5rem;align-items:center;font-size:.9rem;color:#c8d8ea;margin:0 0 .4rem}
+.pills button{font:inherit;font-size:.86rem;font-weight:600;padding:.22rem .7rem;border-radius:999px;border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.1);color:#fff;cursor:pointer}
+.pills button:hover{background:rgba(255,255,255,.22)}
+.stat b small{font-size:.9rem;font-weight:600;color:var(--muted);margin:0 .1rem}
+.cgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.2rem;margin:1rem 0 0}
+@media (max-width:1000px){.cgrid{grid-template-columns:minmax(0,1fr)}}
+.ccard{display:flex;flex-direction:column;gap:.35rem;min-width:0}
+.ccard .label{margin:0;font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-2)}
+.ccard .take{font-size:1.12rem;font-weight:650;line-height:1.35;margin:0}
+.ccard .sub2{font-size:.9rem;color:var(--muted);margin:0 0 .3rem}
+.ccard .small{margin-top:auto;padding-top:.4rem}
+.ccard .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.ccard svg.hp{display:block;width:100%;min-width:560px;height:auto}
+svg.sc .d{stroke:var(--card);stroke-width:1.2;cursor:pointer;opacity:.85}
+svg.sc .d.p{fill:var(--pos)}svg.sc .d.n{fill:var(--neg)}svg.sc .d.s{fill:var(--muted);opacity:.45}
+svg.sc .d:hover{opacity:1;stroke:var(--fg)}
+svg.sc .g{stroke:var(--line);stroke-width:1}svg.sc .g.z{stroke:var(--muted);stroke-width:1.4}
+svg.sc .t{fill:var(--fg)}svg.sc .m{fill:var(--muted)}svg.sc .s{font-size:12px}svg.sc .c{font-size:11px}svg.sc text{font-family:inherit}
+.legend .p{background:var(--pos)}.legend .n{background:var(--neg)}.legend .sdot{background:var(--muted);opacity:.5}
+.bars li.hd{font-size:.76rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:700;border-bottom:1px solid var(--line);padding-bottom:.15rem}
+.bars.two li{grid-template-columns:minmax(5.5rem,7.5rem) minmax(0,1fr) minmax(0,1fr)}
+.track2{display:flex;align-items:center;gap:.4rem;min-width:0}
+.track2 .fill{display:block;height:.75rem;min-width:2px;background:var(--bar);border-radius:0 4px 4px 0;flex:0 0 auto}
+.track2.pay .fill{background:var(--warm)}
+.track2 em{font-style:normal;font-size:.82rem;font-weight:650;font-variant-numeric:tabular-nums;white-space:nowrap}
+.bars.city li{grid-template-columns:minmax(5.5rem,7.5rem) minmax(0,1fr) 3.6rem 4.4rem 3.6rem}
+.bars.city .mix{height:.75rem}
+.bars.city .val.pay{font-weight:600}
+.bars.city li.hd .mixh{text-align:left}
+@media (max-width:520px){.bars.city li{grid-template-columns:minmax(5rem,6.5rem) 3.4rem 3.6rem 3.4rem}.bars.city .track{display:none}.bars.two li{grid-template-columns:minmax(4.5rem,6rem) minmax(0,1fr) minmax(0,1fr)}}
+.bars.split li{grid-template-columns:minmax(7rem,11rem) minmax(0,1fr) auto}
+.bars .val small{display:block;font-weight:400;color:var(--muted);font-size:.76rem}
+h3.sub-h{margin:2rem 0 .8rem;font-size:1.25rem}
+.insights.compact{grid-template-columns:repeat(4,1fr)}
+@media (max-width:1100px){.insights.compact{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.insights.compact{grid-template-columns:1fr}}
+.hub.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:1100px){.hub.four{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.hub.four{grid-template-columns:minmax(0,1fr)}}
+.uses{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.2rem 2rem;margin:1.4rem 0 .4rem;max-width:66rem}
+.uses p{margin:.3rem 0;font-size:.95rem;color:var(--muted)}
+.uses p b{color:var(--fg)}
+@media (max-width:760px){.uses{grid-template-columns:minmax(0,1fr)}}
 </style>
 <!-- Cloudflare Web Analytics: cookieless page-view counting, see /privacy/ --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "d533c0a40546460e9fd42d933ecff5c6"}'></script>
 </head>
