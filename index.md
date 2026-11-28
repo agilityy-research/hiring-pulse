@@ -179,7 +179,7 @@ function), and the movers' names (example pills for the lookup). All from the la
 {%- if usd -%}{%- for c in mk.cities limit: 10 -%}{%- assign pc = usd.byCity | where: "name", c.label | first -%}{%- if pc and c.country == "United States" -%}{%- if pmax == nil or pc.median > pmax.median -%}{%- assign pmax = pc -%}{%- endif -%}{%- endif -%}{%- endfor -%}{%- endif -%}
 <div class="card ccard" id="chart-cities">
 <p class="label">City trade-offs</p>
-<p class="take">{{ c0.label }} has the most startup openings{% if hmax and hmax.label != c0.label %}, {{ hmax.label }} is the most hybrid{% endif %}{% if pmax and pmax.name != c0.label %}, and {{ pmax.name }} advertises the highest US pay{% endif %}.</p>
+<p class="take">{{ c0.label }} has the most startup openings{% if hmax or pmax %}; of the ten largest cities, {% endif %}{% if hmax %}{{ hmax.label }} is the most hybrid{% endif %}{% if hmax and pmax %} and {% endif %}{% if pmax %}{{ pmax.name }} advertises the highest median US salary{% endif %}.</p>
 <p class="sub2">The ten largest cities: open roles, the remote / hybrid / on-site split of roles that state a work mode, and the median salary among postings that publish one, in that country's currency.</p>
 <ol class="bars city">
 <li class="hd"><span></span><span>Open roles</span><span></span><span class="mixh">Work mode</span><span>Median pay</span></li>
@@ -229,7 +229,7 @@ function), and the movers' names (example pills for the lookup). All from the la
 <div class="hub four">
 <a class="card hub-card" href="{{ '/data/salaries/' | relative_url }}">
 <span class="k">Salaries</span>
-{%- if usd and usd.all.medianMaxText %}<b class="n">{{ usd.all.medianText }}</b><p>Median yearly salary offered across {{ usd.all.nT }} US roles that publish one; one in ten tops out at {{ usd.all.topP90Text }} or more.</p>{% else %}<p>The salary ranges startups publish, by function, level and city.</p>{% endif %}
+{%- if usd and usd.all.medianMaxText %}<b class="n">{{ usd.all.medianText }}</b><p>Median yearly salary offered across {{ usd.all.nT }} distinct US roles that publish one; one in ten tops out at {{ usd.all.topP90Text }} or more.</p>{% else %}<p>The salary ranges startups publish, by function, level and city.</p>{% endif %}
 <span class="more">By function, level and city</span></a>
 <a class="card hub-card" href="{{ '/data/cities/' | relative_url }}">
 <span class="k">Hiring by city</span>
@@ -376,7 +376,7 @@ function), and the movers' names (example pills for the lookup). All from the la
     s += '</svg>';
     host.innerHTML = s;
     var note = document.createElement("p"); note.className = "legend";
-    note.innerHTML = '<i class="p"></i>Accelerating <i class="n"></i>Contracting <i class="sdot"></i>Steady or flat<br>' + fmt(rows.length) + ' of ' + fmt(hist.length) + ' companies drawn' + (gone ? '; ' + gone + ' with no open roles left today cannot sit on a log scale' : '') + (clipped ? '; ' + clipped + ' beyond ±' + lim + '% drawn at the edge' : '') + '.';
+    note.innerHTML = '<span><i class="p"></i>Accelerating</span><span><i class="n"></i>Contracting</span><span><i class="sdot"></i>Steady or flat</span><span class="all">' + fmt(rows.length) + ' of ' + fmt(hist.length) + ' companies drawn' + (gone ? '; ' + gone + ' with no open roles left today cannot sit on a log scale' : '') + (clipped ? '; ' + clipped + ' beyond ±' + lim + '% drawn at the edge' : '') + '.</span>';
     host.parentNode.insertBefore(note, host.nextSibling);
     host.addEventListener("click", function (ev) { var c = ev.target.closest("circle[data-i]"); if (!c || !pick) return; pick.innerHTML = rowHtml(rows[+c.getAttribute("data-i")]); });
   }
