@@ -27,7 +27,7 @@ a closure is observed rather than inferred. Full method: [methodology](methodolo
 
 Every tracked company's daily numbers, free by e-mail during the beta: [get the data](get-the-data.md). Schema and a
 free sample: [for data teams](for-data-teams.md). The whole history or a custom cut:
-[ask us](https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml).
+write to data@agilityy.com.
 
 ## How this repository works
 
@@ -44,7 +44,6 @@ free sample: [for data teams](for-data-teams.md). The whole history or a custom 
   `jekyll-optional-front-matter` (a GitHub Pages default), the front page reads `reports/latest.md` at build time and
   shows its key findings and charts, and the archive list is generated from the files in `reports/`, so a new edition
   needs no other step.
-- `.github/ISSUE_TEMPLATE/data-access-request.yml` is the contact form for the data feed (no e-mail address anywhere).
 - `.github/workflows/custom-domain.yml` watches DNS every six hours and switches the site to the custom domain by
   itself (below). It never changes DNS.
 - `samples/` holds the free sample CSVs; `assets/og-card.png` is the social card.
@@ -93,5 +92,4 @@ GitHub Pages.
 Reports in this repository are released under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 Quote freely with attribution: *"Agilityy Research, Hiring Pulse, week of YYYY-MM-DD"* and a link to this repository.
 
-Questions, corrections or a custom cut of the data: open an issue here
-(data requests: the [Data access request](https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml) form).
+Questions, corrections or a custom cut of the data: data@agilityy.com (issues are off on this repository).

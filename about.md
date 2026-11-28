@@ -22,16 +22,14 @@ has the details. No advertising, no sponsored findings.
 
 - **First-party.** Every number comes from the company's own job board, read by us, not from a job aggregator.
 - **Published method.** The [methodology]({{ '/methodology/' | relative_url }}) describes every definition and the daily
-  quality checks; every report's source file is on [GitHub](https://github.com/agilityy-research/hiring-pulse).
+  quality checks; every edition stays online in the [archive]({{ '/reports/' | relative_url }}) unchanged.
 - **Fixed definitions.** The function, seniority and AI/ML classification does not change between editions without a note.
 - **No tracking.** The site sets no cookies; a privacy-friendly counter tallies page views and nothing else ([privacy]({{ '/privacy/' | relative_url }})).
 
 ## Contact
 
-For data requests, corrections, press and research questions, use the
-[request form](https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml) on GitHub;
-say in the form if you would rather continue privately. We answer within two
-working days.{% if site.beta_signup_action != "" %} Beta subscribers can also reply to any of the daily e-mails.{% endif %}
+For data requests, corrections, press and research questions, write to
+[data@agilityy.com](mailto:data@agilityy.com?subject=Hiring%20Pulse). We answer within two working days.{% if site.beta_signup_action != "" %} Beta subscribers can also reply to any of the daily e-mails.{% endif %}
 
 ## Next
 

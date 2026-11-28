@@ -80,7 +80,7 @@
 <link rel="sitemap" type="application/xml" href="{{ '/sitemap.xml' | relative_url }}">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230f4c81'/%3E%3Cpath d='M6 22l6-7 5 4 9-11' stroke='%23fff' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Organization","@id":"{{ site_abs }}#organization","name":"Agilityy Research","url":{{ site_abs | jsonify }},"logo":{{ og_image | jsonify }},"description":"Publisher of Hiring Pulse, the weekly startup hiring benchmark measured from {{ site.coverage.companies }} public job boards, and of the daily hiring data behind it.","sameAs":["https://github.com/agilityy-research"]}
+{"@context":"https://schema.org","@type":"Organization","@id":"{{ site_abs }}#organization","name":"Agilityy Research","url":{{ site_abs | jsonify }},"logo":{{ og_image | jsonify }},"description":"Publisher of Hiring Pulse, the weekly startup hiring benchmark measured from {{ site.coverage.companies }} public job boards, and of the daily hiring data behind it."}
 </script>
 {%- if page.url == "/" %}
 <script type="application/ld+json">
@@ -528,7 +528,7 @@ h3.sub-h{margin:2rem 0 .8rem;font-size:1.25rem}
 <p style="margin:0;max-width:30rem">Weekly startup hiring benchmarks from the public job boards of {{ site.coverage.companies }} companies, read every day by Agilityy Research. The reports are free under <a href="https://creativecommons.org/licenses/by/4.0/" style="display:inline;text-decoration:underline">CC BY 4.0</a>; the daily data behind them is {% if site.beta_signup_action != "" %}free by e-mail during the beta{% else %}available on request{% endif %}.</p></div>
 <div><h4>Reports</h4><a href="{{ '/reports/latest/' | relative_url }}">This week's report</a><a href="{{ '/reports/trends/' | relative_url }}">Trends</a><a href="{{ '/reports/' | relative_url }}">Every edition</a><a href="{{ '/methodology/' | relative_url }}">Methodology</a><a href="{{ '/feed.xml' | relative_url }}">Atom feed</a></div>
 <div><h4>Data</h4><a href="{{ '/data/salaries/' | relative_url }}">Salaries</a><a href="{{ '/data/cities/' | relative_url }}">Hiring by city</a><a href="{{ '/data/skills/' | relative_url }}">Skills in demand</a><a href="{{ '/lists/' | relative_url }}">Startup lists</a><a href="{{ '/get-the-data/' | relative_url }}">Get the daily data</a><a href="{{ '/for-data-teams/' | relative_url }}">For data teams</a></div>
-<div><h4>Company</h4><a href="{{ '/about/' | relative_url }}">About</a><a href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">Contact / request data</a><a href="https://github.com/agilityy-research/hiring-pulse">Source on GitHub</a><a href="{{ '/privacy/' | relative_url }}">Privacy</a></div>
+<div><h4>Company</h4><a href="{{ '/about/' | relative_url }}">About</a><a href="mailto:data@agilityy.com?subject=Hiring%20Pulse">Contact: data@agilityy.com</a><a href="{{ '/privacy/' | relative_url }}">Privacy</a></div>
 <div class="legal">© {{ site.time | date: "%Y" }} Agilityy Research. No cookies; cookieless page-view counting only: <a href="{{ '/privacy/' | relative_url }}" style="display:inline;text-decoration:underline">privacy</a>.</div>
 </div></footer>
 </body>

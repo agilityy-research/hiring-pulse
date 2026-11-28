@@ -55,7 +55,7 @@ cancel any time.
 
 The daily history goes back to {{ site.coverage.daily_since }} and grows by one day every day. If you need it as files
 in your own storage, a regular feed into your warehouse, or a cut of particular companies, industries or days,
-[ask us](https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml) and say what it is for. Journalists and researchers usually get a cut free, with attribution.
+[ask us](mailto:data@agilityy.com?subject=Hiring%20Pulse%20data%20request) and say what it is for. Journalists and researchers usually get a cut free, with attribution.
 The column list and loading notes are on [for data teams]({{ '/for-data-teams/' | relative_url }}).
 
 ## Free samples, no sign-up needed
@@ -87,11 +87,11 @@ The column list and loading notes are on [for data teams]({{ '/for-data-teams/' 
 ## Next
 
 {% if site.beta_signup_action != "" -%}
-<p><a class="btn" href="#beta">Get the daily files free</a> <a class="btn alt" href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">Ask for something else</a></p>
+<p><a class="btn" href="#beta">Get the daily files free</a> <a class="btn alt" href="mailto:data@agilityy.com?subject=Hiring%20Pulse%20data%20request">Ask for something else</a></p>
 {%- elsif site.stripe_payment_link != "" -%}
-<p><a class="btn" href="{{ site.stripe_payment_link }}">Subscribe to Hiring Pulse Daily, $99 a month</a> <a class="btn alt" href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">Ask for something else</a></p>
+<p><a class="btn" href="{{ site.stripe_payment_link }}">Subscribe to Hiring Pulse Daily, $99 a month</a> <a class="btn alt" href="mailto:data@agilityy.com?subject=Hiring%20Pulse%20data%20request">Ask for something else</a></p>
 {%- else -%}
-<p><a class="btn" href="https://github.com/agilityy-research/hiring-pulse/issues/new?template=data-access-request.yml">Ask for the data</a></p>
+<p><a class="btn" href="mailto:data@agilityy.com?subject=Hiring%20Pulse%20data%20request">Ask for the data</a></p>
 {%- endif %}
 
 Loading the files into a warehouse, or need the column list first? See [for data teams]({{ '/for-data-teams/' | relative_url }}).

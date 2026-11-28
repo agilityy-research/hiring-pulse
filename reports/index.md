@@ -12,8 +12,7 @@ the previous edition, then the full tables by function, industry, company size a
 to read and to quote under CC BY 4.0.
 
 The newest edition is always at [reports/latest]({{ '/reports/latest/' | relative_url }}). To get each new one as it
-appears, subscribe with the [Atom feed]({{ '/feed.xml' | relative_url }}) in your feed reader; the Markdown source and chart
-files are in the [GitHub repository](https://github.com/agilityy-research/hiring-pulse/tree/main/reports).
+appears, subscribe with the [Atom feed]({{ '/feed.xml' | relative_url }}) in your feed reader.
 
 {%- assign report_pages = site.pages | where_exp: "p", "p.path contains 'reports/'" | where_exp: "p", "p.name != 'index.md'" | where_exp: "p", "p.name != 'latest.md'" | sort: "name" | reverse %}
 {%- assign weekly = "" | split: "" %}{%- assign baselines = "" | split: "" %}

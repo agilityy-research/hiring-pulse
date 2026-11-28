@@ -144,7 +144,7 @@ and [skills in demand]({{ '/data/skills/' | relative_url }}) pages are recompute
 
 Reports are released under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Cite as
 "Agilityy Research, Hiring Pulse, YYYY-MM-DD" (the edition date) with a link to the report. Found an error or have a
-question about a definition? [Open an issue](https://github.com/agilityy-research/hiring-pulse/issues) on GitHub.
+question about a definition? Write to [data@agilityy.com](mailto:data@agilityy.com?subject=Hiring%20Pulse%20methodology).
 
 ## Next
 
