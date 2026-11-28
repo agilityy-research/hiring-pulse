@@ -26,7 +26,8 @@ loaded from third parties; there is no advertising code.
 {%- endif %}
 - **E-mail subscription.** If a signup box is shown, submitting it sends your address directly to the named
   mailing-list provider, which processes it under its own policy. We see the address only as a subscriber of that list.
-- **Requests.** Data requests go through GitHub issues, under GitHub's policies; we see only what GitHub shows us.
+- **Requests.** Data requests and questions arrive by e-mail at data@agilityy.com, a Google Workspace mailbox, so Google
+  processes that mail under its terms; we keep a request only for as long as it takes to answer it.
 - **The data we publish** is about companies and their job postings, taken from public job boards. It contains no
   personal data about candidates. If a posting contains personal data and you want it removed from our files, write to
   [data@agilityy.com](mailto:data@agilityy.com?subject=Hiring%20Pulse%20removal%20request).
