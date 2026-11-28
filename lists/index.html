@@ -14,7 +14,7 @@ bands: true
 <p class="hero">Who is adding roles, who is cutting, who hires mostly for AI, and who is fully remote: ranked from the daily read of each company's own job board.</p>
 </div></section>
 <section class="band"><div class="wrap">
-<div class="hub">
+<div class="hub four">
 <a class="card hub-card" href="{{ '/lists/fastest-growing-startups/' | relative_url }}"><span class="k">Fastest growing</span><b class="n">{{ L.growing.rows[0].netChange | prepend: "+" }}</b><p>{{ L.growing.rows[0].company }} added the most open roles in {{ hm.windowDays }} days. {{ L.growing.totalT }} of the {{ L.historyCompaniesT }} startups with 14+ days of history added roles; the top {{ L.growing.rows.size }} are listed.</p><span class="more">The list</span></a>
 <a class="card hub-card" href="{{ '/lists/startup-hiring-cuts/' | relative_url }}"><span class="k">Biggest cuts</span><b class="n">{{ L.cutting.rows[0].netChange | replace: "-", "−" }}</b><p>{{ L.cutting.rows[0].company }} closed the most open roles, net, in {{ hm.windowDays }} days. {{ L.cutting.totalT }} startups cut roles; the top {{ L.cutting.rows.size }} are listed.</p><span class="more">The list</span></a>
 <a class="card hub-card" href="{{ '/lists/ai-heavy-startups/' | relative_url }}"><span class="k">AI-heavy boards</span><b class="n">{{ L.aiHeavy.rows[0].aiSharePct }}%</b><p>of {{ L.aiHeavy.rows[0].company }}'s open roles have AI/ML titles. {{ L.aiHeavy.totalT }} boards with {{ L.minOpenRoles }}+ roles are at {{ L.aiHeavyPct | round }}% or more.</p><span class="more">The list</span></a>
