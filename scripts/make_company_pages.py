@@ -7,7 +7,7 @@ deploy time and never committed. Standard library only:
 
 Inputs, all in the built site: reports/data/companies.json (one row per company, written by the weekly pipeline),
 _data/home.json (the edition's window in days, read from the source tree), and company/_template/index.html, the shell
-Jekyll built from company/_template.html with @@ markers where the title, description and body go. Every figure on a
+Jekyll built from company/template-shell.html with @@ markers where the title, description and body go. Every figure on a
 page comes from the company's own row; the benchmark line is recomputed from the same file with the formulas the
 weekly report uses (AI/ML and remote roles summed from each board's share, the median remote share over boards with
 MIN_ROLES or more open roles), so a page never disagrees with the edition it belongs to.
