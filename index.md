@@ -46,7 +46,7 @@ function), and the movers' names (example pills for the lookup). All from the la
   {%- endif -%}
 {%- endfor -%}
 {%- assign fn_table = "" -%}
-{%- for s in sections -%}{%- if s contains "Open roles by function" and forloop.index0 > 0 and fn_table == "" -%}{%- assign fn_table = s -%}{%- endif -%}{%- endfor -%}
+{%- for s in sections -%}{%- assign s_head = s | split: nl | first | strip -%}{%- if s_head == "Open roles by function" and fn_table == "" -%}{%- assign fn_table = s -%}{%- endif -%}{%- endfor -%}
 {%- assign fn_shares = "" -%}{%- assign fn_fill = "" -%}
 {%- assign fn_rows = fn_table | split: nl -%}
 {%- for r in fn_rows -%}
