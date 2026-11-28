@@ -227,8 +227,10 @@ class Shell:
         s = s[:m.start()] + f'<link rel="stylesheet" href="{css_path}">' + s[m.end():]
         s = s.replace('<meta name="robots" content="noindex">', "")  # the template's own noindex; set per page below
         self.robots = '<meta name="robots" content="index,follow,max-image-preview:large">'
-        if self.robots not in s or "@@BODY@@" not in s or "@@TITLE@@" not in s:
-            sys.exit("template: markers missing (robots meta, @@TITLE@@ or @@BODY@@)")
+        missing = [m for m in (self.robots, "@@BODY@@", "@@TITLE@@", "@@DESC@@") if m not in s]
+        if missing:
+            head = re.sub(r"<style>.*?</style>", "<style>…</style>", s, flags=re.S)[:3000]
+            sys.exit(f"template: markers missing: {missing}\n--- built template starts ---\n{head}")
         m = re.search(r'<link rel="canonical" href="(https?://[^/"]+/)company/_template/">', s)
         if not m:
             sys.exit("template: canonical URL not found")
