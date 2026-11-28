@@ -27,7 +27,7 @@ a closure is observed rather than inferred. Full method: [methodology](methodolo
 
 Every tracked company's daily numbers, free by e-mail during the beta: [get the data](get-the-data.md). Schema and a
 free sample: [for data teams](for-data-teams.md). The whole history or a custom cut:
-write to data@agilityy.com.
+use the [contact page](contact.md).
 
 ## How this repository works
 
@@ -92,4 +92,4 @@ GitHub Pages.
 Reports in this repository are released under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 Quote freely with attribution: *"Agilityy Research, Hiring Pulse, week of YYYY-MM-DD"* and a link to this repository.
 
-Questions, corrections or a custom cut of the data: data@agilityy.com (issues are off on this repository).
+Questions, corrections or a custom cut of the data: the site's [contact page](contact.md) (issues are off on this repository; the site prints no e-mail address, see `contact_form_action` in `_config.yml`).

@@ -329,7 +329,7 @@ function), and the movers' names (example pills for the lookup). All from the la
 <p><b>Sales and revenue teams</b> see which companies are adding roles fastest, named every morning: a team that is hiring has budget.</p>
 <p><b>Talent teams</b> benchmark how long roles stay open by function, industry and company size, and watch competitors open or close teams.</p>
 <p><b>Investors and analysts</b> read portfolio and sector hiring from each company's own board, week after week.</p>
-<p><b>Journalists and researchers</b> quote the Monday numbers under CC BY 4.0; a cut of the history for a story or a paper is usually free: <a href="mailto:data@agilityy.com?subject=Hiring%20Pulse%20data%20request">ask us</a>.</p>
+<p><b>Journalists and researchers</b> quote the Monday numbers under CC BY 4.0; a cut of the history for a story or a paper is usually free: <a href="{{ '/contact/' | relative_url }}">ask us</a>.</p>
 </div>
 <div class="actions"><a class="btn alt" href="{{ '/get-the-data/' | relative_url }}">What you get</a>
 <a class="btn alt" href="{{ '/samples/daily_signals_sample.csv' | relative_url }}" download>Free sample file</a>

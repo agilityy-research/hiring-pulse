@@ -28,8 +28,8 @@ has the details. No advertising, no sponsored findings.
 
 ## Contact
 
-For data requests, corrections, press and research questions, write to
-[data@agilityy.com](mailto:data@agilityy.com?subject=Hiring%20Pulse). We answer within two working days.{% if site.beta_signup_action != "" %} Beta subscribers can also reply to any of the daily e-mails.{% endif %}
+For data requests, corrections, press and research questions, use the
+[contact page]({{ '/contact/' | relative_url }}). We answer within two working days.{% if site.beta_signup_action != "" %} Beta subscribers can also reply to any of the daily e-mails.{% endif %}
 
 ## Next
 

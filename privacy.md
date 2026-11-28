@@ -26,11 +26,11 @@ loaded from third parties; there is no advertising code.
 {%- endif %}
 - **E-mail subscription.** If a signup box is shown, submitting it sends your address directly to the named
   mailing-list provider, which processes it under its own policy. We see the address only as a subscriber of that list.
-- **Requests.** Data requests and questions arrive by e-mail at data@agilityy.com, a Google Workspace mailbox, so Google
-  processes that mail under its terms; we keep a request only for as long as it takes to answer it.
+- **Requests.** {% if site.contact_form_action != "" %}The contact form sends your message and address to the form service that hosts it and from there to our
+  mailbox; the service keeps a copy under its own policy. {% else %}Messages reach a Google Workspace mailbox, so Google processes that mail under its terms. {% endif %}We keep a request only for as long as it takes to answer it.
 - **The data we publish** is about companies and their job postings, taken from public job boards. It contains no
-  personal data about candidates. If a posting contains personal data and you want it removed from our files, write to
-  [data@agilityy.com](mailto:data@agilityy.com?subject=Hiring%20Pulse%20removal%20request).
+  personal data about candidates. If a posting contains personal data and you want it removed from our files, use the
+  [contact page]({{ '/contact/' | relative_url }}).
 
 Agilityy Research, publisher of Hiring Pulse. Last updated {% if site.beta_signup_action != "" %}2026-11-25{% else %}2026-11-24{% endif %}. Questions about this page: see
 [About]({{ '/about/' | relative_url }}) for how to reach us.

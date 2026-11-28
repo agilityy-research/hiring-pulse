@@ -15,7 +15,7 @@ companies publish for their own careers pages.
 
 {% if site.beta_signup_action != "" %}During the beta, every company's daily files are free by e-mail until
 {{ site.beta_end | date: "%-d %B %Y" }}: [sign up here]({{ '/get-the-data/' | relative_url }}#beta). {% endif %}For the
-whole history or a regular feed into your own systems, [ask us](mailto:data@agilityy.com?subject=Hiring%20Pulse%20data%20request). Daily collection began on {{ site.coverage.daily_since }}, so the history is short
+whole history or a regular feed into your own systems, [ask us]({{ '/contact/' | relative_url }}). Daily collection began on {{ site.coverage.daily_since }}, so the history is short
 today and grows by one day every day.
 
 ## What is in it
@@ -54,7 +54,7 @@ Deduplicate `job_events` on vendor, slug, job id and event type.
 
 {% if site.beta_signup_action != "" %}During the beta the daily files arrive by e-mail as download links; a scheduled
 job can fetch them each morning. {% endif %}A delivered history (files in your storage bucket, or a warehouse share) is
-set up on request, because the daily history is only weeks old: [ask us](mailto:data@agilityy.com?subject=Hiring%20Pulse%20data%20request)
+set up on request, because the daily history is only weeks old: [ask us]({{ '/contact/' | relative_url }})
 and say what for. Academic and journalistic use: usually a free cut with attribution.
 
 ## Quality
@@ -67,7 +67,7 @@ numbers are on the [methodology]({{ '/methodology/' | relative_url }}) page. Wha
 ## Next
 
 <p>{% if site.beta_signup_action != "" %}<a class="btn" href="{{ '/get-the-data/' | relative_url }}#beta">Get the daily files free</a>
-{% endif %}<a class="btn{% if site.beta_signup_action != "" %} alt{% endif %}" href="mailto:data@agilityy.com?subject=Hiring%20Pulse%20data%20request">Ask for a history delivery</a></p>
+{% endif %}<a class="btn{% if site.beta_signup_action != "" %} alt{% endif %}" href="{{ '/contact/' | relative_url }}">Ask for a history delivery</a></p>
 
-Write to [data@agilityy.com](mailto:data@agilityy.com?subject=Hiring%20Pulse%20history%20delivery) with your organisation, what the data is for, the tables you need and how you
+Use the [contact page]({{ '/contact/' | relative_url }}) with your organisation, what the data is for, the tables you need and how you
 would like them delivered. We reply within two business days.
