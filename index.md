@@ -360,7 +360,13 @@ function), and the movers' names (example pills for the lookup). All from the la
       out2 = document.getElementById("company-results-2"), wrap = document.getElementById("vswrap"), vs = false;
   if (!box || !q || !out) return;
   box.hidden = false; if (pills) pills.hidden = false;
-  var data = null, loading = null, url = "{{ '/reports/data/companies.json' | relative_url }}";
+  var data = null, loading = null, url = "{{ '/reports/data/companies.json' | relative_url }}", betaOn = {% if site.beta_signup_action != "" %}true{% else %}false{% endif %};
+  document.addEventListener("click", function (ev) {
+    var a = ev.target.closest("a.track"); if (!a) return;
+    var use = document.querySelector('#beta input[name="{{ site.beta_use_field | default: 'fields[use_case]' }}"]'), mail = document.querySelector('#beta input[type=email]');
+    if (use && !use.value.trim()) use.value = "Track " + a.getAttribute("data-company");
+    if (mail) setTimeout(function () { mail.focus({preventScroll: true}); }, 400);
+  });
   function load() {
     if (data || loading) return loading;
     loading = fetch(url, {cache: "force-cache"}).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
@@ -383,8 +389,9 @@ function), and the movers' names (example pills for the lookup). All from the la
       line = '<span class="' + cls + '">' + sign + fmt(net) + " roles in " + d + " days" + (growth === null || growth === undefined ? "" : " (" + (growth > 0 ? "+" : "") + growth + "%)") + "</span> · " + word;
     }
     var extra = [ai != null ? ai + "% AI/ML" : null, remote != null ? remote + "% remote" : null].filter(Boolean).join(" · ");
+    var track = betaOn ? '<a class="track" href="#beta" data-company="' + esc(name) + '">' + esc(name) + " is in the daily files: get them free by e-mail \u2192</a>" : "";
     return "<li><b>" + esc(name) + "</b><span>" + fmt(open) + " open roles</span>" + line + (meta ? '<span class="muted">' + esc(meta) + "</span>" : "") +
-           (extra ? '<span class="muted">' + esc(extra) + "</span>" : "") + '</li>';
+           (extra ? '<span class="muted">' + esc(extra) + "</span>" : "") + track + '</li>';
   }
   function render(term, target) {
     target = target || out; target.innerHTML = "";
@@ -423,38 +430,93 @@ function), and the movers' names (example pills for the lookup). All from the la
   // Copy the card as text, or save an SVG chart as a PNG with the site's stamp.
   function stamp() { var e = document.querySelector(".hero .eyebrow"); return "hiring.agilityy.com · " + (e ? e.textContent.replace(/^.*·\s*/, "") : ""); }
   function tools() {
-    document.querySelectorAll(".ccard").forEach(function (card) {
+    var canCopyImg = !!(navigator.clipboard && window.ClipboardItem);
+    document.querySelectorAll(".ccard, .card.fact").forEach(function (card, i) {
+      if (!card.id) card.id = "fact-" + (i + 1);
       var bar = document.createElement("p"); bar.className = "tools";
-      bar.innerHTML = '<button type="button" data-act="copy">Copy text</button>' + (card.querySelector("svg.hp") ? '<button type="button" data-act="png">Save image</button>' : "");
-      var anchor = card.querySelector("p.small:last-of-type"); card.insertBefore(bar, anchor || null);
+      bar.innerHTML = '<button type="button" data-act="img">' + (canCopyImg ? "Copy image" : "Save image") + '</button><button type="button" data-act="copy">Copy text</button>';
+      var anchor = card.querySelector("p.small:last-of-type, a.more"); card.insertBefore(bar, anchor || null);
       bar.addEventListener("click", function (ev) {
         var b = ev.target.closest("button"); if (!b) return;
         if (b.getAttribute("data-act") === "copy") {
           var clone = card.cloneNode(true); clone.querySelectorAll(".tools, .search-results, .chips, svg").forEach(function (n) { n.remove(); });
           var text = clone.innerText.replace(/\n{3,}/g, "\n\n").trim() + "\n\nSource: " + location.origin + location.pathname + "#" + card.id + " (" + stamp() + ")";
           (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject()).then(function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy text"; }, 1500); }, function () { window.prompt("Copy this text", text); });
-        } else savePng(card.querySelector("svg.hp"), card.id);
+        } else {
+          b.textContent = "Drawing…";
+          cardImage(card).then(function (canvas) {
+            return new Promise(function (res) { canvas.toBlob(res, "image/png"); });
+          }).then(function (blob) {
+            if (canCopyImg) return navigator.clipboard.write([new ClipboardItem({"image/png": blob})]).then(function () { b.textContent = "Copied"; });
+            var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "hiring-pulse-" + card.id + ".png"; a.click(); b.textContent = "Saved";
+          }).catch(function () { b.textContent = "Could not copy"; }).then(function () { setTimeout(function () { b.textContent = canCopyImg ? "Copy image" : "Save image"; }, 1800); });
+        }
       });
     });
   }
-  function savePng(svg, id) {
+  // Draw a card onto a canvas without any library: its text lines, its bars and swatches, and any SVG chart, each at the
+  // position it has on screen, then the site's stamp. Buttons, filters, result lists and links are left out.
+  function cardImage(card) {
+    var k = 2, pad = 16, root = card.getBoundingClientRect(), W = Math.ceil(root.width), H = Math.ceil(root.height) + 26;
+    var c = document.createElement("canvas"); c.width = W * k; c.height = H * k;
+    var g = c.getContext("2d"); g.scale(k, k);
+    var cs0 = getComputedStyle(card), bg = cs0.backgroundColor;
+    if (!bg || bg === "rgba(0, 0, 0, 0)") bg = getComputedStyle(document.body).backgroundColor;
+    g.fillStyle = bg; g.fillRect(0, 0, W, H);
+    var skip = function (el) { return el.closest(".tools, .chips, .search-results, button, a.more, p.small, noscript, .visually-hidden") || getComputedStyle(el).display === "none"; };
+    var pending = [];
+    card.querySelectorAll("*").forEach(function (el) {
+      if (skip(el)) return;
+      var r = el.getBoundingClientRect(); if (!r.width || !r.height) return;
+      var x = r.left - root.left, y = r.top - root.top, cs = getComputedStyle(el);
+      if (el.matches("svg.hp")) {
+        pending.push(svgImage(el).then(function (img) { g.drawImage(img, x, y, r.width, r.height); }));
+        return;
+      }
+      if (el.closest("svg")) return;
+      if (el.matches(".fill, .mix i, .legend i, .band, .med")) {
+        var bgc = cs.backgroundColor; if (bgc && bgc !== "rgba(0, 0, 0, 0)") { g.fillStyle = bgc; g.globalAlpha = +cs.opacity || 1; roundRect(g, x, y, r.width, r.height, Math.min(4, r.height / 2)); g.globalAlpha = 1; }
+      }
+      if (cs.borderBottomWidth !== "0px" && cs.borderBottomStyle !== "none" && el.matches("li, li.hd")) { g.fillStyle = cs.borderBottomColor; g.fillRect(x, y + r.height - 1, r.width, 1); }
+    });
+    var walker = document.createTreeWalker(card, NodeFilter.SHOW_TEXT), node;
+    while ((node = walker.nextNode())) {
+      var text = node.nodeValue.replace(/\s+/g, " "); if (!text.trim()) continue;
+      var el = node.parentElement; if (skip(el) || el.closest("svg")) continue;
+      var cs = getComputedStyle(el), range = document.createRange(); range.selectNodeContents(node);
+      var rects = Array.prototype.slice.call(range.getClientRects()).filter(function (q) { return q.width > 0; }); if (!rects.length) continue;
+      g.font = cs.fontStyle + " " + cs.fontWeight + " " + cs.fontSize + " " + cs.fontFamily; g.fillStyle = cs.color; g.textBaseline = "middle";
+      var clip = el.closest(".name") || el; var cr = clip.getBoundingClientRect();
+      g.save(); g.beginPath(); g.rect(cr.left - root.left - 1, cr.top - root.top - 1, cr.width + 2, cr.height + 2); g.clip();
+      if (rects.length === 1) { g.textAlign = cs.textAlign === "right" ? "right" : "left"; g.fillText(text.trim(), (cs.textAlign === "right" ? rects[0].right : rects[0].left) - root.left, rects[0].top - root.top + rects[0].height / 2); }
+      else {  // wrapped text: refill each line box with as many words as fit
+        var words = text.trim().split(" "), li = 0, line = "";
+        g.textAlign = "left";
+        words.forEach(function (w) {
+          var t2 = line ? line + " " + w : w;
+          if (g.measureText(t2).width > rects[Math.min(li, rects.length - 1)].width + 2 && line) { g.fillText(line, rects[Math.min(li, rects.length - 1)].left - root.left, rects[Math.min(li, rects.length - 1)].top - root.top + rects[Math.min(li, rects.length - 1)].height / 2); li++; line = w; }
+          else line = t2;
+        });
+        if (line) { var q = rects[Math.min(li, rects.length - 1)]; g.fillText(line, q.left - root.left, q.top - root.top + q.height / 2); }
+      }
+      g.restore();
+    }
+    return Promise.all(pending).then(function () {
+      g.font = "500 12px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"; g.fillStyle = getComputedStyle(document.body).color; g.globalAlpha = .7; g.textAlign = "right"; g.textBaseline = "middle";
+      g.fillText(stamp(), W - pad, H - 13); g.globalAlpha = 1; return c;
+    });
+  }
+  function roundRect(g, x, y, w, h, r) { g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); g.fill(); }
+  function svgImage(svg) {
     var props = ["fill", "stroke", "stroke-width", "opacity", "font-size", "font-family", "font-weight", "text-anchor"];
     var clone = svg.cloneNode(true), src = svg.querySelectorAll("*"), dst = clone.querySelectorAll("*");
     for (var i = 0; i < src.length; i++) { var cs = getComputedStyle(src[i]); props.forEach(function (pn) { var v = cs.getPropertyValue(pn); if (v) dst[i].style.setProperty(pn, v); }); }
     clone.querySelectorAll("title").forEach(function (t) { t.remove(); });
-    var vb = (svg.getAttribute("viewBox") || "0 0 720 360").split(/\s+/).map(Number), W = vb[2], H = vb[3] + 28;
-    clone.setAttribute("width", W); clone.setAttribute("height", vb[3]); clone.removeAttribute("class");
-    var bg = getComputedStyle(document.body).backgroundColor, fg = getComputedStyle(document.body).color;
-    var outer = '<svg xmlns="http://www.w3.org/2000/svg" width="' + W + '" height="' + H + '"><rect width="100%" height="100%" fill="' + bg + '"/>' +
-                new XMLSerializer().serializeToString(clone).replace(/<svg /, '<svg x="0" y="0" ') +
-                '<text x="' + (W - 8) + '" y="' + (H - 9) + '" text-anchor="end" font-family="-apple-system,Helvetica,Arial,sans-serif" font-size="12" fill="' + fg + '" opacity=".75">' + esc(stamp()) + '</text></svg>';
-    var img = new Image(), url = URL.createObjectURL(new Blob([outer], {type: "image/svg+xml;charset=utf-8"}));
-    img.onload = function () {
-      var c = document.createElement("canvas"), k = 2; c.width = W * k; c.height = H * k; c.getContext("2d").drawImage(img, 0, 0, c.width, c.height); URL.revokeObjectURL(url);
-      c.toBlob(function (blob) { var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "hiring-pulse-" + id + ".png"; a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000); }, "image/png");
-    };
-    img.src = url;
+    var r = svg.getBoundingClientRect(); clone.setAttribute("width", Math.round(r.width)); clone.setAttribute("height", Math.round(r.height)); clone.removeAttribute("class");
+    var url = URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(clone)], {type: "image/svg+xml;charset=utf-8"}));
+    return new Promise(function (res, rej) { var img = new Image(); img.onload = function () { URL.revokeObjectURL(url); res(img); }; img.onerror = rej; img.src = url; });
   }
+  window.hpCardImage = cardImage;
 
   // Growing against shrinking: every company with enough history, open roles across (log scale), change up and down.
   function scatter() {
