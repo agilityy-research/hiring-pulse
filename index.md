@@ -145,7 +145,7 @@ function), and the movers' names (example pills for the lookup). All from the la
 {%- endif -%}{%- endif -%}
 <p class="take">{% if ratio_txt != "" %}{{ ratio_txt }}{% if v_history != "" %}, among the {{ v_history }} with 14+ days of history{% endif %}.{% else %}{{ heads[2] | default: "Which companies added and cut the most roles" }}{% endif %}</p>
 <p class="sub2">One dot per company with 14+ days of daily history: open roles across, on a log scale; change in open roles{% if win_days != "" %} over {{ win_days }} days{% endif %} up and down. Click a dot for the company, or filter.</p>
-<p class="chips" id="scatter-filters" hidden><button type="button" data-f="all" aria-pressed="true">All</button><button type="button" data-f="grow" aria-pressed="false">Growing 20%+</button><button type="button" data-f="ai" aria-pressed="false">AI-native, 50%+ AI/ML</button><button type="button" data-f="remote" aria-pressed="false">Fully remote</button></p>
+<p class="chips" id="scatter-filters" hidden><button type="button" data-f="all" aria-pressed="true">All</button><button type="button" data-f="grow" aria-pressed="false">Growing 20%+</button><button type="button" data-f="ai" aria-pressed="false">AI-native, 50%+ AI/ML, 10+ roles</button><button type="button" data-f="remote" aria-pressed="false">Fully remote, 10+ roles</button></p>
 {%- assign mv_rel = "/reports/charts/" | append: latest_date | append: "-movers.svg" -%}
 {%- assign mv_on_disk = site.static_files | where: "path", mv_rel | first -%}
 <div class="scroll" id="scatter" data-days="{{ win_days }}">{% if mv_on_disk %}{% include_relative {{ mv_rel | remove_first: "/" }} %}{% endif %}</div>
@@ -204,8 +204,8 @@ function), and the movers' names (example pills for the lookup). All from the la
 {%- assign rs = nil -%}{%- if hm and hm.remoteSplit and hm.remoteSplit.total > 0 -%}{%- assign rs = hm.remoteSplit -%}{%- endif -%}
 {%- assign none_b = nil -%}{%- if rs -%}{%- assign none_b = rs.buckets | where: "key", "none" | first -%}{%- endif -%}
 <p class="take">{% if v_remote != "" and none_b %}{{ v_remote }} of open roles are remote, yet {{ none_b.sharePct | round }}% of startups with {{ rs.minOpenRoles }}+ openings offer none.{% else %}{{ heads[5] | default: "Remote roles are concentrated in a minority of companies" }}{% endif %}</p>
-<p class="sub2">Startups with {{ rs.minOpenRoles | default: 10 }} or more open roles{% if rs %} ({{ rs.total }}){% endif %}, by the share of their roles flagged remote. Fully remote means {{ rs.fullyRemotePct | default: 99.5 }}% or more of them, as in the report.</p>
-<ol class="bars split" id="remote-split">{% if rs %}{% for b in rs.buckets %}<li><span class="name">{{ b.label }}</span><span class="track"><span class="fill" style="width:{{ b.sharePct }}%"></span></span><span class="val">{{ b.count }}<small>{{ b.sharePct | round }}% of {{ rs.total }}</small></span></li>{% endfor %}{% endif %}</ol>
+<p class="sub2">Startups with {{ rs.minOpenRoles | default: 10 }} or more open roles{% if rs %} ({{ rs.totalT | default: rs.total }} this week){% endif %}, by the share of their roles flagged remote. Fully remote means {{ rs.fullyRemotePct | default: 99.5 }}% or more of them, as in the report.</p>
+<ol class="bars split" id="remote-split">{% if rs %}{% for b in rs.buckets %}<li><span class="name">{{ b.label }}</span><span class="track"><span class="fill" style="width:{{ b.sharePct }}%"></span></span><span class="val">{{ b.countT | default: b.count }}<small>{{ b.sharePct | round }}% of {{ rs.totalT | default: rs.total }}</small></span></li>{% endfor %}{% endif %}</ol>
 <p class="small"><a href="{{ '/data/cities/#work-mode' | relative_url }}">Remote, hybrid and on-site by city and function</a></p>
 </div>
 
@@ -269,7 +269,7 @@ function), and the movers' names (example pills for the lookup). All from the la
 <p class="sub2">Boards with {{ hm.aiLeaders.minOpenRoles }} or more open roles and the highest share of AI/ML titles{% if v_ai != "" %}, against {{ v_ai }} of all open roles{% endif %}.</p>
 <ol class="bars leaders">
 {%- for r in hm.aiLeaders.rows limit: 5 %}
-<li><span class="name">{{ r.company }}<small>{{ r.openRoles }} open{% if r.industry != "" %} · {{ r.industry }}{% endif %}</small></span><span class="track"><span class="fill" style="width:{{ r.aiSharePct }}%"></span></span><span class="val">{{ r.aiSharePct }}%<small>AI/ML</small></span></li>
+<li><span class="name">{{ r.company }}<small>{{ r.openRolesT | default: r.openRoles }} open{% if r.industry != "" %} · {{ r.industry }}{% endif %}</small></span><span class="track"><span class="fill" style="width:{{ r.aiSharePct }}%"></span></span><span class="val">{{ r.aiSharePct }}%<small>AI/ML</small></span></li>
 {%- endfor %}
 {%- if v_ai != "" %}<li class="base"><span class="name">All open roles</span><span class="track"><span class="fill" style="width:{{ v_ai | remove: "%" }}%"></span></span><span class="val">{{ v_ai }}<small>AI/ML</small></span></li>{% endif %}
 </ol>
@@ -500,7 +500,7 @@ function), and the movers' names (example pills for the lookup). All from the la
     host.addEventListener("click", function (ev) { var c = ev.target.closest("circle[data-i]"); if (!c || !pick) return; pick.innerHTML = rowHtml(rows[+c.getAttribute("data-i")]); });
     var filters = document.getElementById("scatter-filters");
     if (!filters) return;
-    var tests = {all: function () { return true; }, grow: function (r) { return r[5] >= 20; }, ai: function (r) { return r[7] != null && r[7] >= 50; }, remote: function (r) { return r[8] != null && r[8] >= 99.5; }};
+    var tests = {all: function () { return true; }, grow: function (r) { return r[5] >= 20; }, ai: function (r) { return r[3] >= 10 && r[7] != null && r[7] >= 50; }, remote: function (r) { return r[3] >= 10 && r[8] != null && r[8] >= 99.5; }};
     filters.querySelectorAll("button").forEach(function (b) { var n = rows.filter(tests[b.getAttribute("data-f")]).length; b.textContent += " (" + fmt(n) + ")"; });
     filters.hidden = false;
     filters.addEventListener("click", function (ev) {
