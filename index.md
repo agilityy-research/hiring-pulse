@@ -123,7 +123,7 @@ function), and the movers' names (example pills for the lookup). All from the la
 <div class="card ccard" id="chart-movers">
 <p class="label">Growing against shrinking</p>
 <p class="take">{{ heads[2] | default: "Which companies added and cut the most roles" }}</p>
-<p class="sub2">Each dot is one of the {{ v_history | default: "" }} companies with 14+ days of daily history: open roles across, change in open roles{% if win_days != "" %} over {{ win_days }} days{% endif %} up and down. Click a dot for the company.</p>
+<p class="sub2">One dot per company with 14+ days of daily history{% if v_history != "" %} ({{ v_history }} this week){% endif %}: open roles across, on a log scale; change in open roles{% if win_days != "" %} over {{ win_days }} days{% endif %} up and down. Click a dot for the company.</p>
 {%- assign mv_rel = "/reports/charts/" | append: latest_date | append: "-movers.svg" -%}
 {%- assign mv_on_disk = site.static_files | where: "path", mv_rel | first -%}
 <div class="scroll" id="scatter" data-days="{{ win_days }}">{% if mv_on_disk %}{% include_relative {{ mv_rel | remove_first: "/" }} %}{% endif %}</div>
@@ -341,7 +341,9 @@ function), and the movers' names (example pills for the lookup). All from the la
   function scatter() {
     var host = document.getElementById("scatter"), pick = document.getElementById("scatter-pick");
     if (!host) return;
-    var d = +host.getAttribute("data-days") || data.windowDays || 30, rows = data.companies.filter(function (r) { return r[4] !== null && r[4] !== undefined && r[5] !== null && r[5] !== undefined && r[3] > 0; });
+    var d = +host.getAttribute("data-days") || data.windowDays || 30;
+    var hist = data.companies.filter(function (r) { return r[4] !== null && r[4] !== undefined; });
+    var rows = hist.filter(function (r) { return r[5] !== null && r[5] !== undefined && r[3] > 0; }), gone = hist.length - rows.length;
     if (rows.length < 20) return;
     var W = 720, H = 380, L = 52, R = 18, T = 26, B = 44, lim = 100;
     var xs = rows.map(function (r) { return r[3]; }), xmin = Math.max(1, Math.min.apply(null, xs)), xmax = Math.max.apply(null, xs);
@@ -374,7 +376,7 @@ function), and the movers' names (example pills for the lookup). All from the la
     s += '</svg>';
     host.innerHTML = s;
     var note = document.createElement("p"); note.className = "legend";
-    note.innerHTML = '<i class="p"></i>Accelerating <i class="n"></i>Contracting <i class="sdot"></i>Steady or flat · ' + fmt(rows.length) + ' companies' + (clipped ? ' · ' + clipped + ' beyond ±' + lim + '% drawn at the edge' : '');
+    note.innerHTML = '<i class="p"></i>Accelerating <i class="n"></i>Contracting <i class="sdot"></i>Steady or flat<br>' + fmt(rows.length) + ' of ' + fmt(hist.length) + ' companies drawn' + (gone ? '; ' + gone + ' with no open roles left today cannot sit on a log scale' : '') + (clipped ? '; ' + clipped + ' beyond ±' + lim + '% drawn at the edge' : '') + '.';
     host.parentNode.insertBefore(note, host.nextSibling);
     host.addEventListener("click", function (ev) { var c = ev.target.closest("circle[data-i]"); if (!c || !pick) return; pick.innerHTML = rowHtml(rows[+c.getAttribute("data-i")]); });
   }
