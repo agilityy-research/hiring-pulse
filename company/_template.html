@@ -1,0 +1,42 @@
+---
+title: "@@TITLE@@"
+description: "@@DESC@@"
+permalink: /company/_template/
+sitemap: false
+noindex: true
+---
+{%- comment -%}
+The shell of every company page. scripts/make_company_pages.py reads this page's built HTML (_site/company/_template/
+index.html), swaps the @@ markers for one company's figures and writes /company/<slug>/index.html for every row of
+reports/data/companies.json, so the pages carry the same header, footer, styles and signup form as the rest of the site
+without a Jekyll build per page. The built template is deleted afterwards; on a branch-built Pages site (before the
+switch to the Actions deploy) it stays as a noindex page at this address with the markers showing, and nothing links to it.
+{%- endcomment -%}
+<style>
+.co-crumbs{font-size:.86rem;margin:0 0 .4rem}.co-crumbs a{text-decoration:none;color:var(--muted)}.co-crumbs a:hover{color:var(--accent)}
+.co h1{margin:.2rem 0 .4rem}
+.co .stats{margin:1.4rem 0 .4rem}
+.co .stat.up b{color:var(--pos)}.co .stat.down b{color:var(--neg)}
+.co .track{display:inline-block;margin:.4rem 0 0;font-weight:600;text-decoration:none;color:var(--accent)}.co .track:hover{text-decoration:underline}
+.co dl{display:grid;grid-template-columns:max-content 1fr;gap:.25rem 1rem;margin:.8rem 0}.co dt{color:var(--muted)}.co dd{margin:0}
+@media (max-width:560px){.co dl{grid-template-columns:1fr}.co dd{margin-bottom:.4rem}}
+.dir-letters{display:flex;flex-wrap:wrap;gap:.4rem;margin:1rem 0}.dir-letters a{display:inline-block;min-width:2.4rem;text-align:center;padding:.35rem .5rem;border:1px solid var(--line);border-radius:8px;text-decoration:none;font-weight:650}.dir-letters a:hover{border-color:var(--accent)}.dir-letters a.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.dir-letters a small{display:block;font-weight:400;font-size:.72rem;color:var(--muted)}.dir-letters a.on small{color:#dbe7f5}
+.dir-pages{display:flex;flex-wrap:wrap;gap:.4rem;margin:.6rem 0 1.2rem;font-size:.92rem}.dir-pages a,.dir-pages b{padding:.2rem .6rem;border-radius:6px;border:1px solid var(--line);text-decoration:none}.dir-pages b{background:var(--accent-bg);border-color:transparent}
+main.narrow table.dir td.n,main.narrow table.dir th.n{text-align:right;min-width:5rem}
+</style>
+<div class="co">
+@@BODY@@
+</div>
+{% include beta-signup.html %}
+<script>
+(function () {
+  var mail = document.querySelector('#beta input[type=email]');
+  document.addEventListener("click", function (ev) {
+    var a = ev.target.closest("a.track"); if (!a || !mail) return;
+    var use = document.querySelector('#beta input[name="{{ site.beta_use_field | default: 'fields[use_case]' }}"]');
+    if (use && !use.value.trim()) use.value = "Track " + a.getAttribute("data-company");
+    setTimeout(function () { mail.focus({preventScroll: true}); }, 400);
+  });
+})();
+</script>

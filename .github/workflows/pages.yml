@@ -1,0 +1,66 @@
+# Builds and deploys the site with GitHub Actions instead of the branch build: Jekyll exactly as GitHub Pages runs it,
+# then scripts/make_company_pages.py adds one static page per tracked company (/company/<slug>/), the Companies A–Z
+# directory (/companies/) and their sitemap entries, all generated here at deploy time and never committed.
+#
+# Safe to have on main before the switch: the build job runs on every push (a dry run whose counts land in the job
+# summary) and the deploy job runs only while the repository's Pages source is "GitHub Actions". Switching the source
+# (Settings > Pages > Build and deployment > Source, or `gh api -X PUT repos/agilityy-research/hiring-pulse/pages -f
+# build_type=workflow`) is the owner's decision; switching it back to "Deploy from a branch" is the rollback, and the
+# branch build then serves main again without the company pages.
+name: Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    outputs:
+      source: ${{ steps.pages.outputs.source }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read the Pages source (branch or workflow)
+        id: pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          src=$(gh api "repos/${GITHUB_REPOSITORY}/pages" --jq .build_type 2>/dev/null || echo unknown)
+          echo "source=$src" >> "$GITHUB_OUTPUT"
+          echo "Pages build_type: $src (legacy = branch build, workflow = this deploy)" | tee -a "$GITHUB_STEP_SUMMARY"
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+      - name: Build the Jekyll site
+        env:
+          PAGES_REPO_NWO: ${{ github.repository }}
+          JEKYLL_GITHUB_TOKEN: ${{ github.token }}
+          JEKYLL_ENV: production
+        run: |
+          # The custom domain comes from the CNAME file, as on the branch build.
+          printf 'url: "https://%s"\nbaseurl: ""\n' "$(tr -d '[:space:]' < CNAME)" > /tmp/url.yml
+          bundle exec jekyll build --config _config.yml,/tmp/url.yml -d _site
+      - name: Company pages and the A–Z directory
+        run: python3 scripts/make_company_pages.py _site
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+  deploy:
+    needs: build
+    if: needs.build.outputs.source != 'legacy'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
