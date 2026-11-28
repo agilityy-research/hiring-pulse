@@ -1,0 +1,24 @@
+---
+title: "Startup lists: fastest growing, biggest cuts, AI-heavy and fully remote startups this week"
+description: >-
+  Four lists refreshed every Monday from the job boards of 21,000+ startups: the startups adding the most roles, the
+  ones cutting the most, the boards where AI/ML roles dominate, and the fully remote startups.
+permalink: /lists/
+layout: default
+bands: true
+---
+{%- assign hm = site.data.home -%}{%- assign L = hm.lists -%}
+<section class="band navy hero"><div class="wrap">
+<p class="eyebrow">Weekly benchmark · edition of {{ hm.date | date: "%-d %B %Y" }}</p>
+<h1>Startup lists, refreshed every Monday</h1>
+<p class="hero">Who is adding roles, who is cutting, who hires mostly for AI, and who is fully remote: ranked from the daily read of each company's own job board.</p>
+</div></section>
+<section class="band"><div class="wrap">
+<div class="hub">
+<a class="card hub-card" href="{{ '/lists/fastest-growing-startups/' | relative_url }}"><span class="k">Fastest growing</span><b class="n">{{ L.growing.rows[0].netChange | prepend: "+" }}</b><p>{{ L.growing.rows[0].company }} added the most open roles in {{ hm.windowDays }} days. {{ L.growing.totalT }} of the {{ L.historyCompaniesT }} startups with 14+ days of history added roles; the top {{ L.growing.rows.size }} are listed.</p><span class="more">The list</span></a>
+<a class="card hub-card" href="{{ '/lists/startup-hiring-cuts/' | relative_url }}"><span class="k">Biggest cuts</span><b class="n">{{ L.cutting.rows[0].netChange | replace: "-", "−" }}</b><p>{{ L.cutting.rows[0].company }} closed the most open roles, net, in {{ hm.windowDays }} days. {{ L.cutting.totalT }} startups cut roles; the top {{ L.cutting.rows.size }} are listed.</p><span class="more">The list</span></a>
+<a class="card hub-card" href="{{ '/lists/ai-heavy-startups/' | relative_url }}"><span class="k">AI-heavy boards</span><b class="n">{{ L.aiHeavy.rows[0].aiSharePct }}%</b><p>of {{ L.aiHeavy.rows[0].company }}'s open roles have AI/ML titles. {{ L.aiHeavy.totalT }} boards with {{ L.minOpenRoles }}+ roles are at {{ L.aiHeavyPct | round }}% or more.</p><span class="more">The list</span></a>
+<a class="card hub-card" href="{{ '/lists/fully-remote-startups/' | relative_url }}"><span class="k">Fully remote</span><b class="n">{{ L.fullyRemote.totalT }}</b><p>startups with {{ L.minOpenRoles }} to {{ L.remoteMaxOpen }} open roles have every role flagged remote; the {{ L.fullyRemote.rows.size }} largest are listed.</p><span class="more">The list</span></a>
+</div>
+<p class="note">Each list names what it counts and leaves out large employers, staffing agencies and franchises. The daily files behind them cover every tracked company: <a href="{{ '/get-the-data/' | relative_url }}">get the data</a>.</p>
+</div></section>

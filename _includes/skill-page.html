@@ -1,0 +1,49 @@
+{%- comment -%}
+  One skill: the share of startup job descriptions that name it, overall and by function, with its rank among the
+  thirty most-named skills. Param: skill (name as in _data/markets.json skills.top). Stubs: scripts/make_subpages.py.
+{%- endcomment -%}
+{%- assign m = site.data.markets -%}{%- assign s = m.skills -%}
+{%- assign k = s.top | where: "name", include.skill | first -%}
+{%- assign rank = 0 -%}{%- for x in s.top -%}{%- if x.name == include.skill -%}{%- assign rank = forloop.index -%}{%- endif -%}{%- endfor -%}
+<section class="band navy hero"><div class="wrap">
+<p class="crumbs"><a href="{{ '/data/' | relative_url }}">Data</a> › <a href="{{ '/data/skills/' | relative_url }}">Skills in demand</a> › {{ include.skill }}</p>
+<p class="eyebrow">Daily read · {{ m.dateText }}</p>
+<h1>{{ include.skill }} in startup job descriptions</h1>
+{%- if k and s.ready %}
+<p class="hero">{{ k.sharePct }}% of startup job descriptions name {{ include.skill }}: {{ k.rolesT }} of the {{ s.taggedT }} open roles whose description has been read, the number {{ rank }} skill of the thirty most named.</p>
+<p class="sub">Skills are read from the text of each posting on the company's own job board, with the same word list every week. <a href="{{ '/data/skills/' | relative_url }}">How skills are counted</a>.</p>
+{%- else %}
+<p class="hero">{{ include.skill }} is not among the thirty most-named skills this week.</p>
+{%- endif %}
+</div></section>
+
+{%- if k and s.ready %}
+<section class="band"><div class="wrap">
+<h2>Which functions ask for {{ include.skill }}</h2>
+<p class="kicker">The share of each function's job descriptions that name it, where it is among that function's most-named skills.</p>
+{%- assign any = false -%}
+<ol class="bars wide">
+{%- for f in s.byFunction %}{% assign hit = f.skills | where: "name", include.skill | first %}{% if hit %}{% assign any = true %}
+<li><span class="name">{{ f.function }}<small>{{ f.taggedRolesT }} descriptions read</small></span><span class="track"><span class="fill" style="width:{{ hit.sharePct | times: 2 | at_most: 100 }}%"></span></span><span class="val">{{ hit.sharePct }}%<small>{{ hit.rolesT }} roles</small></span></li>
+{%- endif %}{% endfor %}
+</ol>
+{%- unless any %}<p class="muted">{{ include.skill }} is spread across functions without being among any one function's most-named skills.</p>{% endunless %}
+</div></section>
+
+<section class="band tint"><div class="wrap">
+<h2>Alongside {{ include.skill }}</h2>
+<p class="kicker">The most-named skills this week, with their share of all job descriptions read.</p>
+<ol class="bars ranked wide">
+{%- for x in s.top limit: 12 %}
+<li><span class="rk">{{ forloop.index }}</span><span class="name">{% if x.name == include.skill %}<b>{{ x.name }}</b>{% else %}<a href="{{ '/data/skills/' | append: x.name | slugify: 'latin' | append: '/' | relative_url }}">{{ x.name }}</a>{% endif %}</span><span class="track"><span class="fill" style="width:{{ x.barPct }}%"></span></span><span class="val">{{ x.sharePct }}%</span></li>
+{%- endfor %}
+</ol>
+<p class="small"><a href="{{ '/data/skills/' | relative_url }}">All thirty, by function, plus languages and certifications</a></p>
+</div></section>
+{%- endif %}
+
+<section class="band"><div class="wrap">
+<h2>Every posting, every day</h2>
+<p class="sub muted">The daily files behind this page hold every tracked company's open roles and what it opened and closed{% if site.beta_signup_action != "" %}: free by e-mail until {{ site.beta_end | date: "%-d %B %Y" }}{% endif %}.</p>
+<div class="actions"><a class="btn" href="{{ '/get-the-data/' | relative_url }}{% if site.beta_signup_action != "" %}#beta{% endif %}">Get the daily files{% if site.beta_signup_action != "" %} free{% endif %}</a><a class="btn alt" href="{{ '/reports/latest/' | relative_url }}">This week's report</a></div>
+</div></section>

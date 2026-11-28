@@ -1,0 +1,73 @@
+{%- comment -%}
+  One city: open startup roles, companies, new roles, work mode, the functions hiring there and advertised pay in the
+  country's currency. Param: city (label as in _data/markets.json cities). Generated stubs: scripts/make_subpages.py.
+{%- endcomment -%}
+{%- assign m = site.data.markets -%}
+{%- assign c = m.cities | where: "label", include.city | first -%}
+{%- assign cov = m.coverage -%}
+{%- assign tkey = "" -%}
+{%- if c.country == "United States" -%}{%- assign tkey = "usd-year" -%}{%- elsif c.country == "United Kingdom" -%}{%- assign tkey = "gbp-year" -%}{%- elsif c.country == "Canada" -%}{%- assign tkey = "cad-year" -%}{%- elsif c.country == "Germany" or c.country == "France" or c.country == "Netherlands" or c.country == "Spain" or c.country == "Italy" or c.country == "Ireland" or c.country == "Austria" or c.country == "Belgium" or c.country == "Portugal" or c.country == "Finland" -%}{%- assign tkey = "eur-year" -%}{%- endif -%}
+{%- assign t = nil -%}{%- if tkey != "" -%}{%- assign t = m.pay.tables | where: "key", tkey | first -%}{%- endif -%}
+{%- assign city_pay = nil -%}{%- assign row = nil -%}
+{%- if t -%}{%- assign city_pay = t.byCity | where: "name", include.city | first -%}{%- assign row = t.cityFunction.rows | where: "city", include.city | first -%}{%- endif -%}
+{%- assign share = c.roles | times: 1000.0 | divided_by: cov.withCity | round | divided_by: 10.0 -%}
+<section class="band navy hero"><div class="wrap">
+<p class="crumbs"><a href="{{ '/data/' | relative_url }}">Data</a> › <a href="{{ '/data/cities/' | relative_url }}">Hiring by city</a> › {{ include.city }}</p>
+<p class="eyebrow">Daily read · {{ m.dateText }}</p>
+<h1>Startup hiring in {{ include.city }}</h1>
+{%- if c %}
+<p class="hero">{{ c.rolesT }} open roles at {{ c.companiesT }} startups and scale-ups name {{ include.city }}: {{ share }}% of all open roles that name a city, the {% if c.rank == 1 %}largest{% else %}number {{ c.rank }}{% endif %} startup hiring city we track.</p>
+<p class="sub">Counted from each company's own job board, read every day; a role is placed in a city when its posting names one ({{ cov.cityPct }}% do). <a href="{{ '/methodology/' | relative_url }}">How we count</a>.</p>
+<div class="stats" aria-label="Headline numbers">
+<div class="stat"><b>{{ c.rolesT }}</b><span>open roles in {{ include.city }}</span></div>
+<div class="stat"><b>{{ c.companiesT }}</b><span>companies hiring there</span></div>
+{%- if c.modes.knownPct >= 40 %}<div class="stat"><b>{{ c.modes.remote }}%</b><span>of roles that state a work mode are remote; {{ c.modes.hybrid }}% hybrid</span></div>{% endif %}
+{%- if c.newRoles %}<div class="stat"><b>{{ c.newRolesT }}</b><span>roles opened in the last {{ cov.newWindowDays }} days ({{ c.newSharePct }}% of its open roles)</span></div>{% endif %}
+</div>
+{%- else %}
+<p class="hero">{{ include.city }} is not among the cities with enough startup roles this week.</p>
+{%- endif %}
+</div></section>
+
+{%- if c %}
+<section class="band"><div class="wrap">
+<div class="dgrid">
+<div class="panel"><h3>What {{ include.city }} startups hire for</h3><p class="muted">Largest functions by open roles</p>
+<ol class="bars">{% assign f0 = c.topFunctions[0] %}{% for f in c.topFunctions %}<li><span class="name">{{ f.name }}</span><span class="track"><span class="fill" style="width:{{ f.roles | times: 100.0 | divided_by: f0.roles }}%"></span></span><span class="val">{{ f.rolesT }}<small>{{ f.sharePct }}%</small></span></li>{% endfor %}</ol>
+<p class="small"><a href="{{ '/data/cities/#functions' | relative_url }}">Every function's top cities</a></p></div>
+<div class="panel"><h3>How roles are offered</h3><p class="muted">Among the {{ c.modes.knownPct }}% of {{ include.city }} roles that state a work mode</p>
+<ol class="bars"><li><span class="name">Remote</span><span class="track"><span class="fill" style="width:{{ c.modes.remote }}%"></span></span><span class="val">{{ c.modes.remote }}%</span></li><li><span class="name">Hybrid</span><span class="track"><span class="fill" style="width:{{ c.modes.hybrid }}%;background:var(--c-hybrid)"></span></span><span class="val">{{ c.modes.hybrid }}%</span></li><li><span class="name">On-site</span><span class="track"><span class="fill" style="width:{{ c.modes.onsite }}%;background:var(--c-onsite)"></span></span><span class="val">{{ c.modes.onsite }}%</span></li></ol>
+{%- assign wm = m.workMode.overall %}<p class="small">Across all cities: {{ wm.remote }}% remote, {{ wm.hybrid }}% hybrid, {{ wm.onsite }}% on-site.</p></div>
+</div>
+</div></section>
+
+{%- if city_pay or row %}
+<section class="band tint"><div class="wrap">
+<h2>What {{ include.city }} startups offer</h2>
+<p class="kicker">Advertised salaries, in {{ t.currency }} {{ t.periodWord }}, among postings that publish a range; each role counted once at the midpoint of its range.</p>
+<table class="heat"><thead><tr><th>Roles</th><th class="c">Median</th><th class="c">Typical range</th><th class="c" title="The range top that 1 role in 10 reaches or exceeds">High end</th><th class="c">Postings with a range</th></tr></thead><tbody>
+{%- if city_pay %}<tr><td><b>All functions, {{ include.city }}</b></td><td class="c"><b>{{ city_pay.medianText }}</b></td><td class="c">{{ city_pay.medianMinText }}–{{ city_pay.medianMaxText }}</td><td class="c">{{ city_pay.topP90Text }}+</td><td class="c">{{ city_pay.nT }}</td></tr>{% endif %}
+{%- if row %}{% for f in t.cityFunction.functions %}{% assign cell = row.cells[forloop.index0] %}{% if cell and cell.median %}
+<tr><td>{% if tkey == "usd-year" %}<a href="{{ '/data/salaries/' | append: f | slugify: 'latin' | append: '-' | append: include.city | slugify: 'latin' | append: '/' | relative_url }}">{{ f }}</a>{% else %}{{ f }}{% endif %}</td><td class="c">{{ cell.medianText }}</td><td class="c muted">—</td><td class="c muted">—</td><td class="c">{{ cell.nT }}</td></tr>
+{%- endif %}{% endfor %}{% endif %}
+</tbody></table>
+<p class="small"><a href="{{ '/data/salaries/' | relative_url }}">Salaries by function, level and city</a></p>
+</div></section>
+{%- endif %}
+
+<section class="band"><div class="wrap">
+<h2>Other startup hiring cities</h2>
+<ol class="bars ranked wide">
+{%- for o in m.cities limit: 12 %}
+<li><span class="rk">{{ o.rank }}</span><span class="name">{% if o.label == include.city %}<b>{{ o.label }}</b>{% else %}<a href="{{ '/data/cities/' | append: o.label | slugify: 'latin' | append: '/' | relative_url }}">{{ o.label }}</a>{% endif %}<small>{{ o.country }}</small></span><span class="track"><span class="fill" style="width:{{ o.barPct }}%"></span></span><span class="val">{{ o.rolesT }}</span></li>
+{%- endfor %}
+</ol>
+<p class="small"><a href="{{ '/data/cities/' | relative_url }}">All {{ m.cities.size }} cities</a></p>
+</div></section>
+{%- endif %}
+
+<section class="band tint"><div class="wrap">
+<h2>Every company, every day</h2>
+<p class="sub muted">The daily files behind this page hold every tracked company's open roles, with each role's location, and what it opened and closed{% if site.beta_signup_action != "" %}: free by e-mail until {{ site.beta_end | date: "%-d %B %Y" }}{% endif %}.</p>
+<div class="actions"><a class="btn" href="{{ '/get-the-data/' | relative_url }}{% if site.beta_signup_action != "" %}#beta{% endif %}">Get the daily files{% if site.beta_signup_action != "" %} free{% endif %}</a><a class="btn alt" href="{{ '/reports/latest/' | relative_url }}">This week's report</a></div>
+</div></section>

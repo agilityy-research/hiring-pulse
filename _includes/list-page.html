@@ -1,0 +1,58 @@
+{%- comment -%}
+  One of the four list pages, from _data/home.json (written by the weekly Pulse): include.key is growing | cutting |
+  aiHeavy | fullyRemote. The rows and their denominators come from the data file, so the page needs no edit week to week.
+{%- endcomment -%}
+{%- assign hm = site.data.home -%}
+{%- assign L = hm.lists -%}
+{%- assign list = L[include.key] -%}
+{%- capture ed %}{{ hm.date | date: "%-d %B %Y" }}{% endcapture -%}
+{%- assign win = hm.windowDays -%}
+<section class="band navy hero"><div class="wrap">
+<p class="crumbs"><a href="{{ '/lists/' | relative_url }}">Lists</a> › {{ include.crumb }}</p>
+<p class="eyebrow">Weekly benchmark · edition of {{ ed }}</p>
+<h1>{{ include.h1 }}</h1>
+<p class="hero">
+{%- if include.key == "growing" -%}The {{ list.rows.size }} startups that added the most open roles in {{ win }} days, out of {{ L.historyCompaniesT }} with 14+ days of daily history; {{ list.totalT }} of them added roles at all.
+{%- elsif include.key == "cutting" -%}The {{ list.rows.size }} startups that closed the most open roles in {{ win }} days, net, out of {{ L.historyCompaniesT }} with 14+ days of daily history; {{ list.totalT }} of them cut roles at all.
+{%- elsif include.key == "aiHeavy" -%}The {{ list.rows.size }} boards where AI/ML titles are the largest share of open roles, among {{ L.bigCompaniesT }} startups and scale-ups with {{ L.minOpenRoles }} or more open roles; {{ list.totalT }} of them are at {{ L.aiHeavyPct | round }}% or more.
+{%- else -%}Startups whose open roles are all flagged remote ({{ L.fullyRemotePct }}% or more), with {{ L.minOpenRoles }} to {{ L.remoteMaxOpen }} open roles: {{ list.totalT }} this week, the {{ list.rows.size }} largest here.
+{%- endif -%}</p>
+<p class="sub">Read every day from each company's own job board; a role counts as closed the day its posting comes down. Large employers, staffing agencies and franchises are left out. <a href="{{ '/methodology/' | relative_url }}">How we count</a>.</p>
+</div></section>
+
+<section class="band"><div class="wrap">
+<table class="heat list">
+<thead><tr><th>#</th><th>Company</th><th class="c">Open roles</th>
+{%- if include.key == "growing" or include.key == "cutting" -%}<th class="c">Change, {{ win }} days</th><th class="c">Growth</th><th>Signal</th>
+{%- elsif include.key == "aiHeavy" -%}<th class="c">AI/ML share of open roles</th><th>Largest function</th>
+{%- else -%}<th class="c">Remote share</th><th>Largest function</th>{%- endif -%}
+</tr></thead>
+<tbody>
+{%- for r in list.rows %}
+<tr><td class="c">{{ forloop.index }}</td><td><b>{{ r.company }}</b>{% if r.industry != "" %}<small>{{ r.industry }}</small>{% endif %}</td><td class="c">{{ r.openRolesT }}</td>
+{%- if include.key == "growing" or include.key == "cutting" -%}
+<td class="c {% if r.netChange > 0 %}up{% elsif r.netChange < 0 %}down{% endif %}">{% if r.netChange > 0 %}+{% endif %}{{ r.netChange | replace: "-", "−" }}</td><td class="c">{% if r.growthPct != nil %}{% if r.growthPct > 0 %}+{% endif %}{{ r.growthPct | replace: "-", "−" }}%{% else %}—{% endif %}</td><td>{% if r.signal == "A" %}accelerating{% elsif r.signal == "C" %}contracting{% elsif r.signal == "S" %}steady{% else %}—{% endif %}</td>
+{%- elsif include.key == "aiHeavy" -%}
+<td class="c">{{ r.aiSharePct }}%</td><td>{{ r.topFunction | default: "—" }}</td>
+{%- else -%}
+<td class="c">{{ r.remoteSharePct | round }}%</td><td>{{ r.topFunction | default: "—" }}</td>
+{%- endif -%}
+</tr>
+{%- endfor %}
+</tbody></table>
+<p class="note">
+{%- if include.key == "growing" or include.key == "cutting" -%}Change is the net difference in open roles between the two reads {{ win }} days apart; growth is that change as a share of the earlier count. A company is accelerating when its open roles rose by a fifth or more over the window, contracting when they fell by a fifth or more. Companies that joined the daily read in the last 14 days are not yet compared.
+{%- elsif include.key == "aiHeavy" -%}AI/ML roles are counted from job titles (machine learning, data science, LLM, research scientist and similar), with the same rules every week. Boards with fewer than {{ L.minOpenRoles }} open roles are left out.
+{%- else -%}A role is remote when its posting flags it as remote or its location says so. Boards with more than {{ L.remoteMaxOpen }} open roles are left out of this list, since a fully remote board that size is rarely one startup; those with fewer than {{ L.minOpenRoles }} are too small to call.
+{%- endif %} Figures from the edition of {{ ed }}; the next edition is published on Monday.</p>
+</div></section>
+
+<section class="band tint"><div class="wrap">
+<h2>Every company, every day</h2>
+<p class="sub muted">This page shows one week and {{ list.rows.size }} companies. The daily files behind it hold every tracked company's open roles, the roles it opened and closed, and its signal, every morning{% if site.beta_signup_action != "" %}: free by e-mail until {{ site.beta_end | date: "%-d %B %Y" }}{% endif %}.</p>
+<div class="actions"><a class="btn" href="{{ '/get-the-data/' | relative_url }}{% if site.beta_signup_action != "" %}#beta{% endif %}">Get the daily files{% if site.beta_signup_action != "" %} free{% endif %}</a><a class="btn alt" href="{{ '/lists/' | relative_url }}">The other lists</a><a class="btn alt" href="{{ '/reports/latest/' | relative_url }}">This week's report</a></div>
+</div></section>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ItemList","name":{{ include.h1 | jsonify }},"url":{{ page.url | absolute_url | jsonify }},"dateModified":{{ hm.date | jsonify }},"numberOfItems":{{ list.rows.size }},"itemListOrder":"https://schema.org/ItemListOrderDescending","itemListElement":[{% for r in list.rows %}{"@type":"ListItem","position":{{ forloop.index }},"name":{{ r.company | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]}
+</script>

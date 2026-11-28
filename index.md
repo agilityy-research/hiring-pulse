@@ -1,8 +1,10 @@
 ---
-title: "Startup hiring benchmarks, every Monday, from 21,000+ job boards"
+title: "Startup hiring tracker: open roles, salaries and hiring cuts at 21,000+ companies"
 description: >-
   Where startup hiring accelerates and stalls this week: open roles, movers, days-to-fill, AI/ML and remote share across 21,000+ job boards. Free every Monday.
 permalink: /
+jsonld: dataset
+dataset_name: "Hiring Pulse: daily startup hiring data from 21,000+ job boards"
 ---
 {%- capture nl %}
 {% endcapture -%}
@@ -280,7 +282,8 @@ function), and the movers' names (example pills for the lookup). All from the la
 {%- endif %}
 <div class="actions"><a class="btn" href="{{ '/reports/latest/' | relative_url }}">Read the full report</a>
 <a class="btn alt" href="{{ '/reports/' | relative_url }}">Every edition</a>
-<a class="btn alt" href="{{ '/reports/trends/' | relative_url }}">Week by week</a></div>
+<a class="btn alt" href="{{ '/reports/trends/' | relative_url }}">Week by week</a>
+<a class="btn alt" href="{{ '/lists/' | relative_url }}">Startup lists</a></div>
 </div></section>
 
 {% include curious-facts.html report_date=latest_date %}
@@ -312,7 +315,7 @@ function), and the movers' names (example pills for the lookup). All from the la
 <p class="eyebrow">The data behind the report</p>
 {%- if site.beta_signup_action != "" %}
 <h2>The report is free. During the beta, so is the daily data.</h2>
-<p class="sub muted">Behind every number on this page is one line per company per day. Until {{ site.beta_end | date: "%-d %B %Y" }}, every company's files arrive free by e-mail each morning, with the companies that added and cut the most roles. After that they will be $99 a month, and you decide then.</p>
+<p class="sub muted">Behind every number on this page is one line per company per day. Until {{ site.beta_end | date: "%-d %B %Y" }}, every company's files arrive free by e-mail each morning, with the companies that added and cut the most roles. Free for the whole public beta; we will write before it ends.</p>
 {% include beta-signup.html %}
 {%- elsif site.stripe_payment_link != "" %}
 <h2>The report is free. The daily data is $99 a month.</h2>
